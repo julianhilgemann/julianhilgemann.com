@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Julian Hilgemann — Links</title>
+  <meta name="description" content="Der zentrale Hub zu Julian Hilgemanns Profilen: YouTube, Medium, Substack, Instagram, GitHub, LinkedIn." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Julian Hilgemann — Links">
+  <meta property="og:description" content="Alle offiziellen Links auf einen Blick.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://julianhilgemann.com">
+  <meta property="og:image" content="https://julianhilgemann.com/assets/og.png">
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 950:'#0a1020', 900:'#0e1428', 800:'#101a33', 700:'#122042' },
+            neon: { teal:'#41ffd8', violet:'#a468ff' }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Consent Mode v2 defaults: DENY until user consents -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'functionality_storage': 'denied',
+      'personalization_storage': 'denied',
+      'security_storage': 'granted'
+    });
+  </script>
+
+  <!-- Klaro! (CMP) via CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/klaro@0.7.21/dist/klaro.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/klaro@0.7.21/dist/klaro.min.js" defer></script>
+  <script defer>
+    // Minimal Klaro config (DE banner, opt‑in for GA4). Replace G-XXXXXXX with your GA4 ID.
+    window.klaroConfig = {
+      version: 1,
+      noAutoLoad: false,
+      htmlTexts: false,
+      elementID: 'klaro',
+      styling: { theme: ['top','wide'] },
+      lang: 'de',
+      translations: {
+        de: {
+          consentModal: {
+            title: 'Datenschutz‑Einstellungen',
+            description: 'Wir verwenden Cookies/ähnliche Technologien. Sie können Ihre Auswahl jederzeit ändern.'
+          },
+          consentNotice: {
+            description: 'Wir nutzen Google Analytics (optional) für Reichweitenmessung.',
+            learnMore: 'Einstellungen'
+          },
+          ok: 'Akzeptieren',
+          acceptAll: 'Alle akzeptieren (Analytics erlauben)',
+          decline: 'Ablehnen (nur notwendige Cookies)',
+          save: 'Speichern',
+          purposes: { analytics: 'Reichweitenmessung' }
+        }
+      },
+      services: [
+        {
+          name: 'google-analytics',
+          title: 'Google Analytics 4',
+          default: false,
+          purposes: ['analytics'],
+          cookies: [/^_ga(_.*)?/, /^_gid/],
+          onAccept: () => {
+            gtag('consent', 'update', { 'analytics_storage': 'granted' });
+            if (!window.__gaLoaded) {
+              const s = document.createElement('script');
+              s.async = true;
+              s.src = 'https://www.googletagmanager.com/gtag/js?id=G-EGJRBSMNYF'; // <-- replace
+              document.head.appendChild(s);
+              window.__gaLoaded = true;
+              gtag('js', new Date());
+              gtag('config', 'G-EGJRBSMNYF', { anonymize_ip: true }); // <-- replace
+            }
+          },
+          onDecline: () => {
+            gtag('consent', 'update', { 'analytics_storage': 'denied' });
+          }
+        }
+      ]
+    };
+  </script>
+
+  <style>
+    /* Focus ring for keyboard users */
+    :focus-visible { outline: 2px solid #41ffd8; outline-offset: 3px; border-radius: 14px; }
+
+    /* Screen-reader only utility + reveal on focus for skip link */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .focus\:not-sr-only:focus{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;white-space:normal}
+
+    /* Reduce hover dependence on touch devices */
+    @media (pointer: coarse) { .group:hover { background: inherit !important; } .group:active { transform: scale(0.99); } }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+    /* Optional: help users who request higher contrast */
+    @media (prefers-contrast: more) {
+      .text-white\/60 { color: rgba(255,255,255,0.85) !important; }
+      .text-white\/70 { color: rgba(255,255,255,0.9) !important; }
+      .ring-white\/10 { --tw-ring-color: rgba(255,255,255,0.25) !important; }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-b from-navy-950 to-navy-900 text-white antialiased">
+  <!-- Skip link -->
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-navy-700 focus:text-white focus:px-3 focus:py-2 focus:rounded-lg">
+    Zum Inhalt springen
+  </a>
+
+  <header role="banner" class="text-center mb-8">
+    <div class="mx-auto h-24 w-24 mt-10 rounded-2xl bg-navy-800 ring-1 ring-white/10 grid place-items-center shadow-lg">
+      <span aria-hidden="true" class="text-3xl">🌊</span>
+    </div>
+    <h1 class="mt-5 text-2xl md:text-3xl font-semibold tracking-tight">Julian Hilgemann</h1>
+    <p class="mt-2 text-white/70 text-sm md:text-base">Analytics · Finance · Design</p>
+  </header>
+
+  <main id="main" role="main" class="mx-auto max-w-md md:max-w-lg lg:max-w-2xl px-5 pb-10 sm:pb-16">
+    <section aria-labelledby="links-heading" class="grid gap-3 sm:gap-4 lg:grid-cols-2">
+      <h2 id="links-heading" class="sr-only">Hauptlinks</h2>
+
+      <!-- YouTube -->
+      <a href="https://youtube.com/@hyperadapted"
+         class="group flex items-center gap-4 rounded-2xl bg-navy-800/70 ring-1 ring-white/10 px-5 py-4 hover:bg-navy-800 transition"
+         data-analytics="YouTube" rel="me noopener" target="_blank"
+         aria-label="Öffne YouTube – Videos & Tutorials">
+        <img src="/assets/icons/youtube.svg" alt="YouTube" class="h-7 w-7">
+        <div class="flex-1">
+          <div class="font-medium">YouTube</div>
+          <div class="text-sm text-white/70">Videos & Tutorials</div>
+        </div>
+        <span aria-hidden="true" class="opacity-0 group-hover:opacity-100 transition text-neon-teal">↗</span>
+      </a>
+
+      <!-- Medium -->
+      <a href="https://medium.com/@hyperadapted"
+         class="group flex items-center gap-4 rounded-2xl bg-navy-800/70 ring-1 ring-white/10 px-5 py-4 hover:bg-navy-800 transition"
+         data-analytics="Medium" rel="me noopener" target="_blank"
+         aria-label="Öffne Medium – Artikel & Essays">
+        <img src="/assets/icons/medium.svg" alt="Medium" class="h-7 w-7">
+        <div class="flex-1">
+          <div class="font-medium">Medium</div>
+          <div class="text-sm text-white/70">Artikel & Essays</div>
+        </div>
+        <span aria-hidden="true" class="opacity-0 group-hover:opacity-100 transition text-neon-teal">↗</span>
+      </a>
+
+      <!-- Substack -->
+      <a href="https://hyperadapted.substack.com"
+         class="group flex items-center gap-4 rounded-2xl bg-navy-800/70 ring-1 ring-white/10 px-5 py-4 hover:bg-navy-800 transition"
+         data-analytics="Substack" rel="me noopener" target="_blank"
+         aria-label="Öffne Substack – Newsletter">
+        <img src="/assets/icons/substack.svg" alt="Substack" class="h-7 w-7">
+        <div class="flex-1">
+          <div class="font-medium">Substack</div>
+          <div class="text-sm text-white/70">Newsletter</div>
+        </div>
+        <span aria-hidden="true" class="opacity-0 group-hover:opacity-100 transition text-neon-teal">↗</span>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://instagram.com/hyperadapted"
+         class="group flex items-center gap-4 rounded-2xl bg-navy-800/70 ring-1 ring-white/10 px-5 py-4 hover:bg-navy-800 transition"
+         data-analytics="Instagram" rel="me noopener" target="_blank"
+         aria-label="Öffne Instagram – Behind the scenes">
+        <img src="/assets/icons/instagram.svg" alt="Instagram" class="h-7 w-7">
+        <div class="flex-1">
+          <div class="font-medium">Instagram</div>
+          <div class="text-sm text-white/70">Behind the scenes</div>
+        </div>
+        <span aria-hidden="true" class="opacity-0 group-hover:opacity-100 transition text-neon-teal">↗</span>
+      </a>
+
+      <!-- GitHub -->
+      <a href="https://github.com/julianhilgemann/projects"
+         class="group flex items-center gap-4 rounded-2xl bg-navy-800/70 ring-1 ring-white/10 px-5 py-4 hover:bg-navy-800 transition"
+         data-analytics="GitHub" rel="me noopener" target="_blank"
+         aria-label="Öffne GitHub – Code & Projekte">
+        <img src="/assets/icons/github.svg" alt="GitHub" class="h-7 w-7">
+        <div class="flex-1">
+          <div class="font-medium">GitHub</div>
+          <div class="text-sm text-white/70">Code & Projekte</div>
+        </div>
+        <span aria-hidden="true" class="opacity-0 group-hover:opacity-100 transition text-neon-teal">↗</span>
+      </a>
+
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/julian-hilgemann"
+         class="group flex items-center gap-4 rounded-2xl bg-navy-800/70 ring-1 ring-white/10 px-5 py-4 hover:bg-navy-800 transition"
+         data-analytics="LinkedIn" rel="me noopener" target="_blank"
+         aria-label="Öffne LinkedIn – CV & Kontakt">
+        <img src="/assets/icons/linkedin.svg" alt="LinkedIn" class="h-7 w-7">
+        <div class="flex-1">
+          <div class="font-medium">LinkedIn</div>
+          <div class="text-sm text-white/70">CV & Kontakt</div>
+        </div>
+        <span aria-hidden="true" class="opacity-0 group-hover:opacity-100 transition text-neon-teal">↗</span>
+      </a>
+    </section>
+
+    <footer role="contentinfo" class="mt-10 text-center text-sm text-white/60 space-x-3">
+      <a class="underline hover:text-neon-teal" href="/impressum.html">Impressum</a>
+      <a class="underline hover:text-neon-teal" href="/datenschutz.html">Datenschutz</a>
+      <a class="underline hover:text-neon-teal" href="#" onclick="window.klaro && window.klaro.show(); return false;">Cookie‑Einstellungen</a>
+    </footer>
+  </main>
+
+  <script>
+    // Custom outbound event labels for GA4 (after consent/gtag loaded)
+    document.querySelectorAll('[data-analytics]').forEach(el => {
+      el.addEventListener('click', () => {
+        const label = el.getAttribute('data-analytics');
+        if (window.gtag) gtag('event', 'click_outbound', { link_label: label });
+      });
+    });
+  </script>
+</body>
+</html>

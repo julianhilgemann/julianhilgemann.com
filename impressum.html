@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Impressum — Julian Hilgemann</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+  <style>
+    :root { color-scheme: dark; }
+    body { background:#0e1428; color:#ffffff; }
+
+    /* Strong, consistent focus outline */
+    :focus-visible { outline: 2px solid #41ffd8; outline-offset: 3px; border-radius: 8px; }
+
+    /* SR-only utility and reveal on focus for skip link */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .focus\:not-sr-only:focus{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;white-space:normal}
+
+    /* Link visibility and consistency */
+    a { color:#41ffd8; text-decoration: underline; text-underline-offset: 2px; }
+    a:visited { color:#41ffd8; } /* avoid low-contrast default purple */
+    a:hover, a:focus { text-decoration-thickness: 2px; }
+
+    body { background: #0e1428; color: #ffffff; }
+    h1, h2, h3, h4, h5, h6 { color: #ffffff; }
+
+    /* Motion preference */
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  </style>
+</head>
+<body>
+  <!-- Skip link -->
+  <a href="#content" class="sr-only focus:not-sr-only">Zum Inhalt springen</a>
+
+  <main id="content" class="container" role="main">
+    <h1>Impressum</h1>
+
+    <p><strong>Angaben gemäß § 5 TMG</strong></p>
+    <address style="font-style: normal; line-height: 1.6;">
+      Julian Hilgemann<br>
+      Josef‑Führer‑Straße&nbsp;41<br>
+      80997&nbsp;München
+    </address>
+
+    <p><strong>Kontakt</strong><br>
+      E‑Mail: <a href="mailto:contact.hilgemann@gmail.com">contact.hilgemann@gmail.com</a>
+    </p>
+
+    <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</strong><br>
+      Julian Hilgemann (Anschrift wie oben)
+    </p>
+
+    <p><a href="/">Zurück</a></p>
+  </main>
+</body>
+</html>
