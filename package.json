@@ -1,0 +1,26 @@
+{
+  "name": "julianhilgemann.com",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julianhilgemann/julianhilgemann.com.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@astrojs/tailwind": "^5.0.0",
+    "astro": "^4.0.0",
+    "astro-particles": "^2.10.0",
+    "tailwindcss": "^3.0.0",
+    "tsparticles-slim": "^2.12.0"
+  }
+}

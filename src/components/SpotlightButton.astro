@@ -1,0 +1,73 @@
+---
+interface Props {
+    href: string;
+    class?: string;
+}
+
+const { href, class: className } = Astro.props;
+---
+
+<a
+    href={href}
+    class:list={[
+        "js-spotlight-btn relative group inline-flex items-center justify-center p-[1.5px] rounded-full overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(245,158,11,0.3)] active:scale-95",
+        className,
+    ]}
+>
+    <!-- Moving Gradient overlay (The Border) -->
+    <div
+        class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style="background: radial-gradient(300px circle at var(--x, 50%) var(--y, 50%), rgba(245, 158, 11, 1) 0%, rgba(56, 189, 248, 0.6) 50%, transparent 100%);"
+    >
+    </div>
+
+    <!-- Fallback Border (visible when not hovering/no js) -->
+    <div
+        class="absolute inset-0 rounded-full border border-white/10 group-hover:border-transparent transition-colors"
+    >
+    </div>
+
+    <!-- Content Container -->
+    <div
+        class="relative h-full w-full bg-navy-950/90 rounded-full px-10 py-4 flex items-center justify-center transition-colors group-hover:bg-navy-950/80 backdrop-blur-sm"
+    >
+        <span
+            class="text-white font-bold tracking-wide flex items-center gap-2 relative z-20"
+        >
+            <slot />
+        </span>
+
+        <!-- Inner subtle glow -->
+        <div
+            class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-gradient-to-r from-primary/30 to-info/30 rounded-full blur-xl"
+        >
+        </div>
+    </div>
+</a>
+
+<script>
+    // @ts-nocheck
+    // Use a simplified approach to handle Astro view transitions if they were used,
+    // but standard DOMContentLoaded/script execution works for this single page app style.
+    const initSpotlight = () => {
+        const btns = document.querySelectorAll(".js-spotlight-btn");
+
+        btns.forEach((btn) => {
+            btn.addEventListener("mousemove", (e) => {
+                const rect = btn.getBoundingClientRect();
+                // @ts-ignore
+                const x = e.clientX - rect.left;
+                // @ts-ignore
+                const y = e.clientY - rect.top;
+                // @ts-ignore
+                btn.style.setProperty("--x", `${x}px`);
+                // @ts-ignore
+                btn.style.setProperty("--y", `${y}px`);
+            });
+        });
+    };
+
+    initSpotlight();
+    // Support Astro View Transitions if added later
+    document.addEventListener("astro:page-load", initSpotlight);
+</script>

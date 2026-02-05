@@ -1,0 +1,499 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import Offerings from "../components/Offerings.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+const projects = [
+    {
+        title: "Dashboard Gallery",
+        category: "Data Visualization Collection",
+        description:
+            "A collection of high-fidelity analytics interfaces and dashboard designs, showcasing expertise in PowerBI, DAX, and user-centric data storytelling.",
+        tags: ["PowerBI", "PowerQuery", "DAX", "Figma", "UI/UX"],
+        image: "/assets/energy-analytics.png",
+        link: "https://github.com/julianhilgemann/dashboard-gallery/",
+        content: `
+            <h3 class="text-xl font-bold text-white mb-4">Overview</h3>
+            <p class="mb-6">This repository serves as a portfolio of my advanced dashboarding work. It demonstrates how complex data can be transformed into intuitive decision-making tools.</p>
+            <h3 class="text-xl font-bold text-white mb-4">What's Inside</h3>
+            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6">
+                 <li><strong>Energy Trading Analytics:</strong> Real-time market data visualization.</li>
+                 <li><strong>Financial Reporting:</strong> Interactive P&L and cash flow statements.</li>
+                 <li><strong>Sales Performance:</strong> Granular tracking with partner scorecards.</li>
+            </ul>
+            <h3 class="text-xl font-bold text-white mb-4">Technical Highlights</h3>
+            <p>Features advanced DAX patterns, custom PowerQuery transformations, and Figma-designed layouts integrated into PowerBI.</p>
+        `,
+    },
+    {
+        title: "End-to-End SaaS Operating System",
+        category: "Stochastic Financial Twin",
+        description:
+            "A Proof of Concept for programmatically instantiating a commercial-grade data stack from a static business definition, compiling Excel models into a living data system.",
+        tags: [
+            "Excel",
+            "Python",
+            "dbt",
+            "DuckDB",
+            "SQL",
+            "Streamlit",
+            "Prophet",
+        ],
+        image: "/assets/end-to-end-saas-os.png",
+        link: "https://github.com/julianhilgemann/Portfolio",
+        content: `
+            <h3 class="text-xl font-bold text-white mb-4">The Concept</h3>
+            <p class="mb-6">This project implements a "Rapid Data Function"—instantiating an entire end-to-end data stack (Stochastic Simulation, Data Warehouse, Algorithmic Forecasting, and BI) purely from a static business definition.</p>
+            
+            <h3 class="text-xl font-bold text-white mb-4">Core Architecture</h3>
+            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6">
+                <li><strong>Contract-First Engineering:</strong> The entire simulation scales dynamically based on a JSON contract extracted from the Excel Operating Plan.</li>
+                <li><strong>Stochastic Engine:</strong> Simulates Customer Acquisition (Poisson), Retention (Hazard/Survival), and Revenue expansion.</li>
+                <li><strong>Medallion DWH:</strong> A rigorous dbt project structure (Bronze/Silver/Gold) ensuring clean lineage.</li>
+                <li><strong>Regime-Aware Forecasting:</strong> A Prophet model that detects "Growth Regimes" to avoid overfitting on early-stage data.</li>
+            </ul>
+
+            <h3 class="text-xl font-bold text-white mb-4">Development Workflow</h3>
+            <p class="mb-4 text-text-secondary">We treated the Business Contract as code, compiling strategy into a digital twin:</p>
+            <ol class="list-decimal list-inside space-y-2 text-text-secondary">
+                <li><strong>Context:</strong> Domain knowledge structured in Obsidian.</li>
+                <li><strong>RAG Layer:</strong> NotebookLM used to synthesize technical specs.</li>
+                <li><strong>Agentic Execution:</strong> Feeding specs into Cursor/Windsurf to scaffold the stack.</li>
+            </ol>
+        `,
+    },
+    {
+        title: "Vantage Alpin: Analytics Re-Engineering",
+        category: "Production Data Stack",
+        description:
+            "A Single Source of Truth financial reporting pipeline replacing legacy systems with a modern Python/dbt/DuckDB stack, simulating complex e-commerce dynamics.",
+        tags: [
+            "Python",
+            "dbt",
+            "DuckDB",
+            "SQL",
+            "PowerBI",
+            "PowerQuery",
+            "DAX",
+        ],
+        image: "/assets/vantage-alpin-analytics.png",
+        link: "https://github.com/julianhilgemann/BI-Pipeline",
+        content: `
+            <h3 class="text-xl font-bold text-white mb-4">Executive Summary</h3>
+            <p class="mb-6">This project acts as the central financial reporting engine for Vantage Alpin. It replaces legacy PDF reports with a dynamic Modern Data Stack (MDS) that processes stochastic transaction data into a clean Star Schema.</p>
+            
+            <h3 class="text-xl font-bold text-white mb-4">Data Science & Simulation</h3>
+            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6">
+                <li><strong>Controlled Stochasticity:</strong> Uses Non-Homogeneous Poisson Processes (NHPP) to model realistic demand patterns (Seasonality, Payday effects, Events).</li>
+                <li><strong>Product Economics:</strong> Pricing follows Log-Normal distributions; popularity follows Pareto (Power Law).</li>
+            </ul>
+
+            <h3 class="text-xl font-bold text-white mb-4">Analytics Engineering (dbt)</h3>
+            <p class="mb-4 text-text-secondary">We implemented a strict Kimball dimensional model:</p>
+            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6">
+                <li><strong>Marketing Allocation:</strong> Algorithmic attribution of daily ad spend to individual order lines based on revenue share.</li>
+                <li><strong>Currency Normalization:</strong> Robust handling of multi-currency transactions (EUR/CHF) with daily rate lookups.</li>
+                <li><strong>Star Schema:</strong> Central <code>fct_transactions</code> table linking to Type 1 SCD product dimensions.</li>
+            </ul>
+
+            <h3 class="text-xl font-bold text-white mb-4">BI Architecture</h3>
+            <p>To support local Power BI development without complex drivers, we architected a custom Parquet/CSV export workflow from DuckDB, enabling performant DirectQuery-like experiences.</p>
+        `,
+    },
+];
+---
+
+<Layout
+    title="Julian Hilgemann | Data to Decisions"
+    fullWidth={true}
+    noTopPadding={true}
+>
+    <!-- Hero Section -->
+    <Hero />
+
+    <!-- Problem Section -->
+    <Section
+        class="border-t border-white/5 min-h-screen flex flex-col justify-center"
+    >
+        <div class="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mb-12">
+                <h2 class="text-3xl md:text-5xl font-bold">
+                    Most companies have data. <br />
+                    <span class="text-text-secondary"
+                        >Few have decision systems.</span
+                    >
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div
+                    class="p-8 rounded-2xl bg-white/5 border border-white/5 transition-all duration-300 ease-in-out"
+                >
+                    <div class="mb-6 text-white/40">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="40"
+                            height="40"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+                            ></path>
+                            <path d="M3 3v5h5"></path>
+                            <path d="M12 7v5l4 2"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-white/80">
+                        Backward-Looking
+                    </h3>
+                    <p class="text-text-secondary text-sm leading-relaxed">
+                        Dashboards that describe the past but don’t guide
+                        action.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="p-8 rounded-2xl bg-white/5 border border-white/5 transition-all duration-300 ease-in-out"
+                >
+                    <div class="mb-6 text-white/40">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="40"
+                            height="40"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="m18.84 12.25 1.72-1.71h-.02a5.004 5.004 0 0 0-.12-7.07 5.006 5.006 0 0 0-6.95 0l-1.72 1.71"
+                            ></path>
+                            <path
+                                d="m5.17 11.75-1.71 1.71a5.004 5.004 0 0 0 .12 7.07 5.006 5.006 0 0 0 6.95 0l1.71-1.71"
+                            ></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-white/80">
+                        Disconnected
+                    </h3>
+                    <p class="text-text-secondary text-sm leading-relaxed">
+                        Data pipelines that exist but don’t connect to business
+                        impact.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="p-8 rounded-2xl bg-white/5 border border-white/5 transition-all duration-300 ease-in-out"
+                >
+                    <div class="mb-6 text-white/40">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="40"
+                            height="40"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"
+                            ></path>
+                            <path d="M8.5 2h7"></path>
+                            <path d="M7 16h10"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-white/80">
+                        Experimental
+                    </h3>
+                    <p class="text-text-secondary text-sm leading-relaxed">
+                        AI experiments that never turn into usable workflows.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </Section>
+
+    <!-- Solution / Offerings Section -->
+    <Section
+        id="services"
+        class="border-t border-white/5 min-h-screen flex flex-col justify-center"
+    >
+        <div class="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mb-12">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">
+                    I build the system between <br />
+                    <span class="text-primary">data</span> and <span
+                        class="text-info">decisions</span
+                    >.
+                </h2>
+                <p class="text-xl text-text-secondary max-w-2xl">
+                    I combine analytics engineering, AI-assisted workflows,
+                    modeling, and visual decision interfaces into one coherent
+                    system designed around business outcomes.
+                </p>
+            </div>
+
+            <Offerings />
+        </div>
+    </Section>
+
+    <!-- Proof / Projects Section -->
+    <Section
+        id="projects"
+        class="border-t border-white/5 min-h-screen flex flex-col justify-center"
+    >
+        <div class="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h2 class="text-3xl md:text-5xl font-bold">Projects</h2>
+            </div>
+
+            <div class="flex flex-col gap-6">
+                {projects.map((project) => <ProjectCard {...project} />)}
+            </div>
+        </div>
+    </Section>
+
+    <!-- About / Trust Section -->
+    <Section
+        id="about"
+        class="border-t border-white/5 min-h-screen flex flex-col justify-center"
+    >
+        <div class="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Left: Philosophy -->
+                <div>
+                    <h2
+                        class="text-3xl md:text-5xl font-bold mb-8 leading-tight"
+                    >
+                        I see companies less as structures and more as <span
+                            class="text-primary">living systems</span
+                        >.
+                    </h2>
+                    <div
+                        class="space-y-6 text-lg text-text-secondary leading-relaxed"
+                    >
+                        <p>
+                            They breathe. They react. Revenue fluctuates,
+                            customers behave in cycles, and markets shift.
+                            Beneath the surface, there is always structure in
+                            the motion — dynamics that can be modeled,
+                            abstracted, and understood.
+                        </p>
+                        <p>
+                            To me, a dashboard metric isn’t “just a number.”
+                            It’s the visible tip of a deep system: data
+                            architecture, modeling logic, and design choices,
+                            all condensed into a single signal.
+                        </p>
+                        <p
+                            class="text-white font-medium border-l-4 border-primary pl-6"
+                        >
+                            My goal is to design that abstraction so it is
+                            technically sound and aligned with how humans
+                            actually decide.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Focus Areas -->
+                <div
+                    class="glass p-8 md:p-12 rounded-3xl border border-white/5 bg-white/5"
+                >
+                    <h3 class="text-2xl font-bold text-white mb-8">My Focus</h3>
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <span class="text-primary text-xl mt-1">01</span>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">
+                                    Systems Thinking
+                                </h4>
+                                <p class="text-text-secondary text-sm mt-1">
+                                    Understanding the whole, not just the parts.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="text-primary text-xl mt-1">02</span>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">
+                                    Analytics Engineering
+                                </h4>
+                                <p class="text-text-secondary text-sm mt-1">
+                                    Building robust, scalable data pipelines.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="text-primary text-xl mt-1">03</span>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">
+                                    Modeling & Forecasting
+                                </h4>
+                                <p class="text-text-secondary text-sm mt-1">
+                                    Predicting outcomes with statistical rigor.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="text-primary text-xl mt-1">04</span>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">
+                                    Decision Interface Design
+                                </h4>
+                                <p class="text-text-secondary text-sm mt-1">
+                                    Visualizing complexity for clarity.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </Section>
+
+    <!-- CTA Section -->
+    <Section
+        id="cta-section"
+        class="text-center py-32 border-t border-white/5 relative overflow-hidden group min-h-screen flex flex-col justify-center"
+    >
+        <!-- Animated Background -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <!-- Blob 1 (Gold) - Top Left -->
+            <div
+                class="blob-wrapper absolute top-[-10%] left-[-10%] transition-transform duration-[2000ms] ease-out will-change-transform"
+                data-speed="0.05"
+            >
+                <div
+                    class="w-[600px] h-[600px] bg-primary/20 rounded-full blur-[100px] animate-blob"
+                >
+                </div>
+            </div>
+
+            <!-- Blob 2 (Blue) - Bottom Right -->
+            <div
+                class="blob-wrapper absolute bottom-[-10%] right-[-10%] transition-transform duration-[2000ms] ease-out will-change-transform"
+                data-speed="0.08"
+            >
+                <div
+                    class="w-[500px] h-[500px] bg-info/20 rounded-full blur-[80px] animate-blob animation-delay-2000"
+                >
+                </div>
+            </div>
+
+            <!-- Blob 3 (Purple) - Middle/Side -->
+            <div
+                class="blob-wrapper absolute top-1/2 right-[10%] transition-transform duration-[2000ms] ease-out will-change-transform"
+                data-speed="0.03"
+            >
+                <div
+                    class="w-[550px] h-[550px] bg-purple-500/20 rounded-full blur-[90px] animate-blob animation-delay-4000"
+                >
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div
+            class="relative z-10 selection:bg-primary/30 w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8"
+        >
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">
+                Let’s design your decision system.
+            </h2>
+            <p class="text-xl text-text-secondary mb-10 max-w-2xl mx-auto">
+                If your company has data but decisions still rely on gut
+                feeling, we should talk.
+            </p>
+            <a
+                href="#"
+                class="glass hover:bg-white/10 text-white font-medium py-3 px-6 rounded-full transition-all duration-300 ease-in-out border !border-primary text-center inline-block js-open-contact"
+            >
+                Schedule Consultation
+            </a>
+        </div>
+    </Section>
+
+    <style>
+        @keyframes blob {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(50px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-30px, 40px) scale(0.95);
+            }
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+        }
+        .animate-blob {
+            animation: blob 8s infinite ease-in-out;
+        }
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+    </style>
+
+    <script>
+        const section = document.getElementById("cta-section");
+        const wrappers = document.querySelectorAll(".blob-wrapper");
+
+        if (section) {
+            section.addEventListener("mousemove", (e) => {
+                const rect = section.getBoundingClientRect();
+                const x = e.clientX - rect.left; // Mouse relative to section
+                const y = e.clientY - rect.top;
+
+                // Calculate center of section
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                wrappers.forEach((wrapper) => {
+                    const speed = parseFloat(
+                        wrapper.getAttribute("data-speed") || "0.05",
+                    );
+
+                    // Interaction: Pull towards mouse
+                    // We move the wrapper translate based on distance from center to mouse
+                    // But to make it "pull towards mouse", we just shift the wrapper towards the mouse coords
+                    // relative to its initial position.
+
+                    // Simple logic: Target position is (MouseX - InitialPos) * speed
+                    // But wrappers are absolute positioned. Let's just translate them relative to their origin.
+
+                    const moveX = (x - centerX) * speed * 2; // Factor for intensity
+                    const moveY = (y - centerY) * speed * 2;
+
+                    (wrapper as HTMLElement).style.transform =
+                        `translate(${moveX}px, ${moveY}px)`;
+                });
+            });
+
+            // Reset on mouse leave
+            section.addEventListener("mouseleave", () => {
+                wrappers.forEach((wrapper) => {
+                    (wrapper as HTMLElement).style.transform =
+                        `translate(0, 0)`;
+                });
+            });
+        }
+    </script>
+</Layout>

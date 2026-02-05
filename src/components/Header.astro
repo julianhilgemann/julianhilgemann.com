@@ -1,0 +1,112 @@
+---
+const navItems = [
+    { name: "System", href: "/#services" },
+    { name: "Projects", href: "/#projects" },
+    { name: "About", href: "/#about" },
+];
+---
+
+<header
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out pointer-events-none"
+>
+    <!-- 
+      Responsive Container:
+      - w-[95%]: maintain margins on small mobile
+      - max-w-2xl: consistent max width on desktop
+      - px-4: adequate internal padding
+    -->
+    <div
+        class="glass mx-auto mt-4 w-[calc(100%-2rem)] max-w-[1200px] rounded-full px-4 py-3 md:px-6 md:py-3 flex items-center justify-between pointer-events-auto shadow-sm"
+    >
+        <a
+            href="#"
+            class="nav-link font-bold text-base md:text-lg tracking-tight hover:text-primary transition-colors duration-300 ease-in-out shrink-0"
+            data-href="#hero"
+        >
+            JH
+        </a>
+
+        <!-- 
+          Navigation:
+          - Always visible (removed hidden)
+          - Tighter gap on mobile (gap-2.5) to fit
+          - Smaller text on mobile (text-xs)
+        -->
+        <nav class="flex items-center gap-2.5 md:gap-6">
+            {
+                navItems.map((item) => (
+                    <a
+                        href={item.href}
+                        class="nav-link text-xs md:text-sm font-medium hover:text-primary transition-colors duration-300 ease-in-out"
+                        data-href={item.href}
+                    >
+                        {item.name}
+                    </a>
+                ))
+            }
+        </nav>
+
+        <!-- 
+          CTA:
+          - Always visible
+          - Compact padding/text on mobile
+          - Prevent wrapping with whitespace-nowrap
+        -->
+        <div class="flex items-center gap-4 shrink-0">
+            <a
+                href="#"
+                class="glass hover:bg-white/10 text-white text-xs md:text-sm font-medium py-2 px-4 rounded-full transition-all duration-300 ease-in-out border !border-primary text-center whitespace-nowrap js-open-contact"
+            >
+                Contact
+            </a>
+        </div>
+    </div>
+</header>
+
+<script>
+    const initScrollSpy = () => {
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        const observerOptions = {
+            root: null,
+            rootMargin: "-20% 0px -20% 0px", // Activate when section is in middle 60% of screen
+            threshold: 0.2,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute("id");
+
+                    // Remove active class from all
+                    navLinks.forEach((link) => {
+                        link.classList.remove("text-primary");
+                    });
+
+                    // Add active class to corresponding link
+                    // Match either data-href="#id" or data-href="/#id"
+                    let activeLink = document.querySelector(
+                        `.nav-link[data-href="#${id}"]`,
+                    );
+                    if (!activeLink) {
+                        activeLink = document.querySelector(
+                            `.nav-link[data-href="/#${id}"]`,
+                        );
+                    }
+
+                    if (activeLink) {
+                        activeLink.classList.add("text-primary");
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach((section) => observer.observe(section));
+    };
+
+    // run on load
+    initScrollSpy();
+    // run on astro page swap
+    document.addEventListener("astro:page-load", initScrollSpy);
+</script>

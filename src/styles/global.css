@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: theme('colors.background');
+    color: theme('colors.text.primary');
+  }
+
+  body {
+    @apply antialiased;
+  }
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* --- Klaro! Custom Theme --- */
+:root {
+  --klaro-font-family: inherit;
+  --klaro-green1: #f59e0b;
+  --klaro-green2: #d97706;
+  --klaro-blue1: #38bdf8;
+  --klaro-red1: #374151;
+  --klaro-red2: #4b5563;
+  --klaro-background: #0b1220;
+  --klaro-text: #f3f4f6;
+  --klaro-gray1: #1f2937;
+}
+
+/* Common Glass Style */
+.klaro .cookie-notice,
+.klaro .cookie-modal {
+  background-color: rgba(11, 18, 32, 0.9) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+  color: #f3f4f6 !important;
+}
+
+/* --- Bottom Banner (Notice) --- */
+.klaro .cookie-notice {
+  bottom: 24px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 90% !important;
+  max-width: 1200px !important;
+  border-radius: 16px !important;
+  z-index: 5000 !important;
+}
+
+@media (max-width: 640px) {
+  .klaro .cookie-notice {
+    bottom: 16px !important;
+    width: calc(100% - 32px) !important;
+  }
+}
+
+/* --- Settings Modal --- */
+.klaro .cookie-modal {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 90% !important;
+  max-width: 600px !important;
+  max-height: 85vh !important;
+  border-radius: 24px !important;
+  z-index: 9999 !important;
+  overflow: hidden !important;
+  /* Internal scrolling if needed */
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.klaro .cm-modal .cm-body {
+  overflow-y: auto !important;
+  padding: 24px !important;
+}
+
+.klaro .cm-modal .cm-footer {
+  padding: 16px 24px !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+  margin: 0 !important;
+}
+
+.klaro .cm-powered-by {
+  display: none !important;
+}
+
+/* Close Button (X) */
+.klaro .cm-modal .hide {
+  top: 20px !important;
+  right: 20px !important;
+}
+
+.klaro .cm-modal .hide svg path {
+  fill: #9ca3af !important;
+  transition: fill 0.2s;
+}
+
+.klaro .cm-modal .hide:hover svg path {
+  fill: #f59e0b !important;
+}
+
+/* --- Buttons --- */
+.klaro .cm-btn {
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  font-family: inherit !important;
+  text-transform: none !important;
+  transition: all 0.2s ease !important;
+  padding: 12px 24px !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* Accept */
+.klaro .cm-btn.cm-btn-success {
+  background-color: #f59e0b !important;
+  color: #0b1220 !important;
+  border: none !important;
+}
+
+.klaro .cm-btn.cm-btn-success:hover {
+  background-color: #d97706 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important;
+}
+
+/* Decline / Info */
+.klaro .cm-btn.cm-btn-danger,
+.klaro .cm-btn.cm-btn-info {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: #9ca3af !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.klaro .cm-btn.cm-btn-danger:hover,
+.klaro .cm-btn.cm-btn-info:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #f3f4f6 !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* --- Typography & Toggles --- */
+.klaro p,
+.klaro h1,
+.klaro h2,
+.klaro strong,
+.klaro li,
+.klaro span {
+  color: #f3f4f6 !important;
+}
+
+.klaro a {
+  color: #38bdf8 !important;
+  text-decoration: none !important;
+}
+
+.klaro .cm-switch-input:checked+.cm-switch {
+  background-color: #f59e0b !important;
+}
+
+.klaro .cm-switch {
+  border-radius: 9999px !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.klaro .cm-switch::before {
+  background-color: #fff !important;
+}

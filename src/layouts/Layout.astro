@@ -1,0 +1,135 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ContactModal from "../components/ContactModal.astro";
+
+interface Props {
+	title: string;
+	description?: string;
+	fullWidth?: boolean;
+	noTopPadding?: boolean;
+}
+
+const {
+	title,
+	description = "Julian Hilgemann - Data to Decisions",
+	fullWidth = false,
+	noTopPadding = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+
+		<!-- Consent Mode v2 defaults: DENY until user consents -->
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("consent", "default", {
+				ad_storage: "denied",
+				ad_user_data: "denied",
+				ad_personalization: "denied",
+				analytics_storage: "denied",
+				functionality_storage: "denied",
+				personalization_storage: "denied",
+				security_storage: "granted",
+			});
+		</script>
+
+		<!-- Klaro! (CMP) via CDN -->
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/klaro@0.7.21/dist/klaro.min.css"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/klaro@0.7.21/dist/klaro.min.js"
+			defer></script>
+		<script defer is:inline>
+			// Minimal Klaro config (EN banner, opt‑in for GA4). Replace G-XXXXXXX with your GA4 ID.
+			window.klaroConfig = {
+				version: 1,
+				noAutoLoad: false,
+				htmlTexts: false,
+				elementID: "klaro",
+				styling: { theme: ["top", "wide"] },
+				lang: "en",
+				translations: {
+					en: {
+						consentModal: {
+							title: "Privacy Settings",
+							description:
+								"We use cookies and similar technologies. You can change your choices at any time.",
+						},
+						consentNotice: {
+							description:
+								"We use Google Analytics (optional) to improved user experience.",
+							learnMore: "Settings",
+						},
+						ok: "Accept",
+						acceptAll: "Accept all (allow Analytics)",
+						decline: "Decline (necessary cookies only)",
+						save: "Save",
+						purposes: { analytics: "Analytics" },
+					},
+				},
+				services: [
+					{
+						name: "google-analytics",
+						title: "Google Analytics 4",
+						default: false,
+						purposes: ["analytics"],
+						cookies: [/^_ga(_.*)?/, /^_gid/],
+						onAccept: () => {
+							gtag("consent", "update", {
+								analytics_storage: "granted",
+							});
+							if (!window.__gaLoaded) {
+								const s = document.createElement("script");
+								s.async = true;
+								s.src =
+									"https://www.googletagmanager.com/gtag/js?id=G-EGJRBSMNYF"; // <-- replace
+								document.head.appendChild(s);
+								window.__gaLoaded = true;
+								gtag("js", new Date());
+								gtag("config", "G-EGJRBSMNYF", {
+									anonymize_ip: true,
+								}); // <-- replace
+							}
+						},
+						onDecline: () => {
+							gtag("consent", "update", {
+								analytics_storage: "denied",
+							});
+						},
+					},
+				],
+			};
+		</script>
+	</head>
+	<body
+		class="bg-background text-text-primary min-h-screen flex flex-col selection:bg-primary selection:text-white"
+	>
+		<Header />
+		<main
+			class:list={[
+				"flex-grow w-full",
+				noTopPadding ? "" : "pt-24 sm:pt-32",
+				fullWidth ? "" : "max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8",
+			]}
+		>
+			<slot />
+		</main>
+		<Footer />
+		<ContactModal />
+	</body>
+</html>
