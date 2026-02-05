@@ -58,7 +58,7 @@ const id = title.replace(/\s+/g, "-").toLowerCase();
                             href={link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-text-secondary hover:text-white transition-colors duration-300 ease-in-out group/link z-10"
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-text-secondary hover:text-primary transition-colors duration-300 ease-in-out group/link z-10"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +70,7 @@ const id = title.replace(/\s+/g, "-").toLowerCase();
                                 stroke-width="2"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                class="text-text-secondary group-hover/link:text-orange-500 transition-colors duration-300 ease-in-out"
+                                class="text-text-secondary group-hover/link:text-primary transition-colors duration-300 ease-in-out"
                             >
                                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
                             </svg>
@@ -121,12 +121,14 @@ const id = title.replace(/\s+/g, "-").toLowerCase();
         <!-- Expanded Content -->
         <div
             id={`content-${id}`}
-            class="js-content hidden overflow-hidden transition-[max-height] duration-300 ease-in-out"
+            class="js-content grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
         >
-            <div
-                class="pt-6 border-t border-white/10 prose prose-invert prose-sm max-w-none text-text-secondary"
-                set:html={content}
-            />
+            <div class="overflow-hidden">
+                <div
+                    class="pt-6 border-t border-white/10 prose prose-invert prose-sm max-w-none text-text-secondary"
+                    set:html={content}
+                />
+            </div>
         </div>
     </div>
 </div>
@@ -134,6 +136,28 @@ const id = title.replace(/\s+/g, "-").toLowerCase();
 <script>
     function setupAccordion() {
         const triggers = document.querySelectorAll(".js-toggle-btn");
+        const titleTriggers = document.querySelectorAll(".js-toggle-trigger");
+
+        const toggle = (btn) => {
+            const targetId =
+                btn.getAttribute("data-target") ||
+                `content-${btn.textContent.trim().replace(/\s+/g, "-").toLowerCase()}`;
+            // Note: title doesn't have data-target standardly in my previous code?
+            // Let's check the HTML. The button HAS data-target. The Title has class js-toggle-trigger but NO data-target attribute in the code I viewed.
+            // Lines 47-51: <h3 class="... js-toggle-trigger"> {title} </h3>. No data-target.
+            // But the button (Line 84) has data-target.
+            // I should make sure the title click also works if I want it to. The previous code didn't handle title click!
+            // Wait, line 136 select .js-toggle-btn. It didn't select .js-toggle-trigger.
+            // So currently clicking title does NOTHING.
+            // The user didn't ask to fix title clicking, but it has the cursor-pointer class. I should probably support it or just strictly follow instructions.
+            // Instructions: "opening and closing the card a tad smoother".
+            // I will stick to the button logic to avoid scope creep, but I need to make sure I don't break anything.
+
+            // Re-reading JS: triggers = document.querySelectorAll(".js-toggle-btn");
+            // So only button works.
+
+            // Let's just update the loop for buttons as requested.
+        };
 
         triggers.forEach((btn) => {
             btn.addEventListener("click", (e) => {
@@ -144,25 +168,25 @@ const id = title.replace(/\s+/g, "-").toLowerCase();
                 const icon = btn.querySelector(".js-icon");
 
                 if (content && icon) {
-                    const isHidden = content.classList.contains("hidden");
+                    const isOpen =
+                        content.classList.contains("grid-rows-[1fr]");
 
-                    if (isHidden) {
-                        content.classList.remove("hidden");
-                        icon.classList.add("rotate-45");
-                        // Optional: Animate opacity/slide
-                        content.animate(
-                            [
-                                { opacity: 0, transform: "translateY(-10px)" },
-                                { opacity: 1, transform: "translateY(0)" },
-                            ],
-                            {
-                                duration: 300,
-                                easing: "ease-out",
-                            },
+                    if (isOpen) {
+                        // Close
+                        content.classList.remove(
+                            "grid-rows-[1fr]",
+                            "opacity-100",
                         );
-                    } else {
-                        content.classList.add("hidden");
+                        content.classList.add("grid-rows-[0fr]", "opacity-0");
                         icon.classList.remove("rotate-45");
+                    } else {
+                        // Open
+                        content.classList.remove(
+                            "grid-rows-[0fr]",
+                            "opacity-0",
+                        );
+                        content.classList.add("grid-rows-[1fr]", "opacity-100");
+                        icon.classList.add("rotate-45");
                     }
                 }
             });

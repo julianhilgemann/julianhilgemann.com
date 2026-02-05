@@ -18,7 +18,7 @@ const projects = [
             <h3 class="text-xl font-bold text-white mb-4">Overview</h3>
             <p class="mb-6">This repository serves as a portfolio of my advanced dashboarding work. It demonstrates how complex data can be transformed into intuitive decision-making tools.</p>
             <h3 class="text-xl font-bold text-white mb-4">What's Inside</h3>
-            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6">
+            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6 marker:text-info">
                  <li><strong>Energy Trading Analytics:</strong> Real-time market data visualization.</li>
                  <li><strong>Financial Reporting:</strong> Interactive P&L and cash flow statements.</li>
                  <li><strong>Sales Performance:</strong> Granular tracking with partner scorecards.</li>
@@ -48,7 +48,7 @@ const projects = [
             <p class="mb-6">This project implements a "Rapid Data Function"—instantiating an entire end-to-end data stack (Stochastic Simulation, Data Warehouse, Algorithmic Forecasting, and BI) purely from a static business definition.</p>
             
             <h3 class="text-xl font-bold text-white mb-4">Core Architecture</h3>
-            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6">
+            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6 marker:text-info">
                 <li><strong>Contract-First Engineering:</strong> The entire simulation scales dynamically based on a JSON contract extracted from the Excel Operating Plan.</li>
                 <li><strong>Stochastic Engine:</strong> Simulates Customer Acquisition (Poisson), Retention (Hazard/Survival), and Revenue expansion.</li>
                 <li><strong>Medallion DWH:</strong> A rigorous dbt project structure (Bronze/Silver/Gold) ensuring clean lineage.</li>
@@ -85,14 +85,14 @@ const projects = [
             <p class="mb-6">This project acts as the central financial reporting engine for Vantage Alpin. It replaces legacy PDF reports with a dynamic Modern Data Stack (MDS) that processes stochastic transaction data into a clean Star Schema.</p>
             
             <h3 class="text-xl font-bold text-white mb-4">Data Science & Simulation</h3>
-            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6">
+            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6 marker:text-info">
                 <li><strong>Controlled Stochasticity:</strong> Uses Non-Homogeneous Poisson Processes (NHPP) to model realistic demand patterns (Seasonality, Payday effects, Events).</li>
                 <li><strong>Product Economics:</strong> Pricing follows Log-Normal distributions; popularity follows Pareto (Power Law).</li>
             </ul>
 
             <h3 class="text-xl font-bold text-white mb-4">Analytics Engineering (dbt)</h3>
             <p class="mb-4 text-text-secondary">We implemented a strict Kimball dimensional model:</p>
-            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6">
+            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6 marker:text-info">
                 <li><strong>Marketing Allocation:</strong> Algorithmic attribution of daily ad spend to individual order lines based on revenue share.</li>
                 <li><strong>Currency Normalization:</strong> Robust handling of multi-currency transactions (EUR/CHF) with daily rate lookups.</li>
                 <li><strong>Star Schema:</strong> Central <code>fct_transactions</code> table linking to Type 1 SCD product dimensions.</li>
@@ -372,35 +372,57 @@ const projects = [
     >
         <!-- Animated Background -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <!-- Blob 1 (Gold) - Top Left -->
+            <!-- Blob 1: Primary Orange (Top Left) -->
             <div
-                class="blob-wrapper absolute top-[-10%] left-[-10%] transition-transform duration-[2000ms] ease-out will-change-transform"
-                data-speed="0.05"
+                class="blob-wrapper absolute -top-[30%] -left-[10%] transition-transform duration-[2000ms] ease-out will-change-transform"
+                data-speed="0.06"
             >
                 <div
-                    class="w-[600px] h-[600px] bg-primary/20 rounded-full blur-[100px] animate-blob"
+                    class="w-[800px] h-[800px] bg-primary/40 rounded-full blur-[200px] animate-blob"
                 >
                 </div>
             </div>
 
-            <!-- Blob 2 (Blue) - Bottom Right -->
+            <!-- Blob 2: Blue (Bottom Right) -->
             <div
-                class="blob-wrapper absolute bottom-[-10%] right-[-10%] transition-transform duration-[2000ms] ease-out will-change-transform"
+                class="blob-wrapper absolute -bottom-[30%] -right-[10%] transition-transform duration-[2000ms] ease-out will-change-transform"
                 data-speed="0.08"
             >
                 <div
-                    class="w-[500px] h-[500px] bg-info/20 rounded-full blur-[80px] animate-blob animation-delay-2000"
+                    class="w-[900px] h-[900px] bg-blue-600/40 rounded-full blur-[250px] animate-blob animation-delay-2000"
                 >
                 </div>
             </div>
 
-            <!-- Blob 3 (Purple) - Middle/Side -->
+            <!-- Blob 3: Purple (Center/Top) -->
             <div
-                class="blob-wrapper absolute top-1/2 right-[10%] transition-transform duration-[2000ms] ease-out will-change-transform"
-                data-speed="0.03"
+                class="blob-wrapper absolute top-[10%] left-[30%] transition-transform duration-[2000ms] ease-out will-change-transform"
+                data-speed="0.04"
             >
                 <div
-                    class="w-[550px] h-[550px] bg-purple-500/20 rounded-full blur-[90px] animate-blob animation-delay-4000"
+                    class="w-[700px] h-[700px] bg-purple-600/30 rounded-full blur-[200px] animate-blob animation-delay-4000"
+                >
+                </div>
+            </div>
+
+            <!-- Blob 4: Teal (Bottom Left) -->
+            <div
+                class="blob-wrapper absolute -bottom-[10%] -left-[20%] transition-transform duration-[2000ms] ease-out will-change-transform"
+                data-speed="0.07"
+            >
+                <div
+                    class="w-[600px] h-[600px] bg-teal-500/30 rounded-full blur-[200px] animate-blob animation-delay-3000"
+                >
+                </div>
+            </div>
+
+            <!-- Blob 5: Amber/Yellow (Top Right) -->
+            <div
+                class="blob-wrapper absolute -top-[10%] -right-[20%] transition-transform duration-[2000ms] ease-out will-change-transform"
+                data-speed="0.05"
+            >
+                <div
+                    class="w-[700px] h-[700px] bg-amber-500/30 rounded-full blur-[200px] animate-blob animation-delay-5000"
                 >
                 </div>
             </div>
@@ -429,26 +451,32 @@ const projects = [
     <style>
         @keyframes blob {
             0% {
-                transform: translate(0, 0) scale(1);
+                transform: translate(0px, 0px) scale(1);
             }
             33% {
-                transform: translate(50px, -50px) scale(1.1);
+                transform: translate(80px, -120px) scale(1.2);
             }
             66% {
-                transform: translate(-30px, 40px) scale(0.95);
+                transform: translate(-60px, 60px) scale(0.85);
             }
             100% {
-                transform: translate(0, 0) scale(1);
+                transform: translate(0px, 0px) scale(1);
             }
         }
         .animate-blob {
-            animation: blob 8s infinite ease-in-out;
+            animation: blob 7s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
         }
         .animation-delay-2000 {
             animation-delay: 2s;
         }
+        .animation-delay-3000 {
+            animation-delay: 3s;
+        }
         .animation-delay-4000 {
             animation-delay: 4s;
+        }
+        .animation-delay-5000 {
+            animation-delay: 5s;
         }
     </style>
 
