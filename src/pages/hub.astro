@@ -158,8 +158,8 @@ import Layout from "../layouts/Layout.astro";
 
     /* Card Styling */
     .hub-card {
-        @apply flex flex-col items-center justify-center p-5 sm:p-8 rounded-3xl border border-white/10 transition-all duration-500 relative overflow-hidden;
-        min-height: 140px;
+        @apply flex flex-col items-center justify-center p-3 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/10 transition-all duration-500 relative overflow-hidden;
+        min-height: 100px;
     }
 
     @media (min-width: 640px) {
@@ -168,38 +168,45 @@ import Layout from "../layouts/Layout.astro";
         }
     }
 
-    /* Hover State: Glow and Border */
-    .hub-card:hover {
-        @apply border-primary/60 bg-white/5;
-        box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
-        transform: translateY(-4px);
+    /* Hover States (Only on devices that support hover) */
+    @media (hover: hover) {
+        /* Hover State: Glow and Border */
+        .hub-card:hover {
+            @apply border-primary/60 bg-white/5;
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
+            transform: translateY(-4px);
+        }
+
+        /* Icon Hover: Orange + Scale + Glow */
+        .hub-card:hover .hub-icon {
+            @apply text-primary scale-110;
+            filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.4));
+        }
+
+        /* Text Hover */
+        .hub-card:hover .hub-text {
+            @apply text-primary;
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Subtext Hover */
+        .hub-card:hover .hub-subtext {
+            @apply text-white opacity-100;
+        }
     }
 
     /* Icon Styling */
     .hub-icon {
-        @apply w-10 h-10 sm:w-12 sm:h-12 mb-3 sm:mb-4 text-text-secondary transition-all duration-500;
-    }
-
-    /* Icon Hover: Orange + Scale + Glow */
-    .hub-card:hover .hub-icon {
-        @apply text-primary scale-110;
-        filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.4));
+        @apply w-8 h-8 sm:w-12 sm:h-12 mb-2 sm:mb-4 text-text-secondary transition-all duration-500;
     }
 
     /* Text Styling */
     .hub-text {
-        @apply text-lg sm:text-xl font-bold text-text-primary transition-colors duration-300 block;
-    }
-    .hub-card:hover .hub-text {
-        @apply text-primary;
-        text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+        @apply text-base sm:text-xl font-bold text-text-primary transition-colors duration-300 block;
     }
 
     /* Subtext Styling */
     .hub-subtext {
-        @apply text-xs sm:text-sm text-text-secondary mt-1 sm:mt-2 font-medium opacity-80 transition-all duration-300;
-    }
-    .hub-card:hover .hub-subtext {
-        @apply text-white opacity-100;
+        @apply text-[10px] sm:text-sm text-text-secondary mt-0.5 sm:mt-2 font-medium opacity-80 transition-all duration-300;
     }
 </style>
