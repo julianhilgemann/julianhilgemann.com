@@ -9,6 +9,7 @@ interface Props {
 	description?: string;
 	fullWidth?: boolean;
 	noTopPadding?: boolean;
+	noHeader?: boolean;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
 	description = "Julian Hilgemann - Data to Decisions",
 	fullWidth = false,
 	noTopPadding = false,
+	noHeader = false,
 } = Astro.props;
 ---
 
@@ -119,7 +121,7 @@ const {
 	<body
 		class="bg-background text-text-primary min-h-screen flex flex-col selection:bg-primary selection:text-white"
 	>
-		<Header />
+		{!noHeader && <Header />}
 		<main
 			class:list={[
 				"flex-grow w-full",

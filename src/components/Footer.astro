@@ -6,7 +6,7 @@ const year = new Date().getFullYear();
     class="w-full max-w-[1200px] mx-auto px-4 py-12 mt-20 border-t border-white/5"
 >
     <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-        <div class="flex gap-4">
+        <div class="flex gap-4 md:flex-1 md:justify-start">
             <!-- Social Icons from assets -->
             <a
                 href="https://linkedin.com/in/julian-hilgemann"
@@ -56,7 +56,7 @@ const year = new Date().getFullYear();
         </div>
 
         <div
-            class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm text-text-secondary"
+            class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm text-text-secondary md:shrink-0"
         >
             <a
                 href="/impressum"
@@ -82,7 +82,9 @@ const year = new Date().getFullYear();
             >
         </div>
 
-        <div class="text-xs text-text-secondary opacity-50">
+        <div
+            class="text-xs text-text-secondary opacity-50 md:flex-1 md:flex md:justify-end"
+        >
             &copy; {year} Julian Hilgemann
         </div>
     </div>

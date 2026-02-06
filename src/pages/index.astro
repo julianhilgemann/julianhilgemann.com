@@ -267,11 +267,91 @@ const projects = [
         </div>
     </Section>
 
-    <!-- About / Trust Section -->
+    <!-- CTA Section -->
     <Section
-        id="about"
-        class="border-t border-white/5 min-h-screen flex flex-col justify-center"
+        id="cta-section"
+        class="text-center py-32 border-t border-white/5 relative overflow-hidden group min-h-screen flex flex-col justify-center"
     >
+        <!-- Animated Background -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <!-- Blob 1: Primary Orange (Top Left) -->
+            <div
+                class="blob-wrapper absolute -top-[30%] -left-[10%] transition-transform duration-[2000ms] ease-out will-change-transform"
+                data-speed="0.06"
+            >
+                <div
+                    class="w-[800px] h-[800px] bg-primary/40 rounded-full blur-[200px] animate-blob"
+                >
+                </div>
+            </div>
+
+            <!-- Blob 2: Blue (Bottom Right) -->
+            <div
+                class="blob-wrapper absolute -bottom-[30%] -right-[10%] transition-transform duration-[2000ms] ease-out will-change-transform"
+                data-speed="0.08"
+            >
+                <div
+                    class="w-[900px] h-[900px] bg-blue-600/40 rounded-full blur-[250px] animate-blob animation-delay-2000"
+                >
+                </div>
+            </div>
+
+            <!-- Blob 3: Purple (Center/Top) -->
+            <div
+                class="blob-wrapper absolute top-[10%] left-[30%] transition-transform duration-[2000ms] ease-out will-change-transform"
+                data-speed="0.04"
+            >
+                <div
+                    class="w-[700px] h-[700px] bg-purple-600/30 rounded-full blur-[200px] animate-blob animation-delay-4000"
+                >
+                </div>
+            </div>
+
+            <!-- Blob 4: Teal (Bottom Left) -->
+            <div
+                class="blob-wrapper absolute -bottom-[10%] -left-[20%] transition-transform duration-[2000ms] ease-out will-change-transform"
+                data-speed="0.07"
+            >
+                <div
+                    class="w-[600px] h-[600px] bg-teal-500/30 rounded-full blur-[200px] animate-blob animation-delay-3000"
+                >
+                </div>
+            </div>
+
+            <!-- Blob 5: Amber/Yellow (Top Right) -->
+            <div
+                class="blob-wrapper absolute -top-[10%] -right-[20%] transition-transform duration-[2000ms] ease-out will-change-transform"
+                data-speed="0.05"
+            >
+                <div
+                    class="w-[700px] h-[700px] bg-amber-500/30 rounded-full blur-[200px] animate-blob animation-delay-5000"
+                >
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div
+            class="relative z-10 selection:bg-primary/30 w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8"
+        >
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">
+                Let’s design your decision system.
+            </h2>
+            <p class="text-xl text-text-secondary mb-10 max-w-2xl mx-auto">
+                If your company has data but decisions still rely on gut
+                feeling, we should talk.
+            </p>
+            <a
+                href="#"
+                class="glass hover:bg-white/10 text-white font-medium py-3 px-6 rounded-full transition-all duration-300 ease-in-out border !border-primary text-center inline-block js-open-contact"
+            >
+                Schedule Consultation
+            </a>
+        </div>
+    </Section>
+
+    <!-- About / Trust Section -->
+    <Section id="about" class="border-t border-white/5">
         <div class="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <!-- Left: Philosophy -->
@@ -362,89 +442,404 @@ const projects = [
                     </ul>
                 </div>
             </div>
-        </div>
-    </Section>
 
-    <!-- CTA Section -->
-    <Section
-        id="cta-section"
-        class="text-center py-32 border-t border-white/5 relative overflow-hidden group min-h-screen flex flex-col justify-center"
-    >
-        <!-- Animated Background -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <!-- Blob 1: Primary Orange (Top Left) -->
-            <div
-                class="blob-wrapper absolute -top-[30%] -left-[10%] transition-transform duration-[2000ms] ease-out will-change-transform"
-                data-speed="0.06"
-            >
+            <!-- Section 1: Credibility Strip -->
+            <div class="mb-32 mt-32">
+                <div class="mb-12">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">
+                        Domains & Decision Contexts
+                    </h3>
+                    <p class="text-base text-text-secondary/80">
+                        <span class="text-primary/80 italic"
+                            >Delivery principle:</span
+                        > AI-augmented workflows for rapid iteration without sacrificing
+                        rigor.
+                    </p>
+                </div>
+
                 <div
-                    class="w-[800px] h-[800px] bg-primary/40 rounded-full blur-[200px] animate-blob"
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4"
                 >
+                    <div
+                        class="p-6 rounded-xl bg-white/5 border border-white/5 text-center flex flex-col justify-center items-center min-h-[120px]"
+                    >
+                        <span
+                            class="font-bold text-white text-base leading-tight"
+                            >Revenue & Unit Economics</span
+                        >
+                    </div>
+                    <div
+                        class="p-6 rounded-xl bg-white/5 border border-white/5 text-center flex flex-col justify-center items-center min-h-[120px]"
+                    >
+                        <span
+                            class="font-bold text-white text-base leading-tight"
+                            >Growth & Funnel Systems</span
+                        >
+                    </div>
+                    <div
+                        class="p-6 rounded-xl bg-white/5 border border-white/5 text-center flex flex-col justify-center items-center min-h-[120px]"
+                    >
+                        <span
+                            class="font-bold text-white text-base leading-tight"
+                            >Forecasting & Scenario Planning</span
+                        >
+                    </div>
+                    <div
+                        class="p-6 rounded-xl bg-white/5 border border-white/5 text-center flex flex-col justify-center items-center min-h-[120px]"
+                    >
+                        <span
+                            class="font-bold text-white text-base leading-tight"
+                            >Investor & Executive Reporting</span
+                        >
+                    </div>
                 </div>
             </div>
 
-            <!-- Blob 2: Blue (Bottom Right) -->
-            <div
-                class="blob-wrapper absolute -bottom-[30%] -right-[10%] transition-transform duration-[2000ms] ease-out will-change-transform"
-                data-speed="0.08"
-            >
-                <div
-                    class="w-[900px] h-[900px] bg-blue-600/40 rounded-full blur-[250px] animate-blob animation-delay-2000"
-                >
+            <!-- Section 2: Selected Experience & Systems Built -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-32">
+                <!-- Left column: Narrative -->
+                <div>
+                    <h3 class="text-3xl font-bold text-white mb-6">
+                        Selected <span class="text-primary">Experience</span> & Systems
+                        Built
+                    </h3>
+                    <p class="text-text-secondary mb-8 text-lg leading-relaxed">
+                        I focus on the "decision loop" — connecting raw data to
+                        the actual moment of business impact. My systems don't
+                        just report numbers; they frame choices and drive
+                        action.
+                    </p>
+                    <div
+                        class="inline-flex items-center gap-2 text-primary font-medium border-b border-primary/30 pb-0.5 hover:border-primary transition-colors cursor-pointer js-open-contact"
+                    >
+                        Available for fractional analytics engineering & BI
+                        architecture
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"
+                            ></path></svg
+                        >
+                    </div>
+                </div>
+
+                <!-- Right column: Cards -->
+                <div class="space-y-4">
+                    <!-- Credibility Strip -->
+                    <div
+                        class="grid grid-cols-3 gap-2 mb-2 pb-4 border-b border-white/5"
+                    >
+                        <div
+                            class="text-xs text-text-secondary font-medium text-center"
+                        >
+                            Fintech analytics & forecasting
+                        </div>
+                        <div
+                            class="text-xs text-text-secondary font-medium text-center border-l border-white/5"
+                        >
+                            Production BI & KPI systems
+                        </div>
+                        <div
+                            class="text-xs text-text-secondary font-medium text-center border-l border-white/5"
+                        >
+                            Executive & investor reporting
+                        </div>
+                    </div>
+
+                    <div
+                        class="p-6 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 transition-colors group"
+                    >
+                        <div class="flex justify-between items-start mb-2">
+                            <h4
+                                class="font-bold text-white text-lg group-hover:text-primary transition-colors"
+                            >
+                                Forecasting & Scenario System
+                            </h4>
+                        </div>
+                        <p class="text-sm text-white mb-3 font-medium">
+                            Enabled real-time stress testing for leadership to
+                            navigate market volatility.
+                        </p>
+                        <ul
+                            class="list-disc list-inside text-text-secondary text-sm space-y-1 mb-3"
+                        >
+                            <li>
+                                Built multi-variable stochastic revenue models
+                            </li>
+                            <li>
+                                Integrated live actuals for rolling forecasts
+                            </li>
+                        </ul>
+                        <p
+                            class="text-xs text-white/40 font-mono tracking-wider"
+                        >
+                            PYTHON / STREAMLIT / DUCKDB
+                        </p>
+                    </div>
+
+                    <div
+                        class="p-6 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 transition-colors group"
+                    >
+                        <div class="flex justify-between items-start mb-2">
+                            <h4
+                                class="font-bold text-white text-lg group-hover:text-primary transition-colors"
+                            >
+                                KPI + Metric Layer
+                            </h4>
+                        </div>
+                        <p class="text-sm text-white mb-3 font-medium">
+                            Standardized KPIs and automated reporting to reduce
+                            cycle time and improve trust.
+                        </p>
+                        <ul
+                            class="list-disc list-inside text-text-secondary text-sm space-y-1 mb-3"
+                        >
+                            <li>Codified metric definitions in dbt (SSOT)</li>
+                            <li>
+                                Automated reporting pipelines saving ~20h/week
+                            </li>
+                        </ul>
+                        <p
+                            class="text-xs text-white/40 font-mono tracking-wider"
+                        >
+                            DBT / SNOWFLAKE / POWER BI
+                        </p>
+                    </div>
+
+                    <div
+                        class="p-6 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 transition-colors group"
+                    >
+                        <div class="flex justify-between items-start mb-2">
+                            <h4
+                                class="font-bold text-white text-lg group-hover:text-primary transition-colors"
+                            >
+                                Lead Scoring → Activation
+                            </h4>
+                        </div>
+                        <p class="text-sm text-white mb-3 font-medium">
+                            Increased sales efficiency by routing high-intent
+                            leads directly to CRM.
+                        </p>
+                        <ul
+                            class="list-disc list-inside text-text-secondary text-sm space-y-1 mb-3"
+                        >
+                            <li>
+                                Predictive lead scoring based on behavioral data
+                            </li>
+                            <li>
+                                High-intent routing directly to sales slack/CRM
+                            </li>
+                        </ul>
+                        <p
+                            class="text-xs text-white/40 font-mono tracking-wider"
+                        >
+                            FIVETRAN / SALESFORCE / REVERSE ETL
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Blob 3: Purple (Center/Top) -->
-            <div
-                class="blob-wrapper absolute top-[10%] left-[30%] transition-transform duration-[2000ms] ease-out will-change-transform"
-                data-speed="0.04"
-            >
-                <div
-                    class="w-[700px] h-[700px] bg-purple-600/30 rounded-full blur-[200px] animate-blob animation-delay-4000"
-                >
+            <!-- Section 3: Skills & Tooling -->
+            <div class="mb-32">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Card 1 -->
+                    <div
+                        class="p-8 rounded-2xl bg-white/5 border border-white/5"
+                    >
+                        <h4 class="font-bold text-xl text-white mb-2">
+                            Decision & Stakeholder Work
+                        </h4>
+                        <p class="text-sm text-text-secondary mb-6 italic">
+                            Enables: alignment, clarity, action
+                        </p>
+                        <ul class="space-y-2 text-sm text-text-secondary">
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>Decision framing
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>KPI definitions
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>Stakeholder interviews
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>Operating cadence
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>Requirements & documentation
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div
+                        class="p-8 rounded-2xl bg-white/5 border border-white/5"
+                    >
+                        <h4 class="font-bold text-xl text-white mb-2">
+                            Analytics Engineering
+                        </h4>
+                        <p class="text-sm text-text-secondary mb-6 italic">
+                            Enables: trust + scale
+                        </p>
+                        <ul class="space-y-2 text-sm text-text-secondary">
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>SQL (Postgres / BigQuery)
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>dbt modeling
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>Testing & Validation
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>Semantic conventions
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>CI/CD & Git workflows
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div
+                        class="p-8 rounded-2xl bg-white/5 border border-white/5"
+                    >
+                        <h4 class="font-bold text-xl text-white mb-2">
+                            Modeling & Forecasting
+                        </h4>
+                        <p class="text-sm text-text-secondary mb-6 italic">
+                            Enables: planning + risk control
+                        </p>
+                        <ul class="space-y-2 text-sm text-text-secondary">
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>Time series forecasting
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>Econometrics
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>Cohort logic
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>Backtesting
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span
+                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
+                                ></span>Python (statsmodels / sklearn)
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <!-- Blob 4: Teal (Bottom Left) -->
+            <!-- Section 4: Education & Foundations -->
             <div
-                class="blob-wrapper absolute -bottom-[10%] -left-[20%] transition-transform duration-[2000ms] ease-out will-change-transform"
-                data-speed="0.07"
+                class="grid grid-cols-1 md:grid-cols-2 gap-6 opacity-80 hover:opacity-100 transition-opacity duration-300"
             >
                 <div
-                    class="w-[600px] h-[600px] bg-teal-500/30 rounded-full blur-[200px] animate-blob animation-delay-3000"
+                    class="p-6 rounded-xl border border-white/10 bg-white/5 flex items-center gap-4"
                 >
+                    <div class="text-white/40">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path d="M22 10v6M2 10l10-5 10 5-10 5z"
+                            ></path><path d="M6 12v5c3 3 9 3 12 0v-5"
+                            ></path></svg
+                        >
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-lg">
+                            Graduate studies in Quantitative Economics
+                        </h4>
+                        <p class="text-sm text-text-secondary mt-1">
+                            Time series, econometrics, forecasting
+                        </p>
+                    </div>
                 </div>
-            </div>
-
-            <!-- Blob 5: Amber/Yellow (Top Right) -->
-            <div
-                class="blob-wrapper absolute -top-[10%] -right-[20%] transition-transform duration-[2000ms] ease-out will-change-transform"
-                data-speed="0.05"
-            >
                 <div
-                    class="w-[700px] h-[700px] bg-amber-500/30 rounded-full blur-[200px] animate-blob animation-delay-5000"
+                    class="p-6 rounded-xl border border-white/10 bg-white/5 flex items-center gap-4"
                 >
+                    <div class="text-white/40">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path d="M22 10v6M2 10l10-5 10 5-10 5z"
+                            ></path><path d="M6 12v5c3 3 9 3 12 0v-5"
+                            ></path></svg
+                        >
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-lg">
+                            B.Sc. Business Administration
+                        </h4>
+                        <p class="text-sm text-text-secondary mt-1">
+                            Economics & metrics foundation — forecasting thesis
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Content -->
-        <div
-            class="relative z-10 selection:bg-primary/30 w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8"
-        >
-            <h2 class="text-4xl md:text-6xl font-bold mb-6">
-                Let’s design your decision system.
-            </h2>
-            <p class="text-xl text-text-secondary mb-10 max-w-2xl mx-auto">
-                If your company has data but decisions still rely on gut
-                feeling, we should talk.
-            </p>
-            <a
-                href="#"
-                class="glass hover:bg-white/10 text-white font-medium py-3 px-6 rounded-full transition-all duration-300 ease-in-out border !border-primary text-center inline-block js-open-contact"
-            >
-                Schedule Consultation
-            </a>
+            <!-- Discreet Footer CTA -->
+            <div class="mt-32 pt-12 border-t border-white/5 text-center">
+                <p class="text-text-secondary mb-6 text-lg">
+                    If you still have questions, I would be happy to help.
+                </p>
+                <button
+                    class="text-white hover:text-primary transition-colors border-b border-white/20 hover:border-primary pb-0.5 js-open-contact"
+                >
+                    Get in touch
+                </button>
+            </div>
         </div>
     </Section>
 

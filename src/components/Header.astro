@@ -18,13 +18,16 @@ const navItems = [
     <div
         class="glass mx-auto mt-4 w-[calc(100%-2rem)] max-w-[1200px] rounded-full px-4 py-3 md:px-6 md:py-3 flex items-center justify-between pointer-events-auto shadow-sm"
     >
-        <a
-            href="/"
-            class="nav-link font-bold text-base md:text-lg tracking-tight hover:text-primary transition-colors duration-300 ease-in-out shrink-0"
-            data-href="#hero"
-        >
-            JH
-        </a>
+        <!-- Logo Area: Grow to push center -->
+        <div class="flex flex-1 justify-start">
+            <a
+                href="/"
+                class="nav-link font-bold text-base md:text-lg tracking-tight hover:text-primary transition-colors duration-300 ease-in-out shrink-0"
+                data-href="#hero"
+            >
+                JH
+            </a>
+        </div>
 
         <!-- 
           Navigation:
@@ -32,7 +35,7 @@ const navItems = [
           - Tighter gap on mobile (gap-2.5) to fit
           - Smaller text on mobile (text-xs)
         -->
-        <nav class="flex items-center gap-3 md:gap-8">
+        <nav class="flex items-center gap-3 md:gap-8 shrink-0">
             {
                 navItems.map((item, index) => (
                     <>
@@ -60,7 +63,7 @@ const navItems = [
           - Compact padding/text on mobile
           - Prevent wrapping with whitespace-nowrap
         -->
-        <div class="flex items-center gap-4 shrink-0">
+        <div class="flex flex-1 justify-end items-center gap-4">
             <a
                 href="#"
                 class="glass hover:bg-white/10 text-white text-xs md:text-sm font-medium py-2 px-4 rounded-full transition-all duration-300 ease-in-out border !border-primary text-center whitespace-nowrap js-open-contact"
