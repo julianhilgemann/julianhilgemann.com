@@ -179,3 +179,33 @@
 .klaro .cm-switch::before {
   background-color: #fff !important;
 }
+
+/* --- Custom Lists (Fix for iPhone) --- */
+.prose ul {
+  list-style-type: none !important;
+  padding-left: 0 !important;
+}
+
+.prose ul>li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose ul>li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  /* Vertically centered relative to text */
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #9CA3AF;
+  /* text-secondary */
+}
+
+/* Ensure no default marker interferes */
+.prose ul>li::marker {
+  content: none;
+}
