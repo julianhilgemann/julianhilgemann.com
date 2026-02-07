@@ -181,17 +181,29 @@
 }
 
 /* --- Custom Lists (Fix for iPhone) --- */
-.prose ul {
+/* --- Custom Lists (Fix for iPhone) --- */
+.custom-bullets ul,
+.custom-bullets li,
+.prose ul,
+.prose ul>li {
   list-style-type: none !important;
+  list-style: none !important;
+}
+
+.custom-bullets ul,
+.prose ul {
   padding-left: 0 !important;
 }
 
+.custom-bullets li,
 .prose ul>li {
   position: relative;
-  padding-left: 1.5rem;
+  padding-left: 1.5rem !important;
   margin-bottom: 0.5rem;
 }
 
+/* Custom bullet */
+.custom-bullets li::before,
 .prose ul>li::before {
   content: "";
   position: absolute;
@@ -199,13 +211,19 @@
   top: 0.6em;
   /* Vertically centered relative to text */
   width: 6px;
+  /* slightly larger for visibility */
   height: 6px;
   border-radius: 50%;
-  background-color: #9CA3AF;
-  /* text-secondary */
+  background-color: theme('colors.text.secondary');
+  /* #9CA3AF */
 }
 
-/* Ensure no default marker interferes */
-.prose ul>li::marker {
-  content: none;
+/* Aggressively hide default markers */
+.custom-bullets li::marker,
+.prose ul>li::marker,
+.custom-bullets ul ::marker,
+.prose ul ::marker {
+  content: none !important;
+  display: none !important;
+  color: transparent !important;
 }

@@ -114,16 +114,15 @@ const pillars = [
                 <p class="text-text-secondary text-sm mb-6 leading-relaxed">
                     {pillar.description}
                 </p>
-                <ul class="space-y-2">
-                    {pillar.points.map((point) => (
-                        <li class="flex items-start text-sm text-text-secondary/80">
-                            <span class="text-text-secondary mr-2 mt-0.5">
-                                ▪
-                            </span>
-                            {point}
-                        </li>
-                    ))}
-                </ul>
+                <div class="custom-bullets">
+                    <ul class="space-y-2">
+                        {pillar.points.map((point) => (
+                            <li class="flex items-start text-sm text-text-secondary/80">
+                                {point}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         ))
     }
