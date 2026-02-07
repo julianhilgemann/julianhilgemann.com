@@ -15,15 +15,15 @@ const projects = [
         image: "/assets/energy-analytics.png",
         link: "https://github.com/julianhilgemann/dashboard-gallery/blob/main/README.md",
         content: `
-            <h3 class="text-xl font-bold text-white mb-4">Overview</h3>
+            <h3 class="text-xl font-bold text-white mb-4">Concept</h3>
             <p class="mb-6">This repository serves as a portfolio of my advanced dashboarding work. It demonstrates how complex data can be transformed into intuitive decision-making tools.</p>
-            <h3 class="text-xl font-bold text-white mb-4">What's Inside</h3>
-            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6 marker:text-info">
-                 <li><strong>Energy Trading Analytics:</strong> Real-time market data visualization.</li>
-                 <li><strong>Financial Reporting:</strong> Interactive P&L and cash flow statements.</li>
-                 <li><strong>Sales Performance:</strong> Granular tracking with partner scorecards.</li>
+            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                 <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><strong>Energy Trading Analytics:</strong> Real-time market data visualization.</li>
+                 <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><strong>Financial Reporting:</strong> Interactive P&L and cash flow statements.</li>
+                 <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><strong>Sales Performance:</strong> Granular tracking with partner scorecards.</li>
             </ul>
-            <h3 class="text-xl font-bold text-white mb-4">Technical Highlights</h3>
+            <h3 class="text-xl font-bold text-white mb-4">Architecture</h3>
             <p>Features advanced DAX patterns, custom PowerQuery transformations, and Figma-designed layouts integrated into PowerBI.</p>
         `,
     },
@@ -44,24 +44,21 @@ const projects = [
         image: "/assets/end-to-end-saas-os.png",
         link: "https://github.com/julianhilgemann/Portfolio/blob/main/README.md",
         content: `
-            <h3 class="text-xl font-bold text-white mb-4">The Concept</h3>
+            <h3 class="text-xl font-bold text-white mb-4">Concept</h3>
             <p class="mb-6">This project implements a "Rapid Data Function"—instantiating an entire end-to-end data stack (Stochastic Simulation, Data Warehouse, Algorithmic Forecasting, and BI) purely from a static business definition.</p>
             
-            <h3 class="text-xl font-bold text-white mb-4">Core Architecture</h3>
-            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6 marker:text-info">
-                <li><strong>Contract-First Engineering:</strong> The entire simulation scales dynamically based on a JSON contract extracted from the Excel Operating Plan.</li>
-                <li><strong>Stochastic Engine:</strong> Simulates Customer Acquisition (Poisson), Retention (Hazard/Survival), and Revenue expansion.</li>
-                <li><strong>Medallion DWH:</strong> A rigorous dbt project structure (Bronze/Silver/Gold) ensuring clean lineage.</li>
-                <li><strong>Regime-Aware Forecasting:</strong> A Prophet model that detects "Growth Regimes" to avoid overfitting on early-stage data.</li>
+            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Stochastic Engine:</strong> Simulates Customer Acquisition (Poisson), Retention (Hazard/Survival), and Revenue expansion.</span></li>
+                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Regime-Aware Forecasting:</strong> A Prophet model that detects "Growth Regimes" to avoid overfitting on early-stage data.</span></li>
             </ul>
 
-            <h3 class="text-xl font-bold text-white mb-4">Development Workflow</h3>
-            <p class="mb-4 text-text-secondary">We treated the Business Contract as code, compiling strategy into a digital twin:</p>
-            <ol class="list-decimal list-inside space-y-2 text-text-secondary">
-                <li><strong>Context:</strong> Domain knowledge structured in Obsidian.</li>
-                <li><strong>RAG Layer:</strong> NotebookLM used to synthesize technical specs.</li>
-                <li><strong>Agentic Execution:</strong> Feeding specs into Cursor/Windsurf to scaffold the stack.</li>
-            </ol>
+            <h3 class="text-xl font-bold text-white mb-4">Architecture</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Contract-First Engineering:</strong> The entire simulation scales dynamically based on a JSON contract extracted from the Excel Operating Plan.</span></li>
+                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Medallion DWH:</strong> A rigorous dbt project structure (Bronze/Silver/Gold) ensuring clean lineage.</span></li>
+                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Agentic Build Pipeline:</strong> Treating business logic as code, we use cursor/windsurf to scaffold the entire stack from specs.</span></li>
+            </ul>
         `,
     },
     {
@@ -78,28 +75,25 @@ const projects = [
             "PowerQuery",
             "DAX",
         ],
-        image: "/assets/vantage-alpin-analytics.png",
+        image: "/assets/vantage-wip.png",
         link: "https://github.com/julianhilgemann/BI-Pipeline/blob/main/README.md",
         content: `
-            <h3 class="text-xl font-bold text-white mb-4">Executive Summary</h3>
+            <h3 class="text-xl font-bold text-white mb-4">Concept</h3>
             <p class="mb-6">This project acts as the central financial reporting engine for Vantage Alpin. It replaces legacy PDF reports with a dynamic Modern Data Stack (MDS) that processes stochastic transaction data into a clean Star Schema.</p>
             
-            <h3 class="text-xl font-bold text-white mb-4">Data Science & Simulation</h3>
-            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6 marker:text-info">
-                <li><strong>Controlled Stochasticity:</strong> Uses Non-Homogeneous Poisson Processes (NHPP) to model realistic demand patterns (Seasonality, Payday effects, Events).</li>
-                <li><strong>Product Economics:</strong> Pricing follows Log-Normal distributions; popularity follows Pareto (Power Law).</li>
+            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Controlled Stochasticity:</strong> Uses Non-Homogeneous Poisson Processes (NHPP) to model realistic demand patterns.</span></li>
+                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Product Economics:</strong> Pricing follows Log-Normal distributions; popularity follows Pareto (Power Law).</span></li>
+                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Marketing Attribution:</strong> Algorithmic allocation of ad spend to order lines based on revenue share.</span></li>
             </ul>
 
-            <h3 class="text-xl font-bold text-white mb-4">Analytics Engineering (dbt)</h3>
-            <p class="mb-4 text-text-secondary">We implemented a strict Kimball dimensional model:</p>
-            <ul class="list-disc list-inside space-y-2 text-text-secondary mb-6 marker:text-info">
-                <li><strong>Marketing Allocation:</strong> Algorithmic attribution of daily ad spend to individual order lines based on revenue share.</li>
-                <li><strong>Currency Normalization:</strong> Robust handling of multi-currency transactions (EUR/CHF) with daily rate lookups.</li>
-                <li><strong>Star Schema:</strong> Central <code>fct_transactions</code> table linking to Type 1 SCD product dimensions.</li>
+            <h3 class="text-xl font-bold text-white mb-4">Architecture</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Star Schema:</strong> Central <code>fct_transactions</code> table linking to Type 1 SCD product dimensions.</span></li>
+                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Currency Normalization:</strong> Robust handling of multi-currency transactions (EUR/CHF) with daily rate lookups.</span></li>
+                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>DirectQuery-like Extract:</strong> Custom Parquet/CSV export workflow from DuckDB to Power BI for performant local development.</span></li>
             </ul>
-
-            <h3 class="text-xl font-bold text-white mb-4">BI Architecture</h3>
-            <p>To support local Power BI development without complex drivers, we architected a custom Parquet/CSV export workflow from DuckDB, enabling performant DirectQuery-like experiences.</p>
         `,
     },
 ];
@@ -125,6 +119,21 @@ const projects = [
                         >Few have decision systems.</span
                     >
                 </h2>
+                <div
+                    class="text-lg text-text-secondary mt-8 space-y-4 max-w-3xl leading-relaxed"
+                >
+                    <p>
+                        Most organizations invest heavily in data
+                        infrastructure, dashboards, and experimentation. What’s
+                        missing is the connective tissue: systems that translate
+                        information into clear choices, ownership, and action.
+                    </p>
+                    <p>
+                        Without that layer, analytics stays descriptive,
+                        pipelines stay isolated, and AI remains experimental:
+                        useful in isolation, but rarely decisive.
+                    </p>
+                </div>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6">
@@ -258,7 +267,12 @@ const projects = [
     >
         <div class="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-12">
-                <h2 class="text-3xl md:text-5xl font-bold">Projects</h2>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">Projects</h2>
+                <p class="text-xl text-text-secondary max-w-2xl">
+                    A selection of production systems, prototypes, and technical
+                    explorations across analytics engineering, forecasting, and
+                    decision-support systems.
+                </p>
             </div>
 
             <div class="flex flex-col gap-6">
@@ -359,40 +373,42 @@ const projects = [
                     <h2
                         class="text-3xl md:text-5xl font-bold mb-8 leading-tight"
                     >
-                        I see companies less as structures and more as <span
-                            class="text-primary">living systems</span
-                        >.
+                        <span class="text-primary">Philosophy:</span> Systems, Not
+                        Static Structures
                     </h2>
                     <div
                         class="space-y-6 text-lg text-text-secondary leading-relaxed"
                     >
                         <p>
-                            They breathe. They react. Revenue fluctuates,
-                            customers behave in cycles, and markets shift.
-                            Beneath the surface, there is always structure in
-                            the motion — dynamics that can be modeled,
-                            abstracted, and understood.
+                            Companies behave less like fixed structures and more
+                            like living systems. They react, fluctuate, and
+                            evolve. Revenue moves in cycles, customers adapt,
+                            and markets shift.
                         </p>
                         <p>
-                            To me, a dashboard metric isn’t “just a number.”
-                            It’s the visible tip of a deep system: data
-                            architecture, modeling logic, and design choices,
-                            all condensed into a single signal.
+                            Beneath that motion, however, there is structure:
+                            dynamics that can be modeled, abstracted, and
+                            understood.
+                        </p>
+                        <p>
+                            A dashboard metric, then, isn’t “just a number.”
+                            It’s the visible surface of a deeper system. It's an
+                            expression of the underlying data architecture,
+                            modeling logic, and design choices, condensed into a
+                            single signal.
                         </p>
                         <p
                             class="text-white font-medium border-l-4 border-primary pl-6"
                         >
-                            My goal is to design that abstraction so it is
-                            technically sound and aligned with how humans
-                            actually decide.
+                            I design and build abstractions that are technically
+                            sound and aligned with how people actually make
+                            decisions.
                         </p>
                     </div>
                 </div>
 
                 <!-- Right: Focus Areas -->
-                <div
-                    class="glass p-8 md:p-12 rounded-3xl border border-white/5 bg-white/5"
-                >
+                <div class="glass p-8 md:p-12 rounded-3xl bg-white/5">
                     <h3 class="text-2xl font-bold text-white mb-8">My Focus</h3>
                     <ul class="space-y-6">
                         <li class="flex items-start gap-4">
@@ -447,13 +463,13 @@ const projects = [
             <div class="mb-32 mt-32">
                 <div class="mb-12">
                     <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">
-                        Scope & Decision Contexts
+                        Decision Scope & <span class="text-primary"
+                            >Ownership</span
+                        >
                     </h3>
                     <p class="text-base text-text-secondary/80 max-w-2xl">
-                        <span class="text-primary/80 italic">Clarity:</span> I operate
-                        across the full decision loop — from raw data to the final
-                        executive choice. This removes ambiguity and ensures a clear
-                        operating territory.
+                        End-to-end ownership of the decision loop, from data to
+                        executive decisions.
                     </p>
                 </div>
 
@@ -461,11 +477,9 @@ const projects = [
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4"
                 >
                     <div
-                        class="p-6 rounded-xl bg-white/5 border border-white/5 text-center flex flex-col justify-center items-center min-h-[160px] hover:border-primary/30 transition-colors group"
+                        class="glass p-6 rounded-xl text-center flex flex-col justify-center items-center min-h-[160px] transition-colors group hover:-translate-y-1 transition-transform duration-300"
                     >
-                        <div
-                            class="mb-4 text-white/40 group-hover:text-primary transition-colors"
-                        >
+                        <div class="mb-4 text-primary transition-colors">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="32"
@@ -487,11 +501,9 @@ const projects = [
                         >
                     </div>
                     <div
-                        class="p-6 rounded-xl bg-white/5 border border-white/5 text-center flex flex-col justify-center items-center min-h-[160px] hover:border-primary/30 transition-colors group"
+                        class="glass p-6 rounded-xl text-center flex flex-col justify-center items-center min-h-[160px] transition-colors group hover:-translate-y-1 transition-transform duration-300"
                     >
-                        <div
-                            class="mb-4 text-white/40 group-hover:text-primary transition-colors"
-                        >
+                        <div class="mb-4 text-primary transition-colors">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="32"
@@ -513,11 +525,9 @@ const projects = [
                         >
                     </div>
                     <div
-                        class="p-6 rounded-xl bg-white/5 border border-white/5 text-center flex flex-col justify-center items-center min-h-[160px] hover:border-primary/30 transition-colors group"
+                        class="glass p-6 rounded-xl text-center flex flex-col justify-center items-center min-h-[160px] transition-colors group hover:-translate-y-1 transition-transform duration-300"
                     >
-                        <div
-                            class="mb-4 text-white/40 group-hover:text-primary transition-colors"
-                        >
+                        <div class="mb-4 text-primary transition-colors">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="32"
@@ -540,11 +550,9 @@ const projects = [
                         >
                     </div>
                     <div
-                        class="p-6 rounded-xl bg-white/5 border border-white/5 text-center flex flex-col justify-center items-center min-h-[160px] hover:border-primary/30 transition-colors group"
+                        class="glass p-6 rounded-xl text-center flex flex-col justify-center items-center min-h-[160px] transition-colors group hover:-translate-y-1 transition-transform duration-300"
                     >
-                        <div
-                            class="mb-4 text-white/40 group-hover:text-primary transition-colors"
-                        >
+                        <div class="mb-4 text-primary transition-colors">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="32"
@@ -579,84 +587,67 @@ const projects = [
                         Selected <span class="text-primary">Experience</span> & Systems
                         Built
                     </h3>
-                    <p class="text-text-secondary mb-8 text-lg leading-relaxed">
-                        With over <strong>5 years of experience</strong> building
-                        production systems in high-stakes
-                        <strong>Fintech environments</strong>, I have designed
-                        dozens of mission-critical dashboards and analytics
-                        pipelines.
+
+                    <p class="text-text-secondary mb-6 text-lg leading-relaxed">
+                        With <strong>3+ years of experience</strong> building production
+                        systems in high-stakes
+                        <strong>fintech environments</strong>, I design
+                        mission-critical analytics platforms used to run real
+                        businesses.
+                    </p>
+                    <p class="text-text-secondary mb-6 text-lg leading-relaxed">
+                        I deliver <strong>analytics end to end</strong>: from
+                        requirements engineering and rapid prototyping to
+                        production-grade implementation, visualization, and
+                        long-term ownership. This includes building, operating,
+                        and maintaining multiple data assets across their full
+                        lifecycle to support both operational and strategic
+                        decision-making.
+                    </p>
+                    <p class="text-text-secondary mb-6 text-lg leading-relaxed">
+                        My work centers on the <strong>decision loop</strong>:
+                        turning raw data into clarity at the moment it matters.
+                        These systems report metrics, structure decisions,
+                        surface trade-offs, and drive action.
                     </p>
                     <p class="text-text-secondary mb-8 text-lg leading-relaxed">
-                        My focus is on the "decision loop" — connecting raw data
-                        to the actual moment of business impact. My systems
-                        don't just report numbers; they frame choices and drive
-                        action.
+                        I’ve been using <strong>GenAI and LLMs</strong> in production
+                        analytics workflows since 2022, and I actively explore emerging
+                        patterns such as agentic systems, context management, and
+                        tool orchestration. This includes connecting data, code, and
+                        analytical tools via MCP-style interfaces and agentic IDEs,
+                        with the goal of augmenting analytics teams and enabling stakeholders
+                        along the decision chain to harness modern AI toolkits effectively.
                     </p>
-                    <div
-                        class="inline-flex items-center gap-2 text-primary font-medium border-b border-primary/30 pb-0.5 hover:border-primary transition-colors cursor-pointer js-open-contact"
-                    >
-                        Available for fractional analytics engineering & BI
-                        architecture
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"
-                            ></path></svg
-                        >
-                    </div>
                 </div>
 
                 <!-- Right column: Cards -->
                 <div class="space-y-4">
-                    <!-- Credibility Strip -->
                     <div
-                        class="grid grid-cols-3 gap-2 mb-2 pb-4 border-b border-white/5"
-                    >
-                        <div
-                            class="text-xs text-text-secondary font-medium text-center"
-                        >
-                            Fintech analytics & forecasting
-                        </div>
-                        <div
-                            class="text-xs text-text-secondary font-medium text-center border-l border-white/5"
-                        >
-                            Production BI & KPI systems
-                        </div>
-                        <div
-                            class="text-xs text-text-secondary font-medium text-center border-l border-white/5"
-                        >
-                            Executive & investor reporting
-                        </div>
-                    </div>
-
-                    <div
-                        class="p-6 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 transition-colors group"
+                        class="glass p-6 rounded-xl transition-colors group hover:-translate-y-1 transition-transform duration-300"
                     >
                         <div class="flex justify-between items-start mb-2">
                             <h4
-                                class="font-bold text-white text-lg group-hover:text-primary transition-colors"
+                                class="font-bold text-white text-lg transition-colors"
                             >
                                 Forecasting & Scenario System
                             </h4>
                         </div>
                         <p class="text-sm text-white mb-3 font-medium">
-                            Enabled real-time stress testing for leadership to
-                            navigate market volatility.
+                            Hybrid Sales Pipeline Velocity Forecast using HAZARD
+                            + SARIMAX Convolution model.
                         </p>
-                        <ul
-                            class="list-disc list-inside text-text-secondary text-sm space-y-1 mb-6"
-                        >
-                            <li>
+                        <ul class="space-y-2 text-text-secondary text-sm mb-6">
+                            <li class="flex items-start">
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >
                                 Built multi-variable stochastic revenue models
                             </li>
-                            <li>
+                            <li class="flex items-start">
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >
                                 Integrated live actuals for rolling forecasts
                             </li>
                         </ul>
@@ -667,45 +658,11 @@ const projects = [
                             >
                             <span
                                 class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
-                                >STREAMLIT</span
+                                >POSTGRES</span
                             >
                             <span
                                 class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
-                                >DUCKDB</span
-                            >
-                        </div>
-                    </div>
-
-                    <div
-                        class="p-6 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 transition-colors group"
-                    >
-                        <div class="flex justify-between items-start mb-2">
-                            <h4
-                                class="font-bold text-white text-lg group-hover:text-primary transition-colors"
-                            >
-                                KPI + Metric Layer
-                            </h4>
-                        </div>
-                        <p class="text-sm text-white mb-3 font-medium">
-                            Standardized KPIs and automated reporting to reduce
-                            cycle time and improve trust.
-                        </p>
-                        <ul
-                            class="list-disc list-inside text-text-secondary text-sm space-y-1 mb-6"
-                        >
-                            <li>Codified metric definitions in dbt (SSOT)</li>
-                            <li>
-                                Automated reporting pipelines saving ~20h/week
-                            </li>
-                        </ul>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
-                                >DBT</span
-                            >
-                            <span
-                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
-                                >SNOWFLAKE</span
+                                >EXCEL</span
                             >
                             <span
                                 class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
@@ -715,11 +672,59 @@ const projects = [
                     </div>
 
                     <div
-                        class="p-6 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 transition-colors group"
+                        class="glass p-6 rounded-xl transition-colors group hover:-translate-y-1 transition-transform duration-300"
                     >
                         <div class="flex justify-between items-start mb-2">
                             <h4
-                                class="font-bold text-white text-lg group-hover:text-primary transition-colors"
+                                class="font-bold text-white text-lg transition-colors"
+                            >
+                                KPI + Metric Layer
+                            </h4>
+                        </div>
+                        <p class="text-sm text-white mb-3 font-medium">
+                            Standardized KPIs and automated reporting to reduce
+                            cycle time and improve trust.
+                        </p>
+                        <ul class="space-y-2 text-text-secondary text-sm mb-6">
+                            <li class="flex items-start">
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >
+                                Codified metric definitions in dbt (SSOT)
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >
+                                Automated reporting pipelines saving ~20h/week
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
+                                >EXCEL</span
+                            >
+                            <span
+                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
+                                >POWERQUERY</span
+                            >
+                            <span
+                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
+                                >POSTGRES</span
+                            >
+                            <span
+                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
+                                >POWER BI</span
+                            >
+                        </div>
+                    </div>
+
+                    <div
+                        class="glass p-6 rounded-xl transition-colors group hover:-translate-y-1 transition-transform duration-300"
+                    >
+                        <div class="flex justify-between items-start mb-2">
+                            <h4
+                                class="font-bold text-white text-lg transition-colors"
                             >
                                 Lead Scoring → Activation
                             </h4>
@@ -728,24 +733,32 @@ const projects = [
                             Increased sales efficiency by routing high-intent
                             leads directly to CRM.
                         </p>
-                        <ul
-                            class="list-disc list-inside text-text-secondary text-sm space-y-1 mb-6"
-                        >
-                            <li>
+                        <ul class="space-y-2 text-text-secondary text-sm mb-6">
+                            <li class="flex items-start">
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >
                                 Predictive lead scoring based on behavioral data
                             </li>
-                            <li>
+                            <li class="flex items-start">
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >
                                 High-intent routing directly to sales slack/CRM
                             </li>
                         </ul>
                         <div class="flex flex-wrap gap-2">
                             <span
                                 class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
-                                >FIVETRAN</span
+                                >PYTHON</span
                             >
                             <span
                                 class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
-                                >SALESFORCE</span
+                                >POSTGRES</span
+                            >
+                            <span
+                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
+                                >DBT</span
                             >
                             <span
                                 class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
@@ -765,15 +778,15 @@ const projects = [
                     <p
                         class="text-text-secondary mb-8 text-lg leading-relaxed max-w-2xl"
                     >
-                        Technical depth grounded in academic rigor. I view tools
-                        as support for clear thinking, not as an identity.
+                        Clear thinking first. Tools are there to support it.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                    <!-- Card 1 -->
+                <!-- Top Row: Skills (3 Cols) -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- Card 1: Decision -->
                     <div
-                        class="p-8 rounded-2xl bg-white/5 border border-white/5"
+                        class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300"
                     >
                         <h4 class="font-bold text-xl text-white mb-2">
                             Decision & Stakeholder Work
@@ -783,31 +796,31 @@ const projects = [
                         </p>
                         <ul class="space-y-2 text-sm text-text-secondary">
                             <li class="flex items-start gap-2">
-                                <span
-                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
-                                ></span>Decision framing & KPI definitions
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >Decision framing & KPI definitions
                             </li>
                             <li class="flex items-start gap-2">
-                                <span
-                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
-                                ></span>Stakeholder interviews
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >Stakeholder interviews
                             </li>
                             <li class="flex items-start gap-2">
-                                <span
-                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
-                                ></span>Operating cadence
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >Operating cadence
                             </li>
                             <li class="flex items-start gap-2">
-                                <span
-                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
-                                ></span>Requirements & documentation
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >Requirements & documentation
                             </li>
                         </ul>
                     </div>
 
-                    <!-- Card 2 -->
+                    <!-- Card 2: Analytics -->
                     <div
-                        class="p-8 rounded-2xl bg-white/5 border border-white/5"
+                        class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300"
                     >
                         <h4 class="font-bold text-xl text-white mb-2">
                             Analytics Engineering & BI
@@ -817,38 +830,36 @@ const projects = [
                         </p>
                         <ul class="space-y-2 text-sm text-text-secondary">
                             <li class="flex items-start gap-2">
-                                <span
-                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
-                                ></span>SQL (Postgres / BigQuery / DuckDB)
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >SQL (Postgres / BigQuery / DuckDB)
                             </li>
                             <li class="flex items-start gap-2">
-                                <span
-                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
-                                ></span>dbt modeling & testing
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >dbt modeling & testing
                             </li>
                             <li class="flex items-start gap-2">
-                                <span
-                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
-                                ></span>Power BI & DAX
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >Power BI & DAX
                             </li>
                             <li class="flex items-start gap-2">
-                                <span
-                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
-                                ></span>Semantic conventions
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >Semantic conventions
                             </li>
                             <li class="flex items-start gap-2">
-                                <span
-                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
-                                ></span>CI/CD & Git workflows
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >CI/CD & Git workflows
                             </li>
                         </ul>
                     </div>
-                </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Card 3 -->
+                    <!-- Card 3: Modeling -->
                     <div
-                        class="p-8 rounded-2xl bg-white/5 border border-white/5"
+                        class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300"
                     >
                         <h4 class="font-bold text-xl text-white mb-2">
                             Modeling & Forecasting
@@ -858,48 +869,35 @@ const projects = [
                         </p>
                         <ul class="space-y-2 text-sm text-text-secondary">
                             <li class="flex items-start gap-2">
-                                <span
-                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
-                                ></span>Time series forecasting
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >Time series forecasting
                             </li>
                             <li class="flex items-start gap-2">
-                                <span
-                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
-                                ></span>Econometrics & Cohort logic
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >Econometrics & Cohort logic
                             </li>
                             <li class="flex items-start gap-2">
-                                <span
-                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
-                                ></span>Backtesting
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >Backtesting
                             </li>
                             <li class="flex items-start gap-2">
-                                <span
-                                    class="text-primary mt-1.5 w-1 h-1 rounded-full bg-primary block"
-                                ></span>Python (statsmodels / sklearn)
+                                <span class="text-text-secondary mr-2 mt-0.5"
+                                    >▪</span
+                                >Python (statsmodels / sklearn)
                             </li>
                         </ul>
                     </div>
+                </div>
 
+                <!-- Bottom Row: Academic (2 Cols) -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <!-- Academic 1 -->
                     <div
-                        class="p-8 rounded-2xl border border-white/10 bg-white/5 flex flex-col justify-center"
+                        class="glass p-8 rounded-2xl flex flex-col justify-center hover:-translate-y-1 transition-transform duration-300"
                     >
-                        <div class="text-white/40 mb-4">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="32"
-                                height="32"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                ><path d="M22 10v6M2 10l10-5 10 5-10 5z"
-                                ></path><path d="M6 12v5c3 3 9 3 12 0v-5"
-                                ></path></svg
-                            >
-                        </div>
                         <h4 class="font-bold text-white text-lg">
                             Graduate studies in Quantitative Economics
                         </h4>
@@ -910,24 +908,8 @@ const projects = [
 
                     <!-- Academic 2 -->
                     <div
-                        class="p-8 rounded-2xl border border-white/10 bg-white/5 flex flex-col justify-center"
+                        class="glass p-8 rounded-2xl flex flex-col justify-center hover:-translate-y-1 transition-transform duration-300"
                     >
-                        <div class="text-white/40 mb-4">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="32"
-                                height="32"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                ><path d="M22 10v6M2 10l10-5 10 5-10 5z"
-                                ></path><path d="M6 12v5c3 3 9 3 12 0v-5"
-                                ></path></svg
-                            >
-                        </div>
                         <h4 class="font-bold text-white text-lg">
                             B.Sc. Business Administration
                         </h4>

@@ -22,18 +22,14 @@ const id = title.replace(/\s+/g, "-").toLowerCase();
 ---
 
 <div
-    class="project-card group flex flex-col md:flex-row gap-6 md:gap-8 glass rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 ease-in-out border border-white/5 items-start"
+    class="project-card group flex flex-col md:flex-row gap-6 md:gap-8 glass rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 ease-in-out border border-white/5 items-start cursor-pointer"
     id={`card-${id}`}
 >
     <!-- Image -->
     <div
         class="w-full md:w-1/3 aspect-video md:aspect-[4/3] rounded-xl overflow-hidden shrink-0 relative"
     >
-        <img
-            src={image}
-            alt={title}
-            class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
-        />
+        <img src={image} alt={title} class="w-full h-full object-cover" />
     </div>
 
     <!-- Content -->
@@ -41,11 +37,11 @@ const id = title.replace(/\s+/g, "-").toLowerCase();
         <div class="flex justify-between items-start mb-4">
             <div>
                 <span
-                    class="text-xs font-bold tracking-wider text-info uppercase mb-1 block"
+                    class="text-xs font-bold tracking-wider text-primary uppercase mb-1 block"
                     >{category}</span
                 >
                 <h3
-                    class="text-2xl font-bold leading-tight group-hover:text-primary transition-colors duration-300 ease-in-out cursor-pointer js-toggle-trigger"
+                    class="text-2xl font-bold leading-tight transition-colors duration-300 ease-in-out cursor-pointer js-toggle-trigger"
                 >
                     {title}
                 </h3>
@@ -162,38 +158,24 @@ const id = title.replace(/\s+/g, "-").toLowerCase();
 </div>
 
 <script>
-    function setupAccordion() {
-        const triggers = document.querySelectorAll(".js-toggle-btn");
-        const titleTriggers = document.querySelectorAll(".js-toggle-trigger");
+    function setupCardToggle() {
+        const cards = document.querySelectorAll(".project-card");
 
-        const toggle = (btn) => {
-            const targetId =
-                btn.getAttribute("data-target") ||
-                `content-${btn.textContent.trim().replace(/\s+/g, "-").toLowerCase()}`;
-            // Note: title doesn't have data-target standardly in my previous code?
-            // Let's check the HTML. The button HAS data-target. The Title has class js-toggle-trigger but NO data-target attribute in the code I viewed.
-            // Lines 47-51: <h3 class="... js-toggle-trigger"> {title} </h3>. No data-target.
-            // But the button (Line 84) has data-target.
-            // I should make sure the title click also works if I want it to. The previous code didn't handle title click!
-            // Wait, line 136 select .js-toggle-btn. It didn't select .js-toggle-trigger.
-            // So currently clicking title does NOTHING.
-            // The user didn't ask to fix title clicking, but it has the cursor-pointer class. I should probably support it or just strictly follow instructions.
-            // Instructions: "opening and closing the card a tad smoother".
-            // I will stick to the button logic to avoid scope creep, but I need to make sure I don't break anything.
+        cards.forEach((card) => {
+            if (card.hasAttribute("data-listener-attached")) return;
+            card.setAttribute("data-listener-attached", "true");
 
-            // Re-reading JS: triggers = document.querySelectorAll(".js-toggle-btn");
-            // So only button works.
-
-            // Let's just update the loop for buttons as requested.
-        };
-
-        triggers.forEach((btn) => {
-            btn.addEventListener("click", (e) => {
-                e.preventDefault();
-                const targetId = btn.getAttribute("data-target");
+            card.addEventListener("click", (e) => {
                 // @ts-ignore
-                const content = document.getElementById(targetId);
-                const icon = btn.querySelector(".js-icon");
+                if (e.target.closest("a")) return;
+
+                // @ts-ignore
+                if (e.target.closest("button")) {
+                    e.preventDefault();
+                }
+
+                const content = card.querySelector(".js-content");
+                const icon = card.querySelector(".js-icon");
 
                 if (content && icon) {
                     const isOpen =
@@ -222,6 +204,6 @@ const id = title.replace(/\s+/g, "-").toLowerCase();
     }
 
     // Run on load and page swap
-    setupAccordion();
-    document.addEventListener("astro:page-load", setupAccordion);
+    setupCardToggle();
+    document.addEventListener("astro:page-load", setupCardToggle);
 </script>
