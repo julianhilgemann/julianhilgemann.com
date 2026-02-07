@@ -19,9 +19,9 @@ const projects = [
             <p class="mb-6">This repository serves as a portfolio of my advanced dashboarding work. It demonstrates how complex data can be transformed into intuitive decision-making tools.</p>
             <h3 class="text-xl font-bold text-white mb-4">Features</h3>
             <ul class="space-y-2 text-text-secondary mb-6">
-                 <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><strong>Energy Trading Analytics:</strong> Real-time market data visualization.</li>
-                 <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><strong>Financial Reporting:</strong> Interactive P&L and cash flow statements.</li>
-                 <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><strong>Sales Performance:</strong> Granular tracking with partner scorecards.</li>
+                <li><strong>Energy Trading Analytics:</strong> Real-time market data visualization.</li>
+                 <li><strong>Financial Reporting:</strong> Interactive P&L and cash flow statements.</li>
+                 <li><strong>Sales Performance:</strong> Granular tracking with partner scorecards.</li>
             </ul>
             <h3 class="text-xl font-bold text-white mb-4">Architecture</h3>
             <p>Features advanced DAX patterns, custom PowerQuery transformations, and Figma-designed layouts integrated into PowerBI.</p>
@@ -49,15 +49,15 @@ const projects = [
             
             <h3 class="text-xl font-bold text-white mb-4">Features</h3>
             <ul class="space-y-2 text-text-secondary mb-6">
-                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Stochastic Engine:</strong> Simulates Customer Acquisition (Poisson), Retention (Hazard/Survival), and Revenue expansion.</span></li>
-                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Regime-Aware Forecasting:</strong> A Prophet model that detects "Growth Regimes" to avoid overfitting on early-stage data.</span></li>
+                <li><span><strong>Stochastic Engine:</strong> Simulates Customer Acquisition (Poisson), Retention (Hazard/Survival), and Revenue expansion.</span></li>
+                <li><span><strong>Regime-Aware Forecasting:</strong> A Prophet model that detects "Growth Regimes" to avoid overfitting on early-stage data.</span></li>
             </ul>
 
             <h3 class="text-xl font-bold text-white mb-4">Architecture</h3>
             <ul class="space-y-2 text-text-secondary mb-6">
-                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Contract-First Engineering:</strong> The entire simulation scales dynamically based on a JSON contract extracted from the Excel Operating Plan.</span></li>
-                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Medallion DWH:</strong> A rigorous dbt project structure (Bronze/Silver/Gold) ensuring clean lineage.</span></li>
-                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Agentic Build Pipeline:</strong> Treating business logic as code, we use cursor/windsurf to scaffold the entire stack from specs.</span></li>
+                <li><span><strong>Contract-First Engineering:</strong> The entire simulation scales dynamically based on a JSON contract extracted from the Excel Operating Plan.</span></li>
+                <li><span><strong>Medallion DWH:</strong> A rigorous dbt project structure (Bronze/Silver/Gold) ensuring clean lineage.</span></li>
+                <li><span><strong>Agentic Build Pipeline:</strong> Treating business logic as code, we use cursor/windsurf to scaffold the entire stack from specs.</span></li>
             </ul>
         `,
     },
@@ -83,16 +83,16 @@ const projects = [
             
             <h3 class="text-xl font-bold text-white mb-4">Features</h3>
             <ul class="space-y-2 text-text-secondary mb-6">
-                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Controlled Stochasticity:</strong> Uses Non-Homogeneous Poisson Processes (NHPP) to model realistic demand patterns.</span></li>
-                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Product Economics:</strong> Pricing follows Log-Normal distributions; popularity follows Pareto (Power Law).</span></li>
-                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Marketing Attribution:</strong> Algorithmic allocation of ad spend to order lines based on revenue share.</span></li>
+                <li><span><strong>Controlled Stochasticity:</strong> Uses Non-Homogeneous Poisson Processes (NHPP) to model realistic demand patterns.</span></li>
+                <li><span><strong>Product Economics:</strong> Pricing follows Log-Normal distributions; popularity follows Pareto (Power Law).</span></li>
+                <li><span><strong>Marketing Attribution:</strong> Algorithmic allocation of ad spend to order lines based on revenue share.</span></li>
             </ul>
 
             <h3 class="text-xl font-bold text-white mb-4">Architecture</h3>
             <ul class="space-y-2 text-text-secondary mb-6">
-                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Star Schema:</strong> Central <code>fct_transactions</code> table linking to Type 1 SCD product dimensions.</span></li>
-                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>Currency Normalization:</strong> Robust handling of multi-currency transactions (EUR/CHF) with daily rate lookups.</span></li>
-                <li class="flex items-start"><span class="text-text-secondary mr-2 mt-0.5">▪</span><span><strong>DirectQuery-like Extract:</strong> Custom Parquet/CSV export workflow from DuckDB to Power BI for performant local development.</span></li>
+                <li><span><strong>Star Schema:</strong> Central <code>fct_transactions</code> table linking to Type 1 SCD product dimensions.</span></li>
+                <li><span><strong>Currency Normalization:</strong> Robust handling of multi-currency transactions (EUR/CHF) with daily rate lookups.</span></li>
+                <li><span><strong>DirectQuery-like Extract:</strong> Custom Parquet/CSV export workflow from DuckDB to Power BI for performant local development.</span></li>
             </ul>
         `,
     },
@@ -637,17 +637,13 @@ const projects = [
                             Hybrid Sales Pipeline Velocity Forecast using HAZARD
                             + SARIMAX Convolution model.
                         </p>
-                        <ul class="space-y-2 text-text-secondary text-sm mb-6">
-                            <li class="flex items-start">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >
+                        <ul
+                            class="space-y-2 text-text-secondary text-sm mb-6 custom-bullets"
+                        >
+                            <li>
                                 Built multi-variable stochastic revenue models
                             </li>
-                            <li class="flex items-start">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >
+                            <li>
                                 Integrated live actuals for rolling forecasts
                             </li>
                         </ul>
@@ -685,17 +681,11 @@ const projects = [
                             Standardized KPIs and automated reporting to reduce
                             cycle time and improve trust.
                         </p>
-                        <ul class="space-y-2 text-text-secondary text-sm mb-6">
-                            <li class="flex items-start">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >
-                                Codified metric definitions in dbt (SSOT)
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >
+                        <ul
+                            class="space-y-2 text-text-secondary text-sm mb-6 custom-bullets"
+                        >
+                            <li>Codified metric definitions in dbt (SSOT)</li>
+                            <li>
                                 Automated reporting pipelines saving ~20h/week
                             </li>
                         </ul>
@@ -733,17 +723,13 @@ const projects = [
                             Increased sales efficiency by routing high-intent
                             leads directly to CRM.
                         </p>
-                        <ul class="space-y-2 text-text-secondary text-sm mb-6">
-                            <li class="flex items-start">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >
+                        <ul
+                            class="space-y-2 text-text-secondary text-sm mb-6 custom-bullets"
+                        >
+                            <li>
                                 Predictive lead scoring based on behavioral data
                             </li>
-                            <li class="flex items-start">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >
+                            <li>
                                 High-intent routing directly to sales slack/CRM
                             </li>
                         </ul>
@@ -794,27 +780,13 @@ const projects = [
                         <p class="text-sm text-text-secondary mb-6 italic">
                             Enables: alignment, clarity, action
                         </p>
-                        <ul class="space-y-2 text-sm text-text-secondary">
-                            <li class="flex items-start gap-2">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >Decision framing & KPI definitions
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >Stakeholder interviews
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >Operating cadence
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >Requirements & documentation
-                            </li>
+                        <ul
+                            class="space-y-2 text-sm text-text-secondary custom-bullets"
+                        >
+                            <li>Decision framing & KPI definitions</li>
+                            <li>Stakeholder interviews</li>
+                            <li>Operating cadence</li>
+                            <li>Requirements & documentation</li>
                         </ul>
                     </div>
 
@@ -828,32 +800,14 @@ const projects = [
                         <p class="text-sm text-text-secondary mb-6 italic">
                             Enables: trust + scale
                         </p>
-                        <ul class="space-y-2 text-sm text-text-secondary">
-                            <li class="flex items-start gap-2">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >SQL (Postgres / BigQuery / DuckDB)
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >dbt modeling & testing
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >Power BI & DAX
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >Semantic conventions
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >CI/CD & Git workflows
-                            </li>
+                        <ul
+                            class="space-y-2 text-sm text-text-secondary custom-bullets"
+                        >
+                            <li>SQL (Postgres / BigQuery / DuckDB)</li>
+                            <li>dbt modeling & testing</li>
+                            <li>Power BI & DAX</li>
+                            <li>Semantic conventions</li>
+                            <li>CI/CD & Git workflows</li>
                         </ul>
                     </div>
 
@@ -867,27 +821,13 @@ const projects = [
                         <p class="text-sm text-text-secondary mb-6 italic">
                             Enables: planning + risk control
                         </p>
-                        <ul class="space-y-2 text-sm text-text-secondary">
-                            <li class="flex items-start gap-2">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >Time series forecasting
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >Econometrics & Cohort logic
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >Backtesting
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-text-secondary mr-2 mt-0.5"
-                                    >▪</span
-                                >Python (statsmodels / sklearn)
-                            </li>
+                        <ul
+                            class="space-y-2 text-sm text-text-secondary custom-bullets"
+                        >
+                            <li>Time series forecasting</li>
+                            <li>Econometrics & Cohort logic</li>
+                            <li>Backtesting</li>
+                            <li>Python (statsmodels / sklearn)</li>
                         </ul>
                     </div>
                 </div>
