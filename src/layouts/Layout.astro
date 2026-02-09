@@ -7,6 +7,8 @@ import ContactModal from "../components/ContactModal.astro";
 interface Props {
 	title: string;
 	description?: string;
+	image?: string;
+	type?: string;
 	fullWidth?: boolean;
 	noTopPadding?: boolean;
 	noHeader?: boolean;
@@ -15,10 +17,14 @@ interface Props {
 const {
 	title,
 	description = "Julian Hilgemann - Data to Decisions",
+	image = "/Logo%20Circle.png",
+	type = "website",
 	fullWidth = false,
 	noTopPadding = false,
 	noHeader = false,
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -27,9 +33,25 @@ const {
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/png" href="/favicon.png" />
+		<link rel="icon" type="image/png" href="/Logo%20Circle.png" />
+		<link rel="apple-touch-icon" href="/Logo%20Circle.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content={type} />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL(image, Astro.url)} />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={Astro.url} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 		<!-- Consent Mode v2 defaults: DENY until user consents -->
 		<script is:inline>
