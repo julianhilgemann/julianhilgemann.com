@@ -1,0 +1,15 @@
+# Julian Hilgemann - AI Engineer & Data Architect
+
+> Portfolio and documentation for Julian Hilgemann, specializing in Power BI decision dashboards, BI systems, and analytics engineering.
+> Updated: Feb 2026
+
+## Core Pages
+- [Home](/docs/index.md): Main landing page. Overview of services, philosophy, and experience.
+- [Hub](/docs/hub.md): Central hub for code, projects, and contact information.
+- [Page Engine](/docs/page-engine.md): Technical architecture of the "Decision Engine".
+- [Imprint](/docs/impressum.md): Legal notice (Impressum).
+- [Privacy Policy](/docs/datenschutz.md): Data protection and privacy policy.
+- [Cookie Settings](/docs/cookie-einstellungen.md): Cookie management.
+
+## Full Context
+- [Full Documentation](/llms-full.txt): All content combined into a single file for full-context ingestion.

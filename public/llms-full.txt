@@ -1,0 +1,687 @@
+# Pages
+
+## cookie-einstellungen
+
+# Cookie Einstellungen
+
+                Hier können Sie Ihre Cookie-Einstellungen verwalten.
+                (Funktionalität wird aktuell implementiert).
+
+---
+
+## datenschutz
+
+Datenschutzerklärung
+
+                    Verantwortlicher
+
+                    Julian Hilgemann, E‑Mail: hilgemann.julian@gmail.com
+
+                ## Hosting
+
+                Diese Website wird über GitHub Pages bereitgestellt.
+
+                    Reichweitenmessung (Google Analytics 4)
+
+                    Wir verwenden Google Analytics 4 zur Reichweitenmessung. Der
+                    Dienst wird erst nach Ihrer Einwilligung geladen (Art. 6
+                    Abs. 1 lit. a DSGVO). IP‑Adressen werden gekürzt
+                    (anonymize_ip). Anbieter: Google Ireland Limited, Gordon
+                    House, Barrow Street, Dublin 4, Irland.
+
+                    Datenkategorien: Geräteinformationen, Browser‑ und
+                    Ereignisdaten (z. B. Seitenaufrufe, Klicks auf ausgehende
+                    Links).
+
+                    Drittlandübermittlung: Es kann zu Übermittlungen an die
+                    Google LLC in den USA kommen. Rechtsgrundlage sind
+                    Standardvertragsklauseln (Art. 46 DSGVO).
+
+                Speicherdauer: gemäß Ihren GA4‑Einstellungen.
+
+                ## Externe Links
+
+                    Beim Klick auf externe Links (YouTube, Medium, Substack,
+                    Instagram, GitHub, LinkedIn) gelten die
+                    Datenschutzbestimmungen der jeweiligen Anbieter.
+
+                ## Ihre Rechte
+
+                    Sie haben die Rechte auf Auskunft, Berichtigung, Löschung,
+                    Einschränkung der Verarbeitung, Widerspruch sowie
+                    Datenübertragbarkeit. Wenden Sie sich hierzu an die oben
+                    genannte E‑Mail‑Adresse.
+
+---
+
+## hub
+
+Homepage
+                    Main Website
+
+                    GitHub
+                    Code & Projects
+
+                    LinkedIn
+                    Connect & Network
+
+                    CV / Resume
+                    Download
+
+---
+
+## impressum
+
+# Impressum
+
+                        Angaben gemäß § 5 TMG
+
+                        Julian Hilgemann
+
+                        Josef‑Führer‑Straße 41
+
+                        80997 München
+
+                    ## Kontakt
+
+                        E‑Mail: hilgemann.julian@gmail.com
+
+                        Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
+
+                    Julian Hilgemann (Anschrift wie oben)
+
+---
+
+## index
+
+
+
+---
+
+## page-engine
+
+>
+
+                   layer.label
+
+                System Online
+
+                ⚡ AI-Augmented
+Workflow Active
+
+          # SYSTEM ARCHITECTURE
+
+            Blueprinting the decision engine. From raw signal ingestion to predictive strategy execution.
+
+             `}>
+
+         class="spec-section min-h-[50vh] flex flex-col justify-center scroll-mt-32">
+
+                     layer.title
+
+                  STATUS: OPTIMIZED
+
+                           spec.value
+                           "spec.utility"
+
+           05.0 // DEPLOYMENT
+           ### Ready to initiate?
+
+              START PROJECT sequence
+
+---
+
+# Components
+
+## ContactModal
+
+## Let's Connect
+
+                Ready to transform your data into actionable decisions? I'm
+                currently accepting new projects. 
+Drop me a line and let's
+                discuss your strategy.
+
+                    Send me an Email
+
+                Prefer LinkedIn? Connect with me there.
+
+---
+
+## DecisionScope
+
+Decision Scope & Ownership
+
+                End-to-end ownership of the decision loop, from data to
+                executive decisions.
+
+                Revenue & Unit Economics Dashboards
+
+                Growth & Funnel Dashboards
+
+                Forecasting & Scenario Dashboards
+
+                Executive & Investor Reporting
+
+---
+
+## Experience
+
+Selected Experience & Systems
+                    Built
+
+                    With 3+ years of experience building and operating
+                    production analytics systems in high-stakes fintech environments,
+                    my core focus is owning the Power BI decision layer — the point where data becomes trusted, repeatable business
+                    action.
+
+                    I’ve owned and operated production Power BI environments
+                    spanning 10+ dashboards used daily by executive leadership,
+                    sales, and operations. This included end-to-end
+                    responsibility for semantic modeling, KPI logic, access
+                    control, performance optimization, and long-term
+                    maintainability — treating BI as a product, not a reporting
+                    artifact.
+
+                    Underneath the dashboard layer, I’ve worked extensively on
+                    analytics engineering and data modeling: designing metric
+                    layers, contributing to dbt-based transformations, aligning
+                    source-of-truth definitions, and ensuring downstream reports
+                    remain stable as data and business logic evolve. This
+                    foundation enabled more advanced use cases such as
+                    forecasting systems, scenario planning, and decision support
+                    models built on top of the same trusted data structures.
+
+                    A recurring theme in my work is translating between
+                    different stakeholder perspectives and levels of abstraction
+                    — from operational teams needing fast, concrete signals, to
+                    senior leadership requiring high-level clarity,
+                    comparability, and confidence in the numbers. This has
+                    shaped both how I design metrics and how I design
+                    interfaces.
+
+                    Beyond analytics logic, I’ve led cross-functional BI
+                    redesign initiatives with Design and Marketing: migrating
+                    legacy dashboards to a unified visual system, introducing
+                    style guides, templates, and shared conventions (Figma /
+                    Zeroheight), and raising data-visualization quality across
+                    teams to ensure dashboards are not only correct, but usable.
+
+                    I’ve been using GenAI and LLMs in production
+                    analytics workflows since 2022, and actively explore emerging
+                    patterns such as agentic systems, context management, and tool
+                    orchestration. This includes connecting data, code, and analytical
+                    tools via MCP-style interfaces and agentic IDEs, with the goal
+                    of augmenting analytics teams and enabling stakeholders along
+                    the decision chain to harness modern AI toolkits effectively.
+
+                            Power BI Production & Ownership
+
+                        End-to-end ownership of a mission-critical BI
+                        environment.
+
+                            Owned and operated 10+ production Power BI
+                            dashboards
+
+                            80+ monthly active users across executive, sales,
+                            and ops teams
+
+                            Board-level, sales, and operational reporting in
+                            daily use
+
+                        - Centralized KPI definitions and semantic models
+
+                            Performance tuning, model refactoring, and RLS over
+                            time
+
+                            Stakeholder alignment, feedback cycles, and
+                            long-term ownership
+
+                        POWER BI
+                        DAX
+                        POWER QUERY
+                        SEMANTIC MODELING
+                        RLS
+
+                            KPI & Metric Layer
+
+                        Standardizing metrics to restore trust and speed.
+
+                            Replaced fragmented reporting with a single KPI
+                            layer
+
+                            Reduced reporting effort from multi-day cycles to
+                            same-day delivery
+
+                            Supported executive and investor reporting on €4bn+
+                            annual transaction volume
+
+                            Enabled consistent metrics across finance, sales,
+                            and leadership
+
+                        POWER BI
+                        POWER QUERY
+                        DAX
+                        SQL
+                        DBT
+                        POSTGRES
+                        EXCEL
+
+                            Forecasting & Scenario System
+
+                        Decision-grade revenue and pipeline forecasting.
+
+                        - Built multi-variable stochastic revenue models
+
+                            Modeled pipeline velocity and conversion dynamics
+                            across large funnels
+
+                            Combined hazard-based event modeling with seasonal
+                            time-series forecasting
+
+                            Used in rolling executive planning and scenario
+                            analysis
+
+                            Covered pipelines in the hundreds of millions in
+                            deal value
+
+                        PYTHON
+                        POSTGRES
+                        EXCEL
+                        POWER BI
+
+                            Lead Scoring → Activation
+
+                        Turning behavioral data into marketing efficiency.
+
+                            Built predictive lead-scoring models from behavioral
+                            data
+
+                            Integrated scoring into CRM and ad platforms
+                            (Reverse ETL)
+
+                        - Supported six-figure monthly SEA spend
+
+                            Optimized routing of high-intent leads to sales
+                            teams
+
+                            Foundation for performance-marketing optimization
+
+                        PYTHON
+                        POSTGRES
+                        DBT
+                        REVERSE ETL
+
+---
+
+## Footer
+
+LinkedIn
+
+                GitHub
+
+            Imprint
+            GDPR
+
+                Cookies
+
+            Contact
+
+            &copy; year Julian Hilgemann
+
+---
+
+## Header
+
+JH
+
+                            class="nav-link text-xs md:text-sm font-medium hover:text-primary transition-colors duration-300 ease-in-out"
+                            data-href=item.href
+                        >
+                            item.name
+
+                Contact
+
+---
+
+## Hero
+
+Turn Data Into Decisions That Drive Revenue
+
+                I design and build decision-ready Power BI dashboards that
+                    teams can use immediately.
+
+                From messy data to clear KPIs, trusted numbers, and
+                    confident decisions.
+
+                    Book a Strategy Call
+
+                    View Projects
+
+---
+
+## IncludedGrid
+
+What’s Included in Every Engagement
+
+                Every Power BI system I deliver follows a consistent set of
+                design, engineering, and communication standards to ensure
+                long-term usability, trust, and adoption.
+
+                    Design & UX
+
+                        Pixel-perfect layouts with consistent spacing,
+                        typography, and hierarchy
+
+                        Wireframes and mockups for early alignment (Figma)
+
+                        Modern UI patterns optimized for analytical workflows
+
+                        Mobile-ready and responsive report layouts
+
+                        Accessibility-aware design (WCAG principles)
+
+                        IBCS-aligned visual language for management reporting
+
+                        Data Modeling & Semantics
+
+                        High-efficiency semantic model design
+
+                        Clear, documented KPI logic and business definitions
+
+                        Star-schema / Kimball-style modeling where appropriate
+
+                        Performance-optimized measures and model refactoring
+
+                        Extensive metadata and model documentation
+
+                        Governance & Quality
+
+                        Consistent naming conventions and structure
+
+                        Role-level security (RLS) where required
+
+                        Versioned delivery and change traceability
+
+                        Long-term maintainability over short-term hacks
+
+                        Process & Communication
+
+                        Clear requirements engineering and Definition of Done
+                        (DoD)
+
+                        Transparent communication throughout the delivery
+                        process
+
+                        Structured feedback loops with stakeholders
+
+                        Documentation that enables handover and future ownership
+
+---
+
+## LetsDesignCTA
+
+Let’s design your decision system.
+
+            If your company has data but decisions still rely on gut feeling, we
+            should talk.
+
+            Schedule Consultation
+
+---
+
+## Offerings
+
+I build the decision layer — 
+
+                where data becomes action.
+
+                    I specialize in building Power BI dashboards that translate complex data into
+                        clear, trustworthy signals for decision-makers.
+
+                    My focus is the last mile of analytics: the semantic model,
+                    KPI logic, and visual interface where teams actually
+                    interact with data and make decisions.
+
+                    Behind the scenes, my background across analytics
+                    engineering, modeling, and AI ensures that what looks simple
+                    on the surface is technically sound, scalable, and
+                    consistent underneath.
+
+            `}
+                    >
+
+                            offer.title
+
+                            offer.bestFor
+
+                                What you get:
+
+                                        Investment
+
+                                        offer.price
+
+                                        Timeline
+
+                                        offer.timeline
+
+                                        Outcome:
+
+                                    offer.outcome
+
+                Not sure which option fits? I’m happy to recommend the right
+                scope after a short call.
+
+                Book a free consultation
+
+---
+
+## PainPoints
+
+Most companies have data. 
+
+                Few have decision systems.
+
+                    Most organizations invest heavily in data infrastructure and
+                    dashboards — especially Power BI.
+
+                    Yet despite all that effort, teams still argue about
+                    numbers, export data to Excel, or ignore dashboards
+                    altogether.
+
+                    What’s missing isn’t data or tooling. It’s the decision
+                    layer: clear metrics, shared logic, and interfaces designed
+                    around how people actually make decisions.
+
+                    This is where Power BI becomes powerful — not as a reporting
+                    tool, but as a decision interface.
+                    A place where logic, metrics, and design come together
+                        to support real business decisions.
+
+                    Static & Retrospective
+
+                    Dashboards show what happened last month — but not why it
+                    happened or what to do next.
+
+                    Metrics are descriptive, not actionable, leaving teams stuck
+                    reacting instead of deciding.
+
+                    Untrusted Metrics
+
+                    Different dashboards show different numbers for the same
+                    KPI.
+
+                    Without a shared semantic model, stakeholders lose trust —
+                    and decision-making moves back to spreadsheets and meetings.
+
+                    Ignored by the Business
+
+                    Dashboards exist, but adoption is low.
+
+                    Interfaces aren’t designed for real workflows, ownership is
+                    unclear, and reports slowly drift out of relevance.
+
+                The result: dashboards technically work — but decisions still
+                happen elsewhere.
+
+---
+
+## Philosophy
+
+Philosophy: Systems, Not Static
+                    Structures
+
+                        Companies behave less like fixed structures and more
+                        like living systems. They react, fluctuate, and evolve.
+                        Revenue moves in cycles, customers adapt, and markets
+                        shift.
+
+                        Beneath that motion, however, there is structure:
+                        dynamics that can be modeled, abstracted, and
+                        understood.
+
+                        A dashboard metric, then, isn’t “just a number.” It’s
+                        the visible surface of a deeper system. It's an
+                        expression of the underlying data architecture, modeling
+                        logic, and design choices, condensed into a single
+                        signal.
+
+                        I design and build abstractions that are technically
+                        sound and aligned with how people actually make
+                        decisions.
+
+                        In practice, this means designing Power BI dashboards
+                        that surface the right signal at the right moment — not
+                        just more data.
+
+                ### My Focus
+
+                        01
+
+                                Systems Thinking
+
+                                Understanding the whole, not just the parts.
+
+                        02
+
+                                Analytics Engineering
+
+                                Building robust, scalable data pipelines.
+
+                        03
+
+                                Modeling & Forecasting
+
+                                Predicting outcomes with statistical rigor.
+
+                        04
+
+                                Decision Interface Design
+
+                                Visualizing complexity for clarity.
+
+---
+
+## ProjectCard
+
+category
+
+                    title
+
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-text-secondary hover:text-primary transition-colors duration-300 ease-in-out group/link z-10"
+                        >
+
+                            Explore
+
+                description
+
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-primary transition-colors duration-300 ease-in-out group/bottom-link"
+                            >
+
+                                More on Github
+
+---
+
+## Projects
+
+## Projects
+
+                A selection of Power BI dashboards and analytics systems
+                designed to support real business decisions.
+
+             />)}
+
+---
+
+## Section
+
+
+
+---
+
+## SkillsFoundations
+
+Skills & Foundations
+
+                Clear thinking first. Tools are there to support it.
+
+                    Power BI & Semantic Modeling
+
+                    Enables: trust, speed, self-service
+
+                    - Star Schema design & DAX
+
+                    - Data warehouse architecture (dbt)
+
+                    - Governance & row-level security
+
+                    - Performance optimization
+
+                    Decision & Stakeholder Work
+
+                    Enables: alignment, clarity, action
+
+                    - Decision framing & KPI definitions
+
+                    - Stakeholder interviews
+
+                    - Operating cadence
+
+                    - Requirements & documentation
+
+                    Modeling & Forecasting
+
+                    Enables: foresight, planning, risk management
+
+                    - Stochastic simulation (Monte Carlo)
+
+                    - Growth modeling & unit economics
+
+                    - Scenario planning
+
+                    - Python / SciPy / NumPyro
+
+                    Graduate studies in Quantitative Economics
+
+                    Time series, econometrics, forecasting
+
+                    B.Sc. Business Administration
+
+                    Economics & metrics foundation — forecasting thesis
+
+                If you still have questions, I would be happy to help.
+
+                Get in touch
+
+---
+
+## SpotlightButton
+
+
+
+---
+
