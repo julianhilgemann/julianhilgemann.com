@@ -1,0 +1,155 @@
+---
+import Section from "./Section.astro";
+---
+
+<Section
+    class="border-t border-white/5 min-h-screen flex flex-col justify-center"
+>
+    <div class="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mb-12">
+            <h2 class="text-3xl md:text-5xl font-bold">
+                Most companies have data. <br />
+                <span class="text-text-secondary"
+                    >Few have decision systems.</span
+                >
+            </h2>
+            <div
+                class="text-lg text-text-secondary mt-8 space-y-4 max-w-3xl leading-relaxed"
+            >
+                <p>
+                    Most organizations invest heavily in data infrastructure and
+                    dashboards — especially Power BI.
+                </p>
+                <p>
+                    Yet despite all that effort, teams still argue about
+                    numbers, export data to Excel, or ignore dashboards
+                    altogether.
+                </p>
+                <p>
+                    What’s missing isn’t data or tooling. It’s the decision
+                    layer: clear metrics, shared logic, and interfaces designed
+                    around how people actually make decisions.
+                </p>
+                <p class="font-bold text-white mt-6">
+                    This is where Power BI becomes powerful — not as a reporting
+                    tool, but as a decision interface.
+                    <span class="font-normal text-text-secondary"
+                        >A place where logic, metrics, and design come together
+                        to support real business decisions.</span
+                    >
+                </p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- Card 1: Static & Retrospective -->
+            <div
+                class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300 ease-in-out"
+            >
+                <div class="mb-6 text-primary">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"
+                        ></polyline><polyline points="17 6 23 6 23 12"
+                        ></polyline></svg
+                    >
+                </div>
+                <h3 class="font-bold text-xl mb-3 text-white">
+                    Static & Retrospective
+                </h3>
+                <p class="text-text-secondary text-sm leading-relaxed mb-4">
+                    Dashboards show what happened last month — but not why it
+                    happened or what to do next.
+                </p>
+                <p class="text-text-secondary text-sm leading-relaxed">
+                    Metrics are descriptive, not actionable, leaving teams stuck
+                    reacting instead of deciding.
+                </p>
+            </div>
+
+            <!-- Card 2: Untrusted Metrics -->
+            <div
+                class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300 ease-in-out"
+            >
+                <div class="mb-6 text-primary">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path
+                            d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                        ></path><line x1="12" y1="9" x2="12" y2="13"
+                        ></line><line x1="12" y1="17" x2="12.01" y2="17"
+                        ></line></svg
+                    >
+                </div>
+                <h3 class="font-bold text-xl mb-3 text-white">
+                    Untrusted Metrics
+                </h3>
+                <p class="text-text-secondary text-sm leading-relaxed mb-4">
+                    Different dashboards show different numbers for the same
+                    KPI.
+                </p>
+                <p class="text-text-secondary text-sm leading-relaxed">
+                    Without a shared semantic model, stakeholders lose trust —
+                    and decision-making moves back to spreadsheets and meetings.
+                </p>
+            </div>
+
+            <!-- Card 3: Ignored by the Business -->
+            <div
+                class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300 ease-in-out"
+            >
+                <div class="mb-6 text-primary">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line
+                            x1="12"
+                            y1="2"
+                            x2="12"
+                            y2="12"></line></svg
+                    >
+                </div>
+                <h3 class="font-bold text-xl mb-3 text-white">
+                    Ignored by the Business
+                </h3>
+                <p class="text-text-secondary text-sm leading-relaxed mb-4">
+                    Dashboards exist, but adoption is low.
+                </p>
+                <p class="text-text-secondary text-sm leading-relaxed">
+                    Interfaces aren’t designed for real workflows, ownership is
+                    unclear, and reports slowly drift out of relevance.
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center">
+            <p class="text-xl text-text-secondary font-medium italic">
+                The result: dashboards technically work — but decisions still
+                happen elsewhere.
+            </p>
+        </div>
+    </div>
+</Section>
