@@ -8,9 +8,9 @@ import ProjectCard from "../components/ProjectCard.astro";
 const projects = [
     {
         title: "Dashboard Gallery",
-        category: "Data Visualization Collection",
+        category: "Power BI & Decision Interfaces",
         description:
-            "A collection of high-fidelity analytics interfaces and dashboard designs, showcasing expertise in PowerBI, DAX, and user-centric data storytelling.",
+            "Power BI dashboards providing performance, risk, and revenue visibility for trading and finance operations.",
         tags: ["PowerBI", "PowerQuery", "DAX", "Figma", "UI/UX"],
         image: "/assets/energy-analytics.png",
         link: "https://github.com/julianhilgemann/dashboard-gallery/blob/main/README.md",
@@ -28,44 +28,10 @@ const projects = [
         `,
     },
     {
-        title: "End-to-End SaaS Operating System",
-        category: "Stochastic Financial Twin",
-        description:
-            "A Proof of Concept for programmatically instantiating a commercial-grade data stack from a static business definition, compiling Excel models into a living data system.",
-        tags: [
-            "Excel",
-            "Python",
-            "dbt",
-            "DuckDB",
-            "SQL",
-            "Streamlit",
-            "Prophet",
-        ],
-        image: "/assets/end-to-end-saas-os.png",
-        link: "https://github.com/julianhilgemann/Portfolio/blob/main/README.md",
-        content: `
-            <h3 class="text-xl font-bold text-white mb-4">Concept</h3>
-            <p class="mb-6">This project implements a "Rapid Data Function"—instantiating an entire end-to-end data stack (Stochastic Simulation, Data Warehouse, Algorithmic Forecasting, and BI) purely from a static business definition.</p>
-            
-            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
-            <ul class="space-y-2 text-text-secondary mb-6">
-                <li><span><strong>Stochastic Engine:</strong> Simulates Customer Acquisition (Poisson), Retention (Hazard/Survival), and Revenue expansion.</span></li>
-                <li><span><strong>Regime-Aware Forecasting:</strong> A Prophet model that detects "Growth Regimes" to avoid overfitting on early-stage data.</span></li>
-            </ul>
-
-            <h3 class="text-xl font-bold text-white mb-4">Architecture</h3>
-            <ul class="space-y-2 text-text-secondary mb-6">
-                <li><span><strong>Contract-First Engineering:</strong> The entire simulation scales dynamically based on a JSON contract extracted from the Excel Operating Plan.</span></li>
-                <li><span><strong>Medallion DWH:</strong> A rigorous dbt project structure (Bronze/Silver/Gold) ensuring clean lineage.</span></li>
-                <li><span><strong>Agentic Build Pipeline:</strong> Treating business logic as code, we use cursor/windsurf to scaffold the entire stack from specs.</span></li>
-            </ul>
-        `,
-    },
-    {
         title: "Vantage Alpin: Analytics Re-Engineering",
         category: "Production Data Stack",
         description:
-            "A Single Source of Truth financial reporting pipeline replacing legacy systems with a modern Python/dbt/DuckDB stack, simulating complex e-commerce dynamics.",
+            "Production financial reporting engine replacing legacy PDF reports with a dynamic, decision-ready Power BI system.",
         tags: [
             "Python",
             "dbt",
@@ -96,12 +62,46 @@ const projects = [
             </ul>
         `,
     },
+    {
+        title: "End-to-End SaaS Operating System",
+        category: "Stochastic Financial Twin",
+        description:
+            "A full-stack simulation engine that translates static business plans into living data systems.",
+        tags: [
+            "Excel",
+            "Python",
+            "dbt",
+            "DuckDB",
+            "SQL",
+            "Streamlit",
+            "Prophet",
+        ],
+        image: "/assets/end-to-end-saas-os.png",
+        link: "https://github.com/julianhilgemann/Portfolio/blob/main/README.md",
+        content: `
+            <h3 class="text-xl font-bold text-white mb-4">Concept</h3>
+            <p class="mb-6">This project implements a "Rapid Data Function"—instantiating an entire end-to-end data stack (Stochastic Simulation, Data Warehouse, Algorithmic Forecasting, and BI) purely from a static business definition.</p>
+            
+            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>Stochastic Engine:</strong> Simulates Customer Acquisition (Poisson), Retention (Hazard/Survival), and Revenue expansion.</span></li>
+                <li><span><strong>Regime-Aware Forecasting:</strong> A Prophet model that detects "Growth Regimes" to avoid overfitting on early-stage data.</span></li>
+            </ul>
+
+            <h3 class="text-xl font-bold text-white mb-4">Architecture</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>Contract-First Engineering:</strong> The entire simulation scales dynamically based on a JSON contract extracted from the Excel Operating Plan.</span></li>
+                <li><span><strong>Medallion DWH:</strong> A rigorous dbt project structure (Bronze/Silver/Gold) ensuring clean lineage.</span></li>
+                <li><span><strong>Agentic Build Pipeline:</strong> Treating business logic as code, we use cursor/windsurf to scaffold the entire stack from specs.</span></li>
+            </ul>
+        `,
+    },
 ];
 ---
 
 <Layout
-    title="Julian Hilgemann | Data to Decisions"
-    description="I build the system between data and decisions. Analytics engineering, forecasting, and decision systems for high-stakes environments."
+    title="Julian Hilgemann | Power BI Decision Dashboards & BI Systems"
+    description="I build production Power BI dashboards and decision interfaces - trusted metrics, clean models, and reporting used daily by leadership and operations."
     fullWidth={true}
     noTopPadding={true}
 >
@@ -124,25 +124,36 @@ const projects = [
                     class="text-lg text-text-secondary mt-8 space-y-4 max-w-3xl leading-relaxed"
                 >
                     <p>
-                        Most organizations invest heavily in data
-                        infrastructure, dashboards, and experimentation. What’s
-                        missing is the connective tissue: systems that translate
-                        information into clear choices, ownership, and action.
+                        Most organizations invest heavily in data infrastructure
+                        and dashboards — especially Power BI.
                     </p>
                     <p>
-                        Without that layer, analytics stays descriptive,
-                        pipelines stay isolated, and AI remains experimental:
-                        useful in isolation, but rarely decisive.
+                        Yet despite all that effort, teams still argue about
+                        numbers, export data to Excel, or ignore dashboards
+                        altogether.
+                    </p>
+                    <p>
+                        What’s missing isn’t data or tooling. It’s the decision
+                        layer: clear metrics, shared logic, and interfaces
+                        designed around how people actually make decisions.
+                    </p>
+                    <p class="font-bold text-white mt-6">
+                        This is where Power BI becomes powerful — not as a
+                        reporting tool, but as a decision interface.
+                        <span class="font-normal text-text-secondary"
+                            >A place where logic, metrics, and design come
+                            together to support real business decisions.</span
+                        >
                     </p>
                 </div>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6">
-                <!-- Card 1 -->
+                <!-- Card 1: Static & Retrospective -->
                 <div
                     class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300 ease-in-out"
                 >
-                    <div class="mb-6 text-white/40">
+                    <div class="mb-6 text-primary">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="40"
@@ -150,31 +161,32 @@ const projects = [
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="1"
+                            stroke-width="1.5"
                             stroke-linecap="round"
                             stroke-linejoin="round"
+                            ><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"
+                            ></polyline><polyline points="17 6 23 6 23 12"
+                            ></polyline></svg
                         >
-                            <path
-                                d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-                            ></path>
-                            <path d="M3 3v5h5"></path>
-                            <path d="M12 7v5l4 2"></path>
-                        </svg>
                     </div>
                     <h3 class="font-bold text-xl mb-3 text-white">
-                        Backward-Looking
+                        Static & Retrospective
                     </h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-4">
+                        Dashboards show what happened last month — but not why
+                        it happened or what to do next.
+                    </p>
                     <p class="text-text-secondary text-sm leading-relaxed">
-                        Dashboards that describe the past but don’t guide
-                        action.
+                        Metrics are descriptive, not actionable, leaving teams
+                        stuck reacting instead of deciding.
                     </p>
                 </div>
 
-                <!-- Card 2 -->
+                <!-- Card 2: Untrusted Metrics -->
                 <div
                     class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300 ease-in-out"
                 >
-                    <div class="mb-6 text-white/40">
+                    <div class="mb-6 text-primary">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="40"
@@ -182,32 +194,35 @@ const projects = [
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="1"
+                            stroke-width="1.5"
                             stroke-linecap="round"
                             stroke-linejoin="round"
+                            ><path
+                                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                            ></path><line x1="12" y1="9" x2="12" y2="13"
+                            ></line><line x1="12" y1="17" x2="12.01" y2="17"
+                            ></line></svg
                         >
-                            <path
-                                d="m18.84 12.25 1.72-1.71h-.02a5.004 5.004 0 0 0-.12-7.07 5.006 5.006 0 0 0-6.95 0l-1.72 1.71"
-                            ></path>
-                            <path
-                                d="m5.17 11.75-1.71 1.71a5.004 5.004 0 0 0 .12 7.07 5.006 5.006 0 0 0 6.95 0l1.71-1.71"
-                            ></path>
-                        </svg>
                     </div>
                     <h3 class="font-bold text-xl mb-3 text-white">
-                        Disconnected
+                        Untrusted Metrics
                     </h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-4">
+                        Different dashboards show different numbers for the same
+                        KPI.
+                    </p>
                     <p class="text-text-secondary text-sm leading-relaxed">
-                        Data pipelines that exist but don’t connect to business
-                        impact.
+                        Without a shared semantic model, stakeholders lose trust
+                        — and decision-making moves back to spreadsheets and
+                        meetings.
                     </p>
                 </div>
 
-                <!-- Card 3 -->
+                <!-- Card 3: Ignored by the Business -->
                 <div
                     class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300 ease-in-out"
                 >
-                    <div class="mb-6 text-white/40">
+                    <div class="mb-6 text-primary">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="40"
@@ -215,24 +230,32 @@ const projects = [
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="1"
+                            stroke-width="1.5"
                             stroke-linecap="round"
                             stroke-linejoin="round"
+                            ><path d="M18.36 6.64a9 9 0 1 1-12.73 0"
+                            ></path><line x1="12" y1="2" x2="12" y2="12"
+                            ></line></svg
                         >
-                            <path
-                                d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"
-                            ></path>
-                            <path d="M8.5 2h7"></path>
-                            <path d="M7 16h10"></path>
-                        </svg>
                     </div>
                     <h3 class="font-bold text-xl mb-3 text-white">
-                        Experimental
+                        Ignored by the Business
                     </h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-4">
+                        Dashboards exist, but adoption is low.
+                    </p>
                     <p class="text-text-secondary text-sm leading-relaxed">
-                        AI experiments that never turn into usable workflows.
+                        Interfaces aren’t designed for real workflows, ownership
+                        is unclear, and reports slowly drift out of relevance.
                     </p>
                 </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <p class="text-xl text-text-secondary font-medium italic">
+                    The result: dashboards technically work — but decisions
+                    still happen elsewhere.
+                </p>
             </div>
         </div>
     </Section>
@@ -245,16 +268,30 @@ const projects = [
         <div class="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-4xl mb-12">
                 <h2 class="text-3xl md:text-5xl font-bold mb-6">
-                    I build the system between <br />
-                    <span class="text-primary">data</span> and <span
-                        class="text-info">decisions</span
+                    I build the decision layer — <br />
+                    where <span class="text-primary">data</span> becomes <span
+                        class="text-info">action</span
                     >.
                 </h2>
-                <p class="text-xl text-text-secondary max-w-2xl">
-                    I combine analytics engineering, AI-assisted workflows,
-                    modeling, and visual decision interfaces into one coherent
-                    system designed around business outcomes.
-                </p>
+                <div class="text-xl text-text-secondary max-w-3xl space-y-6">
+                    <p>
+                        I specialize in building <strong
+                            >Power BI dashboards that translate complex data
+                            into clear, trustworthy signals for decision-makers</strong
+                        >.
+                    </p>
+                    <p>
+                        My focus is the last mile of analytics: the semantic
+                        model, KPI logic, and visual interface where teams
+                        actually interact with data and make decisions.
+                    </p>
+                    <p>
+                        Behind the scenes, my background across analytics
+                        engineering, modeling, and AI ensures that what looks
+                        simple on the surface is technically sound, scalable,
+                        and consistent underneath.
+                    </p>
+                </div>
             </div>
 
             <Offerings />
@@ -270,9 +307,8 @@ const projects = [
             <div class="mb-12">
                 <h2 class="text-3xl md:text-5xl font-bold mb-6">Projects</h2>
                 <p class="text-xl text-text-secondary max-w-2xl">
-                    A selection of production systems, prototypes, and technical
-                    explorations across analytics engineering, forecasting, and
-                    decision-support systems.
+                    A selection of Power BI dashboards and analytics systems
+                    designed to support real business decisions.
                 </p>
             </div>
 
@@ -405,6 +441,11 @@ const projects = [
                             sound and aligned with how people actually make
                             decisions.
                         </p>
+                        <p class="mt-6 text-lg text-text-secondary">
+                            In practice, this means designing Power BI
+                            dashboards that surface the right signal at the
+                            right moment — not just more data.
+                        </p>
                     </div>
                 </div>
 
@@ -498,7 +539,7 @@ const projects = [
                         </div>
                         <span
                             class="font-bold text-white text-base leading-tight"
-                            >Revenue & Unit Economics</span
+                            >Revenue & Unit Economics Dashboards</span
                         >
                     </div>
                     <div
@@ -522,7 +563,7 @@ const projects = [
                         </div>
                         <span
                             class="font-bold text-white text-base leading-tight"
-                            >Growth & Funnel Systems</span
+                            >Growth & Funnel Dashboards</span
                         >
                     </div>
                     <div
@@ -547,7 +588,7 @@ const projects = [
                         </div>
                         <span
                             class="font-bold text-white text-base leading-tight"
-                            >Forecasting & Scenario Planning</span
+                            >Forecasting & Scenario Dashboards</span
                         >
                     </div>
                     <div
@@ -574,7 +615,7 @@ const projects = [
                         </div>
                         <span
                             class="font-bold text-white text-base leading-tight"
-                            >Investor & Executive Reporting</span
+                            >Executive & Investor Reporting</span
                         >
                     </div>
                 </div>
@@ -590,30 +631,54 @@ const projects = [
                     </h3>
 
                     <p class="text-text-secondary mb-6 text-lg leading-relaxed">
-                        With <strong>3+ years of experience</strong> building production
-                        systems in high-stakes
-                        <strong>fintech environments</strong>, I design
-                        mission-critical analytics platforms used to run real
-                        businesses.
+                        With <strong>3+ years of experience</strong> building and
+                        operating production analytics systems in high-stakes fintech
+                        environments, my core focus is <strong
+                            >owning the Power BI decision layer</strong
+                        > — the point where data becomes trusted, repeatable business
+                        action.
                     </p>
                     <p class="text-text-secondary mb-6 text-lg leading-relaxed">
-                        I deliver <strong>analytics end to end</strong>: from
-                        requirements engineering and rapid prototyping to
-                        production-grade implementation, visualization, and
-                        long-term ownership. This includes building, operating,
-                        and maintaining multiple data assets across their full
-                        lifecycle to support both operational and strategic
-                        decision-making.
+                        I’ve owned and operated production Power BI environments
+                        spanning 10+ dashboards used daily by executive
+                        leadership, sales, and operations. This included
+                        end-to-end responsibility for semantic modeling, KPI
+                        logic, access control, performance optimization, and
+                        long-term maintainability — treating BI as a product,
+                        not a reporting artifact.
                     </p>
                     <p class="text-text-secondary mb-6 text-lg leading-relaxed">
-                        My work centers on the <strong>decision loop</strong>:
-                        turning raw data into clarity at the moment it matters.
-                        These systems report metrics, structure decisions,
-                        surface trade-offs, and drive action.
+                        Underneath the dashboard layer, I’ve worked extensively
+                        on analytics engineering and data modeling: designing
+                        metric layers, contributing to dbt-based
+                        transformations, aligning source-of-truth definitions,
+                        and ensuring downstream reports remain stable as data
+                        and business logic evolve. This foundation enabled more
+                        advanced use cases such as forecasting systems, scenario
+                        planning, and decision support models built on top of
+                        the same trusted data structures.
+                    </p>
+                    <p class="text-text-secondary mb-8 text-lg leading-relaxed">
+                        A recurring theme in my work is translating between
+                        different stakeholder perspectives and levels of
+                        abstraction — from operational teams needing fast,
+                        concrete signals, to senior leadership requiring
+                        high-level clarity, comparability, and confidence in the
+                        numbers. This has shaped both how I design metrics and
+                        how I design interfaces.
+                    </p>
+                    <p class="text-text-secondary mb-8 text-lg leading-relaxed">
+                        Beyond analytics logic, I’ve led cross-functional BI
+                        redesign initiatives with Design and Marketing:
+                        migrating legacy dashboards to a unified visual system,
+                        introducing style guides, templates, and shared
+                        conventions (Figma / Zeroheight), and raising
+                        data-visualization quality across teams to ensure
+                        dashboards are not only correct, but usable.
                     </p>
                     <p class="text-text-secondary mb-8 text-lg leading-relaxed">
                         I’ve been using <strong>GenAI and LLMs</strong> in production
-                        analytics workflows since 2022, and I actively explore emerging
+                        analytics workflows since 2022, and actively explore emerging
                         patterns such as agentic systems, context management, and
                         tool orchestration. This includes connecting data, code, and
                         analytical tools via MCP-style interfaces and agentic IDEs,
@@ -624,6 +689,127 @@ const projects = [
 
                 <!-- Right column: Cards -->
                 <div class="space-y-4">
+                    <!-- Card 1: Power BI Production & Ownership -->
+                    <div
+                        class="glass p-6 rounded-xl transition-colors group hover:-translate-y-1 transition-transform duration-300"
+                    >
+                        <div class="flex justify-between items-start mb-2">
+                            <h4
+                                class="font-bold text-white text-lg transition-colors"
+                            >
+                                Power BI Production & Ownership
+                            </h4>
+                        </div>
+                        <p class="text-sm text-white mb-3 font-medium">
+                            End-to-end ownership of a mission-critical BI
+                            environment.
+                        </p>
+                        <ul
+                            class="space-y-2 text-text-secondary text-sm mb-6 custom-bullets"
+                        >
+                            <li>
+                                Owned and operated 10+ production Power BI
+                                dashboards
+                            </li>
+                            <li>
+                                80+ monthly active users across executive,
+                                sales, and ops teams
+                            </li>
+                            <li>
+                                Board-level, sales, and operational reporting in
+                                daily use
+                            </li>
+                            <li>
+                                Centralized KPI definitions and semantic models
+                            </li>
+                            <li>
+                                Performance tuning, model refactoring, and RLS
+                                over time
+                            </li>
+                            <li>
+                                Stakeholder alignment, feedback cycles, and
+                                long-term ownership
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
+                                >POWER BI</span
+                            >
+                            <span
+                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
+                                >DAX</span
+                            >
+                            <span
+                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
+                                >POWER QUERY</span
+                            >
+                            <span
+                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
+                                >SEMANTIC MODELING</span
+                            >
+                            <span
+                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
+                                >RLS</span
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Card 2: KPI & Metric Layer -->
+                    <div
+                        class="glass p-6 rounded-xl transition-colors group hover:-translate-y-1 transition-transform duration-300"
+                    >
+                        <div class="flex justify-between items-start mb-2">
+                            <h4
+                                class="font-bold text-white text-lg transition-colors"
+                            >
+                                KPI & Metric Layer
+                            </h4>
+                        </div>
+                        <p class="text-sm text-white mb-3 font-medium">
+                            Standardizing metrics to restore trust and speed.
+                        </p>
+                        <ul
+                            class="space-y-2 text-text-secondary text-sm mb-6 custom-bullets"
+                        >
+                            <li>
+                                Replaced fragmented reporting with a single KPI
+                                layer
+                            </li>
+                            <li>
+                                Reduced reporting effort from multi-day cycles
+                                to same-day delivery
+                            </li>
+                            <li>
+                                Supported executive and investor reporting on
+                                €4bn+ annual transaction volume
+                            </li>
+                            <li>
+                                Enabled consistent metrics across finance,
+                                sales, and leadership
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
+                                >POWER BI</span
+                            >
+                            <span
+                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
+                                >POWER QUERY</span
+                            >
+                            <span
+                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
+                                >POSTGRES</span
+                            >
+                            <span
+                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
+                                >EXCEL</span
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Forecasting & Scenario System -->
                     <div
                         class="glass p-6 rounded-xl transition-colors group hover:-translate-y-1 transition-transform duration-300"
                     >
@@ -635,8 +821,7 @@ const projects = [
                             </h4>
                         </div>
                         <p class="text-sm text-white mb-3 font-medium">
-                            Hybrid Sales Pipeline Velocity Forecast using HAZARD
-                            + SARIMAX Convolution model.
+                            Decision-grade revenue and pipeline forecasting.
                         </p>
                         <ul
                             class="space-y-2 text-text-secondary text-sm mb-6 custom-bullets"
@@ -645,7 +830,20 @@ const projects = [
                                 Built multi-variable stochastic revenue models
                             </li>
                             <li>
-                                Integrated live actuals for rolling forecasts
+                                Modeled pipeline velocity and conversion
+                                dynamics across large funnels
+                            </li>
+                            <li>
+                                Combined hazard-based event modeling with
+                                seasonal time-series forecasting
+                            </li>
+                            <li>
+                                Used in rolling executive planning and scenario
+                                analysis
+                            </li>
+                            <li>
+                                Covered pipelines in the hundreds of millions in
+                                deal value
                             </li>
                         </ul>
                         <div class="flex flex-wrap gap-2">
@@ -668,48 +866,7 @@ const projects = [
                         </div>
                     </div>
 
-                    <div
-                        class="glass p-6 rounded-xl transition-colors group hover:-translate-y-1 transition-transform duration-300"
-                    >
-                        <div class="flex justify-between items-start mb-2">
-                            <h4
-                                class="font-bold text-white text-lg transition-colors"
-                            >
-                                KPI + Metric Layer
-                            </h4>
-                        </div>
-                        <p class="text-sm text-white mb-3 font-medium">
-                            Standardized KPIs and automated reporting to reduce
-                            cycle time and improve trust.
-                        </p>
-                        <ul
-                            class="space-y-2 text-text-secondary text-sm mb-6 custom-bullets"
-                        >
-                            <li>Codified metric definitions in dbt (SSOT)</li>
-                            <li>
-                                Automated reporting pipelines saving ~20h/week
-                            </li>
-                        </ul>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
-                                >EXCEL</span
-                            >
-                            <span
-                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
-                                >POWERQUERY</span
-                            >
-                            <span
-                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
-                                >POSTGRES</span
-                            >
-                            <span
-                                class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10"
-                                >POWER BI</span
-                            >
-                        </div>
-                    </div>
-
+                    <!-- Card 4: Lead Scoring → Activation -->
                     <div
                         class="glass p-6 rounded-xl transition-colors group hover:-translate-y-1 transition-transform duration-300"
                     >
@@ -721,17 +878,27 @@ const projects = [
                             </h4>
                         </div>
                         <p class="text-sm text-white mb-3 font-medium">
-                            Increased sales efficiency by routing high-intent
-                            leads directly to CRM.
+                            Turning behavioral data into marketing efficiency.
                         </p>
                         <ul
                             class="space-y-2 text-text-secondary text-sm mb-6 custom-bullets"
                         >
                             <li>
-                                Predictive lead scoring based on behavioral data
+                                Built predictive lead-scoring models from
+                                behavioral data
                             </li>
                             <li>
-                                High-intent routing directly to sales slack/CRM
+                                Integrated scoring into CRM and ad platforms
+                                (Reverse ETL)
+                            </li>
+                            <li>Supported six-figure monthly SEA spend</li>
+                            <li>
+                                Optimized routing of high-intent leads to sales
+                                teams
+                            </li>
+                            <li>
+                                Foundation for performance-marketing
+                                optimization
                             </li>
                         </ul>
                         <div class="flex flex-wrap gap-2">
@@ -755,199 +922,200 @@ const projects = [
                     </div>
                 </div>
             </div>
-
-            <!-- Section 3: Skills & Foundations -->
-            <div class="mb-32">
-                <div class="mb-12">
-                    <h3 class="text-3xl font-bold text-white mb-6">
-                        Skills & <span class="text-primary">Foundations</span>
-                    </h3>
-                    <p
-                        class="text-text-secondary mb-8 text-lg leading-relaxed max-w-2xl"
-                    >
-                        Clear thinking first. Tools are there to support it.
-                    </p>
-                </div>
-
-                <!-- Top Row: Skills (3 Cols) -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-                    <!-- Card 1: Decision -->
-                    <div
-                        class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300"
-                    >
-                        <h4 class="font-bold text-xl text-white mb-2">
-                            Decision & Stakeholder Work
-                        </h4>
-                        <p class="text-sm text-text-secondary mb-6 italic">
-                            Enables: alignment, clarity, action
-                        </p>
-                        <ul
-                            class="space-y-2 text-sm text-text-secondary custom-bullets"
-                        >
-                            <li>Decision framing & KPI definitions</li>
-                            <li>Stakeholder interviews</li>
-                            <li>Operating cadence</li>
-                            <li>Requirements & documentation</li>
-                        </ul>
-                    </div>
-
-                    <!-- Card 2: Analytics -->
-                    <div
-                        class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300"
-                    >
-                        <h4 class="font-bold text-xl text-white mb-2">
-                            Analytics Engineering & BI
-                        </h4>
-                        <p class="text-sm text-text-secondary mb-6 italic">
-                            Enables: trust + scale
-                        </p>
-                        <ul
-                            class="space-y-2 text-sm text-text-secondary custom-bullets"
-                        >
-                            <li>SQL (Postgres / BigQuery / DuckDB)</li>
-                            <li>dbt modeling & testing</li>
-                            <li>Power BI & DAX</li>
-                            <li>Semantic conventions</li>
-                            <li>CI/CD & Git workflows</li>
-                        </ul>
-                    </div>
-
-                    <!-- Card 3: Modeling -->
-                    <div
-                        class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300"
-                    >
-                        <h4 class="font-bold text-xl text-white mb-2">
-                            Modeling & Forecasting
-                        </h4>
-                        <p class="text-sm text-text-secondary mb-6 italic">
-                            Enables: planning + risk control
-                        </p>
-                        <ul
-                            class="space-y-2 text-sm text-text-secondary custom-bullets"
-                        >
-                            <li>Time series forecasting</li>
-                            <li>Econometrics & Cohort logic</li>
-                            <li>Backtesting</li>
-                            <li>Python (statsmodels / sklearn)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Bottom Row: Academic (2 Cols) -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Academic 1 -->
-                    <div
-                        class="glass p-8 rounded-2xl flex flex-col justify-center hover:-translate-y-1 transition-transform duration-300"
-                    >
-                        <h4 class="font-bold text-white text-lg">
-                            Graduate studies in Quantitative Economics
-                        </h4>
-                        <p class="text-sm text-text-secondary mt-1">
-                            Time series, econometrics, forecasting
-                        </p>
-                    </div>
-
-                    <!-- Academic 2 -->
-                    <div
-                        class="glass p-8 rounded-2xl flex flex-col justify-center hover:-translate-y-1 transition-transform duration-300"
-                    >
-                        <h4 class="font-bold text-white text-lg">
-                            B.Sc. Business Administration
-                        </h4>
-                        <p class="text-sm text-text-secondary mt-1">
-                            Economics & metrics foundation — forecasting thesis
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!-- Discreet Footer CTA -->
-            <div class="mt-32 pt-12 border-t border-white/5 text-center">
-                <p class="text-text-secondary mb-6 text-lg">
-                    If you still have questions, I would be happy to help.
-                </p>
-                <button
-                    class="text-white hover:text-primary transition-colors border-b border-white/20 hover:border-primary pb-0.5 js-open-contact"
-                >
-                    Get in touch
-                </button>
-            </div>
         </div>
     </Section>
 
-    <style>
-        @keyframes blob {
-            0% {
-                transform: translate(0px, 0px) scale(1);
-            }
-            33% {
-                transform: translate(80px, -120px) scale(1.2);
-            }
-            66% {
-                transform: translate(-60px, 60px) scale(0.85);
-            }
-            100% {
-                transform: translate(0px, 0px) scale(1);
-            }
-        }
-        .animate-blob {
-            animation: blob 7s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .animation-delay-2000 {
-            animation-delay: 2s;
-        }
-        .animation-delay-3000 {
-            animation-delay: 3s;
-        }
-        .animation-delay-4000 {
-            animation-delay: 4s;
-        }
-        .animation-delay-5000 {
-            animation-delay: 5s;
-        }
-    </style>
+    <!-- Section 3: Skills & Foundations -->
+    <!-- Section 3: Skills & Foundations -->
+    <Section id="skills" class="border-t border-white/5">
+        <div class="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h3 class="text-3xl font-bold text-white mb-6">
+                    Skills & <span class="text-primary">Foundations</span>
+                </h3>
+                <p
+                    class="text-text-secondary mb-8 text-lg leading-relaxed max-w-2xl"
+                >
+                    Clear thinking first. Tools are there to support it.
+                </p>
+            </div>
 
-    <script>
-        const section = document.getElementById("cta-section");
-        const wrappers = document.querySelectorAll(".blob-wrapper");
+            <!-- Top Row: Skills (3 Cols) -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                <!-- Card 1: Power BI & Semantic Modeling -->
+                <div
+                    class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300"
+                >
+                    <h4 class="font-bold text-xl text-white mb-2">
+                        Power BI & Semantic Modeling
+                    </h4>
+                    <p class="text-sm text-text-secondary mb-6 italic">
+                        Enables: trust, speed, self-service
+                    </p>
+                    <ul
+                        class="space-y-2 text-sm text-text-secondary custom-bullets"
+                    >
+                        <li>Star Schema design & DAX</li>
+                        <li>Data warehouse architecture (dbt)</li>
+                        <li>Governance & row-level security</li>
+                        <li>Performance optimization</li>
+                    </ul>
+                </div>
 
-        if (section) {
-            section.addEventListener("mousemove", (e) => {
-                const rect = section.getBoundingClientRect();
-                const x = e.clientX - rect.left; // Mouse relative to section
-                const y = e.clientY - rect.top;
+                <!-- Card 2: Decision & Stakeholder Work -->
+                <div
+                    class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300"
+                >
+                    <h4 class="font-bold text-xl text-white mb-2">
+                        Decision & Stakeholder Work
+                    </h4>
+                    <p class="text-sm text-text-secondary mb-6 italic">
+                        Enables: alignment, clarity, action
+                    </p>
+                    <ul
+                        class="space-y-2 text-sm text-text-secondary custom-bullets"
+                    >
+                        <li>Decision framing & KPI definitions</li>
+                        <li>Stakeholder interviews</li>
+                        <li>Operating cadence</li>
+                        <li>Requirements & documentation</li>
+                    </ul>
+                </div>
 
-                // Calculate center of section
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
+                <!-- Card 3: Modeling & Forecasting -->
+                <div
+                    class="glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300"
+                >
+                    <h4 class="font-bold text-xl text-white mb-2">
+                        Modeling & Forecasting
+                    </h4>
+                    <p class="text-sm text-text-secondary mb-6 italic">
+                        Enables: foresight, planning, risk management
+                    </p>
+                    <ul
+                        class="space-y-2 text-sm text-text-secondary custom-bullets"
+                    >
+                        <li>Stochastic simulation (Monte Carlo)</li>
+                        <li>Growth modeling & unit economics</li>
+                        <li>Scenario planning</li>
+                        <li>Python / SciPy / NumPyro</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Bottom Row: Academic (2 Cols) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Academic 1 -->
+                <div
+                    class="glass p-8 rounded-2xl flex flex-col justify-center hover:-translate-y-1 transition-transform duration-300"
+                >
+                    <h4 class="font-bold text-white text-lg">
+                        Graduate studies in Quantitative Economics
+                    </h4>
+                    <p class="text-sm text-text-secondary mt-1">
+                        Time series, econometrics, forecasting
+                    </p>
+                </div>
 
-                wrappers.forEach((wrapper) => {
-                    const speed = parseFloat(
-                        wrapper.getAttribute("data-speed") || "0.05",
-                    );
-
-                    // Interaction: Pull towards mouse
-                    // We move the wrapper translate based on distance from center to mouse
-                    // But to make it "pull towards mouse", we just shift the wrapper towards the mouse coords
-                    // relative to its initial position.
-
-                    // Simple logic: Target position is (MouseX - InitialPos) * speed
-                    // But wrappers are absolute positioned. Let's just translate them relative to their origin.
-
-                    const moveX = (x - centerX) * speed * 2; // Factor for intensity
-                    const moveY = (y - centerY) * speed * 2;
-
-                    (wrapper as HTMLElement).style.transform =
-                        `translate(${moveX}px, ${moveY}px)`;
-                });
-            });
-
-            // Reset on mouse leave
-            section.addEventListener("mouseleave", () => {
-                wrappers.forEach((wrapper) => {
-                    (wrapper as HTMLElement).style.transform =
-                        `translate(0, 0)`;
-                });
-            });
-        }
-    </script>
+                <!-- Academic 2 -->
+                <div
+                    class="glass p-8 rounded-2xl flex flex-col justify-center hover:-translate-y-1 transition-transform duration-300"
+                >
+                    <h4 class="font-bold text-white text-lg">
+                        B.Sc. Business Administration
+                    </h4>
+                    <p class="text-sm text-text-secondary mt-1">
+                        Economics & metrics foundation — forecasting thesis
+                    </p>
+                </div>
+            </div>
+        </div>
+    </Section>
 </Layout>
+
+<!-- Discreet Footer CTA -->
+<div class="mt-32 pt-12 border-t border-white/5 text-center">
+    <p class="text-text-secondary mb-6 text-lg">
+        If you still have questions, I would be happy to help.
+    </p>
+    <button
+        class="text-white hover:text-primary transition-colors border-b border-white/20 hover:border-primary pb-0.5 js-open-contact"
+    >
+        Get in touch
+    </button>
+</div>
+
+<style>
+    @keyframes blob {
+        0% {
+            transform: translate(0px, 0px) scale(1);
+        }
+        33% {
+            transform: translate(80px, -120px) scale(1.2);
+        }
+        66% {
+            transform: translate(-60px, 60px) scale(0.85);
+        }
+        100% {
+            transform: translate(0px, 0px) scale(1);
+        }
+    }
+    .animate-blob {
+        animation: blob 7s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+    .animation-delay-3000 {
+        animation-delay: 3s;
+    }
+    .animation-delay-4000 {
+        animation-delay: 4s;
+    }
+    .animation-delay-5000 {
+        animation-delay: 5s;
+    }
+</style>
+
+<script>
+    const section = document.getElementById("cta-section");
+    const wrappers = document.querySelectorAll(".blob-wrapper");
+
+    if (section) {
+        section.addEventListener("mousemove", (e) => {
+            const rect = section.getBoundingClientRect();
+            const x = e.clientX - rect.left; // Mouse relative to section
+            const y = e.clientY - rect.top;
+
+            // Calculate center of section
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            wrappers.forEach((wrapper) => {
+                const speed = parseFloat(
+                    wrapper.getAttribute("data-speed") || "0.05",
+                );
+
+                // Interaction: Pull towards mouse
+                // We move the wrapper translate based on distance from center to mouse
+                // But to make it "pull towards mouse", we just shift the wrapper towards the mouse coords
+                // relative to its initial position.
+
+                // Simple logic: Target position is (MouseX - InitialPos) * speed
+                // But wrappers are absolute positioned. Let's just translate them relative to their origin.
+
+                const moveX = (x - centerX) * speed * 2; // Factor for intensity
+                const moveY = (y - centerY) * speed * 2;
+
+                (wrapper as HTMLElement).style.transform =
+                    `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+
+        // Reset on mouse leave
+        section.addEventListener("mouseleave", () => {
+            wrappers.forEach((wrapper) => {
+                (wrapper as HTMLElement).style.transform = `translate(0, 0)`;
+            });
+        });
+    }
+</script>
