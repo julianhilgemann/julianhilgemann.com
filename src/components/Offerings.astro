@@ -3,50 +3,69 @@ import Section from "./Section.astro";
 
 const offerings = [
     {
-        title: "Clarity Dashboard",
-        bestFor: "Best for teams that have data but no clear overview",
+        title: "Clarity Sprint",
+        bestFor:
+            "Best for teams needing an immediate, professional executive overview.",
         features: [
-            "One clean, professional Power BI dashboard",
-            "Clearly defined KPIs and metrics",
-            "Management-ready visuals",
-            "Basic documentation & handover",
+            "One high-impact Power BI dashboard",
+            "Core KPI definition (3–5 metrics)",
+            "Clean UI with standard templates",
+            "1-hour handover & documentation",
         ],
-        price: "€1,000–1,500",
-        timeline: "1–2 weeks",
-        outcome: "You finally see what’s going on.",
-        icon: "clarity",
+        price: "€2,500",
+        timeline: "1 Week",
+        outcome: "You finally see the signals in your data.",
+        icon: "circle-alert",
+        highlight: "⚡",
     },
     {
-        title: "Decision Dashboard",
+        title: "Decision Engine",
         badge: "Best Value",
-        bestFor: "Best when numbers exist but aren’t trusted",
+        bestFor:
+            'Best for establishing a "Single Source of Truth" with trusted metrics.',
         features: [
-            "KPI alignment & metric definitions",
-            "Proper semantic data model",
-            "Multiple report pages & drilldowns",
-            "Visual polish & CI alignment",
-            "Optional role-level security",
+            "Full semantic model (Star Schema)",
+            "Complex DAX & metric logic",
+            "Multi-page report with drill-throughs",
+            "Custom CI/UX alignment",
         ],
-        price: "€2,500–4,000",
-        timeline: "2–4 weeks",
-        outcome:
-            "Leadership can make decisions without second-guessing the data.",
-        icon: "decision",
+        price: "€6,000 – €8,500",
+        timeline: "3–5 Weeks",
+        outcome: "Leadership acts on numbers they actually trust.",
+        icon: "layers",
+        highlight: "📊",
     },
     {
-        title: "Power BI System",
-        bestFor: "Best when Power BI should become your reporting backbone",
+        title: "Analytics System",
+        bestFor:
+            "Best for companies scaling their BI infrastructure as a backbone.",
         features: [
-            "Scalable data model",
-            "Multiple dashboards & use cases",
-            "Performance optimization",
-            "Workspace & deployment setup",
-            "Collaboration with data / design teams",
+            "Multi-dashboard ecosystem",
+            "Workspace & Deployment strategy",
+            "RLS & Governance setup",
+            "Performance tuning & optimization",
         ],
-        price: "€5,000–8,000+",
-        timeline: "project-based",
-        outcome: "Reporting that doesn’t break every quarter.",
-        icon: "system",
+        price: "€15,000+",
+        timeline: "Project-based",
+        outcome: "Reporting infrastructure that doesn't break at scale.",
+        icon: "database",
+        highlight: "🏗️",
+    },
+    {
+        title: "Strategic Enterprise",
+        bestFor:
+            "Best for complex data stacks, AI integration, and high-stakes modeling.",
+        features: [
+            "Agentic AI & LLM-ready models",
+            "Predictive revenue/churn models",
+            "Analytics engineering (dbt/SQL)",
+            "Strategic advisory & roadmapping",
+        ],
+        price: "Individually Scoped",
+        timeline: "Partnership-based",
+        outcome: "Data becomes a proactive competitive advantage.",
+        icon: "shield-check",
+        highlight: "🛡️",
     },
 ];
 ---
@@ -84,20 +103,19 @@ const offerings = [
             </div>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-6 mt-12 mb-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 mb-12">
             {
                 offerings.map((offer) => (
                     <div
-                        class={`glass p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300 group flex flex-col h-full relative ${offer.badge ? "!border-primary border-2" : ""}`}
+                        class={`glass p-8 rounded-2xl card-hover transition-transform duration-300 group flex flex-col h-full relative ${offer.badge ? "!border-primary border-2" : "border border-white/5"}`}
                     >
                         {offer.badge && (
                             <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg shadow-primary/20">
                                 {offer.badge}
                             </div>
                         )}
-
                         <div class="mb-6 text-white/90">
-                            {offer.icon === "clarity" && (
+                            {offer.icon === "circle-alert" && (
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="40"
@@ -115,7 +133,7 @@ const offerings = [
                                     <line x1="12" y1="16" x2="12.01" y2="16" />
                                 </svg>
                             )}
-                            {offer.icon === "decision" && (
+                            {offer.icon === "layers" && (
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="40"
@@ -131,7 +149,7 @@ const offerings = [
                                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
                                 </svg>
                             )}
-                            {offer.icon === "system" && (
+                            {offer.icon === "database" && (
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="40"
@@ -164,12 +182,32 @@ const offerings = [
                                     <line x1="6" y1="18" x2="6.01" y2="18" />
                                 </svg>
                             )}
+                            {offer.icon === "shield-check" && (
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="40"
+                                    height="40"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-primary transition-colors duration-300"
+                                >
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                                    <path d="m9 12 2 2 4-4" />
+                                </svg>
+                            )}
                         </div>
 
-                        <h3 class="text-2xl font-bold mb-2 text-white">
-                            {offer.title}
-                        </h3>
-                        <p class="text-text-secondary text-sm mb-6 italic h-10">
+                        <div class="flex items-center gap-2 mb-2">
+                            <h3 class="text-xl font-bold text-white">
+                                {offer.title}
+                            </h3>
+                        </div>
+
+                        <p class="text-text-secondary text-sm mb-6 min-h-[40px]">
                             {offer.bestFor}
                         </p>
 
@@ -196,14 +234,14 @@ const offerings = [
                                         {offer.price}
                                     </p>
                                 </div>
-                                <div class="text-right">
-                                    <p class="text-xs text-text-secondary uppercase">
-                                        Timeline
-                                    </p>
-                                    <p class="text-sm text-white">
-                                        {offer.timeline}
-                                    </p>
-                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <p class="text-xs text-text-secondary uppercase">
+                                    Timeline
+                                </p>
+                                <p class="text-sm text-white">
+                                    {offer.timeline}
+                                </p>
                             </div>
 
                             <div class="bg-white/5 p-3 rounded-lg border border-white/5">
@@ -233,3 +271,11 @@ const offerings = [
         </div>
     </div>
 </Section>
+
+<style>
+    @media (hover: hover) {
+        .card-hover:hover {
+            transform: translateY(-0.25rem);
+        }
+    }
+</style>

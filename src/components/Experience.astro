@@ -71,7 +71,7 @@ import Section from "./Section.astro";
             <div class="space-y-4">
                 <!-- Card 1: Power BI Production & Ownership -->
                 <div
-                    class="glass p-6 rounded-xl transition-colors group hover:-translate-y-1 transition-transform duration-300"
+                    class="glass p-6 rounded-xl transition-colors group card-hover transition-transform duration-300"
                 >
                     <div class="flex justify-between items-start mb-2">
                         <h4
@@ -135,7 +135,7 @@ import Section from "./Section.astro";
 
                 <!-- Card 2: KPI & Metric Layer -->
                 <div
-                    class="glass p-6 rounded-xl transition-colors group hover:-translate-y-1 transition-transform duration-300"
+                    class="glass p-6 rounded-xl transition-colors group card-hover transition-transform duration-300"
                 >
                     <div class="flex justify-between items-start mb-2">
                         <h4
@@ -201,7 +201,7 @@ import Section from "./Section.astro";
 
                 <!-- Card 3: Forecasting & Scenario System -->
                 <div
-                    class="glass p-6 rounded-xl transition-colors group hover:-translate-y-1 transition-transform duration-300"
+                    class="glass p-6 rounded-xl transition-colors group card-hover transition-transform duration-300"
                 >
                     <div class="flex justify-between items-start mb-2">
                         <h4
@@ -256,7 +256,7 @@ import Section from "./Section.astro";
 
                 <!-- Card 4: Lead Scoring → Activation -->
                 <div
-                    class="glass p-6 rounded-xl transition-colors group hover:-translate-y-1 transition-transform duration-300"
+                    class="glass p-6 rounded-xl transition-colors group card-hover transition-transform duration-300"
                 >
                     <div class="flex justify-between items-start mb-2">
                         <h4
@@ -311,3 +311,11 @@ import Section from "./Section.astro";
         </div>
     </div>
 </Section>
+
+<style>
+    @media (hover: hover) {
+        .card-hover:hover {
+            transform: translateY(-0.25rem);
+        }
+    }
+</style>

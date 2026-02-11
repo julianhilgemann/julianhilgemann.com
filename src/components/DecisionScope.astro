@@ -1,113 +1,184 @@
 ---
 import Section from "./Section.astro";
+
+const scopes = [
+    {
+        title: "Revenue & Unit Economics",
+        description: "From raw ERP/SQL data to trusted margin analysis.",
+        bullets: [
+            "COGS & CAC Modeling",
+            "Real-time LTV Tracking",
+            "Automated Finance Reconciles",
+        ],
+        icon: "bank",
+    },
+    {
+        title: "Growth & Funnel Engineering",
+        description: "Connecting behavioral signals to marketing efficiency.",
+        bullets: [
+            "Lead Scoring Pipelines",
+            "Multi-touch Attribution",
+            "Funnel Velocity & Leakage",
+        ],
+        icon: "filter",
+    },
+    {
+        title: "Forecasting & Scenarios",
+        description: "From historical noise to stochastic revenue models.",
+        bullets: [
+            "Monte Carlo Simulations",
+            "Rolling Pipeline Forecasts",
+            "'What-if' Decision Tools",
+        ],
+        icon: "chart",
+    },
+    {
+        title: "Governance & Strategy",
+        description: "Turning fragmented sheets into a Board-ready Truth.",
+        bullets: [
+            "Metric Standardization",
+            "Executive Style Guides",
+            "RLS & Access Control",
+        ],
+        icon: "building",
+    },
+];
 ---
 
 <Section class="py-24">
     <div class="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-12">
             <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">
-                Decision Scope & <span class="text-primary">Ownership</span>
+                The Surface Area of the <span class="text-primary"
+                    >Decision Layer</span
+                >
             </h3>
-            <p class="text-base text-text-secondary/80 max-w-2xl">
-                End-to-end ownership of the decision loop, from data to
-                executive decisions.
+            <p class="text-base text-text-secondary/80 max-w-3xl">
+                I own the entire analytical value chain—from engineering the
+                'first mile' of raw data to designing the 'last mile' of
+                executive clarity.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-            <div
-                class="glass p-6 rounded-xl text-center flex flex-col justify-center items-center min-h-[160px] transition-colors group hover:-translate-y-1 transition-transform duration-300"
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {
+                scopes.map((scope, index) => (
+                    <div class="glass p-8 rounded-xl flex flex-col h-full relative overflow-hidden group card-hover transition-transform duration-300">
+                        {/* Watermark Number */}
+                        <div class="absolute -right-4 -bottom-8 text-[8rem] font-bold text-white/[0.03] select-none pointer-events-none group-hover:text-white/[0.05] transition-colors leading-none">
+                            0{index + 1}
+                        </div>
+
+                        <div class="mb-6 text-primary relative z-10">
+                            {scope.icon === "bank" && (
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="40"
+                                    height="40"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path d="M3 21h18" />
+                                    <path d="M5 21v-7" />
+                                    <path d="M19 21v-7" />
+                                    <path d="M10 9L3 21" />
+                                    <path d="M14 9l7 12" />
+                                    <rect x="2" y="3" width="20" height="5" />
+                                    <line x1="12" y1="12" x2="12" y2="21" />
+                                </svg>
+                            )}
+                            {scope.icon === "filter" && (
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="40"
+                                    height="40"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                                </svg>
+                            )}
+                            {scope.icon === "chart" && (
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="40"
+                                    height="40"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path d="M3 3v18h18" />
+                                    <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />
+                                </svg>
+                            )}
+                            {scope.icon === "building" && (
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="40"
+                                    height="40"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path d="M3 21h18" />
+                                    <path d="M5 21V7" />
+                                    <path d="M19 21V7" />
+                                    <path d="M4 7h16" />
+                                    <path d="M9 21v-8" />
+                                    <path d="M15 21v-8" />
+                                    <path d="M2 7l10-5 10 5" />
+                                </svg>
+                            )}
+                        </div>
+
+                        <h4 class="text-xl font-bold text-white mb-3 relative z-10">
+                            {scope.title}
+                        </h4>
+                        <p class="text-text-secondary text-sm mb-6 min-h-[40px] relative z-10">
+                            {scope.description}
+                        </p>
+
+                        <ul class="space-y-2 mt-auto relative z-10 custom-bullets">
+                            {scope.bullets.map((bullet) => (
+                                <li class="text-sm text-text-secondary/80">
+                                    {bullet}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))
+            }
+        </div>
+
+        <div class="mt-8 max-w-3xl mx-auto md:mx-0">
+            <p
+                class="text-lg leading-relaxed text-white font-medium border-l-4 border-primary pl-6"
             >
-                <div class="mb-4 text-primary transition-colors">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="32"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M12 2v20"></path><path
-                            d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
-                        ></path></svg
-                    >
-                </div>
-                <span class="font-bold text-white text-base leading-tight"
-                    >Revenue & Unit Economics Dashboards</span
-                >
-            </div>
-            <div
-                class="glass p-6 rounded-xl text-center flex flex-col justify-center items-center min-h-[160px] transition-colors group hover:-translate-y-1 transition-transform duration-300"
-            >
-                <div class="mb-4 text-primary transition-colors">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="32"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><polygon
-                            points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
-                        ></polygon></svg
-                    >
-                </div>
-                <span class="font-bold text-white text-base leading-tight"
-                    >Growth & Funnel Dashboards</span
-                >
-            </div>
-            <div
-                class="glass p-6 rounded-xl text-center flex flex-col justify-center items-center min-h-[160px] transition-colors group hover:-translate-y-1 transition-transform duration-300"
-            >
-                <div class="mb-4 text-primary transition-colors">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="32"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"
-                        ></path><circle cx="12" cy="12" r="3"></circle></svg
-                    >
-                </div>
-                <span class="font-bold text-white text-base leading-tight"
-                    >Forecasting & Scenario Dashboards</span
-                >
-            </div>
-            <div
-                class="glass p-6 rounded-xl text-center flex flex-col justify-center items-center min-h-[160px] transition-colors group hover:-translate-y-1 transition-transform duration-300"
-            >
-                <div class="mb-4 text-primary transition-colors">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="32"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path
-                            d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
-                        ></path><polyline points="14 2 14 8 20 8"
-                        ></polyline><path d="M12 18v-4"></path><path
-                            d="M8 18v-2"></path><path d="M16 18v-6"></path></svg
-                    >
-                </div>
-                <span class="font-bold text-white text-base leading-tight"
-                    >Executive & Investor Reporting</span
-                >
-            </div>
+                I don't just deliver a file; I own the logic, the performance,
+                and the long-term maintainability of the decision loop.
+            </p>
         </div>
     </div>
 </Section>
+
+<style>
+    @media (hover: hover) {
+        .card-hover:hover {
+            transform: translateY(-0.25rem);
+        }
+    }
+</style>
