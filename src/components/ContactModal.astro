@@ -94,6 +94,21 @@
         triggers.forEach((trigger) => {
             trigger.addEventListener("click", (e) => {
                 e.preventDefault();
+
+                // Analytics Tracking
+                const location =
+                    trigger.getAttribute("data-location") || "unknown";
+
+                // Check if gtag is defined (it's in Layout.astro)
+                // @ts-ignore
+                if (typeof window.gtag === "function") {
+                    // @ts-ignore
+                    window.gtag("event", "open_contact_modal", {
+                        event_category: "engagement",
+                        event_label: location,
+                    });
+                }
+
                 dialog.showModal();
             });
         });
