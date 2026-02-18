@@ -150,18 +150,20 @@ Drop me a line and let's
 
 ## DecisionScope
 
-Decision Scope & Ownership
+The Surface Area of the Decision Layer
 
-                End-to-end ownership of the decision loop, from data to
-                executive decisions.
+                I own the entire analytical value chain—from engineering the
+                'first mile' of raw data to designing the 'last mile' of
+                executive clarity.
 
-                Revenue & Unit Economics Dashboards
+                            0
 
-                Growth & Funnel Dashboards
+                            scope.title
 
-                Forecasting & Scenario Dashboards
+                            scope.description
 
-                Executive & Investor Reporting
+                I don't just deliver a file; I own the logic, the performance,
+                and the long-term maintainability of the decision loop.
 
 ---
 
@@ -340,6 +342,9 @@ JH
                         >
                             item.name
 
+                    ENG
+                    GER
+
                 Contact
 
 ---
@@ -364,58 +369,75 @@ Turn Data Into Decisions That Drive Revenue
 
 What’s Included in Every Engagement
 
-                Every Power BI system I deliver follows a consistent set of
-                design, engineering, and communication standards to ensure
-                long-term usability, trust, and adoption.
+                Every Power BI system I deliver follows a rigorous set of
+                engineering, design, and communication standards to ensure
+                long-term usability and audit-grade trust.
 
-                    Design & UX
+                        Institutional Design & UX
 
-                        Pixel-perfect layouts with consistent spacing,
-                        typography, and hierarchy
+                        IBCS-Aligned Visuals: High-density, professional reporting standards optimized
+                        for fast cognition.
 
-                        Wireframes and mockups for early alignment (Figma)
+                        Figma Wireframing: Structural
+                        alignment on layouts and UX before a single line of DAX is
+                        written.
 
-                        Modern UI patterns optimized for analytical workflows
+                        Mobile-Ready Layouts: Responsive interfaces designed for decision-makers on the
+                        move.
 
-                        Mobile-ready and responsive report layouts
+                        Modern UI Patterns: Clean
+                        spacing, typography, and hierarchy optimized for analytical
+                        workflows.
 
-                        Accessibility-aware design (WCAG principles)
+                        Fintech-Grade Engineering
 
-                        IBCS-aligned visual language for management reporting
+                        High-Efficiency Semantics: Performance-tuned data models (Star Schema/Kimball) for
+                        instantaneous loading.
 
-                        Data Modeling & Semantics
+                        LLM-Ready Metadata: Models
+                        enriched with descriptions, making them fully compatible with
+                        AI/Copilot agents.
 
-                        High-efficiency semantic model design
+                        Audit-Ready DAX: Robust,
+                        documented KPI logic that allows finance teams to trace every
+                        number to the source.
 
-                        Clear, documented KPI logic and business definitions
-
-                        Star-schema / Kimball-style modeling where appropriate
-
-                        Performance-optimized measures and model refactoring
-
-                        Extensive metadata and model documentation
+                        Data Quality Checks: Built-in
+                        validation logic to flag data discrepancies before they reach
+                        the dashboard.
 
                         Governance & Quality
 
-                        Consistent naming conventions and structure
+                        Security-First Setup: Role-Level Security (RLS) implementation to ensure data
+                        privacy across the organization.
 
-                        Role-level security (RLS) where required
+                        Maintainable Architecture: Standardized naming conventions and structures for seamless
+                        internal handovers.
 
-                        Versioned delivery and change traceability
+                        Versioned Delivery: Clear
+                        change traceability and deployment cycles (Dev/Test/Prod)
+                        where required.
 
-                        Long-term maintainability over short-term hacks
+                        Process & Transparency
 
-                        Process & Communication
+                        Definition of Done (DoD): Clear requirements engineering so there is zero ambiguity
+                        on project scope.
 
-                        Clear requirements engineering and Definition of Done
-                        (DoD)
+                        The Handover Vault: Comprehensive
+                        documentation and Loom video walkthroughs for long-term ownership.
 
-                        Transparent communication throughout the delivery
-                        process
+                        Structured Feedback: Iterative
+                        review cycles to ensure stakeholder alignment at every milestone.
 
-                        Structured feedback loops with stakeholders
+---
 
-                        Documentation that enables handover and future ownership
+## LanguageModal
+
+## Select Language
+
+                    English
+
+                    Deutsch
 
 ---
 
@@ -451,7 +473,7 @@ I build the decision layer —
             `}
                     >
 
-                            offer.title
+                                offer.title
 
                             offer.bestFor
 
@@ -461,9 +483,9 @@ I build the decision layer —
 
                                         offer.price
 
-                                        Timeline
+                                    Timeline
 
-                                        offer.timeline
+                                    offer.timeline
 
                                         Outcome:
 

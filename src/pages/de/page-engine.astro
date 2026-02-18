@@ -1,0 +1,242 @@
+---
+import Layout from "../../layouts/LayoutDE.astro";
+
+// Data for the diagram and content to ensure they stay in sync
+const layers = [
+  {
+    id: "foundation",
+    label: "FUNDAMENT",
+    title: "1.0 // FOUNDATION_LAYER",
+    specs: [
+      { label: "PROTOKOLL:", value: "Kimball Dimensional Modeling", utility: "Sichert historische Genauigkeit." },
+      { label: "STACK:", value: "PostgreSQL 16", utility: "ACID-konforme Speicherung." },
+      { label: "LATENZ:", value: "< 50ms", utility: "Optimiert für leseintensive Lasten." }
+    ]
+  },
+  {
+    id: "logic",
+    label: "LOGIK",
+    title: "2.0 // LOGIC_LAYER",
+    specs: [
+      { label: "TRANSFORM:", value: "dbt Core", utility: "Modulare SQL-Pipelines." },
+      { label: "TESTING:", value: "Great Expectations", utility: "Automatische Datenqualitätsprüfung." },
+      { label: "LINEAGE:", value: "DAG Visualisierung", utility: "Volle Rückverfolgbarkeit." }
+    ]
+  },
+  {
+    id: "intelligence",
+    label: "INTELLIGENZ",
+    title: "3.0 // INTELLIGENCE_LAYER",
+    specs: [
+      { label: "MODELL:", value: "XGBoost / Prophet", utility: "Prädiktive Analytik." },
+      { label: "RUNTIME:", value: "Python 3.11", utility: "Vektorisierte Operationen." },
+      { label: "OUTPUT:", value: "JSON / Parquet", utility: "Hochdurchsatz-Austausch." }
+    ]
+  },
+  {
+    id: "interface",
+    label: "INTERFACE",
+    title: "4.0 // INTERFACE_LAYER",
+    specs: [
+      { label: "FRAMEWORK:", value: "Astro + React", utility: "Insel-Architektur." },
+      { label: "VISUALS:", value: "D3.js / Recharts", utility: "Benutzerdefinierte interaktive Plots." },
+      { label: "RESPONSE:", value: "Edge Cached", utility: "Globale Verfügbarkeit." }
+    ]
+  }
+];
+---
+
+<Layout title="Page Engine | Architektur" fullWidth={true}>
+  <!-- 
+    Main Wrapper: 
+    - Overrides global background with Deep Graphite (#0A0A0A)
+    - Uses negative margin to pull background up behind the fixed header 
+  -->
+  <div class="bg-[#0A0A0A] min-h-screen w-full -mt-24 pt-24 md:pt-32 text-gray-300 font-sans selection:bg-[#F59E0B] selection:text-black font-light relative overflow-x-hidden">
+    
+    <!-- Background grid effect (optional technical texture) -->
+    <div class="absolute inset-0 z-0 opacity-10 pointer-events-none" 
+         style="background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px); background-size: 40px 40px;">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-12">
+      
+      <!-- LEFT COLUMN: Sticky Diagram -->
+      <aside class="hidden md:block md:col-span-4 lg:col-span-3 h-[calc(100vh-8rem)] sticky top-32">
+        <div class="h-full flex flex-col justify-between py-8 border-l border-white/10 pl-8 relative">
+          
+          <!-- The Pipeline Diagram -->
+          <div class="flex flex-col gap-0 relative">
+             <!-- Continuous Line Background -->
+             <div class="absolute left-[11px] top-4 bottom-4 w-[2px] bg-white/10 -z-10"></div>
+             <!-- Traveling packet (animated via JS) -->
+             <div id="packet" class="absolute left-[11px] w-[2px] h-12 bg-gradient-to-b from-transparent via-[#F59E0B] to-transparent -z-10 transition-all duration-300 ease-linear"></div>
+
+            {layers.map((layer, index) => (
+              <div class="diagram-node group flex items-center gap-4 py-8 opacity-40 transition-all duration-500" data-target={layer.id}>
+                <!-- Node Dot -->
+                <div class="w-[24px] h-[24px] rounded-full border border-white/20 bg-[#0A0A0A] flex items-center justify-center relative z-10 group-[.active]:border-[#F59E0B] group-[.active]:shadow-[0_0_15px_rgba(245,158,11,0.5)] transition-all duration-300">
+                  <div class="w-1.5 h-1.5 rounded-full bg-white/50 group-[.active]:bg-[#F59E0B]"></div>
+                </div>
+                <!-- Label -->
+                <span class="font-mono text-xs tracking-widest uppercase items-center flex gap-2">
+                   { layer.id === 'foundation' && '[RAW]' }
+                   { layer.id === 'logic' && '[CLN]' }
+                   { layer.id === 'intelligence' && '[MDL]' }
+                   { layer.id === 'interface' && '[VIU]' }
+                   <span class="hidden lg:inline group-[.active]:text-white">{layer.label}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <!-- AI Accelerator HUD -->
+          <div class="mt-auto rounded-lg border border-dashed border-white/20 p-4 bg-white/5 backdrop-blur-sm relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
+             <div class="flex items-center gap-3 mb-2">
+                <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                <span class="font-mono text-[10px] text-emerald-400 uppercase tracking-widest">System Online</span>
+             </div>
+             <div class="font-mono text-xs text-white">
+                ⚡ AI-Augmented<br/>Workflow Active
+             </div>
+          </div>
+
+        </div>
+      </aside>
+
+      <!-- RIGHT COLUMN: Scrollable Specs -->
+      <main class="col-span-1 md:col-span-8 lg:col-span-9 flex flex-col gap-32 pb-40 pt-8">
+        
+        <!-- Page Title -->
+        <header class="mb-12">
+          <h1 class="text-4xl md:text-6xl font-bold tracking-tighter text-white mb-4">SYSTEMARCHITEKTUR</h1>
+          <p class="text-xl text-gray-400 max-w-2xl font-light">
+            Blaupause der Entscheidungsmaschine. Von der Signalaufnahme bis zur prädiktiven Strategieausführung.
+          </p>
+        </header>
+        
+        <!-- Mobile Diagram (Horizontal) -->
+        <div class="md:hidden flex justify-between items-center mb-12 border-b border-white/10 pb-8 overflow-x-auto whitespace-nowrap gap-4">
+             {layers.map((layer) => (
+               <div class="flex flex-col items-center gap-2">
+                 <div class="w-3 h-3 rounded-full bg-white/20 mobile-node" id={`mobile-node-${layer.id}`}></div>
+                 <span class="font-mono text-[10px] text-gray-500">{layer.label.substring(0,3)}</span>
+               </div>
+             ))}
+        </div>
+
+        {layers.map((layer) => (
+            <section id={layer.id} class="spec-section min-h-[50vh] flex flex-col justify-center scroll-mt-32">
+              <!-- Card -->
+              <div class="group relative bg-[#111] bg-opacity-60 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden hover:border-[#F59E0B]/50 transition-colors duration-500">
+                <!-- Glow Effect on Hover -->
+                <div class="absolute inset-0 bg-[#F59E0B] opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none"></div>
+
+                <!-- Header -->
+                <div class="border-b border-white/10 px-6 py-4 bg-white/5 flex justify-between items-center">
+                  <h2 class="font-mono text-sm md:text-base text-[#F59E0B] tracking-wider">
+                     {layer.title}
+                  </h2>
+                  <div class="hidden sm:block font-mono text-xs text-gray-600">STATUS: OPTIMIERT</div>
+                </div>
+
+                <!-- Content Grid -->
+                <div class="p-6 md:p-8">
+                   <div class="grid grid-cols-1 gap-y-6">
+                      {layer.specs.map((spec) => (
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-6 items-baseline border-b border-white/5 pb-4 last:border-0 last:pb-0">
+                           <div class="sm:col-span-3 font-mono text-xs text-gray-500 uppercase tracking-widest">{spec.label}</div>
+                           <div class="sm:col-span-4 font-sans text-base text-gray-100 font-medium">{spec.value}</div>
+                           <div class="sm:col-span-5 font-serif italic text-sm text-gray-400">"{spec.utility}"</div>
+                        </div>
+                      ))}
+                   </div>
+                </div>
+              </div>
+            </section>
+        ))}
+
+        <!-- Closing CTA -->
+        <section class="mt-20 border-t border-white/10 pt-20">
+           <div class="font-mono text-sm text-[#F59E0B] mb-4">05.0 // DEPLOYMENT</div>
+           <h3 class="text-3xl font-bold text-white mb-8">Bereit zu starten?</h3>
+           <a href="#" class="inline-flex items-center gap-3 bg-[#F59E0B] text-black px-8 py-4 rounded-md font-bold text-sm hover:bg-white transition-colors duration-300 js-open-contact" data-location="page-engine-cta">
+              PROJEKT-SEQUENZ STARTEN
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+           </a>
+        </section>
+
+      </main>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Script to handle scrollytelling logic
+  document.addEventListener('DOMContentLoaded', () => {
+     const sections = document.querySelectorAll('.spec-section');
+     const nodes = document.querySelectorAll('.diagram-node');
+     const mobileNodes = document.querySelectorAll('.mobile-node');
+     const packet = document.getElementById('packet');
+
+     // Helper to updating active state
+     const updateActiveState = (id: string) => {
+        // Reset
+        nodes.forEach(n => {
+            n.classList.remove('active'); 
+            if (n instanceof HTMLElement) n.style.opacity = '0.4';
+        });
+        mobileNodes.forEach(n => n.classList.remove('bg-[#F59E0B]'));
+
+        // Activate
+        const activeNode = document.querySelector(`.diagram-node[data-target="${id}"]`);
+        if (activeNode && activeNode instanceof HTMLElement) {
+            activeNode.classList.add('active');
+            activeNode.style.opacity = '1';
+            
+            // Move packet
+            if (activeNode.parentElement) {
+                const relativeTop = activeNode.offsetTop;
+                if(packet) packet.style.transform = `translateY(${relativeTop + 16}px)`; // Adjusted offset to align better
+            }
+        }
+        
+        const mobileNode = document.getElementById(`mobile-node-${id}`);
+        if (mobileNode) mobileNode.classList.add('bg-[#F59E0B]');
+     };
+
+     // Intersection Observer
+     const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+           if (entry.isIntersecting) {
+              const id = entry.target.id;
+              updateActiveState(id);
+           }
+        });
+     }, {
+        root: null,
+        threshold: 0.5, // Trigger when 50% of the section is visible
+        rootMargin: "-10% 0px -40% 0px" // Adjust to trigger slightly above center
+     });
+
+     sections.forEach(section => observer.observe(section));
+  });
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+  /* Custom utility for the shimmer animation */
+  @keyframes shimmer {
+    100% { transform: translateX(100%); }
+  }
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+  
+  /* Monospace font fallback if not strictly defined in global */
+  .font-mono {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+</style>

@@ -1,0 +1,222 @@
+---
+
+---
+
+<section
+    id="hero"
+    class="min-h-screen flex flex-col justify-center relative overflow-hidden isolate pt-24 md:pt-0"
+>
+    <!-- Particles Container -->
+    <div id="hero-particles" class="absolute inset-0 z-0"></div>
+
+    <!-- Interactive Background Blobs -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <!-- Blob 1 (Top Right) -->
+        <div
+            class="hero-blob-wrapper absolute top-0 right-0 w-[500px] h-[500px] transition-transform duration-[2000ms] ease-out will-change-transform translate-x-1/3 -translate-y-1/4"
+            data-speed="0.05"
+        >
+            <div
+                class="w-full h-full bg-primary/15 rounded-full blur-[140px] animate-blob"
+            >
+            </div>
+        </div>
+
+        <!-- Blob 2 (Bottom Left) -->
+        <div
+            class="hero-blob-wrapper absolute bottom-0 left-0 w-[400px] h-[400px] transition-transform duration-[2000ms] ease-out will-change-transform -translate-x-1/3 translate-y-1/3"
+            data-speed="0.08"
+        >
+            <div
+                class="w-full h-full bg-info/15 rounded-full blur-[120px] animate-blob animation-delay-2000"
+            >
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pointer-events-none"
+    >
+        <div class="max-w-3xl">
+            <h1
+                class="text-5xl md:text-7xl font-bold tracking-tight mb-6 md:mb-8 leading-[1.1]"
+            >
+                Verwandeln Sie Daten in <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-yellow-300"
+                    >Entscheidungen</span
+                >, die Umsatz treiben
+            </h1>
+
+            <p
+                class="text-xl md:text-2xl text-text-primary drop-shadow-md mb-8 md:mb-10 leading-relaxed max-w-2xl"
+            >
+                <strong
+                    >Ich entwerfe und entwickle entscheidungsreife Power
+                    BI-Dashboards, die Teams sofort nutzen können.</strong
+                >
+                <br />
+                <span class="text-lg md:text-xl text-text-secondary mt-2 block"
+                    >Von unübersichtlichen Daten zu klaren KPIs, verlässlichen
+                    Zahlen und souveränen Entscheidungen.</span
+                >
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 pointer-events-auto">
+                <a
+                    href="#"
+                    class="glass hover:bg-white/10 text-white font-medium py-3 px-6 rounded-full transition-all border !border-primary text-center js-open-contact"
+                    data-location="hero-cta"
+                >
+                    Strategiegespräch buchen
+                </a>
+                <a
+                    href="/de/#projects"
+                    class="glass hover:bg-white/10 text-white font-medium py-3 px-6 rounded-full transition-all border border-white/10 text-center"
+                >
+                    Projekte ansehen
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes blob {
+        0% {
+            transform: translate(0, 0) scale(1);
+        }
+        33% {
+            transform: translate(30px, -50px) scale(1.1);
+        }
+        66% {
+            transform: translate(-20px, 20px) scale(0.9);
+        }
+        100% {
+            transform: translate(0, 0) scale(1);
+        }
+    }
+    .animate-blob {
+        animation: blob 7s infinite ease-in-out;
+    }
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+</style>
+
+<script>
+    import { tsParticles } from "tsparticles-engine";
+    import { loadSlim } from "tsparticles-slim";
+
+    const options = {
+        background: {
+            color: {
+                value: "transparent",
+            },
+        },
+        fullScreen: {
+            enable: false,
+            zIndex: 0,
+        },
+        fpsLimit: 120,
+        interactivity: {
+            events: {
+                onClick: {
+                    enable: true,
+                    mode: "push",
+                },
+                onHover: {
+                    enable: true,
+                    mode: "grab", // Options: "grab" (connect), "repulse" (push), "bubble" (grow)
+                },
+                resize: true,
+            },
+            modes: {
+                push: {
+                    quantity: 4,
+                },
+                grab: {
+                    distance: 300, // [REACTIVITY] Range of mouse interaction (increased for stronger effect)
+                    links: {
+                        opacity: 1,
+                    },
+                },
+            },
+        },
+        particles: {
+            color: {
+                value: "#ffffff", // [COLOR] Color of the dots
+            },
+            links: {
+                color: "#ffffff",
+                distance: 150,
+                enable: true,
+                opacity: 0.2, // [OPACITY] Transparency of lines (0-1)
+                width: 1, // [THICKNESS] Width of connecting lines
+            },
+            move: {
+                direction: "none",
+                enable: true,
+                outModes: {
+                    default: "bounce",
+                },
+                random: false,
+                speed: 1, // [SPEED] Movement speed
+                straight: false,
+            },
+            number: {
+                density: {
+                    enable: true,
+                    area: 800,
+                },
+                value: 100, // [DENSITY] Total number of particles
+            },
+            opacity: {
+                value: 0.3, // [OPACITY] Transparency of dots (0-1)
+            },
+            shape: {
+                type: "circle",
+            },
+            size: {
+                value: { min: 1, max: 3 }, // [SIZE] Radius of dots
+            },
+        },
+        detectRetina: true,
+    };
+
+    (async () => {
+        await loadSlim(tsParticles);
+        await tsParticles.load("hero-particles", options);
+    })();
+
+    // Interactive Blobs Logic
+    const heroSection = document.getElementById("hero");
+    const wrappers = document.querySelectorAll(".hero-blob-wrapper");
+
+    if (heroSection) {
+        heroSection.addEventListener("mousemove", (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            wrappers.forEach((wrapper) => {
+                const speed = parseFloat(
+                    wrapper.getAttribute("data-speed") || "0.05",
+                );
+                // Move opposite to mouse for depth effect, or with it?
+                // The CTA moves with it: (x - centerX) * speed.
+                const moveX = (x - centerX) * speed * 2;
+                const moveY = (y - centerY) * speed * 2;
+                (wrapper as HTMLElement).style.transform =
+                    `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+
+        heroSection.addEventListener("mouseleave", () => {
+            wrappers.forEach((wrapper) => {
+                (wrapper as HTMLElement).style.transform = `translate(0, 0)`;
+            });
+        });
+    }
+</script>

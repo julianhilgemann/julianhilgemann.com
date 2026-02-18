@@ -1,0 +1,44 @@
+---
+import Layout from "../../layouts/LayoutDE.astro";
+import Hero from "../../components/de/Hero.astro";
+import PainPoints from "../../components/de/PainPoints.astro";
+import Offerings from "../../components/de/Offerings.astro";
+import IncludedGrid from "../../components/de/IncludedGrid.astro";
+import Projects from "../../components/de/Projects.astro";
+import LetsDesignCTA from "../../components/de/LetsDesignCTA.astro";
+import Philosophy from "../../components/de/Philosophy.astro";
+import DecisionScope from "../../components/de/DecisionScope.astro";
+import Experience from "../../components/de/Experience.astro";
+import SkillsFoundations from "../../components/de/SkillsFoundations.astro";
+---
+
+<Layout
+    title="Julian Hilgemann | Power BI Decision Dashboards & BI Systeme"
+    description="Ich baue produktive Power BI-Dashboards und Entscheidungsschnittstellen – vertrauenswürdige Metriken, saubere Modelle und Berichte, die täglich von Führungskräften und Operations genutzt werden."
+    fullWidth={true}
+    noTopPadding={true}
+>
+    <!-- Hero Section -->
+    <Hero />
+
+    <!-- Problem Section -->
+    <PainPoints />
+
+    <!-- Services / Offerings Section -->
+    <Offerings />
+
+    <!-- Included Grid -->
+    <IncludedGrid />
+
+    <!-- Projects Section -->
+    <Projects />
+
+    <!-- CTA Section -->
+    <LetsDesignCTA />
+
+    <!-- About / Trust Section components -->
+    <Philosophy />
+    <DecisionScope />
+    <Experience />
+    <SkillsFoundations />
+</Layout>

@@ -1,0 +1,162 @@
+---
+import Section from "../Section.astro";
+---
+
+<Section
+    id="cta-section"
+    class="text-center py-32 border-t border-white/5 relative overflow-hidden group min-h-screen flex flex-col justify-center"
+>
+    <!-- Animated Background -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <!-- Blob 1: Primary Orange (Top Left) -->
+        <div
+            class="blob-wrapper absolute -top-[30%] -left-[10%] transition-transform duration-[2000ms] ease-out will-change-transform"
+            data-speed="0.06"
+        >
+            <div
+                class="w-[800px] h-[800px] bg-primary/40 rounded-full blur-[200px] animate-blob"
+            >
+            </div>
+        </div>
+
+        <!-- Blob 2: Blue (Bottom Right) -->
+        <div
+            class="blob-wrapper absolute -bottom-[30%] -right-[10%] transition-transform duration-[2000ms] ease-out will-change-transform"
+            data-speed="0.08"
+        >
+            <div
+                class="w-[900px] h-[900px] bg-blue-600/40 rounded-full blur-[250px] animate-blob animation-delay-2000"
+            >
+            </div>
+        </div>
+
+        <!-- Blob 3: Purple (Center/Top) -->
+        <div
+            class="blob-wrapper absolute top-[10%] left-[30%] transition-transform duration-[2000ms] ease-out will-change-transform"
+            data-speed="0.04"
+        >
+            <div
+                class="w-[700px] h-[700px] bg-purple-600/30 rounded-full blur-[200px] animate-blob animation-delay-4000"
+            >
+            </div>
+        </div>
+
+        <!-- Blob 4: Teal (Bottom Left) -->
+        <div
+            class="blob-wrapper absolute -bottom-[10%] -left-[20%] transition-transform duration-[2000ms] ease-out will-change-transform"
+            data-speed="0.07"
+        >
+            <div
+                class="w-[600px] h-[600px] bg-teal-500/30 rounded-full blur-[200px] animate-blob animation-delay-3000"
+            >
+            </div>
+        </div>
+
+        <!-- Blob 5: Amber/Yellow (Top Right) -->
+        <div
+            class="blob-wrapper absolute -top-[10%] -right-[20%] transition-transform duration-[2000ms] ease-out will-change-transform"
+            data-speed="0.05"
+        >
+            <div
+                class="w-[700px] h-[700px] bg-amber-500/30 rounded-full blur-[200px] animate-blob animation-delay-5000"
+            >
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div
+        class="relative z-10 selection:bg-primary/30 w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8"
+    >
+        <h2 class="text-4xl md:text-6xl font-bold mb-6">
+            Lassen Sie uns Ihr Entscheidungssystem entwerfen.
+        </h2>
+        <p class="text-xl text-text-secondary mb-10 max-w-2xl mx-auto">
+            Wenn Ihr Unternehmen Daten hat, aber Entscheidungen immer noch auf
+            Bauchgefühl beruhen, sollten wir sprechen.
+        </p>
+        <a
+            href="#"
+            class="glass hover:bg-white/10 text-white font-medium py-3 px-6 rounded-full transition-all duration-300 ease-in-out border !border-primary text-center inline-block js-open-contact"
+            data-location="lets-design-cta"
+        >
+            Beratungstermin vereinbaren
+        </a>
+    </div>
+</Section>
+
+<style>
+    @keyframes blob {
+        0% {
+            transform: translate(0px, 0px) scale(1);
+        }
+        33% {
+            transform: translate(80px, -120px) scale(1.2);
+        }
+        66% {
+            transform: translate(-60px, 60px) scale(0.85);
+        }
+        100% {
+            transform: translate(0px, 0px) scale(1);
+        }
+    }
+    .animate-blob {
+        animation: blob 7s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+    .animation-delay-3000 {
+        animation-delay: 3s;
+    }
+    .animation-delay-4000 {
+        animation-delay: 4s;
+    }
+    .animation-delay-5000 {
+        animation-delay: 5s;
+    }
+</style>
+
+<script>
+    const section = document.getElementById("cta-section");
+    const wrappers = document.querySelectorAll(".blob-wrapper");
+
+    if (section) {
+        section.addEventListener("mousemove", (e) => {
+            const rect = section.getBoundingClientRect();
+            const x = e.clientX - rect.left; // Mouse relative to section
+            const y = e.clientY - rect.top;
+
+            // Calculate center of section
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            wrappers.forEach((wrapper) => {
+                const speed = parseFloat(
+                    wrapper.getAttribute("data-speed") || "0.05",
+                );
+
+                // Interaction: Pull towards mouse
+                // We move the wrapper translate based on distance from center to mouse
+                // But to make it "pull towards mouse", we just shift the wrapper towards the mouse coords
+                // relative to its initial position.
+
+                // Simple logic: Target position is (MouseX - InitialPos) * speed
+                // But wrappers are absolute positioned. Let's just translate them relative to their origin.
+
+                const moveX = (x - centerX) * speed * 2; // Factor for intensity
+                const moveY = (y - centerY) * speed * 2;
+
+                (wrapper as HTMLElement).style.transform =
+                    `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+
+        // Reset on mouse leave
+        section.addEventListener("mouseleave", () => {
+            wrappers.forEach((wrapper) => {
+                (wrapper as HTMLElement).style.transform = `translate(0, 0)`;
+            });
+        });
+    }
+</script>

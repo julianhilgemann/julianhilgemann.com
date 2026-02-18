@@ -1,0 +1,121 @@
+---
+import Section from "../Section.astro";
+import ProjectCard from "../ProjectCard.astro";
+
+const projects = [
+    {
+        title: "Dashboard Gallery",
+        category: "Power BI & Decision Interfaces",
+        description:
+            "Power BI-Dashboards, die Performance, Risiko und Umsatztransparenz für Handels- und Finanzoperationen bieten.",
+        tags: ["PowerBI", "PowerQuery", "DAX", "Figma", "UI/UX"],
+        image: "/assets/energy-analytics.png",
+        link: "https://github.com/julianhilgemann/dashboard-gallery/blob/main/README.md",
+        content: `
+            <h3 class="text-xl font-bold text-white mb-4">Konzept</h3>
+            <p class="mb-6">Dieses Repository dient als Portfolio meiner fortgeschrittenen Dashboarding-Arbeit. Es zeigt, wie komplexe Daten in intuitive Entscheidungswerkzeuge transformiert werden können.</p>
+            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><strong>Energy Trading Analytics:</strong> Echtzeit-Marktdatenvisualisierung.</li>
+                 <li><strong>Financial Reporting:</strong> Interaktive GuV- und Cashflow-Rechnungen.</li>
+                 <li><strong>Sales Performance:</strong> Granulare Verfolgung mit Partner-Scorecards.</li>
+            </ul>
+
+            <br class="block mb-4" />
+            <h3 class="text-xl font-bold text-white mb-4">Architektur</h3>
+            <p>Verfügt über fortgeschrittene DAX-Muster, benutzerdefinierte PowerQuery-Transformationen und Figma-designte Layouts, integriert in Power BI.</p>
+        `,
+    },
+    {
+        title: "Vantage Alpin: Analytics Re-Engineering",
+        category: "Production Data Stack",
+        description:
+            "Produktions-Finanzreporting-Engine, die alte PDF-Berichte durch ein dynamisches, entscheidungsreifes Power BI-System ersetzt.",
+        tags: [
+            "Python",
+            "dbt",
+            "DuckDB",
+            "SQL",
+            "PowerBI",
+            "PowerQuery",
+            "DAX",
+        ],
+        image: "/assets/vantage-wip.png",
+        link: "https://github.com/julianhilgemann/BI-Pipeline/blob/main/README.md",
+        content: `
+            <h3 class="text-xl font-bold text-white mb-4">Konzept</h3>
+            <p class="mb-6">Dieses Projekt fungiert als zentrale Finanzreporting-Engine für Vantage Alpin. Es ersetzt alte PDF-Berichte durch einen dynamischen Modern Data Stack (MDS), der stochastische Transaktionsdaten in ein sauberes Star Schema verarbeitet.</p>
+            
+            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>Kontrollierte Stochastik:</strong> Verwendet nichthomogene Poisson-Prozesse (NHPP) zur Modellierung realistischer Nachfragemuster.</span></li>
+                <li><span><strong>Produktökonomie:</strong> Preisgestaltung folgt Log-Normal-Verteilungen; Beliebtheit folgt Pareto (Power Law).</span></li>
+                <li><span><strong>Marketing-Attribution:</strong> Algorithmische Zuweisung von Werbeausgaben zu Zeilenaufträgen basierend auf Umsatzanteil.</span></li>
+            </ul>
+
+            <br class="block mb-4" />
+            <h3 class="text-xl font-bold text-white mb-4">Architektur</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>Star Schema:</strong> Zentrale <code>fct_transactions</code> Tabelle, verknüpft mit Type 1 SCD Produktdimensionen.</span></li>
+                <li><span><strong>Währungsnormalisierung:</strong> Robuste Handhabung von Multi-Währungstransaktionen (EUR/CHF) mit täglichen Kursabfragen.</span></li>
+                <li><span><strong>DirectQuery-like Extract:</strong> Benutzerdefinierter Parquet/CSV-Export-Workflow von DuckDB zu Power BI für performante lokale Entwicklung.</span></li>
+            </ul>
+        `,
+    },
+    {
+        title: "End-to-End SaaS Operating System",
+        category: "Stochastic Financial Twin",
+        description:
+            "Eine Full-Stack-Simulations-Engine, die statische Geschäftspläne in lebende Datensysteme übersetzt.",
+        tags: [
+            "Excel",
+            "Python",
+            "dbt",
+            "DuckDB",
+            "SQL",
+            "Streamlit",
+            "Prophet",
+        ],
+        image: "/assets/end-to-end-saas-os.png",
+        link: "https://github.com/julianhilgemann/Portfolio/blob/main/README.md",
+        content: `
+            <h3 class="text-xl font-bold text-white mb-4">Konzept</h3>
+            <p class="mb-6">Dieses Projekt implementiert eine "Rapid Data Function" – die Instanziierung eines gesamten End-to-End-Daten-Stacks (Stochastische Simulation, Data Warehouse, Algorithmische Prognose und BI) rein aus einer statischen Geschäftsdefinition.</p>
+            
+            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>Stochastische Engine:</strong> Simuliert Kundenakquise (Poisson), Retention (Hazard/Survival) und Umsatzexpansion.</span></li>
+                <li><span><strong>Regime-Aware Forecasting:</strong> Ein Prophet-Modell, das "Wachstumsregime" erkennt, um Overfitting in frühen Phasen zu vermeiden.</span></li>
+            </ul>
+
+            <br class="block mb-4" />
+            <h3 class="text-xl font-bold text-white mb-4">Architektur</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>Contract-First Engineering:</strong> Die gesamte Simulation skaliert dynamisch basierend auf einem JSON-Vertrag, der aus dem Excel-Betriebsplan extrahiert wurde.</span></li>
+                <li><span><strong>Medallion DWH:</strong> Eine rigorose dbt-Projektstruktur (Bronze/Silver/Gold), die eine saubere Lineage gewährleistet.</span></li>
+                <li><span><strong>Agentic Build Pipeline:</strong> Geschäftslogik als Code behandelnd, nutzen wir Cursor/Windsurf, um den gesamten Stack aus Spezifikationen zu erstellen.</span></li>
+            </ul>
+        `,
+    },
+];
+---
+
+<Section
+    id="projects"
+    class="border-t border-white/5 min-h-screen flex flex-col justify-center"
+>
+    <div class="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+            <h2 class="text-3xl md:text-5xl font-bold mb-6">Projekte</h2>
+            <p class="text-xl text-text-secondary max-w-2xl">
+                Eine Auswahl an Power BI-Dashboards und Analysesystemen, die
+                entwickelt wurden, um echte Geschäftsentscheidungen zu
+                unterstützen.
+            </p>
+        </div>
+
+        <div class="flex flex-col gap-6">
+            {projects.map((project) => <ProjectCard {...project} />)}
+        </div>
+    </div>
+</Section>
