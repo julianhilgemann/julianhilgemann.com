@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Hilgemann;Julian;;;
+FN:Julian Hilgemann
+TITLE:Analytics Expert
+TEL;TYPE=CELL:+49 174 3457 967
+EMAIL:hilgemann.julian@gmail.com
+URL:https://julianhilgemann.com
+URL;type=LinkedIn:https://linkedin.com/in/julian-hilgemann
+X-SOCIALPROFILE;type=linkedin:https://linkedin.com/in/julian-hilgemann
+END:VCARD
