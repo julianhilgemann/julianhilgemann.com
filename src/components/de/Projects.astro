@@ -7,7 +7,7 @@ const projects = [
         title: "Vantage Alpin: Analytics Engineering",
         category: "Production Data Stack",
         description:
-            "Produktionsreife Finanzreporting-Engine, die veraltete PDF-Berichte durch ein dynamisches, entscheidungsreifes Power BI-System ablöst.",
+            "Produktionsreife BI-Reporting-Engine, die veraltete Berichte durch ein dynamisches, entscheidungsreifes Power BI-System ablöst.",
         tags: [
             "Python",
             "dbt",
@@ -21,7 +21,7 @@ const projects = [
         link: "https://github.com/julianhilgemann/BI-Pipeline/blob/main/README.md",
         content: `
             <h3 class="text-xl font-bold text-white mb-4">Konzept</h3>
-            <p class="mb-6">Das Projekt fungiert als zentrale Finanzreporting-Engine für Vantage Alpin. Statische PDF-Berichte werden durch einen Modern Data Stack (MDS) ersetzt, der stochastische Transaktionsdaten in ein sauberes Star Schema überführt.</p>
+            <p class="mb-6">Das Projekt fungiert als zentrale Reporting-Engine für Vantage Alpin. Statische Berichte werden durch einen Modern Data Stack (MDS) ersetzt, der stochastische Transaktionsdaten in ein sauberes Star-Schema überführt.</p>
             
             <h3 class="text-xl font-bold text-white mb-4">Features</h3>
             <ul class="space-y-2 text-text-secondary mb-6">
@@ -33,8 +33,8 @@ const projects = [
             <br class="block mb-4" />
             <h3 class="text-xl font-bold text-white mb-4">Architektur</h3>
             <ul class="space-y-2 text-text-secondary mb-6">
-                <li><span><strong>Star Schema:</strong> Zentrale <code>fct_transactions</code>-Tabelle, verknüpft mit Type-1-SCD-Produktdimensionen.</span></li>
-                <li><span><strong>Währungsnormalisierung:</strong> Robuste Verarbeitung von Multi-Währungs-Transaktionen (EUR/CHF) mit tagesaktuellen Wechselkursen.</span></li>
+                <li><span><strong>– Star-Schema/Zentrale fct_transactions-Tabelle</strong>, verknüpft mit Type-1-SCD-Produktdimensionen.</span></li>
+                <li><span><strong>Währungsnormalisierung:</strong> Robuste Verarbeitung von Multi-Währungs-Transaktionen (EUR/CHF) mit tagesaktuellen Wechselkursen upstream.</span></li>
                 <li><span><strong>DirectQuery-ähnlicher Extract:</strong> Eigener Parquet/CSV-Exportworkflow von DuckDB zu Power BI für performante lokale Entwicklung.</span></li>
             </ul>
         `,
@@ -57,7 +57,7 @@ const projects = [
         link: "https://github.com/julianhilgemann/Portfolio/blob/main/README.md",
         content: `
             <h3 class="text-xl font-bold text-white mb-4">Konzept</h3>
-            <p class="mb-6">Das Projekt implementiert eine "Rapid Data Function" – die vollständige Instanziierung eines End-to-End-Datenstacks (stochastische Simulation, Data Warehouse, algorithmische Prognose und BI) direkt aus einer statischen Geschäftsdefinition.</p>
+            <p class="mb-6">Das Projekt implementiert eine "Rapid Data Function" – die vollständige Instanziierung eines End-to-End-Datenstacks (stochastische Simulation, Data Warehouse, algorithmische Prognose und BI) direkt aus einer statischen Geschäftsdefinition in Form eines Spreadsheets.</p>
             
             <h3 class="text-xl font-bold text-white mb-4">Features</h3>
             <ul class="space-y-2 text-text-secondary mb-6">
@@ -68,9 +68,9 @@ const projects = [
             <br class="block mb-4" />
             <h3 class="text-xl font-bold text-white mb-4">Architektur</h3>
             <ul class="space-y-2 text-text-secondary mb-6">
-                <li><span><strong>Contract-First Engineering:</strong> Die gesamte Simulation skaliert dynamisch auf Basis eines JSON-Vertrags aus dem Excel-Betriebsplan.</span></li>
-                <li><span><strong>Medallion DWH:</strong> Rigorose dbt-Projektstruktur (Bronze/Silver/Gold) für saubere Datenlineage.</span></li>
-                <li><span><strong>Agentic Build Pipeline:</strong> Geschäftslogik als Code – entwickelt mit Cursor/Windsurf direkt aus Spezifikationen.</span></li>
+                <li><span><strong>Contract-First Engineering:</strong> Die gesamte Simulation skaliert dynamisch auf Basis eines JSON-Vertrags aus dem Excel-Modell.</span></li>
+                <li><span><strong>Medallion DWH:</strong> dbt-Projektstruktur (Bronze/Silver/Gold) für saubere Datennachvollziehbarkeit.</span></li>
+                <li><span><strong>Agentic Build Pipeline:</strong> Geschäftslogik als Code – entwickelt mit Googles Antigravity, direkt aus Spezifikationen.</span></li>
             </ul>
         `,
     },
@@ -78,17 +78,17 @@ const projects = [
         title: "Yield Curve Explorer",
         category: "DATA VISUALIZATION",
         description:
-            "Interaktive Visualisierungen, die Finanzmarktdaten in klare Narrative verwandeln.",
+            "Visualisierungen, die Finanzdaten in Narrative verwandeln.",
         tags: ["Python", "Plotly", "Bundesbank API", "Financial Data"],
         image: "/assets/dataviz_yield_heatmap.webp",
         link: "https://github.com/julianhilgemann/dataviz/tree/main",
         content: `
             <h3 class="text-xl font-bold text-white mb-4">Konzept</h3>
-            <p class="mb-6">Eine wachsende Sammlung von Datenvisualisierungen mit Fokus auf finanzielle und makroökonomische Signale. Jedes Element ist darauf ausgelegt, komplexe Datensätze zugänglich zu machen – wobei Klarheit, Kontext und visuelle Präzision über Dekoration stehen.</p>
+            <p class="mb-6">Eine wachsende Sammlung von Datenvisualisierungen mit Fokus auf finanzielle und makroökonomische Indikatoren. Jedes Element ist darauf ausgelegt, komplexe Datensätze zugänglich zu machen – wobei Klarheit, Kontext und visuelle Präzision über Dekoration stehen.</p>
             
             <h3 class="text-xl font-bold text-white mb-4">Features</h3>
             <ul class="space-y-2 text-text-secondary mb-6">
-                <li><span><strong>Yield Curve Heatmap:</strong> Renditen deutscher Staatsanleihen im Zeitverlauf, bezogen über die Bundesbank API. Zeigt Zinsstrukturverschiebungen und Inversionsmuster auf einen Blick.</span></li>
+                <li><span><strong>Yield Curve Heatmap:</strong> Renditen deutscher Staatsanleihen im Zeitverlauf, bezogen über die Bundesbank-API. Zeigt Zinsstrukturverschiebungen und Inversionsmuster auf einen Blick.</span></li>
             </ul>
 
             <br class="block mb-4" />
@@ -107,8 +107,7 @@ const projects = [
         <div class="mb-12">
             <h2 class="text-3xl md:text-5xl font-bold mb-6">Projekte</h2>
             <p class="text-xl text-text-secondary max-w-2xl">
-                Eine Auswahl an Power BI-Dashboards und Analysesystemen,
-                entwickelt für den Einsatz in realen Geschäftsentscheidungen.
+                Eine Auswahl an Power BI-Dashboards und Datenprodukten.
             </p>
         </div>
 
