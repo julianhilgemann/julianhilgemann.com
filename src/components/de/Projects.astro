@@ -4,30 +4,7 @@ import ProjectCard from "../ProjectCard.astro";
 
 const projects = [
     {
-        title: "Dashboard Gallery",
-        category: "Power BI & Decision Interfaces",
-        description:
-            "Power BI-Dashboards für Performance-, Risiko- und Umsatztransparenz im Handels- und Finanzumfeld.",
-        tags: ["PowerBI", "PowerQuery", "DAX", "Figma", "UI/UX"],
-        image: "/assets/energy-analytics.png",
-        link: "https://github.com/julianhilgemann/dashboard-gallery/blob/main/README.md",
-        content: `
-            <h3 class="text-xl font-bold text-white mb-4">Konzept</h3>
-            <p class="mb-6">Dieses Repository zeigt meine fortgeschrittene Dashboarding-Arbeit und dokumentiert, wie sich komplexe Daten in intuitive Entscheidungswerkzeuge überführen lassen.</p>
-            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
-            <ul class="space-y-2 text-text-secondary mb-6">
-                <li><strong>Energy Trading Analytics:</strong> Echtzeit-Visualisierung von Marktdaten.</li>
-                 <li><strong>Financial Reporting:</strong> Interaktive GuV- und Cashflow-Auswertungen.</li>
-                 <li><strong>Sales Performance:</strong> Granulares Tracking mit Partner-Scorecards.</li>
-            </ul>
-
-            <br class="block mb-4" />
-            <h3 class="text-xl font-bold text-white mb-4">Architektur</h3>
-            <p>Fortgeschrittene DAX-Muster, maßgeschneiderte PowerQuery-Transformationen und in Figma entwickelte Layouts – nahtlos in Power BI integriert.</p>
-        `,
-    },
-    {
-        title: "Vantage Alpin: Analytics Re-Engineering",
+        title: "Vantage Alpin: Analytics Engineering",
         category: "Production Data Stack",
         description:
             "Produktionsreife Finanzreporting-Engine, die veraltete PDF-Berichte durch ein dynamisches, entscheidungsreifes Power BI-System ablöst.",
@@ -40,7 +17,7 @@ const projects = [
             "PowerQuery",
             "DAX",
         ],
-        image: "/assets/vantage-wip.png",
+        image: "/assets/vantage_dashboard_main.webp",
         link: "https://github.com/julianhilgemann/BI-Pipeline/blob/main/README.md",
         content: `
             <h3 class="text-xl font-bold text-white mb-4">Konzept</h3>
@@ -76,7 +53,7 @@ const projects = [
             "Streamlit",
             "Prophet",
         ],
-        image: "/assets/end-to-end-saas-os.png",
+        image: "/assets/agentic_hla.webp",
         link: "https://github.com/julianhilgemann/Portfolio/blob/main/README.md",
         content: `
             <h3 class="text-xl font-bold text-white mb-4">Konzept</h3>
@@ -95,6 +72,28 @@ const projects = [
                 <li><span><strong>Medallion DWH:</strong> Rigorose dbt-Projektstruktur (Bronze/Silver/Gold) für saubere Datenlineage.</span></li>
                 <li><span><strong>Agentic Build Pipeline:</strong> Geschäftslogik als Code – entwickelt mit Cursor/Windsurf direkt aus Spezifikationen.</span></li>
             </ul>
+        `,
+    },
+    {
+        title: "Yield Curve Explorer",
+        category: "DATA VISUALIZATION",
+        description:
+            "Interaktive Visualisierungen, die Finanzmarktdaten in klare Narrative verwandeln.",
+        tags: ["Python", "Plotly", "Bundesbank API", "Financial Data"],
+        image: "/assets/dataviz_yield_heatmap.webp",
+        link: "https://github.com/julianhilgemann/dataviz/tree/main",
+        content: `
+            <h3 class="text-xl font-bold text-white mb-4">Konzept</h3>
+            <p class="mb-6">Eine wachsende Sammlung von Datenvisualisierungen mit Fokus auf finanzielle und makroökonomische Signale. Jedes Element ist darauf ausgelegt, komplexe Datensätze zugänglich zu machen – wobei Klarheit, Kontext und visuelle Präzision über Dekoration stehen.</p>
+            
+            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>Yield Curve Heatmap:</strong> Renditen deutscher Staatsanleihen im Zeitverlauf, bezogen über die Bundesbank API. Zeigt Zinsstrukturverschiebungen und Inversionsmuster auf einen Blick.</span></li>
+            </ul>
+
+            <br class="block mb-4" />
+            <h3 class="text-xl font-bold text-white mb-4">Architektur</h3>
+            <p>Erstellt mit Python und Plotly, mit Live-Daten aus öffentlichen APIs. Entwickelt für Reproduzierbarkeit – jede Visualisierung ist in sich geschlossen und dokumentiert.</p>
         `,
     },
 ];

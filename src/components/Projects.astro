@@ -4,30 +4,7 @@ import ProjectCard from "./ProjectCard.astro";
 
 const projects = [
     {
-        title: "Dashboard Gallery",
-        category: "Power BI & Decision Interfaces",
-        description:
-            "Power BI dashboards providing performance, risk, and revenue visibility for trading and finance operations.",
-        tags: ["PowerBI", "PowerQuery", "DAX", "Figma", "UI/UX"],
-        image: "/assets/energy-analytics.png",
-        link: "https://github.com/julianhilgemann/dashboard-gallery/blob/main/README.md",
-        content: `
-            <h3 class="text-xl font-bold text-white mb-4">Concept</h3>
-            <p class="mb-6">This repository serves as a portfolio of my advanced dashboarding work. It demonstrates how complex data can be transformed into intuitive decision-making tools.</p>
-            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
-            <ul class="space-y-2 text-text-secondary mb-6">
-                <li><strong>Energy Trading Analytics:</strong> Real-time market data visualization.</li>
-                 <li><strong>Financial Reporting:</strong> Interactive P&L and cash flow statements.</li>
-                 <li><strong>Sales Performance:</strong> Granular tracking with partner scorecards.</li>
-            </ul>
-
-            <br class="block mb-4" />
-            <h3 class="text-xl font-bold text-white mb-4">Architecture</h3>
-            <p>Features advanced DAX patterns, custom PowerQuery transformations, and Figma-designed layouts integrated into PowerBI.</p>
-        `,
-    },
-    {
-        title: "Vantage Alpin: Analytics Re-Engineering",
+        title: "Vantage Alpin: Analytics Engineering",
         category: "Production Data Stack",
         description:
             "Production financial reporting engine replacing legacy PDF reports with a dynamic, decision-ready Power BI system.",
@@ -40,7 +17,7 @@ const projects = [
             "PowerQuery",
             "DAX",
         ],
-        image: "/assets/vantage-wip.png",
+        image: "/assets/vantage_dashboard_main.webp",
         link: "https://github.com/julianhilgemann/BI-Pipeline/blob/main/README.md",
         content: `
             <h3 class="text-xl font-bold text-white mb-4">Concept</h3>
@@ -76,7 +53,7 @@ const projects = [
             "Streamlit",
             "Prophet",
         ],
-        image: "/assets/end-to-end-saas-os.png",
+        image: "/assets/agentic_hla.webp",
         link: "https://github.com/julianhilgemann/Portfolio/blob/main/README.md",
         content: `
             <h3 class="text-xl font-bold text-white mb-4">Concept</h3>
@@ -95,6 +72,28 @@ const projects = [
                 <li><span><strong>Medallion DWH:</strong> A rigorous dbt project structure (Bronze/Silver/Gold) ensuring clean lineage.</span></li>
                 <li><span><strong>Agentic Build Pipeline:</strong> Treating business logic as code, we use cursor/windsurf to scaffold the entire stack from specs.</span></li>
             </ul>
+        `,
+    },
+    {
+        title: "Yield Curve Explorer",
+        category: "DATA VISUALIZATION",
+        description:
+            "Interactive visualizations turning financial market data into clear narratives.",
+        tags: ["Python", "Plotly", "Bundesbank API", "Financial Data"],
+        image: "/assets/dataviz_yield_heatmap.webp",
+        link: "https://github.com/julianhilgemann/dataviz/tree/main",
+        content: `
+            <h3 class="text-xl font-bold text-white mb-4">Concept</h3>
+            <p class="mb-6">A growing collection of data visualizations focused on financial and macroeconomic signals. Each piece is built to make complex datasets accessible — prioritizing clarity, context, and visual precision over decoration.</p>
+            
+            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>Yield Curve Heatmap:</strong> German government bond yields over time, sourced from the Bundesbank API. Reveals term structure shifts and inversion patterns at a glance.</span></li>
+            </ul>
+
+            <br class="block mb-4" />
+            <h3 class="text-xl font-bold text-white mb-4">Architecture</h3>
+            <p>Built with Python and Plotly, pulling live data from public APIs. Designed for reproducibility — each visualization is self-contained and documented.</p>
         `,
     },
 ];
