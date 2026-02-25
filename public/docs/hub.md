@@ -9,5 +9,5 @@ Homepage
                     LinkedIn
                     Connect & Network
 
-                    CV / Resume
+                    Contact
                     Download

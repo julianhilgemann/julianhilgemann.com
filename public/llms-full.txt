@@ -65,7 +65,7 @@ Homepage
                     LinkedIn
                     Connect & Network
 
-                    CV / Resume
+                    Contact
                     Download
 
 ---
@@ -128,6 +128,18 @@ Workflow Active
            ### Ready to initiate?
 
               START PROJECT sequence
+
+---
+
+## start
+
+Welcome
+
+                Select a Language
+
+                    ENGLISH
+
+                    DEUTSCH
 
 ---
 
@@ -208,6 +220,12 @@ Selected Experience & Systems
                     style guides, templates, and shared conventions (Figma /
                     Zeroheight), and raising data-visualization quality across
                     teams to ensure dashboards are not only correct, but usable.
+
+                    This work is grounded in formal training in economics and
+                    quantitative methods — a B.Sc. in Business Administration
+                    with a forecasting focus, followed by graduate studies in
+                    Quantitative Economics covering time series analysis,
+                    econometrics, and statistical modeling.
 
                     I’ve been using GenAI and LLMs in production
                     analytics workflows since 2022, and actively explore emerging
@@ -313,6 +331,33 @@ Selected Experience & Systems
                         POSTGRES
                         DBT
                         REVERSE ETL
+
+                            M&A Due Diligence & Financial Modeling
+
+                        Building investor-grade financial intelligence for
+                        strategic decisions.
+
+                            Modeled multiple acquisition targets with deal
+                            values in the multi-million euro range
+
+                            EBITDA uplift quantification and synergy calculation
+                            models
+
+                            Strategic scenario analyses across buy/hold/exit
+                            cases
+
+                        - Enterprise value and equity stake modeling
+
+                        - Break-even and threshold sensitivity analysis
+
+                        EXCEL
+                        POWER QUERY
+                        DATAROOM
+                        FINANCIAL MODELING
+
+            Any Questions?
+
+                Get in touch
 
 ---
 
@@ -642,62 +687,6 @@ category
 ## Section
 
 
-
----
-
-## SkillsFoundations
-
-Skills & Foundations
-
-                Clear thinking first. Tools are there to support it.
-
-                    Power BI & Semantic Modeling
-
-                    Enables: trust, speed, self-service
-
-                    - Star Schema design & DAX
-
-                    - Data warehouse architecture (dbt)
-
-                    - Governance & row-level security
-
-                    - Performance optimization
-
-                    Decision & Stakeholder Work
-
-                    Enables: alignment, clarity, action
-
-                    - Decision framing & KPI definitions
-
-                    - Stakeholder interviews
-
-                    - Operating cadence
-
-                    - Requirements & documentation
-
-                    Modeling & Forecasting
-
-                    Enables: foresight, planning, risk management
-
-                    - Stochastic simulation (Monte Carlo)
-
-                    - Growth modeling & unit economics
-
-                    - Scenario planning
-
-                    - Python / SciPy / NumPyro
-
-                    Graduate studies in Quantitative Economics
-
-                    Time series, econometrics, forecasting
-
-                    B.Sc. Business Administration
-
-                    Economics & metrics foundation — forecasting thesis
-
-                If you still have questions, I would be happy to help.
-
-                Get in touch
 
 ---
 
