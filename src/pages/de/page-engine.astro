@@ -52,7 +52,7 @@ const layers = [
     - Overrides global background with Deep Graphite (#0A0A0A)
     - Uses negative margin to pull background up behind the fixed header 
   -->
-  <div class="bg-[#0A0A0A] min-h-screen w-full -mt-24 pt-24 md:pt-32 text-gray-300 font-sans selection:bg-[#F59E0B] selection:text-black font-light relative overflow-x-hidden">
+  <div class="bg-[#0A0A0A] min-h-[100svh] w-full -mt-24 pt-24 md:pt-32 text-gray-300 font-sans selection:bg-[#F59E0B] selection:text-black font-light relative overflow-x-hidden">
     
     <!-- Background grid effect (optional technical texture) -->
     <div class="absolute inset-0 z-0 opacity-10 pointer-events-none" 
@@ -62,7 +62,7 @@ const layers = [
     <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-12">
       
       <!-- LEFT COLUMN: Sticky Diagram -->
-      <aside class="hidden md:block md:col-span-4 lg:col-span-3 h-[calc(100vh-8rem)] sticky top-32">
+      <aside class="hidden md:block md:col-span-4 lg:col-span-3 h-[calc(100svh-8rem)] sticky top-32">
         <div class="h-full flex flex-col justify-between py-8 border-l border-white/10 pl-8 relative">
           
           <!-- The Pipeline Diagram -->
