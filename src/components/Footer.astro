@@ -7,7 +7,9 @@ const year = new Date().getFullYear();
 >
     <div class="flex flex-col md:flex-row justify-between items-center gap-6">
         <!-- Row 1: Social Icons & Language -->
-        <div class="flex gap-4 order-1">
+        <div
+            class="flex gap-4 order-1 md:flex-1 md:justify-start w-full justify-center"
+        >
             <!-- Social Icons from assets -->
             <a
                 href="https://linkedin.com/in/julian-hilgemann"
@@ -78,7 +80,7 @@ const year = new Date().getFullYear();
 
         <!-- Row 2: Links -->
         <div
-            class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm text-text-secondary order-2"
+            class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm text-text-secondary order-2 md:flex-1"
         >
             <a
                 href="/impressum"
@@ -105,7 +107,9 @@ const year = new Date().getFullYear();
         </div>
 
         <!-- Row 3: Copyright -->
-        <div class="text-xs text-text-secondary opacity-50 text-center order-3">
+        <div
+            class="text-xs text-text-secondary opacity-50 text-center order-3 md:flex-1 md:text-right w-full"
+        >
             &copy; {year} Julian Hilgemann
         </div>
     </div>
