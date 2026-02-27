@@ -4,7 +4,7 @@
 
 <section
     id="hero"
-    class="min-h-[100dvh] flex flex-col justify-center relative isolate pt-24 md:pt-0"
+    class="min-h-0 md:min-h-[100svh] py-28 md:py-0 flex flex-col justify-center relative isolate"
 >
     <!-- Particles Container -->
     <div id="hero-particles" class="absolute inset-0 z-0"></div>
@@ -162,7 +162,7 @@
                 random: false,
                 speed: 1, // [SPEED] Movement speed
                 straight: false,
-            },
+            } as any,
             number: {
                 density: {
                     enable: true,
