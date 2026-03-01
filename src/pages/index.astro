@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
-import CredibilityBar from "../components/CredibilityBar.astro";
 import Projects from "../components/Projects.astro";
 import SecondaryCTA from "../components/SecondaryCTA.astro";
 ---
@@ -15,22 +14,8 @@ import SecondaryCTA from "../components/SecondaryCTA.astro";
     <!-- Hero Section -->
     <Hero />
 
-    <!-- Credibility Bar -->
-    <CredibilityBar />
-
     <!-- Projects Section -->
-    <div class="py-12 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold tracking-tight mb-4 text-center">
-            Current Projects
-        </h2>
-        <p class="text-text-secondary text-center max-w-2xl mx-auto mb-12">
-            A selection of my recent open-source work and public project
-            contributions, hosted on GitHub.
-        </p>
-    </div>
-    <div class="-mt-12">
-        <Projects />
-    </div>
+    <Projects />
 
     <!-- Secondary CTA -->
     <SecondaryCTA />

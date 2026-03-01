@@ -7,60 +7,26 @@ import Section from "../Section.astro";
     class="text-center py-32 border-t border-white/5 relative overflow-hidden group min-h-0 md:min-h-[100svh] flex flex-col justify-center"
 >
     <!-- Animated Background -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <!-- Blob 1: Primary Orange (Top Left) -->
+    <!-- Static Background with Lighter Animation -->
+    <div
+        class="absolute inset-0 overflow-hidden pointer-events-none opacity-50"
+    >
+        <!-- Merged Blob: Primary Orange & Yellow (Top Right) -->
         <div
-            class="blob-wrapper absolute -top-[30%] -left-[10%] transition-transform duration-[2000ms] ease-out will-change-transform"
-            data-speed="0.06"
+            class="absolute -top-[30%] -right-[10%] w-[1000px] h-[1000px] bg-gradient-to-br from-primary/30 to-amber-500/20 rounded-full blur-[150px] animate-pulse-slow"
         >
-            <div
-                class="w-[800px] h-[800px] bg-primary/40 rounded-full blur-[200px] animate-blob"
-            >
-            </div>
         </div>
 
-        <!-- Blob 2: Blue (Bottom Right) -->
+        <!-- Merged Blob: Blue & Purple (Bottom Right) -->
         <div
-            class="blob-wrapper absolute -bottom-[30%] -right-[10%] transition-transform duration-[2000ms] ease-out will-change-transform"
-            data-speed="0.08"
+            class="absolute -bottom-[40%] -right-[20%] w-[1200px] h-[1200px] bg-gradient-to-tl from-blue-600/30 to-purple-600/20 rounded-full blur-[200px] animate-blob"
         >
-            <div
-                class="w-[900px] h-[900px] bg-blue-600/40 rounded-full blur-[250px] animate-blob animation-delay-2000"
-            >
-            </div>
         </div>
 
-        <!-- Blob 3: Purple (Center/Top) -->
+        <!-- Merged Blob: Teal (Bottom Left) -->
         <div
-            class="blob-wrapper absolute top-[10%] left-[30%] transition-transform duration-[2000ms] ease-out will-change-transform"
-            data-speed="0.04"
+            class="absolute -bottom-[20%] -left-[20%] w-[800px] h-[800px] bg-teal-500/20 rounded-full blur-[150px] animate-blob animation-delay-4000"
         >
-            <div
-                class="w-[700px] h-[700px] bg-purple-600/30 rounded-full blur-[200px] animate-blob animation-delay-4000"
-            >
-            </div>
-        </div>
-
-        <!-- Blob 4: Teal (Bottom Left) -->
-        <div
-            class="blob-wrapper absolute -bottom-[10%] -left-[20%] transition-transform duration-[2000ms] ease-out will-change-transform"
-            data-speed="0.07"
-        >
-            <div
-                class="w-[600px] h-[600px] bg-teal-500/30 rounded-full blur-[200px] animate-blob animation-delay-3000"
-            >
-            </div>
-        </div>
-
-        <!-- Blob 5: Amber/Yellow (Top Right) -->
-        <div
-            class="blob-wrapper absolute -top-[10%] -right-[20%] transition-transform duration-[2000ms] ease-out will-change-transform"
-            data-speed="0.05"
-        >
-            <div
-                class="w-[700px] h-[700px] bg-amber-500/30 rounded-full blur-[200px] animate-blob animation-delay-5000"
-            >
-            </div>
         </div>
     </div>
 
@@ -92,72 +58,35 @@ import Section from "../Section.astro";
             transform: translate(0px, 0px) scale(1);
         }
         33% {
-            transform: translate(80px, -120px) scale(1.2);
+            transform: translate(30px, -50px) scale(1.05);
         }
         66% {
-            transform: translate(-60px, 60px) scale(0.85);
+            transform: translate(-20px, 20px) scale(0.95);
         }
         100% {
             transform: translate(0px, 0px) scale(1);
         }
     }
     .animate-blob {
-        animation: blob 7s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        animation: blob 15s infinite alternate ease-in-out;
     }
-    .animation-delay-2000 {
-        animation-delay: 2s;
+    @keyframes pulse-slow {
+        0%,
+        100% {
+            opacity: 0.8;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
     }
-    .animation-delay-3000 {
-        animation-delay: 3s;
+    .animate-pulse-slow {
+        animation: pulse-slow 8s infinite ease-in-out;
     }
     .animation-delay-4000 {
         animation-delay: 4s;
     }
-    .animation-delay-5000 {
-        animation-delay: 5s;
-    }
 </style>
 
-<script>
-    const section = document.getElementById("cta-section");
-    const wrappers = document.querySelectorAll(".blob-wrapper");
-
-    if (section) {
-        section.addEventListener("mousemove", (e) => {
-            const rect = section.getBoundingClientRect();
-            const x = e.clientX - rect.left; // Mouse relative to section
-            const y = e.clientY - rect.top;
-
-            // Calculate center of section
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            wrappers.forEach((wrapper) => {
-                const speed = parseFloat(
-                    wrapper.getAttribute("data-speed") || "0.05",
-                );
-
-                // Interaction: Pull towards mouse
-                // We move the wrapper translate based on distance from center to mouse
-                // But to make it "pull towards mouse", we just shift the wrapper towards the mouse coords
-                // relative to its initial position.
-
-                // Simple logic: Target position is (MouseX - InitialPos) * speed
-                // But wrappers are absolute positioned. Let's just translate them relative to their origin.
-
-                const moveX = (x - centerX) * speed * 2; // Factor for intensity
-                const moveY = (y - centerY) * speed * 2;
-
-                (wrapper as HTMLElement).style.transform =
-                    `translate(${moveX}px, ${moveY}px)`;
-            });
-        });
-
-        // Reset on mouse leave
-        section.addEventListener("mouseleave", () => {
-            wrappers.forEach((wrapper) => {
-                (wrapper as HTMLElement).style.transform = `translate(0, 0)`;
-            });
-        });
-    }
-</script>
+<!-- Removed heavy JS mouse tracking for performance -->

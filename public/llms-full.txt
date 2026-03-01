@@ -106,10 +106,7 @@ Homepage
 
 ## index
 
-Current Projects
 
-            A selection of my recent open-source work and public project
-            contributions, hosted on GitHub.
 
 ---
 
@@ -441,9 +438,9 @@ Turn Data Into Decisions That Drive Revenue
                 From messy data to clear KPIs, trusted numbers, and
                     confident decisions.
 
-                    About me
-
                     Services & Packages
+
+                    About me
 
 ---
 
@@ -536,8 +533,7 @@ Let’s design your decision system.
 
 ## Nav
 
-JH
-                Julian Hilgemann
+Julian Hilgemann
 
                             class:list=
                         >
@@ -735,10 +731,10 @@ category
 
 ## Projects
 
-## Projects
+Current Projects
 
-                A selection of Power BI dashboards and analytics systems
-                designed to support real business decisions.
+                A selection of my recent open-source work and public project
+                contributions, hosted on GitHub.
 
              />)}
 

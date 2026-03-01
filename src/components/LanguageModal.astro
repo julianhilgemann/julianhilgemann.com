@@ -1,5 +1,29 @@
 ---
+const currentPath = Astro.url.pathname;
 
+const getTargetLangPath = (targetLang: "en" | "de") => {
+    let path = currentPath;
+    if (path.endsWith("/") && path !== "/") path = path.slice(0, -1);
+
+    // We don't have 'lang' directly here as a prop by default, but we can look at the current path.
+    const isDe = path === "/de" || path.startsWith("/de/");
+
+    if (targetLang === "en") {
+        if (isDe) {
+            const pathWithoutDe = path.replace(/^\/de/, "");
+            return pathWithoutDe === "" ? "/" : pathWithoutDe;
+        }
+        return path || "/";
+    } else {
+        if (!isDe) {
+            return path === "/" ? "/de" : `/de${path}`;
+        }
+        return path || "/de";
+    }
+};
+
+const enPath = getTargetLangPath("en");
+const dePath = getTargetLangPath("de");
 ---
 
 <dialog
@@ -37,7 +61,7 @@
 
             <div class="space-y-4">
                 <a
-                    href="#"
+                    href={enPath}
                     class="block w-full glass hover:bg-white/10 border border-white/10 hover:border-primary text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 ease-in-out group lang-link"
                     data-lang="en"
                 >
@@ -48,7 +72,7 @@
                 </a>
 
                 <a
-                    href="#"
+                    href={dePath}
                     class="block w-full glass hover:bg-white/10 border border-white/10 hover:border-primary text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 ease-in-out group lang-link"
                     data-lang="de"
                 >
@@ -100,34 +124,13 @@
             }
         });
 
-        // Handle Language Links (Smart Routing)
+        // Handle Language Links (Close modal on click, navigation works naturally via href)
         langLinks.forEach((link) => {
-            link.addEventListener("click", (e) => {
-                e.preventDefault();
-                const targetLang = link.getAttribute("data-lang");
-                const currentPath = window.location.pathname;
-
-                let newPath = "/";
-
-                if (targetLang === "en") {
-                    // Switch to English
-                    if (currentPath.startsWith("/de")) {
-                        newPath = currentPath.replace(/^\/de/, "") || "/";
-                    } else {
-                        newPath = currentPath; // Already English
-                    }
-                } else if (targetLang === "de") {
-                    // Switch to German
-                    if (!currentPath.startsWith("/de")) {
-                        // Avoid double //
-                        const path = currentPath === "/" ? "" : currentPath;
-                        newPath = `/de${path}`;
-                    } else {
-                        newPath = currentPath; // Already German
-                    }
-                }
-
-                window.location.href = newPath;
+            link.addEventListener("click", () => {
+                // optional: add a small delay so user sees active state
+                setTimeout(() => {
+                    dialog.close();
+                }, 150);
             });
         });
     };
