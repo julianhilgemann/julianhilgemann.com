@@ -392,10 +392,6 @@ Selected Experience & Systems
                         DATAROOM
                         FINANCIAL MODELING
 
-            Any Questions?
-
-                Get in touch
-
 ---
 
 ## Footer
@@ -449,7 +445,7 @@ Turn Data Into Decisions That Drive Revenue
 
 ## IncludedGrid
 
-What’s Included in Every Engagement
+Professional Standards
 
                 Every Power BI system I deliver follows a rigorous set of
                 engineering, design, and communication standards to ensure
