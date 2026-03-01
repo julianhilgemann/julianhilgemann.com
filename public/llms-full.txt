@@ -1,5 +1,17 @@
 # Pages
 
+## about
+
+About Me
+
+                I am a BI developer and analytics engineer focused on building
+                production-ready Power BI environments that replace outdated
+                reporting with dynamic, trusted decision systems. I care deeply
+                about clean data models, reliable metrics, and interfaces that
+                let leadership teams take confident action.
+
+---
+
 ## cookie-einstellungen
 
 # Cookie Einstellungen
@@ -94,7 +106,10 @@ Homepage
 
 ## index
 
+Current Projects
 
+            A selection of my recent open-source work and public project
+            contributions, hosted on GitHub.
 
 ---
 
@@ -131,6 +146,12 @@ Workflow Active
 
 ---
 
+## services
+
+
+
+---
+
 ## start
 
 Welcome
@@ -157,6 +178,22 @@ Drop me a line and let's
                     Send me an Email
 
                 Prefer LinkedIn? Connect with me there.
+
+---
+
+## CredibilityBar
+
+€4B+
+                yearly transaction volume
+
+                10+
+                productive Power BI dashboards
+
+                80+
+                monthly active users
+
+                3+
+                years fintech production experience
 
 ---
 
@@ -404,9 +441,9 @@ Turn Data Into Decisions That Drive Revenue
                 From messy data to clear KPIs, trusted numbers, and
                     confident decisions.
 
-                    Book a Strategy Call
+                    About me
 
-                    View Projects
+                    Services & Packages
 
 ---
 
@@ -494,6 +531,29 @@ Let’s design your decision system.
             should talk.
 
             Schedule Consultation
+
+---
+
+## Nav
+
+JH
+                Julian Hilgemann
+
+                            class:list=
+                        >
+                            item.name
+
+                contactText
+
+                            class:list=
+                        >
+                            item.name
+
+                        contactText
+
+                        ENG
+
+                        GER
 
 ---
 
@@ -681,6 +741,14 @@ category
                 designed to support real business decisions.
 
              />)}
+
+---
+
+## SecondaryCTA
+
+Questions? I reply fast.
+
+            Contact me
 
 ---
 

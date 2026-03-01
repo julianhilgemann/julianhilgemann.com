@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import Header from "../components/de/Header.astro";
+import Nav from "../components/Nav.astro";
 import Footer from "../components/de/Footer.astro";
 import ContactModal from "../components/de/ContactModal.astro";
 import LanguageModal from "../components/LanguageModal.astro";
@@ -144,7 +144,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <body
         class="bg-background text-text-primary min-h-[100svh] flex flex-col selection:bg-primary selection:text-white"
     >
-        {!noHeader && <Header />}
+        {!noHeader && <Nav lang="de" />}
         <main
             class:list={[
                 "flex-grow w-full",

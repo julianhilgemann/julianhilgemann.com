@@ -1,0 +1,38 @@
+---
+import Layout from "../../layouts/LayoutDE.astro";
+import Philosophy from "../../components/de/Philosophy.astro";
+import Experience from "../../components/de/Experience.astro";
+import DecisionScope from "../../components/de/DecisionScope.astro";
+import SecondaryCTA from "../../components/de/SecondaryCTA.astro";
+---
+
+<Layout
+    title="Über mich | Julian Hilgemann"
+    description="Erfahren Sie mehr über meinen beruflichen Hintergrund, meine Philosophie und Erfahrung."
+    fullWidth={false}
+>
+    <!-- Intro Section -->
+    <section class="py-16 md:py-24">
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+                Über mich
+            </h1>
+            <p class="text-xl text-text-secondary leading-relaxed">
+                Ich bin BI-Entwickler und Analytics Engineer mit Fokus auf den
+                Aufbau produktionsreifer Power BI-Umgebungen, die veraltete
+                Berichterstattung durch dynamische, vertrauenswürdige
+                Entscheidungssysteme ersetzen. Mir sind saubere Datenmodelle,
+                verlässliche Kennzahlen und Interfaces, mit denen Führungsteams
+                sichere Entscheidungen treffen können, enorm wichtig.
+            </p>
+        </div>
+    </section>
+
+    <!-- Content Sections -->
+    <Philosophy />
+    <Experience />
+    <DecisionScope />
+
+    <!-- Contact CTA -->
+    <SecondaryCTA />
+</Layout>

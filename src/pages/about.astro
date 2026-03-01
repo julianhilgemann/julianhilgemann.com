@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Philosophy from "../components/Philosophy.astro";
+import Experience from "../components/Experience.astro";
+import DecisionScope from "../components/DecisionScope.astro";
+import SecondaryCTA from "../components/SecondaryCTA.astro";
+
+// Note: SkillsFoundations is merged into Experience or as its own component, currently let's just use what was in index.astro
+// Wait, looking at the original index, there is no <SkillsFoundations />
+---
+
+<Layout
+    title="About | Julian Hilgemann"
+    description="Learn more about my professional background, philosophy, and experience."
+    fullWidth={false}
+>
+    <!-- Intro Section -->
+    <section class="py-16 md:py-24">
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+                About Me
+            </h1>
+            <p class="text-xl text-text-secondary leading-relaxed">
+                I am a BI developer and analytics engineer focused on building
+                production-ready Power BI environments that replace outdated
+                reporting with dynamic, trusted decision systems. I care deeply
+                about clean data models, reliable metrics, and interfaces that
+                let leadership teams take confident action.
+            </p>
+        </div>
+    </section>
+
+    <!-- Content Sections -->
+    <Philosophy />
+    <Experience />
+    <DecisionScope />
+
+    <!-- Contact CTA -->
+    <SecondaryCTA />
+</Layout>

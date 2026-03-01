@@ -1,0 +1,26 @@
+---
+import Layout from "../../layouts/LayoutDE.astro";
+import PainPoints from "../../components/de/PainPoints.astro";
+import Offerings from "../../components/de/Offerings.astro";
+import IncludedGrid from "../../components/de/IncludedGrid.astro";
+import LetsDesignCTA from "../../components/de/LetsDesignCTA.astro";
+---
+
+<Layout
+    title="Leistungen & Preise | Julian Hilgemann"
+    description="Leistungspakete, Deliverables und Preise für BI- und Data-Engineering-Lösungen."
+    fullWidth={true}
+    noTopPadding={false}
+>
+    <!-- Problem / Context Section -->
+    <PainPoints />
+
+    <!-- Services / Packages Section -->
+    <Offerings />
+
+    <!-- Included Grid -->
+    <IncludedGrid />
+
+    <!-- Services CTA -->
+    <LetsDesignCTA />
+</Layout>
