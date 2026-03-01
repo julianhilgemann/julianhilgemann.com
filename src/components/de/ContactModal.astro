@@ -33,13 +33,12 @@
 
         <!-- Content -->
         <div class="text-center">
-            <h2 class="text-3xl font-bold mb-4 text-white">
-                Lassen Sie uns sprechen
-            </h2>
+            <h2 class="text-3xl font-bold mb-4 text-white">Let's Connect</h2>
             <p class="text-text-secondary mb-8 text-lg leading-relaxed">
-                Bereit, Ihre Daten in handlungsrelevante Entscheidungen zu
-                verwandeln? Ich nehme derzeit neue Projekte an. <br />Schreiben
-                Sie mir und lassen Sie uns Ihre Strategie besprechen.
+                Daten in Entscheidungen verwandeln?<br />
+                Ich bin offen für neue Projekte.<br />
+                Schreiben Sie mir!<br />
+                Ich melde mich.
             </p>
 
             <a
@@ -71,12 +70,13 @@
             </a>
 
             <p class="mt-8 text-sm text-text-secondary/60">
-                Lieber LinkedIn? <a
+                Lieber LinkedIn?<br />
+                <a
                     href="https://linkedin.com/in/julian-hilgemann"
                     target="_blank"
                     class="text-primary hover:underline"
-                    >Vernetzen Sie sich dort mit mir</a
-                >.
+                    >Vernetzen Sie sich...</a
+                >
             </p>
         </div>
     </div>
@@ -96,6 +96,7 @@
         triggers.forEach((trigger) => {
             trigger.addEventListener("click", (e) => {
                 e.preventDefault();
+                document.body.style.overflow = "hidden";
 
                 // Analytics Tracking
                 const location =
@@ -113,6 +114,11 @@
 
                 dialog.showModal();
             });
+        });
+
+        // Handle all close events (button, backdrop, Escape key)
+        dialog.addEventListener("close", () => {
+            document.body.style.overflow = "";
         });
 
         // Close

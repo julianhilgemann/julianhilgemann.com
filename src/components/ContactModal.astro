@@ -94,6 +94,7 @@
         triggers.forEach((trigger) => {
             trigger.addEventListener("click", (e) => {
                 e.preventDefault();
+                document.body.style.overflow = "hidden";
 
                 // Analytics Tracking
                 const location =
@@ -111,6 +112,11 @@
 
                 dialog.showModal();
             });
+        });
+
+        // Handle all close events (button, backdrop, Escape key)
+        dialog.addEventListener("close", () => {
+            document.body.style.overflow = "";
         });
 
         // Close

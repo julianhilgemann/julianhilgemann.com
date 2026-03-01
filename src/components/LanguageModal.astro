@@ -101,8 +101,14 @@ const dePath = getTargetLangPath("de");
         triggers.forEach((trigger) => {
             trigger.addEventListener("click", (e) => {
                 e.preventDefault();
+                document.body.style.overflow = "hidden";
                 dialog.showModal();
             });
+        });
+
+        // Handle all close events (button, backdrop, Escape key)
+        dialog.addEventListener("close", () => {
+            document.body.style.overflow = "";
         });
 
         // Close
