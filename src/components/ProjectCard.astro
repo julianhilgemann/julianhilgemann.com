@@ -75,7 +75,7 @@ const id = title.replace(/\s+/g, "-").toLowerCase();
                     )
                 }
                 <button
-                    class="js-toggle-btn w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors duration-300 ease-in-out group-hover:text-primary border border-white/10"
+                    class="js-toggle-btn w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors duration-300 ease-in-out md:group-hover:text-primary border border-white/10"
                     aria-label="Expand details"
                     data-target={`content-${id}`}
                 >
@@ -176,6 +176,7 @@ const id = title.replace(/\s+/g, "-").toLowerCase();
 
                 const content = card.querySelector(".js-content");
                 const icon = card.querySelector(".js-icon");
+                const toggleBtn = card.querySelector(".js-toggle-btn");
 
                 if (content && icon) {
                     const isOpen =
@@ -189,6 +190,13 @@ const id = title.replace(/\s+/g, "-").toLowerCase();
                         );
                         content.classList.add("grid-rows-[0fr]", "opacity-0");
                         icon.classList.remove("rotate-45");
+                        if (toggleBtn)
+                            toggleBtn.classList.remove("!text-primary");
+
+                        // Drop focus to remove sticky hover on mobile
+                        if (document.activeElement instanceof HTMLElement) {
+                            document.activeElement.blur();
+                        }
                     } else {
                         // Open
                         content.classList.remove(
@@ -197,6 +205,7 @@ const id = title.replace(/\s+/g, "-").toLowerCase();
                         );
                         content.classList.add("grid-rows-[1fr]", "opacity-100");
                         icon.classList.add("rotate-45");
+                        if (toggleBtn) toggleBtn.classList.add("!text-primary");
                     }
                 }
             });

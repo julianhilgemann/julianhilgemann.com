@@ -278,7 +278,7 @@ const isActive = (href: string) => {
             isOpen = false;
 
             // Icon animation back to +
-            iconElement.classList.remove("rotate-45");
+            iconElement.classList.remove("rotate-45", "!text-primary");
 
             // Menu animation out
             menuInner.classList.remove("opacity-100", "scale-y-100");
@@ -297,8 +297,8 @@ const isActive = (href: string) => {
             if (isOpen) return;
             isOpen = true;
 
-            // Icon animation to X
-            iconElement.classList.add("rotate-45");
+            // Icon animation to X and change color
+            iconElement.classList.add("rotate-45", "!text-primary");
 
             // Menu animation in
             menu.classList.remove("pointer-events-none");
