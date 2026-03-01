@@ -181,11 +181,30 @@ const isActive = (href: string) => {
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="transition-transform duration-300 ease-in-out transform"
+                    class="transition-colors duration-300 ease-in-out"
                     id="nav-toggle-icon"
                 >
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <line
+                        x1="4"
+                        y1="6"
+                        x2="20"
+                        y2="6"
+                        class="transition-all duration-300 origin-center"
+                        id="nav-line-1"></line>
+                    <line
+                        x1="4"
+                        y1="12"
+                        x2="20"
+                        y2="12"
+                        class="transition-all duration-300 origin-center"
+                        id="nav-line-2"></line>
+                    <line
+                        x1="4"
+                        y1="18"
+                        x2="20"
+                        y2="18"
+                        class="transition-all duration-300 origin-center"
+                        id="nav-line-3"></line>
                 </svg>
             </button>
         </div>
@@ -265,10 +284,22 @@ const isActive = (href: string) => {
         const menu = document.getElementById("mobile-menu");
         const menuInner = document.getElementById("mobile-menu-inner");
         const iconElement = document.getElementById("nav-toggle-icon");
+        const line1 = document.getElementById("nav-line-1");
+        const line2 = document.getElementById("nav-line-2");
+        const line3 = document.getElementById("nav-line-3");
         const navbarContainer = document.getElementById("navbar-container");
         const body = document.body;
 
-        if (!toggle || !menu || !menuInner || !iconElement || !navbarContainer)
+        if (
+            !toggle ||
+            !menu ||
+            !menuInner ||
+            !iconElement ||
+            !navbarContainer ||
+            !line1 ||
+            !line2 ||
+            !line3
+        )
             return;
 
         let isOpen = false;
@@ -277,8 +308,11 @@ const isActive = (href: string) => {
             if (!isOpen) return;
             isOpen = false;
 
-            // Icon animation back to +
-            iconElement.classList.remove("rotate-45", "!text-primary");
+            // Icon animation back to hamburger
+            iconElement.classList.remove("!text-primary");
+            line1.classList.remove("translate-y-[6px]", "rotate-45");
+            line2.classList.remove("opacity-0");
+            line3.classList.remove("-translate-y-[6px]", "-rotate-45");
 
             // Menu animation out
             menuInner.classList.remove("opacity-100", "scale-y-100");
@@ -298,7 +332,10 @@ const isActive = (href: string) => {
             isOpen = true;
 
             // Icon animation to X and change color
-            iconElement.classList.add("rotate-45", "!text-primary");
+            iconElement.classList.add("!text-primary");
+            line1.classList.add("translate-y-[6px]", "rotate-45");
+            line2.classList.add("opacity-0");
+            line3.classList.add("-translate-y-[6px]", "-rotate-45");
 
             // Menu animation in
             menu.classList.remove("pointer-events-none");
