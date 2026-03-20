@@ -75,25 +75,30 @@ const projects = [
         `,
     },
     {
-        title: "Yield Curve Explorer",
+        title: "Interaktive Yield Curve Heatmap",
         category: "DATA VISUALIZATION",
         description:
-            "Visualisierungen, die Finanzdaten in Narrative verwandeln.",
-        tags: ["Python", "Plotly", "Bundesbank API", "Financial Data"],
-        image: "/assets/dataviz_yield_heatmap.webp",
-        link: "https://github.com/julianhilgemann/dataviz/tree/main",
+            "Eine interaktive Webanwendung, die über 25 Jahre Daten zur deutschen Zinsstrukturkurve in einer leistungsstarken Canvas-Heatmap darstellt.",
+        tags: ["React", "D3.js", "Bundesbank API", "HTML5 Canvas"],
+        image: "/assets/interactive_yield_curve_app.webp",
+        link: "https://github.com/julianhilgemann/heatmapp",
         content: `
             <h3 class="text-xl font-bold text-white mb-4">Konzept</h3>
-            <p class="mb-6">Eine wachsende Sammlung von Datenvisualisierungen mit Fokus auf finanzielle und makroökonomische Indikatoren. Jedes Element ist darauf ausgelegt, komplexe Datensätze zugänglich zu machen – wobei Klarheit, Kontext und visuelle Präzision über Dekoration stehen.</p>
+            <p class="mb-6">Eine Webanwendung, die über 25 Jahre Daten zur deutschen Zinsstrukturkurve in einer einzigen Ansicht visualisiert. Die App ruft monatliche Svensson-Nullkupon-Renditeschätzungen direkt über die SDMX-REST-API der Bundesbank ab.</p>
             
             <h3 class="text-xl font-bold text-white mb-4">Features</h3>
             <ul class="space-y-2 text-text-secondary mb-6">
-                <li><span><strong>Yield Curve Heatmap:</strong> Renditen deutscher Staatsanleihen im Zeitverlauf, bezogen über die Bundesbank-API. Zeigt Zinsstrukturverschiebungen und Inversionsmuster auf einen Blick.</span></li>
+                <li><span><strong>High-Performance Rendering:</strong> Nutzt HTML5 Canvas und ImageData für bilineare Interpolation auf Pixelebene für flüssige und präzise Darstellungen.</span></li>
+                <li><span><strong>Interaktive Steuerung:</strong> Konfigurierbare Datums- und Laufzeitbereiche, 26 Farbpaletten und interaktive Tooltips zur detaillierten Erkundung.</span></li>
+                <li><span><strong>Datenintegration:</strong> Live-Datenabruf mit automatischem Fallback auf einen synthetischen Nelson-Siegel-Datensatz bei fehlender API-Verbindung.</span></li>
             </ul>
 
             <br class="block mb-4" />
             <h3 class="text-xl font-bold text-white mb-4">Architektur</h3>
-            <p>Erstellt mit Python und Plotly, mit Live-Daten aus öffentlichen APIs. Entwickelt für Reproduzierbarkeit – jede Visualisierung ist in sich geschlossen und dokumentiert.</p>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>Frontend:</strong> React 18 für die Benutzeroberfläche und D3 (v7) für Farbinterpolatoren und Skalen.</span></li>
+                <li><span><strong>Export:</strong> Lokales Rendern hochauflösender PNGs über einen Offscreen-Canvas (2560x1440).</span></li>
+            </ul>
         `,
     },
     {
