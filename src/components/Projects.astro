@@ -96,6 +96,39 @@ const projects = [
             <p>Built with Python and Plotly, pulling live data from public APIs. Designed for reproducibility — each visualization is self-contained and documented.</p>
         `,
     },
+    {
+        title: "B2B Pipeline Forecasting Prototype",
+        category: "Predictive Analytics",
+        description:
+            "Business-day sales pipeline forecasting prototype with competing outcomes, age-based conversion kernel estimation, and PIT reconstruction.",
+        tags: [
+            "DuckDB",
+            "Python",
+            "Forecasting",
+            "Analytics Engineering",
+        ],
+        image: "/assets/pipeline_forecast.webp",
+        link: "https://github.com/julianhilgemann/pipeline-forecast",
+        content: `
+            <h3 class="text-xl font-bold text-white mb-4">Concept</h3>
+            <p class="mb-6">Model how a B2B opportunity pipeline converts over time (in business days), then forecast future daily conversions by combining expected conversions from existing active stock and newly arriving opportunities. Built as a transparent, auditable forecasting framework.</p>
+            
+            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>Kernel Estimation:</strong> Competing-risk kernel estimation (won, lost, censored) from a trailing training window.</span></li>
+                <li><span><strong>PIT Reconstruction:</strong> Robust Point-in-Time reconstruction from SCD2 status history to prevent look-ahead leakage.</span></li>
+                <li><span><strong>Synthetic Data:</strong> Generator includes realistic behaviors like business-day seasonality, weekend suppression, and regime switches.</span></li>
+            </ul>
+
+            <br class="block mb-4" />
+            <h3 class="text-xl font-bold text-white mb-4">Architecture</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>DuckDB Core:</strong> A fast analytics warehouse managing calendar, opportunity facts, and SCD2 status history.</span></li>
+                <li><span><strong>Evaluation Framework:</strong> Daily error metrics (MAE/RMSE/WAPE) and rolling multi-as-of backtesting with age-attributable error surfaces.</span></li>
+                <li><span><strong>Multi-panel Visualization:</strong> Structured forecast architecture rendering existing-pipeline and future-arrivals convolution heatmaps.</span></li>
+            </ul>
+        `,
+    },
 ];
 ---
 

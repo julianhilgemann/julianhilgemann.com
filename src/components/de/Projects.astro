@@ -96,6 +96,39 @@ const projects = [
             <p>Erstellt mit Python und Plotly, mit Live-Daten aus öffentlichen APIs. Entwickelt für Reproduzierbarkeit – jede Visualisierung ist in sich geschlossen und dokumentiert.</p>
         `,
     },
+    {
+        title: "B2B Pipeline Forecasting System",
+        category: "Predictive Analytics",
+        description:
+            "Prototyp zur Prognose von B2B-Vertriebspipelines mit konkurrierenden Ausgängen, altersbasierter Conversion-Kernel-Schätzung und PIT-Rekonstruktion.",
+        tags: [
+            "DuckDB",
+            "Python",
+            "Forecasting",
+            "Analytics Engineering",
+        ],
+        image: "/assets/pipeline_forecast.webp",
+        link: "https://github.com/julianhilgemann/pipeline-forecast",
+        content: `
+            <h3 class="text-xl font-bold text-white mb-4">Konzept</h3>
+            <p class="mb-6">Modellierung der Konversion einer B2B-Opportunity-Pipeline über die Zeit (in Geschäftstagen). Die Prognose zukünftiger täglicher Konversionen kombiniert erwartete Abschlüsse aus dem bestehenden aktiven Bestand sowie von neu eintreffenden Opportunities. Ein transparentes, auditierbares Forecasting-Framework.</p>
+            
+            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>Kernel-Schätzung:</strong> Schätzung von competing-risk Kernels (won, lost, censored) aus einem gleitenden Trainingsfenster.</span></li>
+                <li><span><strong>PIT-Rekonstruktion:</strong> Robuste Point-in-Time-Rekonstruktion durch SCD2-Statushistorie zur Vermeidung von Look-ahead Leakage.</span></li>
+                <li><span><strong>Synthetische Daten:</strong> Generator mit realistischen Eigenschaften wie Geschäftstags-Saisonalität, Wochenend-Unterdrückung und Regimewechseln.</span></li>
+            </ul>
+
+            <br class="block mb-4" />
+            <h3 class="text-xl font-bold text-white mb-4">Architektur</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>DuckDB Core:</strong> Schnelles Analytics-Warehouse für Kalender, Opportunity-Fakten und SCD2-Historie.</span></li>
+                <li><span><strong>Evaluierungs-Framework:</strong> Tägliche Fehlermetriken sowie rollierendes Multi-as-of Backtesting mit altersabhängigen Fehlerflächen.</span></li>
+                <li><span><strong>Multi-Panel Visualisierung:</strong> Strukturierte Darstellung von Convolution-Heatmaps für den Bestand und zukünftige Eingänge.</span></li>
+            </ul>
+        `,
+    },
 ];
 ---
 
