@@ -134,6 +134,30 @@ const projects = [
             </ul>
         `,
     },
+    {
+        title: "ShaderGradient Playground",
+        category: "Creative Coding & Graphics",
+        description:
+            "A browser-based, real-time shader gradient simulator built on Three.js and custom GLSL for rendering and exporting animating mesh gradients.",
+        tags: ["Three.js", "GLSL", "React", "Creative Coding"],
+        image: "/assets/shadergradient.webp",
+        link: "https://github.com/julianhilgemann/shadergradient",
+        content: `
+            <h3 class="text-xl font-bold text-white mb-4">Concept</h3>
+            <p class="mb-6">The playground renders a live, animating gradient mesh using a custom simplex-noise vertex shader. Dial in animated mesh gradient visuals—spheres, planes, water planes—and export them as looping GIFs or videos directly from the browser without any installation.</p>
+            
+            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>Real-Time Shading:</strong> 3 customizable gradient colors blended across geometry based on noise, full lighting/environment controls.</span></li>
+                <li><span><strong>Geometry & Camera:</strong> Tweak geometries (sphere, plane, etc.), noise displacement, and camera angles freely.</span></li>
+                <li><span><strong>Rich Export:</strong> Export looping animations as GIFs or videos (WebM/MP4 up to 4K), or copy the exact state as a React JSX snippet.</span></li>
+            </ul>
+
+            <br class="block mb-4" />
+            <h3 class="text-xl font-bold text-white mb-4">Architecture</h3>
+            <p>Built purely in the browser using Three.js and custom GLSL. It features an integrated preset system with localStorage, and client-side media encoders (omggif and WebCodecs/MediaRecorder API) for direct asset generation.</p>
+        `,
+    },
 ];
 ---
 

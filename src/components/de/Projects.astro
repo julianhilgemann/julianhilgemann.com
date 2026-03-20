@@ -134,6 +134,30 @@ const projects = [
             </ul>
         `,
     },
+    {
+        title: "ShaderGradient Playground",
+        category: "Creative Coding & Graphics",
+        description:
+            "Ein browserbasierter Echtzeit-Shader-Gradient-Simulator, basierend auf Three.js und benutzerdefiniertem GLSL zum Rendern und Exportieren animierter Mesh-Gradients.",
+        tags: ["Three.js", "GLSL", "React", "Creative Coding"],
+        image: "/assets/shadergradient.webp",
+        link: "https://github.com/julianhilgemann/shadergradient",
+        content: `
+            <h3 class="text-xl font-bold text-white mb-4">Konzept</h3>
+            <p class="mb-6">Der Playground rendert ein animiertes Live-Gradient-Mesh unter Verwendung eines benutzerdefinierten Simplex-Noise-Vertex-Shaders. Animierte Mesh-Gradient-Visuals – Sphären, Flächen, Wasserflächen – und der Export als geloopte GIFs oder Videos erfolgen komplett im Browser ohne Installation.</p>
+            
+            <h3 class="text-xl font-bold text-white mb-4">Features</h3>
+            <ul class="space-y-2 text-text-secondary mb-6">
+                <li><span><strong>Echtzeit-Shading:</strong> 3 anpassbare Gradient-Farben, die basierend auf Noise über Geometrien geblendet werden, inklusive Licht- und Umgebungssteuerung.</span></li>
+                <li><span><strong>Geometrie & Kamera:</strong> Freie Anpassung von Geometrien (Sphäre, Plane etc.), Noise-Displacement und Kamerawinkeln.</span></li>
+                <li><span><strong>Vielseitiger Export:</strong> Export von Animationen als GIFs oder Videos (WebM/MP4 bis 4K) sowie direkte Übernahme des Zustands als React-JSX-Snippet.</span></li>
+            </ul>
+
+            <br class="block mb-4" />
+            <h3 class="text-xl font-bold text-white mb-4">Architektur</h3>
+            <p>Komplett browserbasiert mit Three.js und eigenem GLSL. Integriert ein Preset-System mit localStorage sowie clientseitige Media-Encoder (omggif und WebCodecs/MediaRecorder API) zur direkten Asset-Generierung.</p>
+        `,
+    },
 ];
 ---
 
