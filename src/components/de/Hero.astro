@@ -4,36 +4,37 @@
 
 <section
     id="hero"
-    class="min-h-0 md:min-h-[100svh] py-28 md:py-0 flex flex-col justify-center relative isolate"
+    class="min-h-0 md:min-h-[100svh] py-28 md:py-0 flex flex-col justify-center relative isolate overflow-hidden"
 >
-    <!-- Particles Container -->
-    <div id="hero-particles" class="absolute inset-0 z-0"></div>
-
-    <!-- Interactive Background Blobs -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+    <!-- ========================================== -->
+    <!-- LAYER 1: Interactive Blobs (Deepest)       -->
+    <!-- ========================================== -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none -z-40">
         <!-- Blob 1 (Top Right) -->
-        <div
-            class="hero-blob-wrapper absolute top-0 right-0 w-[500px] h-[500px] transition-transform duration-[2000ms] ease-out md:will-change-transform translate-x-1/3 -translate-y-1/4"
-            data-speed="0.05"
-        >
-            <div
-                class="w-full h-full bg-primary/15 rounded-full blur-[60px] md:blur-[140px] animate-blob"
-            >
-            </div>
+        <div class="hero-blob-wrapper absolute top-0 right-0 w-[500px] h-[500px] transition-transform duration-[2000ms] ease-out md:will-change-transform translate-x-1/3 -translate-y-1/4" data-speed="0.05">
+            <div class="w-full h-full bg-primary/20 rounded-full blur-[60px] md:blur-[140px] animate-blob"></div>
         </div>
 
         <!-- Blob 2 (Bottom Left) -->
-        <div
-            class="hero-blob-wrapper absolute bottom-0 left-0 w-[400px] h-[400px] transition-transform duration-[2000ms] ease-out md:will-change-transform -translate-x-1/3 translate-y-1/3"
-            data-speed="0.08"
-        >
-            <div
-                class="w-full h-full bg-info/15 rounded-full blur-[50px] md:blur-[120px] animate-blob animation-delay-2000"
-            >
-            </div>
+        <div class="hero-blob-wrapper absolute bottom-0 left-0 w-[400px] h-[400px] transition-transform duration-[2000ms] ease-out md:will-change-transform -translate-x-1/3 translate-y-1/3" data-speed="0.08">
+            <div class="w-full h-full bg-info/20 rounded-full blur-[50px] md:blur-[120px] animate-blob animation-delay-2000"></div>
         </div>
     </div>
 
+    <!-- ========================================== -->
+    <!-- LAYER 2: Canvas Particles (-z-30)          -->
+    <!-- ========================================== -->
+    <canvas id="particle-canvas" class="absolute inset-0 w-full h-full pointer-events-none -z-30"></canvas>
+
+    <!-- ========================================== -->
+    <!-- LAYER 3: Global Glass Layer (-z-20)        -->
+    <!-- Blurs the particles AND the blobs          -->
+    <!-- ========================================== -->
+    <div class="absolute inset-0 bg-background/20 backdrop-blur-[5px] pointer-events-none -z-20"></div>
+
+    <!-- ========================================== -->
+    <!-- LAYER 4: Content & Buttons (Top, z-10)     -->
+    <!-- ========================================== -->
     <div
         class="w-full max-w-[1200px] mx-auto px-8 sm:px-12 lg:px-16 relative z-10 pointer-events-none"
     >
@@ -103,94 +104,93 @@
 </style>
 
 <script>
-    import { tsParticles } from "tsparticles-engine";
-    import { loadSlim } from "tsparticles-slim";
-
-    const options = {
-        background: {
-            color: {
-                value: "transparent",
-            },
-        },
-        fullScreen: {
-            enable: false,
-            zIndex: 0,
-        },
-        fpsLimit: 120,
-        interactivity: {
-            events: {
-                onClick: {
-                    enable: true,
-                    mode: "push",
-                },
-                onHover: {
-                    enable: true,
-                    mode: "grab", // Options: "grab" (connect), "repulse" (push), "bubble" (grow)
-                },
-                resize: true,
-            },
-            modes: {
-                push: {
-                    quantity: 4,
-                },
-                grab: {
-                    distance: 300, // [REACTIVITY] Range of mouse interaction (increased for stronger effect)
-                    links: {
-                        opacity: 1,
-                    },
-                },
-            },
-        },
-        particles: {
-            color: {
-                value: "#ffffff", // [COLOR] Color of the dots
-            },
-            links: {
-                color: "#ffffff",
-                distance: 150,
-                enable: true,
-                opacity: 0.2, // [OPACITY] Transparency of lines (0-1)
-                width: 1, // [THICKNESS] Width of connecting lines
-            },
-            move: {
-                direction: "none",
-                enable: true,
-                outModes: {
-                    default: "bounce",
-                },
-                random: false,
-                speed: 1, // [SPEED] Movement speed
-                straight: false,
-            } as any,
-            number: {
-                density: {
-                    enable: true,
-                    area: 800,
-                },
-                value: 100, // [DENSITY] Total number of particles
-            },
-            opacity: {
-                value: 0.3, // [OPACITY] Transparency of dots (0-1)
-            },
-            shape: {
-                type: "circle",
-            },
-            size: {
-                value: { min: 1, max: 3 }, // [SIZE] Radius of dots
-            },
-        },
-        detectRetina: true,
-    };
-
-    (async () => {
-        if (window.matchMedia("(min-width: 768px)").matches) {
-            await loadSlim(tsParticles);
-            await tsParticles.load("hero-particles", options);
-        }
-    })();
-
-    // Interactive Blobs Logic
+    // ==========================================
+    // 1. CUSTOM CANVAS PARTICLES LOGIC
+    // ==========================================
+    const canvas = document.getElementById('particle-canvas') as HTMLCanvasElement;
+    const ctx = canvas?.getContext('2d');
     const heroSection = document.getElementById("hero");
+    
+    if (canvas && ctx && heroSection) {
+        let points: Point[] = [];
+        const numPoints = window.innerWidth < 768 ? 60 : 130; 
+        const maxDist = 180;
+
+        const resizeCanvas = () => {
+            canvas.width = heroSection.offsetWidth;
+            canvas.height = heroSection.offsetHeight;
+        };
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Point {
+            x: number;
+            y: number;
+            vx: number;
+            vy: number;
+            radius: number;
+
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                
+                // Randomize the radius between 1px and 5px
+                this.radius = Math.random() * 4 + 1; 
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+        }
+
+        for (let i = 0; i < numPoints; i++) points.push(new Point());
+
+        const draw = () => {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < points.length; i++) {
+                let p1 = points[i];
+                p1.update();
+
+                // Draw Dots (Contour / Outline Rings only)
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)'; // Ring color and opacity
+                ctx.lineWidth = 1.5; // Thickness of the ring
+                ctx.beginPath();
+                ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2);
+                ctx.stroke(); // Used stroke() instead of fill() to make them hollow
+
+                // Check distances to draw lines
+                for (let j = i + 1; j < points.length; j++) {
+                    let p2 = points[j];
+                    let dx = p1.x - p2.x;
+                    let dy = p1.y - p2.y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < maxDist) {
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - dist/maxDist) * 0.5})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(draw);
+        };
+        draw();
+    }
+
+    // ==========================================
+    // 2. INTERACTIVE BLOBS LOGIC
+    // ==========================================
     const wrappers = document.querySelectorAll(".hero-blob-wrapper");
 
     if (heroSection) {
@@ -202,15 +202,10 @@
             const centerY = rect.height / 2;
 
             wrappers.forEach((wrapper) => {
-                const speed = parseFloat(
-                    wrapper.getAttribute("data-speed") || "0.05",
-                );
-                // Move opposite to mouse for depth effect, or with it?
-                // The CTA moves with it: (x - centerX) * speed.
+                const speed = parseFloat(wrapper.getAttribute("data-speed") || "0.05");
                 const moveX = (x - centerX) * speed * 2;
                 const moveY = (y - centerY) * speed * 2;
-                (wrapper as HTMLElement).style.transform =
-                    `translate(${moveX}px, ${moveY}px)`;
+                (wrapper as HTMLElement).style.transform = `translate(${moveX}px, ${moveY}px)`;
             });
         });
 
