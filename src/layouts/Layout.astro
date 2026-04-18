@@ -61,6 +61,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 		<!-- Consent Mode v2 defaults: DENY until user consents -->
 		{!noAnalytics && (
 			<>
+				<!-- Google tag (gtag.js) -->
+				<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGJRBSMNYF"></script>
 				<script is:inline>
 					window.dataLayer = window.dataLayer || [];
 					function gtag() {
@@ -74,6 +76,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 						functionality_storage: "denied",
 						personalization_storage: "denied",
 						security_storage: "granted",
+					});
+
+					gtag("js", new Date());
+					gtag("config", "G-EGJRBSMNYF", {
+						anonymize_ip: true,
 					});
 				</script>
 
@@ -124,18 +131,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 									gtag("consent", "update", {
 										analytics_storage: "granted",
 									});
-									if (!window.__gaLoaded) {
-										const s = document.createElement("script");
-										s.async = true;
-										s.src =
-											"https://www.googletagmanager.com/gtag/js?id=G-EGJRBSMNYF"; // <-- replace
-										document.head.appendChild(s);
-										window.__gaLoaded = true;
-										gtag("js", new Date());
-										gtag("config", "G-EGJRBSMNYF", {
-											anonymize_ip: true,
-										}); // <-- replace
-									}
 								},
 								onDecline: () => {
 									gtag("consent", "update", {
