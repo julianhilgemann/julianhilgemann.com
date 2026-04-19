@@ -76,6 +76,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 						functionality_storage: "denied",
 						personalization_storage: "denied",
 						security_storage: "granted",
+						wait_for_update: 500,
 					});
 
 					gtag("js", new Date());
@@ -96,6 +97,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 					// Minimal Klaro config (EN banner, opt‑in for GA4). Replace G-XXXXXXX with your GA4 ID.
 					window.klaroConfig = {
 						version: 1,
+						acceptAll: true,
+						hideDeclineAll: false,
 						noAutoLoad: false,
 						htmlTexts: false,
 						elementID: "klaro",
@@ -113,7 +116,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 										"We use Google Analytics (optional) to improved user experience.",
 									learnMore: "Settings",
 								},
-								ok: "Accept",
+								ok: "Accept Selected",
 								acceptAll: "Accept all (allow Analytics)",
 								decline: "Decline (necessary cookies only)",
 								save: "Save",
@@ -124,7 +127,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 							{
 								name: "google-analytics",
 								title: "Google Analytics 4",
-								default: false,
+								default: true,
 								purposes: ["analytics"],
 								cookies: [/^_ga(_.*)?/, /^_gid/],
 								onAccept: () => {
