@@ -1,0 +1,8 @@
+---
+// Thin locale wrapper. The calculator itself is shared — duplicating the pricing
+// maths and chart logic into this directory would guarantee the two languages
+// drift apart on the next rate change.
+import PricingCalculator from "../PricingCalculator.astro";
+---
+
+<PricingCalculator lang="de" />
