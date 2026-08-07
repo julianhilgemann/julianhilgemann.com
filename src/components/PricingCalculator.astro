@@ -1,0 +1,972 @@
+---
+import Section from "./Section.astro";
+import { strings, type Lang } from "../lib/pricing-strings";
+import { pricingConfig as cfg, formatCurrency } from "../lib/pricing";
+
+interface Props {
+    lang?: Lang;
+}
+const { lang = "en" } = Astro.props;
+const t = strings[lang];
+const fmt = (n: number) => formatCurrency(n, lang);
+
+const sourcesCfg = cfg.quantityItems.find((q) => q.id === "sources")!;
+const pagesCfg = cfg.quantityItems.find((q) => q.id === "pages")!;
+const semanticCfg = cfg.scopeItems.find((s) => s.id === "semanticModel")!;
+const transformCfg = cfg.scopeItems.find((s) => s.id === "analyticsEngineering")!;
+const designCfg = cfg.modules.find((m) => m.id === "designSystem")!;
+const onboardingCfg = cfg.modules.find((m) => m.id === "onboarding")!;
+const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
+---
+
+<Section id="pricing" class="!pt-0 pb-20 md:pb-28">
+    <div
+        id="pricing-calculator"
+        data-lang={lang}
+        class="w-full max-w-[1200px] mx-auto px-6 sm:px-10 lg:px-16"
+    >
+        <!-- Framing: the argument the number needs to land against -->
+        <div class="max-w-3xl mb-12 md:mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold leading-tight">
+                {t.intro.heading}<br />
+                <span class="text-primary">{t.intro.headingAccent}</span>
+            </h2>
+            <div class="text-base md:text-lg text-text-secondary mt-6 space-y-4 leading-relaxed">
+                {t.intro.body.map((p) => <p>{p}</p>)}
+            </div>
+            <p class="mt-6 text-sm font-medium text-white/80 italic">
+                {t.intro.kicker}
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-[minmax(0,1fr)_minmax(360px,420px)] gap-8 xl:gap-12 items-start">
+            <!-- ── Controls ─────────────────────────────────────────── -->
+            <div data-controls class="space-y-6 pb-28 lg:pb-0">
+                <!-- 1 · Foundation -->
+                <div class="glass rounded-2xl p-6 md:p-8">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-bold text-white">{t.sections.foundation.title}</h3>
+                        <p class="text-sm text-text-secondary mt-1">{t.sections.foundation.hint}</p>
+                    </div>
+
+                    <div class="rounded-xl bg-white/[0.03] border border-white/5 p-4 mb-6">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="min-w-0">
+                                <p class="text-sm font-semibold text-white">{t.items.foundation.label}</p>
+                                <ul class="mt-2 space-y-1">
+                                    {t.items.foundation.includes.map((i) => (
+                                        <li class="text-xs text-text-secondary leading-relaxed">{i}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <span class="shrink-0 text-sm font-semibold text-white tabular-nums">{fmt(cfg.base.price)}</span>
+                        </div>
+                    </div>
+
+                    <p class="text-sm font-semibold text-white mb-1">{t.controls.sourcesLabel}</p>
+                    <p class="text-xs text-text-secondary mb-4">{t.controls.sourcesHint}</p>
+                    <div class="divide-y divide-white/5">
+                        {sourcesCfg.tiers.map((tier) => (
+                            <div class="flex items-center justify-between gap-4 py-3">
+                                <div class="min-w-0">
+                                    <p class="text-sm text-white">{t.items[`sources.${tier.id}`].label}</p>
+                                    <p class="text-xs text-text-secondary mt-0.5">{fmt(tier.price)} · {tier.label}</p>
+                                </div>
+                                <div class="flex items-center gap-1 shrink-0">
+                                    <button type="button" class="step-btn" data-step="-1" data-path={`sources.${tier.id}`} aria-label={`${t.controls.decrease}: ${t.items[`sources.${tier.id}`].label}`}>&minus;</button>
+                                    <output class="w-8 text-center text-sm font-semibold text-white tabular-nums" data-qty={`sources.${tier.id}`}>0</output>
+                                    <button type="button" class="step-btn" data-step="1" data-path={`sources.${tier.id}`} aria-label={`${t.controls.increase}: ${t.items[`sources.${tier.id}`].label}`}>+</button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <p class="warn" data-warning="advancedNoSources" hidden>{t.warnings.advancedNoSources}</p>
+                </div>
+
+                <!-- 2 · Output -->
+                <div class="glass rounded-2xl p-6 md:p-8">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-bold text-white">{t.sections.output.title}</h3>
+                        <p class="text-sm text-text-secondary mt-1">{t.sections.output.hint}</p>
+                    </div>
+                    <p class="text-xs text-text-secondary mb-4">{t.controls.pagesHint}</p>
+                    <div class="divide-y divide-white/5">
+                        {pagesCfg.tiers.map((tier) => (
+                            <div class="flex items-center justify-between gap-4 py-3">
+                                <div class="min-w-0">
+                                    <p class="text-sm text-white">{t.items[`pages.${tier.id}`].label}</p>
+                                    <p class="text-xs text-text-secondary mt-0.5">{fmt(tier.price)} · {tier.label}</p>
+                                </div>
+                                <div class="flex items-center gap-1 shrink-0">
+                                    <button type="button" class="step-btn" data-step="-1" data-path={`pages.${tier.id}`} aria-label={`${t.controls.decrease}: ${t.items[`pages.${tier.id}`].label}`}>&minus;</button>
+                                    <output class="w-8 text-center text-sm font-semibold text-white tabular-nums" data-qty={`pages.${tier.id}`}>0</output>
+                                    <button type="button" class="step-btn" data-step="1" data-path={`pages.${tier.id}`} aria-label={`${t.controls.increase}: ${t.items[`pages.${tier.id}`].label}`}>+</button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <p class="warn" data-warning="pagesPerSource" hidden>{t.warnings.pagesPerSource}</p>
+                </div>
+
+                <!-- 3 · Data layer -->
+                <div class="glass rounded-2xl p-6 md:p-8">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-bold text-white">{t.sections.dataLayer.title}</h3>
+                        <p class="text-sm text-text-secondary mt-1">{t.sections.dataLayer.hint}</p>
+                    </div>
+
+                    <fieldset>
+                        <legend class="text-sm font-semibold text-white">{t.controls.semanticModelLabel}</legend>
+                        <p class="text-xs text-text-secondary mt-1 mb-3">{t.controls.semanticModelHint}</p>
+                        <div class="space-y-2">
+                            {semanticCfg.options.map((o) => (
+                                <label class="opt">
+                                    <input type="radio" name="semanticModel" value={o.id} checked={o.id === semanticCfg.default} class="sr-only peer" />
+                                    <span class="opt-body">
+                                        <span class="opt-main">
+                                            <span class="opt-title">{t.items[`semanticModel.${o.id}`].label}</span>
+                                            <span class="opt-sub">{t.items[`semanticModel.${o.id}`].includes[0]}</span>
+                                        </span>
+                                        <span class="opt-price">{fmt(o.price)}</span>
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+                        <p class="warn" data-warning="pagesOnCompactModel" hidden>{t.warnings.pagesOnCompactModel}</p>
+                    </fieldset>
+
+                    <fieldset class="mt-6 pt-6 border-t border-white/5">
+                        <legend class="text-sm font-semibold text-white">{t.controls.transformLabel}</legend>
+                        <p class="text-xs text-text-secondary mt-1 mb-3">{t.controls.transformHint}</p>
+                        <div class="space-y-2">
+                            {transformCfg.options.map((o) => (
+                                <label class="opt">
+                                    <input type="radio" name="analyticsEngineering" value={o.id} checked={o.id === transformCfg.default} class="sr-only peer" />
+                                    <span class="opt-body">
+                                        <span class="opt-main">
+                                            <span class="opt-title">{t.items[`analyticsEngineering.${o.id}`].label}</span>
+                                            <span class="opt-sub">{t.items[`analyticsEngineering.${o.id}`].includes[0]}</span>
+                                        </span>
+                                        <span class="opt-price">{o.price === 0 ? "—" : fmt(o.price)}</span>
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- 4 · Extras -->
+                <div class="glass rounded-2xl p-6 md:p-8">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-bold text-white">{t.sections.extras.title}</h3>
+                        <p class="text-sm text-text-secondary mt-1">{t.sections.extras.hint}</p>
+                    </div>
+
+                    <!-- AI readiness: free, but its list value must stay visible -->
+                    <div class="rounded-xl border border-primary/30 bg-primary/[0.06] p-4 mb-6">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="min-w-0">
+                                <p class="text-sm font-semibold text-white">
+                                    {t.items.aiReadiness.label}
+                                    <span class="ml-2 align-middle text-[10px] uppercase tracking-wider bg-primary text-navy-950 font-bold px-2 py-0.5 rounded-full">{aiCfg.badge}</span>
+                                </p>
+                                <ul class="mt-2 space-y-1">
+                                    {t.items.aiReadiness.includes.map((i) => (
+                                        <li class="text-xs text-text-secondary leading-relaxed">{i}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <span class="shrink-0 text-right">
+                                <s class="block text-xs text-text-secondary/70 tabular-nums">{fmt(aiCfg.listValue!)}</s>
+                                <span class="block text-sm font-bold text-primary tabular-nums">{fmt(0)}</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <fieldset>
+                        <legend class="text-sm font-semibold text-white mb-3">{t.controls.designLabel}</legend>
+                        <div class="space-y-2">
+                            {designCfg.options!.map((o) => (
+                                <label class="opt">
+                                    <input type="radio" name="designSystem" value={o.id} checked={o.id === designCfg.default} class="sr-only peer" />
+                                    <span class="opt-body">
+                                        <span class="opt-main">
+                                            <span class="opt-title">{t.items[`designSystem.${o.id}`].label}</span>
+                                            <span class="opt-sub">{t.items[`designSystem.${o.id}`].includes[0]}</span>
+                                        </span>
+                                        <span class="opt-price">{o.price === 0 ? "—" : fmt(o.price)}</span>
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="mt-6 pt-6 border-t border-white/5">
+                        <legend class="text-sm font-semibold text-white mb-3">{t.controls.onboardingLabel}</legend>
+                        <div class="space-y-2">
+                            {onboardingCfg.options!.map((o) => (
+                                <label class="opt">
+                                    <input type="radio" name="onboarding" value={o.id} checked={o.id === onboardingCfg.default} class="sr-only peer" />
+                                    <span class="opt-body">
+                                        <span class="opt-main">
+                                            <span class="opt-title">{t.items[`onboarding.${o.id}`].label}</span>
+                                            <span class="opt-sub">{t.items[`onboarding.${o.id}`].includes[0]}</span>
+                                        </span>
+                                        <span class="opt-price">{o.price === 0 ? "—" : fmt(o.price)}</span>
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="mt-6 pt-6 border-t border-white/5">
+                        <legend class="text-sm font-semibold text-white">{t.controls.customWorkLabel}</legend>
+                        <p class="text-xs text-text-secondary mt-1 mb-3">{t.controls.customWorkHint}</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            {cfg.hourly.blocks.map((b) => (
+                                <label class="opt">
+                                    <input type="radio" name="customWork" value={b.id} checked={b.id === cfg.hourly.default} class="sr-only peer" />
+                                    <span class="opt-body opt-compact">
+                                        <span class="opt-title">{b.hours === 0 ? "—" : `${b.hours} h`}</span>
+                                        <span class="opt-sub">{fmt(b.price)}</span>
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="mt-6 pt-6 border-t border-white/5">
+                        <legend class="text-sm font-semibold text-white">{t.controls.complexityLabel}</legend>
+                        <p class="text-xs text-text-secondary mt-1 mb-3">{t.controls.complexityHint}</p>
+                        <div class="space-y-2">
+                            {cfg.multipliers.factors.map((f) => (
+                                <label class="opt">
+                                    <input type="checkbox" name="multiplier" value={f.id} class="sr-only peer" />
+                                    <span class="opt-body">
+                                        <span class="opt-main">
+                                            <span class="opt-title">{f.label}</span>
+                                        </span>
+                                        <span class="opt-price">+{Math.round(f.add * 100)}%</span>
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+                    </fieldset>
+                </div>
+
+                <button type="button" data-reset class="text-sm text-text-secondary hover:text-primary underline underline-offset-4 transition-colors">
+                    {t.controls.reset}
+                </button>
+            </div>
+
+            <!-- ── Result panel ─────────────────────────────────────── -->
+            <!-- A sticky panel taller than the viewport pins its top and leaves
+                 its bottom (the CTA) permanently out of reach, so it is capped
+                 to the visible area and scrolls internally when it overflows. -->
+            <div
+                id="pricing-result"
+                class="glass rounded-2xl p-6 md:p-8 lg:sticky lg:top-24 scroll-mt-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto panel-scroll"
+            >
+                <!-- Badge pinned to the header row: anchored to the number it
+                     would drift left and right every time the total changes. -->
+                <div class="flex items-center justify-between gap-3">
+                    <p class="text-xs uppercase tracking-wider text-text-secondary">{t.result.totalLabel}</p>
+                    <span class="text-[10px] uppercase tracking-wider border border-primary/40 text-primary px-2 py-0.5 rounded-full shrink-0">{t.result.estimateBadge}</span>
+                </div>
+                <p class="text-4xl md:text-5xl font-bold text-white mt-2 tabular-nums" data-total>—</p>
+                <p class="text-xs text-text-secondary mt-1">{t.result.oneTime} · {t.result.vat}</p>
+
+                <!-- Stacked bar -->
+                <h4 class="text-sm font-semibold text-white mt-8 mb-3">{t.chart.heading}</h4>
+                <div class="viz-root">
+                    <div class="flex gap-[6px] h-6 w-full" data-bar role="img" aria-label={t.chart.heading}></div>
+                </div>
+                <div class="mt-2 h-4 text-xs text-text-secondary" data-bar-hint aria-live="polite"></div>
+
+                <!-- Legend: the primary interaction, not a hover-only affordance -->
+                <h4 class="text-sm font-semibold text-white mt-5 mb-2">{t.chart.legendHeading}</h4>
+                <div data-legend class="space-y-1"></div>
+
+                <div data-free class="mt-5 pt-4 border-t border-white/10"></div>
+
+                <div data-threshold hidden class="mt-5 rounded-xl border border-primary/30 bg-primary/[0.06] p-4 text-sm text-white/90"></div>
+
+                <div class="mt-6 space-y-3">
+                    <a href="#" data-mailto class="block w-full text-center bg-primary hover:bg-primary/90 text-navy-950 font-bold py-3 px-6 rounded-full transition-all">
+                        {t.cta.primary}
+                    </a>
+                    <p class="text-[11px] text-text-secondary text-center">{t.cta.primarySub}</p>
+                    <button type="button" data-copy class="block w-full text-center glass hover:bg-white/10 text-white text-sm font-medium py-2.5 px-6 rounded-full transition-all border border-white/15">
+                        {t.cta.copy}
+                    </button>
+                </div>
+
+                <div class="mt-6 pt-5 border-t border-white/10 space-y-3">
+                    <p class="text-xs text-text-secondary leading-relaxed">{t.result.disclaimer}</p>
+                    <p class="text-xs text-text-secondary">{t.result.validity(cfg.validityDays)}</p>
+                    <p class="text-xs text-text-secondary">{t.result.ongoing}</p>
+                    <!-- Static rather than a <details>: three short lines are not
+                         worth a disclosure, and expanding one inside a sticky
+                         panel reflowed everything around it. -->
+                    <div>
+                        <p class="text-xs font-semibold text-white/80">{t.result.excludedHeading}</p>
+                        <ul class="mt-2 space-y-1">
+                            {t.result.excluded.map((e) => (
+                                <li class="text-[11px] text-text-secondary leading-relaxed">{e}</li>
+                            ))}
+                        </ul>
+                    </div>
+                    <p class="text-[10px] text-text-secondary/60">{t.result.versionLabel(cfg.priceListVersion)}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Always-included standards (absorbed from the retired IncludedGrid) -->
+        <div class="mt-16 pt-12 border-t border-white/5">
+            <h3 class="text-xl md:text-2xl font-bold text-white">{t.alwaysIncluded.heading}</h3>
+            <p class="text-sm text-text-secondary mt-2 max-w-2xl">{t.alwaysIncluded.sub}</p>
+            <div class="grid md:grid-cols-2 gap-6 mt-8">
+                {t.alwaysIncluded.groups.map((g) => (
+                    <div class="glass rounded-xl p-6">
+                        <h4 class="font-bold text-white mb-3">{g.title}</h4>
+                        <ul class="space-y-2 custom-bullets">
+                            {g.items.map((i) => <li class="text-sm text-text-secondary">{i}</li>)}
+                        </ul>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sticky total: thumb-reachable, hidden once the panel is on screen -->
+    <div
+        data-sticky
+        class="lg:hidden fixed bottom-0 left-0 right-0 z-40 glass border-t border-white/10 px-5 py-3 flex items-center justify-between gap-4 translate-y-full transition-transform duration-300"
+    >
+        <div class="min-w-0">
+            <p class="text-[10px] uppercase tracking-wider text-text-secondary truncate">{t.result.totalLabel}</p>
+            <p class="text-xl font-bold text-white leading-tight" data-sticky-total>—</p>
+        </div>
+        <a href="#pricing-result" data-sticky-jump class="shrink-0 bg-primary text-navy-950 font-bold text-sm py-2.5 px-5 rounded-full">
+            {t.chart.legendHeading}
+        </a>
+    </div>
+</Section>
+
+<style>
+    /* Validated categorical palette — six family hues, OKLCH-generated and
+       checked with the dataviz validator against this site's #0B1220 surface:
+       adjacent CVD ΔE 12.9 (target 8), normal-vision ΔE 21.4 (floor 15),
+       all six inside the dark lightness band and >= 3:1 contrast.
+       Tiers inside a family are NOT separate hues — lightness steps cannot
+       clear the normal-vision floor inside the band, so tiers are separated by
+       the surface gap and resolved in the legend instead. */
+    #pricing-calculator {
+        --seg-foundation: #eb635e;
+        --seg-sources: #08a2af;
+        --seg-pages: #bb8d07;
+        --seg-dataLayer: #5b89f6;
+        --seg-extras: #42af4d;
+        --seg-uplift: #c165c7;
+        --viz-surface: #0b1220;
+    }
+
+    .step-btn {
+        width: 2.25rem;
+        height: 2.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #fff;
+        font-size: 1.125rem;
+        line-height: 1;
+        transition: all 0.2s;
+        touch-action: manipulation;
+    }
+    .step-btn:hover:not(:disabled) {
+        border-color: #f59e0b;
+        color: #f59e0b;
+    }
+    .step-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+
+    .opt {
+        display: block;
+        cursor: pointer;
+    }
+    .opt-body {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        border-radius: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.02);
+        transition: all 0.2s;
+    }
+    .opt:hover .opt-body {
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    .peer:checked ~ .opt-body {
+        border-color: #f59e0b;
+        background: rgba(245, 158, 11, 0.08);
+    }
+    .peer:focus-visible ~ .opt-body {
+        outline: 2px solid #38bdf8;
+        outline-offset: 2px;
+    }
+    .opt-main {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+    .opt-title {
+        font-size: 0.875rem;
+        color: #fff;
+        font-weight: 500;
+    }
+    .opt-sub {
+        font-size: 0.6875rem;
+        color: #9ca3af;
+        margin-top: 0.125rem;
+        line-height: 1.4;
+    }
+    .opt-price {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: #fff;
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+    }
+    .opt-compact {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.125rem;
+        padding: 0.625rem 0.5rem;
+    }
+
+    /* A native <legend> renders *inside* the fieldset's top border, cutting a
+       notch through the section divider. Floating it makes it flow as an
+       ordinary block while keeping the fieldset/legend semantics for the
+       radio groups. */
+    fieldset > legend {
+        float: left;
+        width: 100%;
+        padding: 0;
+    }
+    fieldset > legend + * {
+        clear: both;
+    }
+
+    .panel-scroll {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+    }
+    .panel-scroll::-webkit-scrollbar {
+        width: 6px;
+    }
+    .panel-scroll::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.18);
+        border-radius: 3px;
+    }
+
+    .warn {
+        margin-top: 0.75rem;
+        font-size: 0.75rem;
+        line-height: 1.5;
+        color: #fbbf24;
+        background: rgba(251, 191, 36, 0.08);
+        border: 1px solid rgba(251, 191, 36, 0.25);
+        border-radius: 0.5rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    /* Bar segments. Widths stay exactly proportional — a 1px floor keeps small
+       items visible without distorting the encoding. Separation is the 2px
+       surface gap, never a stroke. */
+    /* Bar segments and legend rows are built in JS, so they never receive
+       Astro's scope attribute — these rules must be :global() or they simply
+       do not match. They stay nested under #pricing-calculator so the global
+       escape hatch cannot leak into the rest of the site. */
+    #pricing-calculator :global(.seg) {
+        min-width: 1px;
+        flex-shrink: 0;
+        transition: opacity 0.2s;
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+    #pricing-calculator :global(.seg-group) {
+        display: flex;
+        gap: 2px;
+        min-width: 1px;
+    }
+    #pricing-calculator :global(.seg-uplift-fill) {
+        background-image: repeating-linear-gradient(
+            45deg,
+            transparent 0 3px,
+            rgba(11, 18, 32, 0.5) 3px 6px
+        );
+    }
+    #pricing-calculator :global([data-bar].is-dimmed .seg:not(.is-active)) {
+        opacity: 0.28;
+    }
+
+    #pricing-calculator :global(.legend-row) {
+        width: 100%;
+        text-align: left;
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        padding: 0.375rem 0.5rem;
+        border-radius: 0.5rem;
+        transition: background 0.15s;
+    }
+    #pricing-calculator :global(.legend-row:hover) {
+        background: rgba(255, 255, 255, 0.04);
+    }
+    /* Focus = opacity only. Nothing is added, removed or resized, so the
+       panel's height is identical whether or not a family is focused. */
+    #pricing-calculator :global([data-family-block]) {
+        transition: opacity 0.2s;
+    }
+    #pricing-calculator :global([data-legend].is-dimmed [data-family-block]:not(.is-active)) {
+        opacity: 0.35;
+    }
+    #pricing-calculator :global(.legend-swatch) {
+        width: 0.625rem;
+        height: 0.625rem;
+        border-radius: 2px;
+        flex-shrink: 0;
+        transform: translateY(1px);
+    }
+
+    details > summary::-webkit-details-marker {
+        display: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        [data-sticky],
+        .opt-body,
+        .step-btn {
+            transition: none !important;
+        }
+        #pricing-calculator :global(.seg),
+        #pricing-calculator :global(.legend-row) {
+            transition: none !important;
+        }
+    }
+</style>
+
+<script>
+    import {
+        calculate,
+        DEFAULT_SELECTION,
+        formatCurrency,
+        pricingConfig as cfg,
+        type Selection,
+        type Segment,
+    } from "../lib/pricing";
+    import { strings, type Lang } from "../lib/pricing-strings";
+
+    const root = document.getElementById("pricing-calculator");
+    if (root) {
+        const lang = (root.dataset.lang as Lang) || "en";
+        const t = strings[lang];
+        const fmt = (n: number) => formatCurrency(n, lang);
+
+        const selection: Selection = structuredClone(DEFAULT_SELECTION);
+
+        // Segment group -> colour family. customWork rides the extras hue: it is
+        // an Extras-section item, and six families is the most the palette can
+        // carry while clearing the validator.
+        const FAMILY_OF: Record<string, string> = {
+            foundation: "foundation",
+            sources: "sources",
+            pages: "pages",
+            dataLayer: "dataLayer",
+            extras: "extras",
+            custom: "extras",
+            uplift: "uplift",
+        };
+        const FAMILY_ORDER = ["foundation", "sources", "pages", "dataLayer", "extras", "uplift"];
+        const FAMILY_LABEL: Record<string, string> = {
+            foundation: t.items.foundation.short,
+            sources: t.controls.sourcesLabel,
+            pages: t.controls.pagesLabel,
+            // The data-layer family carries both the semantic model and upstream
+            // transformation, so it takes the section name rather than one item's.
+            dataLayer: t.sections.dataLayer.title.replace(/^\d+\s*·\s*/, ""),
+            extras: t.sections.extras.title.replace(/^\d+\s*·\s*/, ""),
+            uplift: t.items.uplift.label,
+        };
+
+        const $ = <T extends Element>(sel: string) => root.querySelector<T>(sel);
+        const $$ = <T extends Element>(sel: string) => Array.from(root.querySelectorAll<T>(sel));
+
+        const bar = $<HTMLElement>("[data-bar]")!;
+        const barHint = $<HTMLElement>("[data-bar-hint]")!;
+        const legendEl = $<HTMLElement>("[data-legend]")!;
+        const freeEl = $<HTMLElement>("[data-free]")!;
+        const totalEl = $<HTMLElement>("[data-total]")!;
+        const thresholdEl = $<HTMLElement>("[data-threshold]")!;
+        const mailtoEl = $<HTMLAnchorElement>("[data-mailto]")!;
+        const copyBtn = $<HTMLButtonElement>("[data-copy]")!;
+        // The sticky bar is a sibling of #pricing-calculator (it must escape the
+        // padded container to span the viewport), so it is queried from document.
+        const stickyEl = document.querySelector<HTMLElement>("[data-sticky]")!;
+        const stickyTotalEl = document.querySelector<HTMLElement>("[data-sticky-total]")!;
+
+        const unitWord = (group: string, qty: number) =>
+            group === "sources"
+                ? qty === 1
+                    ? t.units.source
+                    : t.units.sources
+                : qty === 1
+                  ? t.units.page
+                  : t.units.pages;
+
+        function derivation(seg: Segment): string {
+            if (seg.id === "customWork" && seg.qty) return t.chart.hoursNote(seg.qty);
+            if (seg.qty && seg.unitPrice) {
+                const pct = Math.round((1 - (seg.avgFactor ?? 1)) * 100);
+                // "per page", never "per pages" — the noun after "per" is always singular.
+                if (pct > 0) return t.chart.taperNote(seg.qty, unitWord(seg.group, 1), fmt(seg.unitPrice), pct);
+                return `${seg.qty} × ${fmt(seg.unitPrice)}`;
+            }
+            if (seg.id === "uplift") return t.items.uplift.includes[0];
+            return t.items[seg.labelKey]?.includes[0] ?? "";
+        }
+
+        /**
+         * Percentages via largest remainder so the legend sums to exactly 100.
+         * Rounding each share independently lands on 99 or 101 often enough to
+         * be noticed by exactly the audience this page is aimed at.
+         */
+        function sharesOf(values: number[], total: number): number[] {
+            if (!total) return values.map(() => 0);
+            const raw = values.map((v) => (v / total) * 100);
+            const out = raw.map(Math.floor);
+            const short = 100 - out.reduce((a, b) => a + b, 0);
+            raw.map((v, i) => ({ i, frac: v - Math.floor(v) }))
+                .sort((a, b) => b.frac - a.frac)
+                .slice(0, Math.max(0, short))
+                .forEach(({ i }) => (out[i] += 1));
+            return out;
+        }
+
+        /**
+         * Focus a family by DIMMING everything else — never by hiding it.
+         * Hiding the non-focused detail rows changed the panel's height on
+         * every hover, which made the whole column jump around.
+         */
+        function setActiveFamily(family: string | null) {
+            bar.classList.toggle("is-dimmed", family !== null);
+            legendEl.classList.toggle("is-dimmed", family !== null);
+            $$<HTMLElement>(".seg").forEach((el) =>
+                el.classList.toggle("is-active", family !== null && el.dataset.family === family),
+            );
+            $$<HTMLElement>("[data-family-block]").forEach((el) => {
+                const on = family !== null && el.dataset.familyBlock === family;
+                el.classList.toggle("is-active", on);
+                el.querySelector(".legend-row")?.setAttribute("aria-pressed", String(on));
+            });
+        }
+
+        // A clicked family stays focused; hover only previews while nothing is
+        // pinned, so the two interactions never fight each other.
+        let pinnedFamily: string | null = null;
+        const previewFamily = (family: string | null) => {
+            if (pinnedFamily === null) setActiveFamily(family);
+        };
+
+        function render() {
+            const r = calculate(selection);
+
+            const families = FAMILY_ORDER.map((fam) => ({
+                id: fam,
+                segments: r.segments.filter((s) => FAMILY_OF[s.group] === fam),
+            })).filter((f) => f.segments.length > 0);
+
+            // ── bar ──
+            bar.innerHTML = "";
+            families.forEach((fam, fi) => {
+                const groupTotal = fam.segments.reduce((a, s) => a + s.value, 0);
+                const group = document.createElement("div");
+                group.className = "seg-group";
+                group.style.flex = `${groupTotal} 0 0px`;
+                fam.segments.forEach((seg, si) => {
+                    const el = document.createElement("div");
+                    el.className = "seg" + (fam.id === "uplift" ? " seg-uplift-fill" : "");
+                    el.style.flex = `${seg.value} 0 0px`;
+                    el.style.backgroundColor = `var(--seg-${fam.id})`;
+                    el.dataset.family = fam.id;
+                    const isFirst = fi === 0 && si === 0;
+                    const isLast = fi === families.length - 1 && si === fam.segments.length - 1;
+                    if (isFirst) el.style.borderTopLeftRadius = el.style.borderBottomLeftRadius = "2px";
+                    if (isLast) el.style.borderTopRightRadius = el.style.borderBottomRightRadius = "4px";
+                    const pct = r.total ? Math.round((seg.display / r.total) * 100) : 0;
+                    const name = t.items[seg.labelKey]?.short ?? seg.labelKey;
+                    const hint = `${name} · ${fmt(seg.display)} · ${pct}% ${t.chart.shareOfTotal}`;
+                    el.addEventListener("mouseenter", () => {
+                        if (pinnedFamily === null) barHint.textContent = hint;
+                        previewFamily(fam.id);
+                    });
+                    el.addEventListener("mouseleave", () => {
+                        if (pinnedFamily === null) barHint.textContent = "";
+                        previewFamily(null);
+                    });
+                    // Tapping a segment pins the same focus the legend rows do,
+                    // so the chart is usable on touch where hover never fires.
+                    el.addEventListener("click", () => {
+                        pinnedFamily = pinnedFamily === fam.id ? null : fam.id;
+                        setActiveFamily(pinnedFamily);
+                        barHint.textContent = pinnedFamily ? hint : "";
+                    });
+                    group.appendChild(el);
+                });
+                bar.appendChild(group);
+            });
+
+            // ── legend ──
+            legendEl.innerHTML = "";
+            const famTotals = families.map((f) => f.segments.reduce((a, s) => a + s.display, 0));
+            const famShares = sharesOf(famTotals, r.total);
+            families.forEach((fam, fi) => {
+                const famTotal = famTotals[fi];
+                const pct = famShares[fi];
+
+                const block = document.createElement("div");
+                block.dataset.familyBlock = fam.id;
+
+                const row = document.createElement("button");
+                row.type = "button";
+                row.className = "legend-row";
+                row.setAttribute("aria-pressed", "false");
+                row.innerHTML = `
+                    <span class="legend-swatch${fam.id === "uplift" ? " seg-uplift-fill" : ""}" style="background-color:var(--seg-${fam.id})"></span>
+                    <span class="flex-1 min-w-0 text-sm text-white truncate">${FAMILY_LABEL[fam.id]}</span>
+                    <span class="text-sm font-semibold text-white tabular-nums">${fmt(famTotal)}</span>
+                    <span class="text-xs text-text-secondary tabular-nums w-9 text-right">${pct}%</span>`;
+                row.addEventListener("click", () => {
+                    pinnedFamily = pinnedFamily === fam.id ? null : fam.id;
+                    setActiveFamily(pinnedFamily);
+                    barHint.textContent = pinnedFamily
+                        ? `${FAMILY_LABEL[fam.id]} · ${fmt(famTotal)} · ${pct}% ${t.chart.shareOfTotal}`
+                        : "";
+                });
+                row.addEventListener("mouseenter", () => previewFamily(fam.id));
+                row.addEventListener("mouseleave", () => previewFamily(null));
+                block.appendChild(row);
+
+                // Tier detail — this is what answers "how much is the API connection".
+                // Always rendered; focus only changes its opacity.
+                const sub = document.createElement("div");
+                sub.className = "pl-[1.125rem] pb-1 space-y-1";
+                // A single-segment family already shows its figure on the family
+                // row; repeating it below reads as a duplicate rather than detail.
+                const showSubValue = fam.segments.length > 1;
+                sub.innerHTML = fam.segments
+                    .map((seg) => {
+                        const d = derivation(seg);
+                        return `<div class="flex items-baseline gap-2 text-xs">
+                            <span class="flex-1 min-w-0 text-text-secondary">${t.items[seg.labelKey]?.label ?? seg.labelKey}${d ? `<span class="block text-[11px] text-text-secondary/70">${d}</span>` : ""}</span>
+                            ${showSubValue ? `<span class="text-white/80 tabular-nums shrink-0">${fmt(seg.display)}</span>` : ""}
+                        </div>`;
+                    })
+                    .join("");
+                block.appendChild(sub);
+                legendEl.appendChild(block);
+            });
+            // The legend was just rebuilt, so any pinned focus no longer applies.
+            pinnedFamily = null;
+            barHint.textContent = "";
+            setActiveFamily(null);
+
+            // ── free items ──
+            freeEl.innerHTML = `
+                <p class="text-xs font-semibold text-white mb-2">${t.chart.freeHeading}</p>
+                ${r.freeItems
+                    .map(
+                        (f) => `<div class="flex items-baseline gap-2 text-xs py-0.5">
+                            <span class="flex-1 min-w-0 text-text-secondary">${t.items[f.labelKey]?.label ?? f.labelKey}</span>
+                            ${f.listValue > 0 ? `<s class="text-text-secondary/60 tabular-nums">${fmt(f.listValue)}</s>` : ""}
+                            <span class="text-primary font-semibold tabular-nums">${fmt(0)}</span>
+                        </div>`,
+                    )
+                    .join("")}`;
+
+            // ── totals & thresholds ──
+            totalEl.textContent = fmt(r.total);
+            stickyTotalEl.textContent = fmt(r.total);
+            if (r.threshold === "none") {
+                thresholdEl.hidden = true;
+            } else {
+                thresholdEl.hidden = false;
+                thresholdEl.textContent =
+                    r.threshold === "hard" ? t.result.hardThreshold : t.result.softThreshold;
+            }
+
+            // ── warnings ──
+            $$<HTMLElement>("[data-warning]").forEach((el) => {
+                el.hidden = !r.warnings.includes(el.dataset.warning!);
+            });
+
+            // ── stepper bounds ──
+            const sourceTotal = selection.sources.A + selection.sources.B + selection.sources.C;
+            const pageTotal = selection.pages.A + selection.pages.B + selection.pages.C;
+            $$<HTMLButtonElement>("[data-path]").forEach((btn) => {
+                const [group, tier] = btn.dataset.path!.split(".");
+                const step = Number(btn.dataset.step);
+                const qty = (selection as any)[group][tier] as number;
+                const total = group === "sources" ? sourceTotal : pageTotal;
+                const max = group === "sources" ? cfg.quantityItems[0].max : cfg.quantityItems[1].max;
+                btn.disabled = step < 0 ? qty <= 0 || total <= 1 : total >= max;
+            });
+            $$<HTMLElement>("[data-qty]").forEach((el) => {
+                const [group, tier] = el.dataset.qty!.split(".");
+                el.textContent = String((selection as any)[group][tier]);
+            });
+
+            // ── handoff ──
+            const summary = buildSummary(r);
+            mailtoEl.href = `mailto:hilgemann.julian@gmail.com?subject=${encodeURIComponent(t.cta.mailSubject)}&body=${encodeURIComponent(t.cta.mailIntro + "\n" + summary)}`;
+            mailtoEl.dataset.summary = summary;
+            mailtoEl.dataset.total = String(r.total);
+        }
+
+        function buildSummary(r: ReturnType<typeof calculate>): string {
+            const lines = r.segments.map(
+                (s) => `- ${t.items[s.labelKey]?.label ?? s.labelKey}: ${fmt(s.display)}`,
+            );
+            return [
+                `${t.result.totalLabel}: ${fmt(r.total)} (${t.result.estimateBadge})`,
+                "",
+                `${t.chart.legendHeading}:`,
+                ...lines,
+                "",
+                `${t.chart.freeHeading}: ${r.freeItems.map((f) => t.items[f.labelKey]?.label ?? f.labelKey).join(", ")}`,
+                "",
+                t.result.vat,
+                t.result.validity(r.validityDays),
+                t.result.versionLabel(r.priceListVersion),
+            ].join("\n");
+        }
+
+        // Releasing a pinned family: any click or tap outside the chart and its
+        // legend clears it. Clicks inside those two are the toggles themselves,
+        // so they are allowed to bubble past this handler untouched.
+        const releasePin = () => {
+            if (pinnedFamily === null) return;
+            pinnedFamily = null;
+            setActiveFamily(null);
+            barHint.textContent = "";
+        };
+        document.addEventListener("click", (e) => {
+            const target = e.target as Element | null;
+            if (target?.closest("[data-bar]") || target?.closest("[data-legend]")) return;
+            releasePin();
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") releasePin();
+        });
+
+        // ── events ──
+        $$<HTMLButtonElement>("[data-path]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const [group, tier] = btn.dataset.path!.split(".");
+                const step = Number(btn.dataset.step);
+                const next = (selection as any)[group][tier] + step;
+                (selection as any)[group][tier] = Math.max(0, next);
+                render();
+            });
+        });
+
+        $$<HTMLInputElement>('input[type="radio"]').forEach((input) => {
+            input.addEventListener("change", () => {
+                (selection as any)[input.name] = input.value;
+                render();
+            });
+        });
+
+        $$<HTMLInputElement>('input[name="multiplier"]').forEach((input) => {
+            input.addEventListener("change", () => {
+                selection.multipliers[input.value] = input.checked;
+                render();
+            });
+        });
+
+        $<HTMLButtonElement>("[data-reset]")?.addEventListener("click", () => {
+            Object.assign(selection, structuredClone(DEFAULT_SELECTION));
+            $$<HTMLInputElement>('input[type="radio"]').forEach((i) => {
+                i.checked = i.value === (DEFAULT_SELECTION as any)[i.name];
+            });
+            $$<HTMLInputElement>('input[name="multiplier"]').forEach((i) => (i.checked = false));
+            render();
+        });
+
+        copyBtn.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(mailtoEl.dataset.summary || "");
+                const original = copyBtn.textContent;
+                copyBtn.textContent = t.cta.copied;
+                setTimeout(() => (copyBtn.textContent = original), 1800);
+            } catch {
+                /* clipboard blocked — the mailto path still works */
+            }
+        });
+
+        mailtoEl.addEventListener("click", () => {
+            if (typeof (window as any).gtag === "function") {
+                (window as any).gtag("event", "pricing_config_submit", {
+                    event_category: "pricing_calculator",
+                    value: Number(mailtoEl.dataset.total || 0),
+                    currency: "EUR",
+                    price_list_version: cfg.priceListVersion,
+                    language: lang,
+                });
+            }
+        });
+
+        // Sticky total: visible only below `lg`, once the reader is inside the
+        // calculator, and only while the result panel itself is off screen.
+        // A scroll handler rather than IntersectionObserver so the bar fails
+        // *open* — an observer that never fires would hide it permanently.
+        const resultPanel = totalEl.closest(".glass") as HTMLElement | null;
+        const controlsEl = $<HTMLElement>("[data-controls]");
+        function updateSticky() {
+            if (!resultPanel || !controlsEl) return;
+            const panel = resultPanel.getBoundingClientRect();
+            const controls = controlsEl.getBoundingClientRect();
+            const isDesktop = window.innerWidth >= 1024;
+            // Anchor on the controls, not the section: the calculator starts at
+            // the top of the page, so a section-based test is true immediately.
+            const started = controls.top < window.innerHeight * 0.25;
+            const panelInView = panel.top < window.innerHeight * 0.85 && panel.bottom > 0;
+            // Once the reader is past the result, the bar has done its job and
+            // would otherwise sit over the closing CTA and footer.
+            const pastResult = panel.bottom <= 0;
+            stickyEl.classList.toggle(
+                "translate-y-full",
+                isDesktop || !started || panelInView || pastResult,
+            );
+        }
+        // Called directly rather than rAF-throttled: it is two reads and no
+        // writes to layout, and a throttle latch that never clears would leave
+        // the bar stuck in whatever state it was last in.
+        window.addEventListener("scroll", updateSticky, { passive: true });
+        window.addEventListener("resize", updateSticky);
+        updateSticky();
+        $<HTMLAnchorElement>("[data-sticky-jump]")?.addEventListener("click", (e) => {
+            e.preventDefault();
+            resultPanel?.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+
+        render();
+    }
+</script>

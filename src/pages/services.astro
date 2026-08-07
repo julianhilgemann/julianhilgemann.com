@@ -1,25 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PainPoints from "../components/PainPoints.astro";
-import Offerings from "../components/Offerings.astro";
-import IncludedGrid from "../components/IncludedGrid.astro";
+import PricingCalculator from "../components/PricingCalculator.astro";
 import LetsDesignCTA from "../components/LetsDesignCTA.astro";
 ---
 
 <Layout
     title="Services & Pricing | Julian Hilgemann"
-    description="Explore my service packages, deliverables, and pricing for BI and data engineering solutions."
+    description="Configure a realistic project scope and see an itemised estimate — what a Power BI decision system costs, and exactly where the money goes."
     fullWidth={true}
     noTopPadding={false}
 >
-    <!-- Problem / Context Section -->
-    <PainPoints />
-
-    <!-- Services / Packages Section -->
-    <Offerings />
-
-    <!-- Included Grid -->
-    <IncludedGrid />
+    <!-- Problem framing + interactive pricing calculator -->
+    <PricingCalculator lang="en" />
 
     <!-- Services CTA -->
     <LetsDesignCTA />

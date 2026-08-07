@@ -1,0 +1,199 @@
+{
+  "priceListVersion": "2026-08-01",
+  "_anchor": "All fixed prices derived from an internal effort estimate at EUR 900/day, plus a ~20% fixed-price risk buffer. Change the day rate and re-derive rather than editing individual numbers ad hoc.",
+  "currency": "EUR",
+  "vatNote": "All prices net, plus VAT.",
+  "validityDays": 30,
+
+  "display": {
+    "estimateRangePct": 20,
+    "_estimateRangeNote": "RETAINED BUT UNUSED. The UI shows exact figures labelled as an estimate. Kept so a range presentation can be re-enabled without re-deriving it.",
+    "roundToNearest": 500,
+    "headlineFromPrice": 6000,
+    "_headlineNote": "Minimum viable config = base 2400 + 1 source Tier A 600 + 3 pages Tier A 1350 + semanticModel compact 1800 = 6150. Publish as 'from EUR 6.000'. The previous value (4500, derived from 4350) omitted the semantic model, which is required:true — every report sits on a model, so it cannot be excluded from the floor."
+  },
+
+  "thresholds": {
+    "softReviewAt": 10000,
+    "_softNote": "Above this: still show the estimate, but surface a scoping-call CTA and a 'range widens with scope' note.",
+    "hardContactAt": 30000,
+    "_hardNote": "Above this: keep the number visible and escalate CTA prominence. The number is deliberately NOT hidden — with no capture form on the page, hiding it from the best-qualified visitor loses the lead entirely."
+  },
+
+  "base": {
+    "id": "foundation",
+    "label": "Foundation & Fabric workspace setup",
+    "price": 2400,
+    "mandatory": true,
+    "effortDays": 2,
+    "includes": [
+      "Workspace and capacity configuration",
+      "Dev / test / prod environments + deployment pipeline",
+      "Git integration and naming/governance conventions",
+      "Kickoff and requirements session"
+    ]
+  },
+
+  "quantityItems": [
+    {
+      "id": "sources",
+      "label": "Data connections",
+      "unit": "source",
+      "min": 1,
+      "max": 25,
+      "default": 1,
+      "tiers": [
+        { "id": "A", "label": "Standard connector (SQL, SharePoint, Excel/CSV, common SaaS)", "price": 600 },
+        { "id": "B", "label": "Custom REST API (OAuth, pagination, rate limits)", "price": 1200 },
+        { "id": "C", "label": "Legacy / undocumented / manual file-based", "price": 2100 }
+      ],
+      "taper": [
+        { "fromUnit": 1, "toUnit": 3, "factor": 1.0 },
+        { "fromUnit": 4, "toUnit": 8, "factor": 0.85 },
+        { "fromUnit": 9, "toUnit": null, "factor": 0.75 }
+      ],
+      "_taperNote": "Taper is applied by cumulative source slot, tier-agnostic, cheapest tier consuming the earliest (undiscounted) slots. Mirrors the pages rule so both quantity items behave identically and the discount always lands on the most expensive units."
+    },
+    {
+      "id": "pages",
+      "label": "Report pages",
+      "unit": "page",
+      "min": 1,
+      "max": 40,
+      "default": 3,
+      "tiers": [
+        { "id": "A", "label": "Standard (visuals on an existing model)", "price": 450 },
+        { "id": "B", "label": "Interactive (drill-through, bookmarks, what-if, dynamic measures)", "price": 800 },
+        { "id": "C", "label": "Advanced (custom visuals, complex layout, heavy DAX)", "price": 1300 }
+      ],
+      "taper": [
+        { "fromUnit": 1, "toUnit": 5, "factor": 1.0 },
+        { "fromUnit": 6, "toUnit": 15, "factor": 0.85 },
+        { "fromUnit": 16, "toUnit": null, "factor": 0.7 }
+      ],
+      "_taperNote": "Taper is applied by cumulative page slot, tier-agnostic, cheapest tier consuming the earliest slots. Keeps the total predictable and always favours the buyer."
+    }
+  ],
+
+  "scopeItems": [
+    {
+      "id": "semanticModel",
+      "label": "Semantic model",
+      "required": true,
+      "default": "compact",
+      "options": [
+        { "id": "compact", "label": "Compact — up to ~5 tables, standard measures", "price": 1800 },
+        { "id": "standard", "label": "Standard — up to ~15 tables, time intelligence, calculation groups", "price": 3600 },
+        { "id": "complex", "label": "Complex — multi-fact, advanced DAX patterns, reconciliation logic", "price": 6500 }
+      ]
+    },
+    {
+      "id": "analyticsEngineering",
+      "label": "Upstream data transformation",
+      "required": false,
+      "default": "none",
+      "options": [
+        { "id": "none", "label": "None — data is already prepared", "price": 0 },
+        { "id": "light", "label": "Light — cleaning, conformed dimensions, a handful of views/notebooks", "price": 2400 },
+        { "id": "standard", "label": "Standard — medallion lakehouse, incremental loads, historization, orchestration", "price": 6000 },
+        { "id": "advanced", "label": "Advanced — SCD2, reconciliation, multi-currency / IFRS-style calculation layers", "price": 12000 }
+      ]
+    }
+  ],
+
+  "modules": [
+    {
+      "id": "designSystem",
+      "label": "Design system & theming",
+      "default": "none",
+      "options": [
+        { "id": "none", "label": "Default theme", "price": 0 },
+        { "id": "branded", "label": "Branded theme — theme file, colors/fonts/logo, page templates", "price": 1200 },
+        { "id": "full", "label": "Full design system — tokenized theme, component & layout library, documentation", "price": 3500 }
+      ]
+    },
+    {
+      "id": "aiReadiness",
+      "label": "AI readiness",
+      "price": 0,
+      "listValue": 2900,
+      "includedByDefault": true,
+      "badge": "Included",
+      "_note": "Free differentiator. Always show the struck-through list value — giving it away only works as positioning if the buyer knows what it is worth.",
+      "includes": [
+        "Metadata layer: semantic descriptions, business glossary, model documentation",
+        "Agentic enablement: skill files, curated query patterns, agent-consumable model contracts"
+      ]
+    },
+    {
+      "id": "onboarding",
+      "label": "Onboarding & enablement",
+      "default": "handover",
+      "options": [
+        { "id": "handover", "label": "Handover — recorded walkthrough + documentation", "price": 0, "badge": "Included" },
+        { "id": "training", "label": "Team training — live 2h session + materials", "price": 900 }
+      ]
+    }
+  ],
+
+  "multipliers": {
+    "_note": "Applied additively to the delivery-effort subtotal, then capped. Base = foundation + sources + pages + semantic model + upstream transformation + design system + onboarding. EXCLUDES prepaid hourly blocks (sold at a published rate, not scoped effort) and all zero-priced items.",
+    "cap": 1.6,
+    "factors": [
+      { "id": "multiTenant", "label": "Multiple tenants or distinct audiences", "add": 0.2 },
+      { "id": "rls", "label": "Row-level security required", "add": 0.1 },
+      { "id": "multiLanguage", "label": "Multi-language reporting", "add": 0.15 }
+    ]
+  },
+
+  "recurring": {
+    "_status": "RETAINED BUT NOT RENDERED. Recurring/monthly is out of scope for v1 — the UI shows a single one-time total. Re-enabling this is a UI change only; no pricing needs re-deriving.",
+    "minTermMonths": 12,
+    "options": [
+      {
+        "id": "reactive",
+        "label": "Reactive support",
+        "monthly": 290,
+        "includes": ["Bug fixes", "Response target 2 business days", "Up to 2h/month"]
+      },
+      {
+        "id": "managed",
+        "label": "Managed",
+        "monthly": 690,
+        "includes": ["Everything in Reactive", "Refresh monitoring & proactive checks", "Up to 4h/month"]
+      },
+      {
+        "id": "partnership",
+        "label": "Partnership",
+        "monthly": 1400,
+        "includes": ["Everything in Managed", "8h/month change budget", "Quarterly review"]
+      }
+    ],
+    "_sideProjectWarning": "Use 'response targets', never 'guaranteed SLA'. No on-call, no out-of-hours language. Keep Reactive as the pre-selected default."
+  },
+
+  "hourly": {
+    "rate": 110,
+    "label": "Custom work & change budget",
+    "default": "none",
+    "_note": "Rendered as a selectable input in the Extras section. Excluded from the complexity multiplier — these are prepaid hours at a published rate, not scoped delivery effort.",
+    "blocks": [
+      { "id": "none", "hours": 0, "price": 0, "discount": 0.0 },
+      { "id": "h10", "hours": 10, "price": 1100, "discount": 0.0 },
+      { "id": "h25", "hours": 25, "price": 2600, "discount": 0.05 },
+      { "id": "h50", "hours": 50, "price": 4950, "discount": 0.1 }
+    ]
+  },
+
+  "warnings": [
+    { "id": "pagesPerSource", "_rule": "totalPages > 10 && totalSources === 1" },
+    { "id": "advancedNoSources", "_rule": "analyticsEngineering === 'advanced' && totalSources <= 1" },
+    { "id": "pagesOnCompactModel", "_rule": "totalPages >= 15 && semanticModel === 'compact'" }
+  ],
+
+  "excluded": [
+    "Microsoft Fabric capacity (F-SKU) and Power BI licences — billed by Microsoft directly to the client",
+    "Third-party data source subscription costs",
+    "Travel, if on-site work is requested"
+  ]
+}
