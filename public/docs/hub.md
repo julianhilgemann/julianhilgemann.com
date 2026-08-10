@@ -1,13 +1,17 @@
-# hub
+# Link Hub
 
 Homepage
-                    Main Website
 
-                    GitHub
-                    Code & Projects
+Main Website
 
-                    LinkedIn
-                    Connect & Network
+GitHub
 
-                    Contact
-                    Download
+Code & Projects
+
+LinkedIn
+
+Connect & Network
+
+Contact
+
+Download

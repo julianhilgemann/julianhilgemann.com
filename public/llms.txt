@@ -1,15 +1,30 @@
-# Julian Hilgemann - AI Engineer & Data Architect
+# Julian Hilgemann — Power BI & Microsoft Fabric Decision Systems
 
-> Portfolio and documentation for Julian Hilgemann, specializing in Power BI decision dashboards, BI systems, and analytics engineering.
-> Updated: Feb 2026
+> Portfolio and technical documentation for Julian Hilgemann, an analytics engineer building production Power BI and Microsoft Fabric systems: semantic models, KPI and metric layers, forecasting, and decision interfaces. Published in English at / and in German at /de/.
+> Updated: Aug 2026
 
-## Core Pages
-- [Home](/docs/index.md): Main landing page. Overview of services, philosophy, and experience.
-- [Hub](/docs/hub.md): Central hub for code, projects, and contact information.
-- [Page Engine](/docs/page-engine.md): Technical architecture of the "Decision Engine".
-- [Imprint](/docs/impressum.md): Legal notice (Impressum).
-- [Privacy Policy](/docs/datenschutz.md): Data protection and privacy policy.
-- [Cookie Settings](/docs/cookie-einstellungen.md): Cookie management.
+## Core Pages (English)
+- [Home](/docs/index.md): Landing page: positioning statement and summaries of current open-source data projects.
+- [About](/docs/about.md): Working philosophy and experience: multi-tenant Microsoft Fabric product work, semantic model scale, TMDL and Git-based workflow, and forecasting background.
+- [Services & Pricing](/docs/services.md): Service packages, deliverables, engineering and design standards, and the interactive pricing calculator.
+- [Page Engine](/docs/page-engine.md): Technical architecture of the decision engine: signal ingestion, modeling, forecasting, and delivery layers.
+- [Link Hub](/docs/hub.md): Contact and profile links: GitHub, LinkedIn, and a downloadable vCard.
+- [Language Select](/docs/start.md): Entry gateway routing visitors to the English or German version of the site.
+
+## Core Pages (German)
+- [Startseite](/docs/de/index.md): German landing page: positioning statement and current open-source data projects.
+- [Über mich](/docs/de/about.md): German about page: working philosophy, Microsoft Fabric product work, semantic model scale, and forecasting background.
+- [Leistungen & Preise](/docs/de/services.md): German services page: packages, deliverables, delivery standards, and the pricing calculator.
+- [Page Engine (DE)](/docs/de/page-engine.md): German version of the decision engine architecture breakdown.
+- [Link Hub (DE)](/docs/de/hub.md): German contact and profile link hub.
+
+## Legal & Site Utilities
+- [Impressum](/docs/impressum.md): Legal notice under § 5 TMG: operator identity, address, and contact.
+- [Privacy Policy](/docs/datenschutz.md): GDPR privacy policy: hosting, Google Analytics 4 consent handling, data categories, third-country transfers, and data subject rights.
+- [Cookie Settings](/docs/cookie-einstellungen.md): Cookie preference management.
+- [Impressum (DE)](/docs/de/impressum.md): German legal notice under § 5 TMG.
+- [Datenschutz (DE)](/docs/de/datenschutz.md): German GDPR privacy policy.
+- [Cookie-Einstellungen (DE)](/docs/de/cookie-einstellungen.md): German cookie preference management.
 
 ## Full Context
-- [Full Documentation](/llms-full.txt): All content combined into a single file for full-context ingestion.
+- [Full Documentation](/llms-full.txt): Every page and component combined into a single file for full-context ingestion.

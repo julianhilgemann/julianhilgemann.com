@@ -1,414 +1,530 @@
 # Pages
 
+## index
+
+### Turn Data Into Decisions That Drive Revenue
+
+I design and build decision-ready Power BI dashboards that teams can use immediately. From messy data to clear KPIs, trusted numbers, and confident decisions.
+
+Services & Packages
+
+About me
+
+#### Current Projects
+
+A selection of my recent open-source work and public project contributions, hosted on GitHub.
+
+#### Questions? I reply fast.
+
+Contact me
+
+---
+
 ## about
 
-About Me
+### About Me
 
-                    I appreciate the intersection of analytical rigor and visual aesthetics. 
-                    My work centers on building data interfaces that do more than just display numbers—they 
-                    enable real decisions by generating insights within a reliable, polished product.
+I build BI as a product, not as a report. That means I own what I ship — the model underneath, the numbers on the surface, and whether anyone still trusts them six months later.
 
-                    What I Value in My Craft:
+Most reporting breaks in one of two directions: the numbers are right but nobody uses them, or it looks good and the model underneath won't hold. I work where those two meet.
 
-                    - Conceptual Clarity: Grounding architectural decisions in a clear product vision.
+Companies behave less like fixed structures than like living systems. Revenue moves in cycles, customers adapt, markets shift. Underneath the motion there is structure — dynamics you can model.
 
-                    - Creative Flow: Engaging in collaborative UI/UX ideation to solve complex problems.
+So a number on a dashboard isn't just a number. It's the visible surface of a data model, a set of definitions, and a hundred decisions about what to leave out.
 
-                    - Scalable Logic: The satisfaction of building robust structures within the data landscape.
+I build those abstractions to be technically sound and to match how people actually decide.
 
-                    - Intellectual Stimulation: Tackling the challenges of advanced analytics.
+#### How I work
 
-                    - Craftsmanship: A relentless attention to detail when refining data products.
+- **Clarity before code.** Architecture follows from a clear picture of what the product is for, not the other way around.
 
-                    - Tangible Impact: Seeing a product drive adoption and reduce friction for the user.
+- **Craft in the details.** Correct isn't enough. Naming, layout, load times and edge cases decide whether people come back.
 
-                    - Measured Exploration: Experimenting with novel technologies to expand what’s possible.
+- **Impact you can see.** A dashboard nobody opens is a failed project, however elegant the model.
 
-                    With a background spanning Business, Economics, and Statistics, I’ve spent the last years 
-                    in the Fintech sector building high-stakes data products.
+#### What I've built
 
-                    However, my perspective is equally shaped by an upbringing embedded in the contemporary art space. 
-                    This duality allows me to lean into a creative approach to analytics—blending technical precision 
-                    with intuitive design to drive meaningful results.
+##### Multi-tenant Fabric product
 
----
+I work on the product side of a multi-tenant Microsoft Fabric environment — around 150 customers, each with their own Dev, Test and Prod workspaces. The model runs to roughly 100 tables and 700 measures, and my job is keeping it fast and correct while it keeps growing. I build in VS Code against TMDL files with Git and DevOps behind it, rather than clicking through the service. Alongside that I'm rebuilding the transformation layer, moving dataflows into properly modeled warehouses and lakehouses.
 
-## cookie-einstellungen
+##### Forecasting and decision models
 
-# Cookie Einstellungen
+Before that I spent years building production BI in fintech: revenue and pipeline forecasting, scenario planning, and the metric layer underneath them — used in rolling executive planning. That side of the work is grounded in formal training in economics and quantitative methods.
 
-                Hier können Sie Ihre Cookie-Einstellungen verwalten.
-                (Funktionalität wird aktuell implementiert).
+I grew up around contemporary art, which is probably why I can't leave a badly laid-out chart alone. It's also the part of this work I enjoy most — the point where something technically dense becomes something a person can read at a glance.
+
+#### Questions? I reply fast.
+
+Contact me
 
 ---
 
-## datenschutz
+## services
 
-Datenschutzerklärung
+#### Let’s design your decision system.
 
-                    Verantwortlicher
+If your company has data but decisions still rely on gut feeling, we should talk.
 
-                    Julian Hilgemann, E‑Mail: hilgemann.julian@gmail.com
+Schedule Consultation
 
-                ## Hosting
+#### Pricing model
 
-                Diese Website wird über GitHub Pages bereitgestellt.
+Fixed-price configurator. All prices net, plus VAT. Quote valid 30 days. Price list version 2026-08-01. Entry point: from EUR 6,000.
 
-                    Reichweitenmessung (Google Analytics 4)
+##### Foundation & Fabric workspace setup
 
-                    Wir verwenden Google Analytics 4 zur Reichweitenmessung. Der
-                    Dienst wird erst nach Ihrer Einwilligung geladen (Art. 6
-                    Abs. 1 lit. a DSGVO). IP‑Adressen werden gekürzt
-                    (anonymize_ip). Anbieter: Google Ireland Limited, Gordon
-                    House, Barrow Street, Dublin 4, Irland.
+EUR 2,400, mandatory.
 
-                    Datenkategorien: Geräteinformationen, Browser‑ und
-                    Ereignisdaten (z. B. Seitenaufrufe, Klicks auf ausgehende
-                    Links).
+- Workspace and capacity configuration
+- Dev / test / prod environments + deployment pipeline
+- Git integration and naming/governance conventions
+- Kickoff and requirements session
 
-                    Drittlandübermittlung: Es kann zu Übermittlungen an die
-                    Google LLC in den USA kommen. Rechtsgrundlage sind
-                    Standardvertragsklauseln (Art. 46 DSGVO).
+##### Quantity-based items
 
-                Speicherdauer: gemäß Ihren GA4‑Einstellungen.
+**Data connections** (per source, 1-25); volume tapering applies.
 
-                ## Externe Links
+- Standard connector (SQL, SharePoint, Excel/CSV, common SaaS): EUR 600
+- Custom REST API (OAuth, pagination, rate limits): EUR 1,200
+- Legacy / undocumented / manual file-based: EUR 2,100
 
-                    Beim Klick auf externe Links (YouTube, Medium, Substack,
-                    Instagram, GitHub, LinkedIn) gelten die
-                    Datenschutzbestimmungen der jeweiligen Anbieter.
+**Report pages** (per page, 1-40); volume tapering applies.
 
-                ## Ihre Rechte
+- Standard (visuals on an existing model): EUR 450
+- Interactive (drill-through, bookmarks, what-if, dynamic measures): EUR 800
+- Advanced (custom visuals, complex layout, heavy DAX): EUR 1,300
 
-                    Sie haben die Rechte auf Auskunft, Berichtigung, Löschung,
-                    Einschränkung der Verarbeitung, Widerspruch sowie
-                    Datenübertragbarkeit. Wenden Sie sich hierzu an die oben
-                    genannte E‑Mail‑Adresse.
+##### Scope options
+
+**Semantic model** (required)
+
+- Compact — up to ~5 tables, standard measures: EUR 1,800
+- Standard — up to ~15 tables, time intelligence, calculation groups: EUR 3,600
+- Complex — multi-fact, advanced DAX patterns, reconciliation logic: EUR 6,500
+
+**Upstream data transformation**
+
+- None — data is already prepared: EUR 0
+- Light — cleaning, conformed dimensions, a handful of views/notebooks: EUR 2,400
+- Standard — medallion lakehouse, incremental loads, historization, orchestration: EUR 6,000
+- Advanced — SCD2, reconciliation, multi-currency / IFRS-style calculation layers: EUR 12,000
+
+##### Modules
+
+**Design system & theming**
+
+- Default theme: EUR 0
+- Branded theme — theme file, colors/fonts/logo, page templates: EUR 1,200
+- Full design system — tokenized theme, component & layout library, documentation: EUR 3,500
+
+**AI readiness** — included as standard (list value EUR 2,900)
+
+- Metadata layer: semantic descriptions, business glossary, model documentation
+- Agentic enablement: skill files, curated query patterns, agent-consumable model contracts
+
+**Onboarding & enablement**
+
+- Handover — recorded walkthrough + documentation: EUR 0
+- Team training — live 2h session + materials: EUR 900
+
+##### Complexity factors (combined cap 1.6x)
+
+- Multiple tenants or distinct audiences: +20%
+- Row-level security required: +10%
+- Multi-language reporting: +15%
+
+##### Ongoing support (minimum 12 months)
+
+- **Reactive support** — EUR 290/month: Bug fixes; Response target 2 business days; Up to 2h/month
+- **Managed** — EUR 690/month: Everything in Reactive; Refresh monitoring & proactive checks; Up to 4h/month
+- **Partnership** — EUR 1,400/month: Everything in Managed; 8h/month change budget; Quarterly review
+
+##### Custom work
+
+Custom work & change budget at EUR 110/hour.
+
+Prepaid blocks: 10h EUR 1,100, 25h EUR 2,600 (5% off), 50h EUR 4,950 (10% off).
+
+##### Not included
+
+- Microsoft Fabric capacity (F-SKU) and Power BI licences — billed by Microsoft directly to the client
+- Third-party data source subscription costs
+- Travel, if on-site work is requested
+
+---
+
+## page-engine
+
+System Online
+
+⚡ AI-Augmented
+Workflow Active
+
+### SYSTEM ARCHITECTURE
+
+Blueprinting the decision engine. From raw signal ingestion to predictive strategy execution.
+
+05.0 // DEPLOYMENT
+
+##### Ready to initiate?
+
+START PROJECT sequence
 
 ---
 
 ## hub
 
 Homepage
-                    Main Website
 
-                    GitHub
-                    Code & Projects
+Main Website
 
-                    LinkedIn
-                    Connect & Network
+GitHub
 
-                    Contact
-                    Download
+Code & Projects
 
----
+LinkedIn
 
-## impressum
+Connect & Network
 
-# Impressum
+Contact
 
-                        Angaben gemäß § 5 TMG
-
-                        Julian Hilgemann
-
-                        Josef‑Führer‑Straße 41
-
-                        80997 München
-
-                    ## Kontakt
-
-                        E‑Mail: hilgemann.julian@gmail.com
-
-                        Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
-
-                    Julian Hilgemann (Anschrift wie oben)
-
----
-
-## index
-
-
-
----
-
-## page-engine
-
->
-
-                   layer.label
-
-                System Online
-
-                ⚡ AI-Augmented
-Workflow Active
-
-          # SYSTEM ARCHITECTURE
-
-            Blueprinting the decision engine. From raw signal ingestion to predictive strategy execution.
-
-             `}>
-
-         class="spec-section min-h-[50vh] flex flex-col justify-center scroll-mt-32">
-
-                     layer.title
-
-                  STATUS: OPTIMIZED
-
-                           spec.value
-                           "spec.utility"
-
-           05.0 // DEPLOYMENT
-           ### Ready to initiate?
-
-              START PROJECT sequence
-
----
-
-## services
-
-
+Download
 
 ---
 
 ## start
 
-Welcome
+### Welcome
 
-                Select a Language
+Select a Language
 
-                    ENGLISH
+ENGLISH
 
-                    DEUTSCH
+DEUTSCH
 
 ---
 
-# Components
+## de/index
+
+### Aus Daten Werden Entscheidungen, die zählen.
+
+Power BI-Dashboards und Analytics-Landschaften, mit denen Teams sofort arbeiten können. Von unstrukturierten Rohdaten zu klaren KPIs, belastbaren Zahlen und Entscheidungen die richtig sind.
+
+Leistungen & Preise
+
+Über mich
+
+#### Aktuelle Projekte
+
+Eine Auswahl meiner aktuellen Open-Source-Arbeit und öffentlichen Projektbeiträge auf GitHub.
+
+#### Fragen? Ich antworte schnell.
+
+Kontakt aufnehmen
+
+---
+
+## de/about
+
+### Über mich
+
+Ich baue BI als Produkt, nicht als Report. Das heißt: Ich verantworte, was ich ausliefere — das Modell darunter, die Zahlen an der Oberfläche und die Frage, ob ihnen ein halbes Jahr später noch jemand vertraut.
+
+Die meisten Reportings scheitern in eine von zwei Richtungen: Die Zahlen stimmen, aber niemand nutzt sie. Oder es sieht gut aus, und das Modell darunter trägt nicht. Ich arbeite genau dort, wo beides zusammenkommt.
+
+Unternehmen verhalten sich weniger wie feste Strukturen als wie lebende Systeme. Umsätze bewegen sich in Zyklen, Kunden passen sich an, Märkte verschieben sich. Unter der Bewegung liegt Struktur — Dynamiken, die sich modellieren lassen.
+
+Eine Zahl im Dashboard ist deshalb nie nur eine Zahl. Sie ist die sichtbare Oberfläche eines Datenmodells, einer Reihe von Definitionen und von hundert Entscheidungen darüber, was weggelassen wird.
+
+Ich baue diese Abstraktionen so, dass sie technisch sauber sind und dazu passen, wie Menschen tatsächlich entscheiden.
+
+#### Wie ich arbeite
+
+- **Klarheit vor Code.** Architektur folgt aus einem klaren Bild davon, wofür das Produkt da ist — nicht umgekehrt.
+
+- **Sorgfalt im Detail.** Richtig reicht nicht. Benennung, Layout, Ladezeiten und Randfälle entscheiden, ob Leute wiederkommen.
+
+- **Sichtbare Wirkung.** Ein Dashboard, das niemand öffnet, ist ein gescheitertes Projekt — so elegant das Modell auch sein mag.
+
+#### Was ich gebaut habe
+
+##### Multi-Tenant-Produkt in Fabric
+
+Ich arbeite auf der Produktseite einer Multi-Tenant-Umgebung in Microsoft Fabric — rund 150 Kunden mit jeweils eigenen Dev-, Test- und Prod-Workspaces. Das Modell umfasst etwa 100 Tabellen und 700 Measures, und meine Aufgabe ist, es schnell und korrekt zu halten, während es weiter wächst. Ich entwickle in VS Code gegen TMDL-Dateien, mit Git und DevOps dahinter, statt im Service zu klicken. Parallel baue ich die Transformationsschicht um und überführe Dataflows in sauber modellierte Warehouses und Lakehouses.
+
+##### Forecasting und Entscheidungsmodelle
+
+Davor habe ich jahrelang produktive BI im Fintech-Umfeld gebaut: Umsatz- und Pipeline-Forecasting, Szenarioplanung und die Metrik-Schicht darunter — im Einsatz in der rollierenden Planung auf Führungsebene. Diese Seite der Arbeit ist in einer formalen Ausbildung in Wirtschaftswissenschaften und quantitativen Methoden verankert.
+
+Ich bin im Umfeld zeitgenössischer Kunst aufgewachsen. Wahrscheinlich kann ich deshalb kein schlecht gesetztes Chart stehen lassen. Es ist auch der Teil dieser Arbeit, der mir am meisten Spaß macht — der Punkt, an dem etwas technisch Dichtes zu etwas wird, das ein Mensch auf einen Blick lesen kann.
+
+#### Fragen? Ich antworte schnell.
+
+Kontakt aufnehmen
+
+---
+
+## de/services
+
+#### Lassen Sie uns Ihre Entscheidungen einfacher gestalten.
+
+Wenn Ihr Unternehmen über Daten verfügt, Entscheidungen aber weiterhin aus dem Bauch heraus getroffen werden – dann sollten wir sprechen.
+
+Beratungstermin vereinbaren
+
+#### Pricing model
+
+Fixed-price configurator. All prices net, plus VAT. Quote valid 30 days. Price list version 2026-08-01. Entry point: from EUR 6,000.
+
+##### Foundation & Fabric workspace setup
+
+EUR 2,400, mandatory.
+
+- Workspace and capacity configuration
+- Dev / test / prod environments + deployment pipeline
+- Git integration and naming/governance conventions
+- Kickoff and requirements session
+
+##### Quantity-based items
+
+**Data connections** (per source, 1-25); volume tapering applies.
+
+- Standard connector (SQL, SharePoint, Excel/CSV, common SaaS): EUR 600
+- Custom REST API (OAuth, pagination, rate limits): EUR 1,200
+- Legacy / undocumented / manual file-based: EUR 2,100
+
+**Report pages** (per page, 1-40); volume tapering applies.
+
+- Standard (visuals on an existing model): EUR 450
+- Interactive (drill-through, bookmarks, what-if, dynamic measures): EUR 800
+- Advanced (custom visuals, complex layout, heavy DAX): EUR 1,300
+
+##### Scope options
+
+**Semantic model** (required)
+
+- Compact — up to ~5 tables, standard measures: EUR 1,800
+- Standard — up to ~15 tables, time intelligence, calculation groups: EUR 3,600
+- Complex — multi-fact, advanced DAX patterns, reconciliation logic: EUR 6,500
+
+**Upstream data transformation**
+
+- None — data is already prepared: EUR 0
+- Light — cleaning, conformed dimensions, a handful of views/notebooks: EUR 2,400
+- Standard — medallion lakehouse, incremental loads, historization, orchestration: EUR 6,000
+- Advanced — SCD2, reconciliation, multi-currency / IFRS-style calculation layers: EUR 12,000
+
+##### Modules
+
+**Design system & theming**
+
+- Default theme: EUR 0
+- Branded theme — theme file, colors/fonts/logo, page templates: EUR 1,200
+- Full design system — tokenized theme, component & layout library, documentation: EUR 3,500
+
+**AI readiness** — included as standard (list value EUR 2,900)
+
+- Metadata layer: semantic descriptions, business glossary, model documentation
+- Agentic enablement: skill files, curated query patterns, agent-consumable model contracts
+
+**Onboarding & enablement**
+
+- Handover — recorded walkthrough + documentation: EUR 0
+- Team training — live 2h session + materials: EUR 900
+
+##### Complexity factors (combined cap 1.6x)
+
+- Multiple tenants or distinct audiences: +20%
+- Row-level security required: +10%
+- Multi-language reporting: +15%
+
+##### Ongoing support (minimum 12 months)
+
+- **Reactive support** — EUR 290/month: Bug fixes; Response target 2 business days; Up to 2h/month
+- **Managed** — EUR 690/month: Everything in Reactive; Refresh monitoring & proactive checks; Up to 4h/month
+- **Partnership** — EUR 1,400/month: Everything in Managed; 8h/month change budget; Quarterly review
+
+##### Custom work
+
+Custom work & change budget at EUR 110/hour.
+
+Prepaid blocks: 10h EUR 1,100, 25h EUR 2,600 (5% off), 50h EUR 4,950 (10% off).
+
+##### Not included
+
+- Microsoft Fabric capacity (F-SKU) and Power BI licences — billed by Microsoft directly to the client
+- Third-party data source subscription costs
+- Travel, if on-site work is requested
+
+---
+
+## de/page-engine
+
+System Online
+
+⚡ AI-Augmented
+Workflow Active
+
+### SYSTEMARCHITEKTUR
+
+Blaupause der Entscheidungsmaschine. Von der Signalaufnahme bis zur prädiktiven Strategieausführung.
+
+05.0 // DEPLOYMENT
+
+##### Bereit zu starten?
+
+PROJEKT-SEQUENZ STARTEN
+
+---
+
+## de/hub
+
+Startseite
+
+Haupt-Website
+
+GitHub
+
+Code & Projekte
+
+LinkedIn
+
+Vernetzen & Networking
+
+Kontakt
+
+Download
+
+---
+
+## impressum
+
+### Impressum
+
+#### Angaben gemäß § 5 TMG
+
+Julian Hilgemann Josef‑Führer‑Straße 41 80997 München
+
+#### Kontakt
+
+E‑Mail: hilgemann.julian@gmail.com
+
+#### Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
+
+Julian Hilgemann (Anschrift wie oben)
+
+---
+
+## datenschutz
+
+### Datenschutzerklärung
+
+#### Verantwortlicher
+
+Julian Hilgemann, E‑Mail: hilgemann.julian@gmail.com
+
+#### Hosting
+
+Diese Website wird über GitHub Pages bereitgestellt.
+
+#### Reichweitenmessung (Google Analytics 4)
+
+Wir verwenden Google Analytics 4 zur Reichweitenmessung. Der Dienst wird erst nach Ihrer Einwilligung geladen (Art. 6 Abs. 1 lit. a DSGVO). IP‑Adressen werden gekürzt (anonymize_ip). Anbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.
+
+Datenkategorien: Geräteinformationen, Browser‑ und Ereignisdaten (z. B. Seitenaufrufe, Klicks auf ausgehende Links).
+
+Drittlandübermittlung: Es kann zu Übermittlungen an die Google LLC in den USA kommen. Rechtsgrundlage sind Standardvertragsklauseln (Art. 46 DSGVO).
+
+Speicherdauer: gemäß Ihren GA4‑Einstellungen.
+
+#### Externe Links
+
+Beim Klick auf externe Links (YouTube, Medium, Substack, Instagram, GitHub, LinkedIn) gelten die Datenschutzbestimmungen der jeweiligen Anbieter.
+
+#### Ihre Rechte
+
+Sie haben die Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Widerspruch sowie Datenübertragbarkeit. Wenden Sie sich hierzu an die oben genannte E‑Mail‑Adresse.
+
+---
+
+## cookie-einstellungen
+
+### Cookie Einstellungen
+
+Hier können Sie Ihre Cookie-Einstellungen verwalten. (Funktionalität wird aktuell implementiert).
+
+---
+
+## de/impressum
+
+### Impressum
+
+#### Angaben gemäß § 5 TMG
+
+Julian Hilgemann Josef‑Führer‑Straße 41 80997 München
+
+#### Kontakt
+
+E‑Mail: hilgemann.julian@gmail.com
+
+#### Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
+
+Julian Hilgemann (Anschrift wie oben)
+
+---
+
+## de/datenschutz
+
+### Datenschutzerklärung
+
+#### Verantwortlicher
+
+Julian Hilgemann, E‑Mail: hilgemann.julian@gmail.com
+
+#### Hosting
+
+Diese Website wird über GitHub Pages bereitgestellt.
+
+#### Reichweitenmessung (Google Analytics 4)
+
+Wir verwenden Google Analytics 4 zur Reichweitenmessung. Der Dienst wird erst nach Ihrer Einwilligung geladen (Art. 6 Abs. 1 lit. a DSGVO). IP‑Adressen werden gekürzt (anonymize_ip). Anbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.
+
+Datenkategorien: Geräteinformationen, Browser‑ und Ereignisdaten (z. B. Seitenaufrufe, Klicks auf ausgehende Links).
+
+Drittlandübermittlung: Es kann zu Übermittlungen an die Google LLC in den USA kommen. Rechtsgrundlage sind Standardvertragsklauseln (Art. 46 DSGVO).
+
+Speicherdauer: gemäß Ihren GA4‑Einstellungen.
+
+#### Externe Links
+
+Beim Klick auf externe Links (YouTube, Medium, Substack, Instagram, GitHub, LinkedIn) gelten die Datenschutzbestimmungen der jeweiligen Anbieter.
+
+#### Ihre Rechte
+
+Sie haben die Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Widerspruch sowie Datenübertragbarkeit. Wenden Sie sich hierzu an die oben genannte E‑Mail‑Adresse.
+
+---
+
+## de/cookie-einstellungen
+
+### Cookie Einstellungen
+
+Hier können Sie Ihre Cookie-Einstellungen verwalten. (Funktionalität wird aktuell implementiert).
+
+---
+
+# Shared Components
 
 ## ContactModal
 
-## Let's Connect
+#### Let's Connect
 
-                Ready to transform your data into actionable decisions? I'm
-                currently accepting new projects. 
-Drop me a line and let's
-                discuss your strategy.
+Ready to transform your data into actionable decisions? I'm currently accepting new projects. Drop me a line and let's discuss your strategy.
 
-                    Send me an Email
+Send me an Email
 
-                Prefer LinkedIn? Connect with me there.
-
----
-
-## CredibilityBar
-
-€4B+
-                yearly transaction volume
-
-                10+
-                productive Power BI dashboards
-
-                80+
-                monthly active users
-
-                3+
-                years fintech production experience
-
----
-
-## DecisionScope
-
-The Surface Area of the Decision Layer
-
-                I own the entire analytical value chain—from engineering the
-                'first mile' of raw data to designing the 'last mile' of
-                executive clarity.
-
-                            0
-
-                            scope.title
-
-                            scope.description
-
-                I don't just deliver a file; I own the logic, the performance,
-                and the long-term maintainability of the decision loop.
-
----
-
-## Experience
-
-Selected Experience & Systems
-                    Built
-
-                    With 3+ years of experience building and operating
-                    production analytics systems in high-stakes fintech environments,
-                    my core focus is owning the Power BI decision layer — the point where data becomes trusted, repeatable business
-                    action.
-
-                    I’ve owned and operated production Power BI environments
-                    spanning 10+ dashboards used daily by executive leadership,
-                    sales, and operations. This included end-to-end
-                    responsibility for semantic modeling, KPI logic, access
-                    control, performance optimization, and long-term
-                    maintainability — treating BI as a product, not a reporting
-                    artifact.
-
-                    Underneath the dashboard layer, I’ve worked extensively on
-                    analytics engineering and data modeling: designing metric
-                    layers, contributing to dbt-based transformations, aligning
-                    source-of-truth definitions, and ensuring downstream reports
-                    remain stable as data and business logic evolve. This
-                    foundation enabled more advanced use cases such as
-                    forecasting systems, scenario planning, and decision support
-                    models built on top of the same trusted data structures.
-
-                    A recurring theme in my work is translating between
-                    different stakeholder perspectives and levels of abstraction
-                    — from operational teams needing fast, concrete signals, to
-                    senior leadership requiring high-level clarity,
-                    comparability, and confidence in the numbers. This has
-                    shaped both how I design metrics and how I design
-                    interfaces.
-
-                    Beyond analytics logic, I’ve led cross-functional BI
-                    redesign initiatives with Design and Marketing: migrating
-                    legacy dashboards to a unified visual system, introducing
-                    style guides, templates, and shared conventions (Figma /
-                    Zeroheight), and raising data-visualization quality across
-                    teams to ensure dashboards are not only correct, but usable.
-
-                    This work is grounded in formal training in economics and
-                    quantitative methods — a B.Sc. in Business Administration
-                    with a forecasting focus, followed by graduate studies in
-                    Quantitative Economics covering time series analysis,
-                    econometrics, and statistical modeling.
-
-                    I’ve been using GenAI and LLMs in production
-                    analytics workflows since 2022, and actively explore emerging
-                    patterns such as agentic systems, context management, and tool
-                    orchestration. This includes connecting data, code, and analytical
-                    tools via MCP-style interfaces and agentic IDEs, with the goal
-                    of augmenting analytics teams and enabling stakeholders along
-                    the decision chain to harness modern AI toolkits effectively.
-
-                            Power BI Production & Ownership
-
-                        End-to-end ownership of a mission-critical BI
-                        environment.
-
-                            Owned and operated 10+ production Power BI
-                            dashboards
-
-                            80+ monthly active users across executive, sales,
-                            and ops teams
-
-                            Board-level, sales, and operational reporting in
-                            daily use
-
-                        - Centralized KPI definitions and semantic models
-
-                            Performance tuning, model refactoring, and RLS over
-                            time
-
-                            Stakeholder alignment, feedback cycles, and
-                            long-term ownership
-
-                        POWER BI
-                        DAX
-                        POWER QUERY
-                        SEMANTIC MODELING
-                        RLS
-
-                            KPI & Metric Layer
-
-                        Standardizing metrics to restore trust and speed.
-
-                            Replaced fragmented reporting with a single KPI
-                            layer
-
-                            Reduced reporting effort from multi-day cycles to
-                            same-day delivery
-
-                            Supported executive and investor reporting on €4bn+
-                            annual transaction volume
-
-                            Enabled consistent metrics across finance, sales,
-                            and leadership
-
-                        POWER BI
-                        POWER QUERY
-                        DAX
-                        SQL
-                        DBT
-                        POSTGRES
-                        EXCEL
-
-                            Forecasting & Scenario System
-
-                        Decision-grade revenue and pipeline forecasting.
-
-                        - Built multi-variable stochastic revenue models
-
-                            Modeled pipeline velocity and conversion dynamics
-                            across large funnels
-
-                            Combined hazard-based event modeling with seasonal
-                            time-series forecasting
-
-                            Used in rolling executive planning and scenario
-                            analysis
-
-                            Covered pipelines in the hundreds of millions in
-                            deal value
-
-                        PYTHON
-                        POSTGRES
-                        EXCEL
-                        POWER BI
-
-                            Lead Scoring → Activation
-
-                        Turning behavioral data into marketing efficiency.
-
-                            Built predictive lead-scoring models from behavioral
-                            data
-
-                            Integrated scoring into CRM and ad platforms
-                            (Reverse ETL)
-
-                        - Supported six-figure monthly SEA spend
-
-                            Optimized routing of high-intent leads to sales
-                            teams
-
-                            Foundation for performance-marketing optimization
-
-                        PYTHON
-                        POSTGRES
-                        DBT
-                        REVERSE ETL
-
-                            M&A Due Diligence & Financial Modeling
-
-                        Building investor-grade financial intelligence for
-                        strategic decisions.
-
-                            Modeled multiple acquisition targets with deal
-                            values in the multi-million euro range
-
-                            EBITDA uplift quantification and synergy calculation
-                            models
-
-                            Strategic scenario analyses across buy/hold/exit
-                            cases
-
-                        - Enterprise value and equity stake modeling
-
-                        - Break-even and threshold sensitivity analysis
-
-                        EXCEL
-                        POWER QUERY
-                        DATAROOM
-                        FINANCIAL MODELING
+Prefer LinkedIn? Connect with me there.
 
 ---
 
@@ -416,69 +532,26 @@ Selected Experience & Systems
 
 LinkedIn
 
-                GitHub
+GitHub
 
-            Imprint
-            GDPR
+Imprint
+GDPR
 
-                Cookies
+Cookies
 
-            Contact
+Contact
 
-            &copy; year Julian Hilgemann
-
----
-
-## Header
-
-JH
-
-                            class="nav-link text-xs md:text-sm font-medium hover:text-primary transition-colors duration-300 ease-in-out"
-                            data-href=item.href
-                        >
-                            item.name
-
-                    ENG
-                    GER
-
-                Contact
-
----
-
-## Hero
-
-Turn Data Into Decisions That Drive Revenue
-
-                I design and build decision-ready Power BI dashboards that
-                    teams can use immediately.
-
-                From messy data to clear KPIs, trusted numbers, and
-                    confident decisions.
-
-                    Services & Packages
-
-                    About me
+&copy;  Julian Hilgemann
 
 ---
 
 ## LanguageModal
 
-## Select Language
+#### Select Language
 
-                    English
+English
 
-                    Deutsch
-
----
-
-## LetsDesignCTA
-
-Let’s design your decision system.
-
-            If your company has data but decisions still rely on gut feeling, we
-            should talk.
-
-            Schedule Consultation
+Deutsch
 
 ---
 
@@ -486,253 +559,38 @@ Let’s design your decision system.
 
 Julian Hilgemann
 
-                contactText
+ENG
 
-                            class:list=
-                        >
-                            item.name
-
-                        contactText
-
-                        ENG
-
-                        GER
+GER
 
 ---
 
-## Philosophy
+## de/ContactModal
 
-Philosophy: Systems, Not Static
-                    Structures
+#### Let's Connect
 
-                        Companies behave less like fixed structures and more
-                        like living systems. They react, fluctuate, and evolve.
-                        Revenue moves in cycles, customers adapt, and markets
-                        shift.
+Daten in Entscheidungen verwandeln? Ich bin offen für neue Projekte. Schreiben Sie mir! Ich melde mich.
 
-                        Beneath that motion, however, there is structure:
-                        dynamics that can be modeled, abstracted, and
-                        understood.
+E-Mail senden
 
-                        A dashboard metric, then, isn’t “just a number.” It’s
-                        the visible surface of a deeper system. It's an
-                        expression of the underlying data architecture, modeling
-                        logic, and design choices, condensed into a single
-                        signal.
-
-                        I design and build abstractions that are technically
-                        sound and aligned with how people actually make
-                        decisions.
-
-                        In practice, this means designing Power BI dashboards
-                        that surface the right signal at the right moment — not
-                        just more data.
-
-                ### My Focus
-
-                        01
-
-                                Systems Thinking
-
-                                Understanding the whole, not just the parts.
-
-                        02
-
-                                Analytics Engineering
-
-                                Building robust, scalable data pipelines.
-
-                        03
-
-                                Modeling & Forecasting
-
-                                Predicting outcomes with statistical rigor.
-
-                        04
-
-                                Decision Interface Design
-
-                                Visualizing complexity for clarity.
+Lieber LinkedIn? Vernetzen Sie sich...
 
 ---
 
-## PricingCalculator
+## de/Footer
 
-t.intro.heading
+LinkedIn
 
-                t.intro.headingAccent
+GitHub
 
-                t.intro.kicker
+Impressum
+Datenschutz
 
-                        ### t.sections.foundation.title
+Cookies
 
-                        t.sections.foundation.hint
+Kontakt
 
-                                t.items.foundation.label
-
-                    t.controls.sourcesLabel
-
-                    t.controls.sourcesHint
-
-                        `].label}
-                                     · tier.label
-
-                                    &minus;
-                                    0
-                                    +
-
-                    t.warnings.advancedNoSources
-
-                        ### t.sections.output.title
-
-                        t.sections.output.hint
-
-                    t.controls.pagesHint
-
-                        `].label}
-                                     · tier.label
-
-                                    &minus;
-                                    0
-                                    +
-
-                    t.warnings.pagesPerSource
-
-                        ### t.sections.dataLayer.title
-
-                        t.sections.dataLayer.hint
-
-                        t.controls.semanticModelLabel
-                        t.controls.semanticModelHint
-
-                             checked= class="sr-only peer" />
-
-                        t.warnings.pagesOnCompactModel
-
-                        t.controls.transformLabel
-                        t.controls.transformHint
-
-                             checked= class="sr-only peer" />
-
-                        ### t.sections.extras.title
-
-                        t.sections.extras.hint
-
-                                    t.items.aiReadiness.label
-                                    aiCfg.badge
-
-                        t.controls.designLabel
-
-                             checked= class="sr-only peer" />
-
-                        t.controls.onboardingLabel
-
-                             checked= class="sr-only peer" />
-
-                        t.controls.customWorkLabel
-                        t.controls.customWorkHint
-
-                             checked= class="sr-only peer" />
-
-                        t.controls.complexityLabel
-                        t.controls.complexityHint
-
-                             class="sr-only peer" />
-
-                                            f.label
-
-                                        +%
-
-                    t.controls.reset
-
-                    t.result.totalLabel
-
-                    t.result.estimateBadge
-
-                —
-
-                t.result.oneTime · t.result.vat
-
-                t.chart.heading
-
-                t.chart.legendHeading
-
-                        t.cta.primary
-
-                    t.cta.primarySub
-
-                        t.cta.copy
-
-                    t.result.disclaimer
-
-                    t.result.ongoing
-
-                        t.result.excludedHeading
-
-            ### t.alwaysIncluded.heading
-
-            t.alwaysIncluded.sub
-
-            t.result.totalLabel
-
-            —
-
-            t.chart.legendHeading
-
----
-
-## ProjectCard
-
-category
-
-                    title
-
-                description
-
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:opacity-80 transition-opacity duration-300 ease-in-out"
-                                >
-
-                                    More on Github
-
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class=`}
-                                >
-
-                                    secondaryLink.text
-
----
-
-## Projects
-
-Current Projects
-
-                A selection of my recent open-source work and public project
-                contributions, hosted on GitHub.
-
-             />)}
-
----
-
-## SecondaryCTA
-
-Questions? I reply fast.
-
-            Contact me
-
----
-
-## Section
-
-
-
----
-
-## SpotlightButton
-
-
+&copy;  Julian Hilgemann
 
 ---
 

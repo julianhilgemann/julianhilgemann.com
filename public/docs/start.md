@@ -1,9 +1,7 @@
-# start
+# Welcome
 
-Welcome
+Select a Language
 
-                Select a Language
+ENGLISH
 
-                    ENGLISH
-
-                    DEUTSCH
+DEUTSCH

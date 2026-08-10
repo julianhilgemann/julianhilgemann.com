@@ -1,56 +1,119 @@
 ---
 import Layout from "../../layouts/LayoutDE.astro";
-import Philosophy from "../../components/de/Philosophy.astro";
-import Experience from "../../components/de/Experience.astro";
 import SecondaryCTA from "../../components/de/SecondaryCTA.astro";
 ---
 
 <Layout
     title="Über mich | Julian Hilgemann"
-    description="Erfahren Sie mehr über meinen beruflichen Hintergrund, meine Philosophie und Erfahrung."
+    description="Ich baue BI als Produkt — verantwortete Modelle, verlässliche Zahlen und Interfaces, die tatsächlich genutzt werden."
     fullWidth={true}
 >
-    <!-- Intro Section -->
     <section class="pb-16 md:pb-24 px-8 sm:px-12 lg:px-16">
         <div class="max-w-3xl mx-auto text-left">
-            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-8">
                 Über mich
             </h1>
+
             <div class="text-xl text-text-secondary leading-relaxed space-y-6">
                 <p>
-                    Ich schätze die Schnittmenge zwischen analytischer Präzision und visueller Ästhetik. 
-                    Meine Arbeit konzentriert sich auf die Entwicklung von Daten-Interfaces, die mehr tun, als nur Zahlen anzuzeigen – sie 
-                    ermöglichen echte Entscheidungen, indem sie Erkenntnisse innerhalb eines zuverlässigen, durchdachten Produkts generieren.
+                    Ich baue BI als Produkt, nicht als Report. Das heißt: Ich
+                    verantworte, was ich ausliefere — das Modell darunter, die
+                    Zahlen an der Oberfläche und die Frage, ob ihnen ein halbes
+                    Jahr später noch jemand vertraut.
                 </p>
                 <p>
-                    Was ich an meinem Handwerk schätze:
-                </p>
-                <ul class="list-disc pl-6 space-y-2">
-                    <li><strong>Konzeptionelle Klarheit:</strong> Architekturentscheidungen in einer klaren Produktvision verankern.</li>
-                    <li><strong>Kreativer Flow:</strong> Die Zusammenarbeit bei UI/UX-Ideenfindung, um komplexe Probleme zu lösen.</li>
-                    <li><strong>Skalierbare Logik:</strong> Die Zufriedenheit, robuste Strukturen innerhalb der Datenlandschaft aufzubauen.</li>
-                    <li><strong>Intellektuelle Stimulation:</strong> Die Herausforderungen moderner Analytics meistern.</li>
-                    <li><strong>Handwerkliches Können:</strong> Eine unermüdliche Detailgenauigkeit bei der Verfeinerung von Datenprodukten.</li>
-                    <li><strong>Spürbarer Impact:</strong> Zu sehen, wie ein Produkt die Nutzung fördert und Reibungsverluste für den Anwender reduziert.</li>
-                    <li><strong>Gemessenes Erkunden:</strong> Das Experimentieren mit neuen Technologien, um die eigenen Möglichkeiten zu erweitern.</li>
-                </ul>
-                <p>
-                    Mit einem Hintergrund in BWL, VWL und Statistik habe ich die letzten Jahre im Fintech-Sektor 
-                    verbracht und dort anspruchsvolle Datenprodukte entwickelt.
+                    Die meisten Reportings scheitern in eine von zwei
+                    Richtungen: Die Zahlen stimmen, aber niemand nutzt sie. Oder
+                    es sieht gut aus, und das Modell darunter trägt nicht. Ich
+                    arbeite genau dort, wo beides zusammenkommt.
                 </p>
                 <p>
-                    Gleichzeitig ist meine Perspektive ebenso geprägt durch eine Erziehung im Umfeld zeitgenössischer Kunst. 
-                    Diese Dualität erlaubt es mir, einen kreativen Ansatz in der Analytik zu verfolgen – technische Präzision 
-                    mit intuitivem Design zu verbinden, um bedeutsame Ergebnisse zu erzielen.
+                    Unternehmen verhalten sich weniger wie feste Strukturen als
+                    wie lebende Systeme. Umsätze bewegen sich in Zyklen, Kunden
+                    passen sich an, Märkte verschieben sich. Unter der Bewegung
+                    liegt Struktur — Dynamiken, die sich modellieren lassen.
+                </p>
+                <p>
+                    Eine Zahl im Dashboard ist deshalb nie nur eine Zahl. Sie
+                    ist die sichtbare Oberfläche eines Datenmodells, einer Reihe
+                    von Definitionen und von hundert Entscheidungen darüber, was
+                    weggelassen wird.
+                </p>
+                <p class="text-white font-medium border-l-4 border-primary pl-6">
+                    Ich baue diese Abstraktionen so, dass sie technisch sauber
+                    sind und dazu passen, wie Menschen tatsächlich entscheiden.
                 </p>
             </div>
+
+            <h2 class="text-2xl md:text-3xl font-bold mt-16 mb-6">
+                Wie ich arbeite
+            </h2>
+            <ul class="space-y-4 text-lg text-text-secondary leading-relaxed">
+                <li>
+                    <strong class="text-white">Klarheit vor Code.</strong> Architektur
+                    folgt aus einem klaren Bild davon, wofür das Produkt da ist —
+                    nicht umgekehrt.
+                </li>
+                <li>
+                    <strong class="text-white">Sorgfalt im Detail.</strong> Richtig
+                    reicht nicht. Benennung, Layout, Ladezeiten und Randfälle entscheiden,
+                    ob Leute wiederkommen.
+                </li>
+                <li>
+                    <strong class="text-white">Sichtbare Wirkung.</strong> Ein Dashboard,
+                    das niemand öffnet, ist ein gescheitertes Projekt — so elegant
+                    das Modell auch sein mag.
+                </li>
+            </ul>
+
+            <h2 class="text-2xl md:text-3xl font-bold mt-16 mb-6">
+                Was ich gebaut habe
+            </h2>
+            <div class="grid gap-4">
+                <div class="glass p-6 md:p-8 rounded-xl">
+                    <h3 class="font-bold text-white text-lg mb-3">
+                        Multi-Tenant-Produkt in Fabric
+                    </h3>
+                    <p class="text-text-secondary leading-relaxed">
+                        Ich arbeite auf der Produktseite einer
+                        Multi-Tenant-Umgebung in Microsoft Fabric — rund 150
+                        Kunden mit jeweils eigenen Dev-, Test- und
+                        Prod-Workspaces. Das Modell umfasst etwa 100 Tabellen
+                        und 700 Measures, und meine Aufgabe ist, es schnell und
+                        korrekt zu halten, während es weiter wächst. Ich
+                        entwickle in VS Code gegen TMDL-Dateien, mit Git und
+                        DevOps dahinter, statt im Service zu klicken. Parallel
+                        baue ich die Transformationsschicht um und überführe
+                        Dataflows in sauber modellierte Warehouses und
+                        Lakehouses.
+                    </p>
+                </div>
+
+                <div class="glass p-6 md:p-8 rounded-xl">
+                    <h3 class="font-bold text-white text-lg mb-3">
+                        Forecasting und Entscheidungsmodelle
+                    </h3>
+                    <p class="text-text-secondary leading-relaxed">
+                        Davor habe ich jahrelang produktive BI im Fintech-Umfeld
+                        gebaut: Umsatz- und Pipeline-Forecasting,
+                        Szenarioplanung und die Metrik-Schicht darunter — im
+                        Einsatz in der rollierenden Planung auf Führungsebene.
+                        Diese Seite der Arbeit ist in einer formalen Ausbildung
+                        in Wirtschaftswissenschaften und quantitativen Methoden
+                        verankert.
+                    </p>
+                </div>
+            </div>
+
+            <p class="text-xl text-text-secondary leading-relaxed mt-16">
+                Ich bin im Umfeld zeitgenössischer Kunst aufgewachsen.
+                Wahrscheinlich kann ich deshalb kein schlecht gesetztes Chart
+                stehen lassen. Es ist auch der Teil dieser Arbeit, der mir am
+                meisten Spaß macht — der Punkt, an dem etwas technisch Dichtes
+                zu etwas wird, das ein Mensch auf einen Blick lesen kann.
+            </p>
         </div>
     </section>
 
-    <!-- Content Sections -->
-    <Philosophy />
-    <Experience />
-
-    <!-- Contact CTA -->
     <SecondaryCTA />
 </Layout>

@@ -1,10 +1,10 @@
-# Services & Pricing
+# Leistungen & Preise
 
-## Let’s design your decision system.
+## Lassen Sie uns Ihre Entscheidungen einfacher gestalten.
 
-If your company has data but decisions still rely on gut feeling, we should talk.
+Wenn Ihr Unternehmen über Daten verfügt, Entscheidungen aber weiterhin aus dem Bauch heraus getroffen werden – dann sollten wir sprechen.
 
-Schedule Consultation
+Beratungstermin vereinbaren
 
 ## Pricing model
 
