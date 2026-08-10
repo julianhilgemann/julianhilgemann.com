@@ -15,6 +15,10 @@ const PRESERVE_IN_DOCS = new Set(['llmcntxt.md']);
 
 const SKIP_PAGES = new Set(['404']);
 
+const PRICING_CONFIG = path.join(SRC_DIR, 'data', 'pricing-config.json');
+// Pages whose real content lives in data rather than markup.
+const ENRICHED_PAGES = new Set(['services', 'de/services']);
+
 const SITE_TITLE = 'Julian Hilgemann — Power BI & Microsoft Fabric Decision Systems';
 const SITE_SUMMARY =
     'Portfolio and technical documentation for Julian Hilgemann, an analytics engineer building production Power BI and Microsoft Fabric systems: semantic models, KPI and metric layers, forecasting, and decision interfaces. Published in English at / and in German at /de/.';
@@ -242,9 +246,122 @@ function cleanContent(content) {
     // read as Markdown code blocks.
     text = text.replace(/^[ \t]+/gm, '');
     text = text.replace(/[ \t]+$/gm, '');
+
+    // Components driven entirely by client-side data leave behind empty heading
+    // shells and decorative glyphs once the markup is flattened.
+    text = text
+        .split('\n')
+        .filter((line) => !/^#{1,6}\s*$/.test(line) && !/^[\s\-—–·•|]+$/.test(line))
+        .join('\n');
+
     text = text.replace(/\n{3,}/g, '\n\n');
 
     return text.trim();
+}
+
+/**
+ * Recursively drop `_`-prefixed keys. These hold internal pricing rationale —
+ * the day rate the fixed prices are derived from, the risk buffer, and the
+ * lead-handling thresholds. None of it currently reaches the browser and none
+ * of it may reach a published file.
+ */
+function stripInternal(value) {
+    if (Array.isArray(value)) return value.map(stripInternal);
+    if (value && typeof value === 'object') {
+        return Object.fromEntries(
+            Object.entries(value)
+                .filter(([key]) => !key.startsWith('_'))
+                .map(([key, nested]) => [key, stripInternal(nested)]),
+        );
+    }
+    return value;
+}
+
+/**
+ * The pricing calculator renders from JSON at runtime, so flattening its markup
+ * yields nothing. Rebuild the offering from the same config the UI reads, so
+ * the services page stays answerable instead of being an empty shell.
+ */
+function renderPricing(rawConfig) {
+    const config = stripInternal(rawConfig);
+    const format = new Intl.NumberFormat('en-US');
+    const money = (amount) => `${config.currency} ${format.format(amount)}`;
+    const out = [];
+
+    out.push('## Pricing model', '');
+    out.push(
+        `Fixed-price configurator. ${config.vatNote} Quote valid ${config.validityDays} days. ` +
+            `Price list version ${config.priceListVersion}. Entry point: from ${money(config.display.headlineFromPrice)}.`,
+        '',
+    );
+
+    out.push(`### ${config.base.label}`, '', `${money(config.base.price)}, mandatory.`, '');
+    for (const line of config.base.includes ?? []) out.push(`- ${line}`);
+    out.push('');
+
+    out.push('### Quantity-based items', '');
+    for (const item of config.quantityItems ?? []) {
+        out.push(`**${item.label}** (per ${item.unit}, ${item.min}-${item.max}); volume tapering applies.`, '');
+        for (const tier of item.tiers ?? []) out.push(`- ${tier.label}: ${money(tier.price)}`);
+        out.push('');
+    }
+
+    out.push('### Scope options', '');
+    for (const item of config.scopeItems ?? []) {
+        out.push(`**${item.label}**${item.required ? ' (required)' : ''}`, '');
+        for (const option of item.options ?? []) out.push(`- ${option.label}: ${money(option.price)}`);
+        out.push('');
+    }
+
+    out.push('### Modules', '');
+    for (const module of config.modules ?? []) {
+        if (module.options) {
+            out.push(`**${module.label}**`, '');
+            for (const option of module.options) out.push(`- ${option.label}: ${money(option.price)}`);
+        } else {
+            const value = module.includedByDefault
+                ? `included as standard (list value ${money(module.listValue)})`
+                : money(module.price);
+            out.push(`**${module.label}** — ${value}`, '');
+            for (const line of module.includes ?? []) out.push(`- ${line}`);
+        }
+        out.push('');
+    }
+
+    if (config.multipliers?.factors?.length) {
+        out.push(`### Complexity factors (combined cap ${config.multipliers.cap}x)`, '');
+        for (const factor of config.multipliers.factors) {
+            out.push(`- ${factor.label}: +${Math.round(factor.add * 100)}%`);
+        }
+        out.push('');
+    }
+
+    if (config.recurring?.options?.length) {
+        out.push(`### Ongoing support (minimum ${config.recurring.minTermMonths} months)`, '');
+        for (const option of config.recurring.options) {
+            out.push(`- **${option.label}** — ${money(option.monthly)}/month: ${(option.includes ?? []).join('; ')}`);
+        }
+        out.push('');
+    }
+
+    if (config.hourly) {
+        const blocks = (config.hourly.blocks ?? [])
+            .filter((block) => block.hours > 0)
+            .map(
+                (block) =>
+                    `${block.hours}h ${money(block.price)}${block.discount ? ` (${Math.round(block.discount * 100)}% off)` : ''}`,
+            );
+        out.push('### Custom work', '', `${config.hourly.label} at ${money(config.hourly.rate)}/hour.`, '');
+        if (blocks.length) out.push(`Prepaid blocks: ${blocks.join(', ')}.`, '');
+    }
+
+    if (config.excluded?.length) {
+        out.push('### Not included', '');
+        for (const line of config.excluded) out.push(`- ${line}`);
+        out.push('');
+    }
+
+    return out.join('\n').trim();
 }
 
 /** Absolute paths of components imported directly by a single .astro file. */
@@ -326,6 +443,9 @@ async function main() {
         ...pageSlugs.filter((slug) => !PAGE_ORDER.includes(slug)).sort(),
     ];
 
+    const pricingConfig = JSON.parse(await fs.readFile(PRICING_CONFIG, 'utf-8'));
+    const pricingMarkdown = renderPricing(pricingConfig);
+
     let fullContent = '# Pages\n\n';
     const inlined = new Set();
 
@@ -344,6 +464,8 @@ async function main() {
             const componentText = cleanContent(componentRaw);
             if (componentText) parts.push(componentText);
         }
+
+        if (ENRICHED_PAGES.has(slug)) parts.push(pricingMarkdown);
 
         const content = parts.filter(Boolean).join('\n\n');
         const { title } = metaFor(slug);

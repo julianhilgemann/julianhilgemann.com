@@ -1,89 +1,91 @@
 # Services & Pricing
 
-## Most companies have data. Few have decision systems.
-
-Most organizations invest heavily in data infrastructure and dashboards — especially Power BI.
-
-Yet despite all that effort, teams still argue about numbers, export data to Excel, or ignore dashboards altogether.
-
-What’s missing isn’t data or tooling. It’s the decision layer: clear metrics, shared logic, and interfaces designed around how people actually make decisions.
-
-This is where Power BI becomes powerful — not as a reporting tool, but as a decision interface. A place where logic, metrics, and design come together to support real business decisions.
-
-### Static & Retrospective
-
-Dashboards show what happened last month — but not why it happened or what to do next.
-
-Metrics are descriptive, not actionable, leaving teams stuck reacting instead of deciding.
-
-### Untrusted Metrics
-
-Different dashboards show different numbers for the same KPI.
-
-Without a shared semantic model, stakeholders lose trust — and decision-making moves back to spreadsheets and meetings.
-
-### Ignored by the Business
-
-Dashboards exist, but adoption is low.
-
-Interfaces aren’t designed for real workflows, ownership is unclear, and reports slowly drift out of relevance.
-
-The result: dashboards technically work — but decisions still happen elsewhere.
-
-## I build the decision layer — where data becomes action.
-
-I specialize in building Power BI dashboards that translate complex data into clear, trustworthy signals for decision-makers.
-
-My focus is the last mile of analytics: the semantic model, KPI logic, and visual interface where teams actually interact with data and make decisions.
-
-Behind the scenes, my background across analytics engineering, modeling, and AI ensures that what looks simple on the surface is technically sound, scalable, and consistent underneath.
-
-Not sure which option fits? I’m happy to recommend the right scope after a short call.
-
-Book a free consultation
-
-### Professional Standards
-
-Every Power BI system I deliver follows a rigorous set of engineering, design, and communication standards to ensure long-term usability and audit-grade trust.
-
-#### Institutional Design & UX
-
-- IBCS-Aligned Visuals: High-density, professional reporting standards optimized for fast cognition.
-
-- **Figma Wireframing:** Structural alignment on layouts and UX before a single line of DAX is written.
-
-- Mobile-Ready Layouts: Responsive interfaces designed for decision-makers on the move.
-
-- **Modern UI Patterns:** Clean spacing, typography, and hierarchy optimized for analytical workflows.
-
-#### Fintech-Grade Engineering
-
-- High-Efficiency Semantics: Performance-tuned data models (Star Schema/Kimball) for instantaneous loading.
-
-- **LLM-Ready Metadata:** Models enriched with descriptions, making them fully compatible with AI/Copilot agents.
-
-- **Audit-Ready DAX:** Robust, documented KPI logic that allows finance teams to trace every number to the source.
-
-- **Data Quality Checks:** Built-in validation logic to flag data discrepancies before they reach the dashboard.
-
-#### Governance & Quality
-
-- Security-First Setup: Role-Level Security (RLS) implementation to ensure data privacy across the organization.
-
-- Maintainable Architecture: Standardized naming conventions and structures for seamless internal handovers.
-
-- **Versioned Delivery:** Clear change traceability and deployment cycles (Dev/Test/Prod) where required.
-
-#### Process & Transparency
-
-- Definition of Done (DoD): Clear requirements engineering so there is zero ambiguity on project scope.
-
-- **The Handover Vault:** Comprehensive documentation and Loom video walkthroughs for long-term ownership.
-
-- **Structured Feedback:** Iterative review cycles to ensure stakeholder alignment at every milestone.
-
 ## Let’s design your decision system.
 
 If your company has data but decisions still rely on gut feeling, we should talk.
 
 Schedule Consultation
+
+## Pricing model
+
+Fixed-price configurator. All prices net, plus VAT. Quote valid 30 days. Price list version 2026-08-01. Entry point: from EUR 6,000.
+
+### Foundation & Fabric workspace setup
+
+EUR 2,400, mandatory.
+
+- Workspace and capacity configuration
+- Dev / test / prod environments + deployment pipeline
+- Git integration and naming/governance conventions
+- Kickoff and requirements session
+
+### Quantity-based items
+
+**Data connections** (per source, 1-25); volume tapering applies.
+
+- Standard connector (SQL, SharePoint, Excel/CSV, common SaaS): EUR 600
+- Custom REST API (OAuth, pagination, rate limits): EUR 1,200
+- Legacy / undocumented / manual file-based: EUR 2,100
+
+**Report pages** (per page, 1-40); volume tapering applies.
+
+- Standard (visuals on an existing model): EUR 450
+- Interactive (drill-through, bookmarks, what-if, dynamic measures): EUR 800
+- Advanced (custom visuals, complex layout, heavy DAX): EUR 1,300
+
+### Scope options
+
+**Semantic model** (required)
+
+- Compact — up to ~5 tables, standard measures: EUR 1,800
+- Standard — up to ~15 tables, time intelligence, calculation groups: EUR 3,600
+- Complex — multi-fact, advanced DAX patterns, reconciliation logic: EUR 6,500
+
+**Upstream data transformation**
+
+- None — data is already prepared: EUR 0
+- Light — cleaning, conformed dimensions, a handful of views/notebooks: EUR 2,400
+- Standard — medallion lakehouse, incremental loads, historization, orchestration: EUR 6,000
+- Advanced — SCD2, reconciliation, multi-currency / IFRS-style calculation layers: EUR 12,000
+
+### Modules
+
+**Design system & theming**
+
+- Default theme: EUR 0
+- Branded theme — theme file, colors/fonts/logo, page templates: EUR 1,200
+- Full design system — tokenized theme, component & layout library, documentation: EUR 3,500
+
+**AI readiness** — included as standard (list value EUR 2,900)
+
+- Metadata layer: semantic descriptions, business glossary, model documentation
+- Agentic enablement: skill files, curated query patterns, agent-consumable model contracts
+
+**Onboarding & enablement**
+
+- Handover — recorded walkthrough + documentation: EUR 0
+- Team training — live 2h session + materials: EUR 900
+
+### Complexity factors (combined cap 1.6x)
+
+- Multiple tenants or distinct audiences: +20%
+- Row-level security required: +10%
+- Multi-language reporting: +15%
+
+### Ongoing support (minimum 12 months)
+
+- **Reactive support** — EUR 290/month: Bug fixes; Response target 2 business days; Up to 2h/month
+- **Managed** — EUR 690/month: Everything in Reactive; Refresh monitoring & proactive checks; Up to 4h/month
+- **Partnership** — EUR 1,400/month: Everything in Managed; 8h/month change budget; Quarterly review
+
+### Custom work
+
+Custom work & change budget at EUR 110/hour.
+
+Prepaid blocks: 10h EUR 1,100, 25h EUR 2,600 (5% off), 50h EUR 4,950 (10% off).
+
+### Not included
+
+- Microsoft Fabric capacity (F-SKU) and Power BI licences — billed by Microsoft directly to the client
+- Third-party data source subscription costs
+- Travel, if on-site work is requested
