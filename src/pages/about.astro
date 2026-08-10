@@ -1,59 +1,111 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Philosophy from "../components/Philosophy.astro";
-import Experience from "../components/Experience.astro";
 import SecondaryCTA from "../components/SecondaryCTA.astro";
-
-// Note: SkillsFoundations is merged into Experience or as its own component, currently let's just use what was in index.astro
-// Wait, looking at the original index, there is no <SkillsFoundations />
 ---
 
 <Layout
     title="About | Julian Hilgemann"
-    description="Learn more about my professional background, philosophy, and experience."
+    description="I build BI as a product — owned models, trusted numbers, and interfaces people actually use."
     fullWidth={true}
 >
-    <!-- Intro Section -->
     <section class="pb-16 md:pb-24 px-8 sm:px-12 lg:px-16">
         <div class="max-w-3xl mx-auto text-left">
-            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-8">
                 About Me
             </h1>
+
             <div class="text-xl text-text-secondary leading-relaxed space-y-6">
                 <p>
-                    I appreciate the intersection of analytical rigor and visual aesthetics. 
-                    My work centers on building data interfaces that do more than just display numbers—they 
-                    enable real decisions by generating insights within a reliable, polished product.
+                    I build BI as a product, not as a report. That means I own
+                    what I ship — the model underneath, the numbers on the
+                    surface, and whether anyone still trusts them six months
+                    later.
                 </p>
                 <p>
-                    What I Value in My Craft:
-                </p>
-                <ul class="list-disc pl-6 space-y-2">
-                    <li><strong>Conceptual Clarity:</strong> Grounding architectural decisions in a clear product vision.</li>
-                    <li><strong>Creative Flow:</strong> Engaging in collaborative UI/UX ideation to solve complex problems.</li>
-                    <li><strong>Scalable Logic:</strong> The satisfaction of building robust structures within the data landscape.</li>
-                    <li><strong>Intellectual Stimulation:</strong> Tackling the challenges of advanced analytics.</li>
-                    <li><strong>Craftsmanship:</strong> A relentless attention to detail when refining data products.</li>
-                    <li><strong>Tangible Impact:</strong> Seeing a product drive adoption and reduce friction for the user.</li>
-                    <li><strong>Measured Exploration:</strong> Experimenting with novel technologies to expand what’s possible.</li>
-                </ul>
-                <p>
-                    With a background spanning Business, Economics, and Statistics, I’ve spent the last years 
-                    in the Fintech sector building high-stakes data products.
+                    Most reporting breaks in one of two directions: the numbers
+                    are right but nobody uses them, or it looks good and the
+                    model underneath won't hold. I work where those two meet.
                 </p>
                 <p>
-                    However, my perspective is equally shaped by an upbringing embedded in the contemporary art space. 
-                    This duality allows me to lean into a creative approach to analytics—blending technical precision 
-                    with intuitive design to drive meaningful results.
+                    Companies behave less like fixed structures than like living
+                    systems. Revenue moves in cycles, customers adapt, markets
+                    shift. Underneath the motion there is structure — dynamics
+                    you can model.
+                </p>
+                <p>
+                    So a number on a dashboard isn't just a number. It's the
+                    visible surface of a data model, a set of definitions, and a
+                    hundred decisions about what to leave out.
+                </p>
+                <p class="text-white font-medium border-l-4 border-primary pl-6">
+                    I build those abstractions to be technically sound and to
+                    match how people actually decide.
                 </p>
             </div>
+
+            <h2 class="text-2xl md:text-3xl font-bold mt-16 mb-6">How I work</h2>
+            <ul class="space-y-4 text-lg text-text-secondary leading-relaxed">
+                <li>
+                    <strong class="text-white">Clarity before code.</strong> Architecture
+                    follows from a clear picture of what the product is for, not
+                    the other way around.
+                </li>
+                <li>
+                    <strong class="text-white">Craft in the details.</strong> Correct
+                    isn't enough. Naming, layout, load times and edge cases decide
+                    whether people come back.
+                </li>
+                <li>
+                    <strong class="text-white">Impact you can see.</strong> A dashboard
+                    nobody opens is a failed project, however elegant the model.
+                </li>
+            </ul>
+
+            <h2 class="text-2xl md:text-3xl font-bold mt-16 mb-6">
+                What I've built
+            </h2>
+            <div class="grid gap-4">
+                <div class="glass p-6 md:p-8 rounded-xl">
+                    <h3 class="font-bold text-white text-lg mb-3">
+                        Multi-tenant Fabric product
+                    </h3>
+                    <p class="text-text-secondary leading-relaxed">
+                        I work on the product side of a multi-tenant Microsoft
+                        Fabric environment — around 150 customers, each with
+                        their own Dev, Test and Prod workspaces. The model runs
+                        to roughly 100 tables and 700 measures, and my job is
+                        keeping it fast and correct while it keeps growing. I
+                        build in VS Code against TMDL files with Git and DevOps
+                        behind it, rather than clicking through the service.
+                        Alongside that I'm rebuilding the transformation layer,
+                        moving dataflows into properly modeled warehouses and
+                        lakehouses.
+                    </p>
+                </div>
+
+                <div class="glass p-6 md:p-8 rounded-xl">
+                    <h3 class="font-bold text-white text-lg mb-3">
+                        Forecasting and decision models
+                    </h3>
+                    <p class="text-text-secondary leading-relaxed">
+                        Before that I spent years building production BI in
+                        fintech: revenue and pipeline forecasting, scenario
+                        planning, and the metric layer underneath them — used in
+                        rolling executive planning. That side of the work is
+                        grounded in formal training in economics and
+                        quantitative methods.
+                    </p>
+                </div>
+            </div>
+
+            <p class="text-xl text-text-secondary leading-relaxed mt-16">
+                I grew up around contemporary art, which is probably why I can't
+                leave a badly laid-out chart alone. It's also the part of this
+                work I enjoy most — the point where something technically dense
+                becomes something a person can read at a glance.
+            </p>
         </div>
     </section>
 
-    <!-- Content Sections -->
-    <Philosophy />
-    <Experience />
-
-    <!-- Contact CTA -->
     <SecondaryCTA />
 </Layout>

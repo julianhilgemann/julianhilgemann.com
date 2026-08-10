@@ -1,30 +1,16 @@
-# page-engine
+# Page Engine
 
->
+System Online
 
-                   layer.label
-
-                System Online
-
-                ⚡ AI-Augmented
+⚡ AI-Augmented
 Workflow Active
 
-          # SYSTEM ARCHITECTURE
+# SYSTEM ARCHITECTURE
 
-            Blueprinting the decision engine. From raw signal ingestion to predictive strategy execution.
+Blueprinting the decision engine. From raw signal ingestion to predictive strategy execution.
 
-             `}>
+05.0 // DEPLOYMENT
 
-         class="spec-section min-h-[50vh] flex flex-col justify-center scroll-mt-32">
+### Ready to initiate?
 
-                     layer.title
-
-                  STATUS: OPTIMIZED
-
-                           spec.value
-                           "spec.utility"
-
-           05.0 // DEPLOYMENT
-           ### Ready to initiate?
-
-              START PROJECT sequence
+START PROJECT sequence

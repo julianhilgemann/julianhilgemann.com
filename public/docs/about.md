@@ -1,30 +1,35 @@
-# about
+# About Me
 
-About Me
+I build BI as a product, not as a report. That means I own what I ship — the model underneath, the numbers on the surface, and whether anyone still trusts them six months later.
 
-                    I appreciate the intersection of analytical rigor and visual aesthetics. 
-                    My work centers on building data interfaces that do more than just display numbers—they 
-                    enable real decisions by generating insights within a reliable, polished product.
+Most reporting breaks in one of two directions: the numbers are right but nobody uses them, or it looks good and the model underneath won't hold. I work where those two meet.
 
-                    What I Value in My Craft:
+Companies behave less like fixed structures than like living systems. Revenue moves in cycles, customers adapt, markets shift. Underneath the motion there is structure — dynamics you can model.
 
-                    - Conceptual Clarity: Grounding architectural decisions in a clear product vision.
+So a number on a dashboard isn't just a number. It's the visible surface of a data model, a set of definitions, and a hundred decisions about what to leave out.
 
-                    - Creative Flow: Engaging in collaborative UI/UX ideation to solve complex problems.
+I build those abstractions to be technically sound and to match how people actually decide.
 
-                    - Scalable Logic: The satisfaction of building robust structures within the data landscape.
+## How I work
 
-                    - Intellectual Stimulation: Tackling the challenges of advanced analytics.
+- **Clarity before code.** Architecture follows from a clear picture of what the product is for, not the other way around.
 
-                    - Craftsmanship: A relentless attention to detail when refining data products.
+- **Craft in the details.** Correct isn't enough. Naming, layout, load times and edge cases decide whether people come back.
 
-                    - Tangible Impact: Seeing a product drive adoption and reduce friction for the user.
+- **Impact you can see.** A dashboard nobody opens is a failed project, however elegant the model.
 
-                    - Measured Exploration: Experimenting with novel technologies to expand what’s possible.
+## What I've built
 
-                    With a background spanning Business, Economics, and Statistics, I’ve spent the last years 
-                    in the Fintech sector building high-stakes data products.
+### Multi-tenant Fabric product
 
-                    However, my perspective is equally shaped by an upbringing embedded in the contemporary art space. 
-                    This duality allows me to lean into a creative approach to analytics—blending technical precision 
-                    with intuitive design to drive meaningful results.
+I work on the product side of a multi-tenant Microsoft Fabric environment — around 150 customers, each with their own Dev, Test and Prod workspaces. The model runs to roughly 100 tables and 700 measures, and my job is keeping it fast and correct while it keeps growing. I build in VS Code against TMDL files with Git and DevOps behind it, rather than clicking through the service. Alongside that I'm rebuilding the transformation layer, moving dataflows into properly modeled warehouses and lakehouses.
+
+### Forecasting and decision models
+
+Before that I spent years building production BI in fintech: revenue and pipeline forecasting, scenario planning, and the metric layer underneath them — used in rolling executive planning. That side of the work is grounded in formal training in economics and quantitative methods.
+
+I grew up around contemporary art, which is probably why I can't leave a badly laid-out chart alone. It's also the part of this work I enjoy most — the point where something technically dense becomes something a person can read at a glance.
+
+## Questions? I reply fast.
+
+Contact me
