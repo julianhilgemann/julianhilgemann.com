@@ -3,7 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import SecondaryCTA from "../components/SecondaryCTA.astro";
 import MotionIntro from "../components/MotionIntro.astro";
 import NumberAnatomy from "../components/NumberAnatomy.astro";
-import TidyChart from "../components/TidyChart.astro";
 import PageBackdrop from "../components/PageBackdrop.astro";
 
 // Figure labels, stats and tags only restate the prose around them, so they
@@ -25,7 +24,6 @@ const ui = {
     ],
     fabricTags: ["Microsoft Fabric", "TMDL", "VS Code", "Git", "DevOps", "Warehouse & Lakehouse"],
     fintechTags: ["Revenue forecasting", "Pipeline forecasting", "Scenario planning", "Metric layer"],
-    chart: "Illustration: a cluttered bar chart straightening itself into a sorted one with a single highlighted bar. Click to replay.",
 };
 ---
 
@@ -214,22 +212,6 @@ const ui = {
                         </ul>
                     </div>
                 </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── Closing note ── -->
-    <section class="px-8 sm:px-12 lg:px-16 py-20 md:py-28 border-t border-white/5">
-        <div class="max-w-[1200px] mx-auto grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <p data-reveal class="text-2xl md:text-3xl text-text-secondary leading-snug">
-                I grew up around contemporary art, which is probably why I can't
-                leave a badly laid-out chart alone. It's also the part of this
-                work I enjoy most — <span class="text-white">the point where something
-                technically dense becomes something a person can read at a
-                glance.</span>
-            </p>
-            <div data-reveal>
-                <TidyChart ariaLabel={ui.chart} />
             </div>
         </div>
     </section>

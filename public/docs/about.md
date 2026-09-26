@@ -28,8 +28,6 @@ I work on the product side of a multi-tenant Microsoft Fabric environment — ar
 
 Before that I spent years building production BI in fintech: revenue and pipeline forecasting, scenario planning, and the metric layer underneath them — used in rolling executive planning. That side of the work is grounded in formal training in economics and quantitative methods.
 
-I grew up around contemporary art, which is probably why I can't leave a badly laid-out chart alone. It's also the part of this work I enjoy most — the point where something technically dense becomes something a person can read at a glance.
-
 ## Questions? I reply fast.
 
 Contact me

@@ -9,7 +9,7 @@ Personal consulting site for Julian Hilgemann (Power BI / Microsoft Fabric decis
 | `/`, `/de` | `src/pages/index.astro`, `src/pages/de/index.astro` | Hero, the current project (`CurrentProject` + animated `PipelineDiagram`), contact CTA. GSAP motion. |
 | `/projects`, `/de/projects` | `projects.astro` | Full project list (`Projects` → `ProjectCard`). GSAP motion via `page.ts`. |
 | `/services`, `/de/services` | `services.astro` | Interactive pricing calculator + CTA. |
-| `/about`, `/de/about` | `about.astro` | Copy inline in the page file, plus the `NumberAnatomy` figure, a timeline and `TidyChart`. GSAP motion. |
+| `/about`, `/de/about` | `about.astro` | Copy inline in the page file, plus the `NumberAnatomy` figure and a timeline, then the contact CTA. GSAP motion. |
 | `/page-engine` (+ DE) | `page-engine.astro` | Architecture explainer; data array in frontmatter. |
 | `/hub` (+ DE), `/start` | `hub.astro`, `start.astro` | "Gateway" pages: link hub and language picker (`/start` → `/hub` or `/de/hub`), mostly reached on phones. No nav; `start` also has no footer or analytics. EN-only `start`. GSAP motion. |
 | legal | `impressum`, `datenschutz`, `cookie-einstellungen` (+ DE) | Legal pages. |
@@ -25,7 +25,7 @@ Components that are shared across languages (one file serves both):
 - `Nav.astro` — takes `lang`.
 - `PricingCalculator.astro` — takes `lang`; `de/PricingCalculator.astro` is a thin wrapper. All calculator copy lives in `src/lib/pricing-strings.ts`, typed by `LocaleStrings`, so a new string needs the interface field plus both locale entries.
 - `ProjectCard.astro`, `Section.astro`, `LanguageModal.astro`, `MotionIntro.astro`, `NetworkBackdrop.astro`, `PageBackdrop.astro`.
-- `NumberAnatomy.astro`, `TidyChart.astro` (About) and `PipelineDiagram.astro` (homepage) — figures whose text arrives as props.
+- `NumberAnatomy.astro` (About) and `PipelineDiagram.astro` (homepage) — figures whose text arrives as props.
 
 `Projects.astro` / `de/Projects.astro` hold the project data and render only the card list; the Projects pages supply the heading. The homepage's current project lives in `CurrentProject.astro` / `de/CurrentProject.astro` — to feature a different project, swap that section and its diagram props.
 
@@ -62,7 +62,7 @@ The fuller brief (`cntxt/design.md`, `cntxt/specs.md`, …) and `pricing-calcula
 - Hero network canvas: `src/scripts/hero-network.ts`. It pauses off-screen or in a hidden tab, and paints a static frame under reduced motion. The gateway pages reuse it through `NetworkBackdrop.astro`, so the network is the site's one signature background: prefer it over inventing a new one.
 - Reuse before adding: new pages should compose the existing vocabulary (masked-line intro, fade + rise, `.glass` + `.spotlight-card`, `.link-card`, magnetic buttons, the network backdrop) so motion stays aligned across the site.
 - GSAP 3 from npm: `ScrollTrigger` and `SplitText` are registered in `motion.ts`, `ScrambleTextPlugin` in `home.ts`. All plugins are free in the public package, and GSAP loads only on the pages that import a motion script.
-- Animated figures (`NumberAnatomy`, `TidyChart`, `PipelineDiagram`) ship their **end state** in markup — what reduced-motion and no-JS visitors see — and the script sets up the starting state.
+- Animated figures (`NumberAnatomy`, `PipelineDiagram`) ship their **end state** in markup — what reduced-motion and no-JS visitors see — and the script sets up the starting state.
 - Figures that must read on phones render two layouts (`PipelineDiagram`: wide from `lg`, tall below) and animate only the visible one via `gsap.matchMedia()`; a single wide SVG scaled down to a phone makes its labels unreadable.
 - Everything honours `prefers-reduced-motion` and is skipped when it is set. If nothing animates while you test, check that OS setting before debugging code.
 - Elements GSAP tweens must use `transition-colors` (or no transition), never Tailwind's `transition-all`: a CSS transition on `transform` / `opacity` fights every tween frame and makes the motion lag.

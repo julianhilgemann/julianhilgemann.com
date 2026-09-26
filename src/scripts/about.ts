@@ -8,7 +8,6 @@
  *   [data-quote]           words brighten as the reader passes
  *   [data-timeline]        rail fills and dots light as entries are reached
  *   [data-count]           figures count up once (data-prefix is kept)
- *   [data-tidy-chart]      cluttered chart tidies itself; click replays
  */
 import {
     gsap,
@@ -19,26 +18,12 @@ import {
     initPageMotion,
 } from "./motion";
 
-// The "before" state, per bar: shifted, resized, tilted, off the baseline and
-// in clashing colours. Fixed values rather than random so it reads as designed.
-const MESS = {
-    dx: [-10, 8, -6, 12, -4, 9, -8],
-    width: [34, 18, 30, 22, 38, 20, 28],
-    height: [58, 132, 30, 90, 44, 108, 72],
-    drop: [8, -6, 12, -10, 4, -12, 6],
-    rotation: [-9, 6, -4, 11, -7, 3, -12],
-    fill: ["#e11d48", "#22c55e", "#a855f7", "#06b6d4", "#eab308", "#f97316", "#3b82f6"],
-};
-const GRID_TILT = [4, -3, 6];
-const BASELINE = 176;
-
 if (initPageMotion()) {
     playIntro();
     anatomy();
     quote();
     timeline();
     counters();
-    tidyChart();
 }
 
 function anatomy() {
@@ -187,51 +172,5 @@ function counters() {
             onUpdate: () => (el.textContent = `${prefix}${Math.round(state.value)}`),
             scrollTrigger: { trigger: el, start: "top 85%", once: true },
         });
-    });
-}
-
-function tidyChart() {
-    const chart = document.querySelector<HTMLElement>("[data-tidy-chart]");
-    if (!chart) return;
-    const bars = gsap.utils.toArray<SVGRectElement>("[data-bar]", chart);
-    const grid = gsap.utils.toArray<SVGLineElement>("[data-gridline]", chart);
-
-    const tl = gsap.timeline({ paused: true, defaults: { duration: 1.1, ease: "power3.inOut" } });
-    bars.forEach((bar, i) => {
-        tl.from(
-            bar,
-            {
-                attr: {
-                    x: Number(bar.getAttribute("x")) + MESS.dx[i],
-                    width: MESS.width[i],
-                    height: MESS.height[i],
-                    y: BASELINE + MESS.drop[i] - MESS.height[i],
-                },
-                fill: MESS.fill[i],
-                rotation: MESS.rotation[i],
-                transformOrigin: "50% 100%",
-            },
-            i * 0.06,
-        );
-    });
-    grid.forEach((line, i) => {
-        tl.from(line, { rotation: GRID_TILT[i], transformOrigin: "50% 50%", opacity: 0.3 }, 0);
-    });
-
-    ScrollTrigger.create({
-        trigger: chart,
-        start: "top 75%",
-        onEnter: () => tl.timeScale(1).play(),
-        onLeaveBack: () => tl.timeScale(1).reverse(),
-    });
-
-    // Click to mess it up again and watch it recover.
-    chart.style.cursor = "pointer";
-    chart.addEventListener("click", () => {
-        tl.eventCallback("onReverseComplete", () => {
-            tl.eventCallback("onReverseComplete", null);
-            tl.timeScale(1).play();
-        });
-        tl.timeScale(2.2).reverse();
     });
 }

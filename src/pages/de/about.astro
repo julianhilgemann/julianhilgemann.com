@@ -3,7 +3,6 @@ import Layout from "../../layouts/LayoutDE.astro";
 import SecondaryCTA from "../../components/de/SecondaryCTA.astro";
 import MotionIntro from "../../components/MotionIntro.astro";
 import NumberAnatomy from "../../components/NumberAnatomy.astro";
-import TidyChart from "../../components/TidyChart.astro";
 import PageBackdrop from "../../components/PageBackdrop.astro";
 
 // Figure labels, stats and tags only restate the prose around them, so they
@@ -25,7 +24,6 @@ const ui = {
     ],
     fabricTags: ["Microsoft Fabric", "TMDL", "VS Code", "Git", "DevOps", "Warehouse & Lakehouse"],
     fintechTags: ["Umsatz-Forecasting", "Pipeline-Forecasting", "Szenarioplanung", "Metrik-Schicht"],
-    chart: "Illustration: ein unordentliches Balkendiagramm ordnet sich zu einem sortierten mit einem hervorgehobenen Balken. Klicken zum Wiederholen.",
 };
 ---
 
@@ -219,23 +217,6 @@ const ui = {
                         </ul>
                     </div>
                 </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── Closing note ── -->
-    <section class="px-8 sm:px-12 lg:px-16 py-20 md:py-28 border-t border-white/5">
-        <div class="max-w-[1200px] mx-auto grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <p data-reveal class="text-2xl md:text-3xl text-text-secondary leading-snug">
-                Ich bin im Umfeld zeitgenössischer Kunst aufgewachsen.
-                Wahrscheinlich kann ich deshalb kein schlecht gesetztes Chart
-                stehen lassen. Es ist auch der Teil dieser Arbeit, der mir am
-                meisten Spaß macht — <span class="text-white">der Punkt, an dem etwas
-                technisch Dichtes zu etwas wird, das ein Mensch auf einen Blick
-                lesen kann.</span>
-            </p>
-            <div data-reveal>
-                <TidyChart ariaLabel={ui.chart} />
             </div>
         </div>
     </section>
