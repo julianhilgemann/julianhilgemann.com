@@ -1,5 +1,4 @@
 ---
-import Section from "./Section.astro";
 import ProjectCard from "./ProjectCard.astro";
 
 const projects = [
@@ -176,23 +175,8 @@ const projects = [
 ];
 ---
 
-<Section
-    id="projects"
-    class="border-t border-white/5 min-h-0 py-28 md:min-h-[100svh] md:py-0 flex flex-col justify-center"
->
-    <div class="w-full max-w-[1200px] mx-auto px-8 sm:px-12 lg:px-16">
-        <div class="mb-12">
-            <h2 class="text-3xl md:text-5xl font-bold mb-6">
-                Current Projects
-            </h2>
-            <p class="text-xl text-text-secondary max-w-2xl">
-                A selection of my recent open-source work and public project
-                contributions, hosted on GitHub.
-            </p>
-        </div>
-
-        <div class="flex flex-col gap-6">
-            {projects.map((project) => <ProjectCard {...project} />)}
-        </div>
-    </div>
-</Section>
+<!-- The card list only; the Projects page supplies the heading. Cards rise
+     one by one as they scroll in ([data-reveal-batch], src/scripts/motion.ts). -->
+<div data-reveal-batch class="flex flex-col gap-6">
+    {projects.map((project) => <ProjectCard {...project} />)}
+</div>

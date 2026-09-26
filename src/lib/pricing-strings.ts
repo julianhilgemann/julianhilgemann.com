@@ -47,6 +47,8 @@ export interface LocaleStrings {
     chart: {
         heading: string;
         legendHeading: string;
+        /** Mobile sticky-bar button. Kept short: it shares a row with the total. */
+        stickyJump: string;
         freeHeading: string;
         taperNote: (qty: number, unit: string, unitPrice: string, pct: number) => string;
         hoursNote: (hours: number) => string;
@@ -122,6 +124,7 @@ const en: LocaleStrings = {
     chart: {
         heading: "Where the money goes",
         legendHeading: "Cost breakdown",
+        stickyJump: "Cost breakdown",
         freeHeading: "Included at no cost",
         taperNote: (qty, unit, unitPrice, pct) =>
             `${qty} × ${unitPrice} per ${unit}, volume-adjusted −${pct}%`,
@@ -429,6 +432,7 @@ const de: LocaleStrings = {
     chart: {
         heading: "Wofür das Budget verwendet wird",
         legendHeading: "Kostenaufschlüsselung",
+        stickyJump: "Aufschlüsselung",
         freeHeading: "Ohne Aufpreis enthalten",
         taperNote: (qty, unit, unitPrice, pct) =>
             `${qty} × ${unitPrice} pro ${unit}, mengenbereinigt −${pct} %`,

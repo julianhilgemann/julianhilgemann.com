@@ -1,0 +1,20 @@
+---
+// The homepage hero's backdrop for standalone pages (/start, /hub): slow
+// ambient glows, the interactive node network, and the frosted layer over
+// both. Render it inside a `relative isolate` element marked [data-network]:
+// that element sizes the canvas and receives the pointer. Wired up by
+// src/scripts/gateway.ts.
+---
+
+<div aria-hidden="true" class="absolute inset-0 overflow-hidden pointer-events-none -z-40">
+    <div class="ambient-blob absolute -top-40 -right-40 w-[520px] h-[520px] rounded-full bg-primary/[0.14] blur-[120px]"></div>
+    <div class="ambient-blob ambient-blob-late absolute -bottom-40 -left-40 w-[440px] h-[440px] rounded-full bg-info/[0.14] blur-[120px]"></div>
+</div>
+<canvas
+    data-network-canvas
+    data-intro
+    data-intro-backdrop
+    aria-hidden="true"
+    class="absolute inset-0 w-full h-full pointer-events-none -z-30"
+></canvas>
+<div aria-hidden="true" class="absolute inset-0 bg-background/20 backdrop-blur-[5px] pointer-events-none -z-20"></div>

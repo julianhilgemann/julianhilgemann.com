@@ -1,10 +1,11 @@
 # Julian Hilgemann — Power BI & Microsoft Fabric Decision Systems
 
 > Portfolio and technical documentation for Julian Hilgemann, an analytics engineer building production Power BI and Microsoft Fabric systems: semantic models, KPI and metric layers, forecasting, and decision interfaces. Published in English at / and in German at /de/.
-> Updated: Aug 2026
+> Updated: Sep 2026
 
 ## Core Pages (English)
-- [Home](/docs/index.md): Landing page: positioning statement and summaries of current open-source data projects.
+- [Home](/docs/index.md): Landing page: positioning statement and the current project, the FX Macro Data Platform, with its architecture.
+- [Projects](/docs/projects.md): Open-source data projects: analytics engineering, forecasting, data visualisation and creative coding, each with concept and architecture.
 - [About](/docs/about.md): Working philosophy and experience: multi-tenant Microsoft Fabric product work, semantic model scale, TMDL and Git-based workflow, and forecasting background.
 - [Services & Pricing](/docs/services.md): Service packages, deliverables, engineering and design standards, and the interactive pricing calculator.
 - [Page Engine](/docs/page-engine.md): Technical architecture of the decision engine: signal ingestion, modeling, forecasting, and delivery layers.
@@ -12,7 +13,8 @@
 - [Language Select](/docs/start.md): Entry gateway routing visitors to the English or German version of the site.
 
 ## Core Pages (German)
-- [Startseite](/docs/de/index.md): German landing page: positioning statement and current open-source data projects.
+- [Startseite](/docs/de/index.md): German landing page: positioning statement and the current project, the FX Macro Data Platform.
+- [Projekte](/docs/de/projects.md): German project list: open-source data projects with concept and architecture.
 - [Über mich](/docs/de/about.md): German about page: working philosophy, Microsoft Fabric product work, semantic model scale, and forecasting background.
 - [Leistungen & Preise](/docs/de/services.md): German services page: packages, deliverables, delivery standards, and the pricing calculator.
 - [Page Engine (DE)](/docs/de/page-engine.md): German version of the decision engine architecture breakdown.

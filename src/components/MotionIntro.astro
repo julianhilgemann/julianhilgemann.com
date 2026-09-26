@@ -1,0 +1,14 @@
+---
+// Pre-paint hide for pages whose intro is animated (homepage hero, About).
+// Render it before the [data-intro] elements: it adds `html.motion-intro`
+// (CSS in global.css hides [data-intro]) and the page script removes it once
+// GSAP holds each element's state. Dropped after 2.5s regardless, so a bundle
+// that fails to load can never leave the page blank.
+---
+
+<script is:inline>
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("motion-intro");
+        setTimeout(() => document.documentElement.classList.remove("motion-intro"), 2500);
+    }
+</script>
