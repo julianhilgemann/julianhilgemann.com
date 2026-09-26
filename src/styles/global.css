@@ -22,31 +22,60 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* --- Klaro! Custom Theme --- */
-:root {
-  --klaro-font-family: inherit;
-  --klaro-green1: #f59e0b;
-  --klaro-green2: #d97706;
-  --klaro-blue1: #38bdf8;
-  --klaro-red1: #374151;
-  --klaro-red2: #4b5563;
-  --klaro-background: #0b1220;
-  --klaro-text: #f3f4f6;
-  --klaro-gray1: #1f2937;
+/* --- Klaro cookie consent ---
+   Two surfaces, one look: the notice (first visit) and the settings dialog
+   (the notice's "Settings" link, or the footer's "Cookies" button, which
+   calls klaro.show()). Colours go through the variables Klaro's own
+   stylesheet reads (--dark1, --green1, … in klaro.min.css); the rules below
+   add the glass card, the layout and the button hierarchy. */
+.klaro {
+  --font-family: inherit;
+  --title-font-family: inherit;
+  --dark1: rgba(11, 18, 32, 0.9);      /* card surface */
+  --dark2: rgba(255, 255, 255, 0.08);  /* dividers */
+  --dark3: #9ca3af;
+  --light1: #f3f4f6;                   /* text */
+  --light2: rgba(255, 255, 255, 0.08);
+  --light3: #9ca3af;                   /* muted text */
+  --white2: rgba(255, 255, 255, 0.14); /* switch track, off */
+  --white3: #ffffff;                   /* switch knob */
+  --green1: #f59e0b;                   /* on / primary */
+  --green2: #d97706;
+  --green3: #f59e0b;
+  --border-radius: 12px;
 }
 
-/* Common Glass Style */
-.klaro .cookie-notice,
-.klaro .cookie-modal {
+/* Shared glass card */
+.klaro .cookie-notice:not(.cookie-modal-notice),
+.klaro .cookie-modal .cm-modal.cm-klaro {
   background-color: rgba(11, 18, 32, 0.9) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
-  color: #f3f4f6 !important;
+  color: #f3f4f6;
 }
 
-/* --- Bottom Banner (Notice) --- */
+/* Entrances: the site's fade + rise. `translate`, not `transform`, because
+   both cards pin `transform` with !important, which would block the animation. */
+@keyframes klaro-rise {
+  from { opacity: 0; translate: 0 12px; }
+}
+@keyframes klaro-fade {
+  from { opacity: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .klaro .cookie-notice:not(.cookie-modal-notice),
+  .klaro .cookie-modal .cm-modal.cm-klaro {
+    animation: klaro-rise 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .klaro .cookie-modal .cm-bg {
+    animation: klaro-fade 0.3s ease-out both;
+  }
+}
+
+/* --- Notice (bottom banner) --- */
 .klaro .cookie-notice {
   /* The Klaro config uses the "top" theme, which sets `top`; with `bottom`
      also set the notice stretched over the whole viewport. */
@@ -56,7 +85,6 @@
   transform: translateX(-50%) !important;
   width: 90% !important;
   max-width: 1200px !important;
-  border-radius: 16px !important;
   z-index: 5000 !important;
 }
 
@@ -67,52 +95,148 @@
   }
 }
 
-/* --- Settings Modal --- */
+/* --- Settings dialog ---
+   .cookie-modal is Klaro's full-screen layer (dimmed .cm-bg + the dialog);
+   .cm-modal is the dialog itself. Centred on larger screens, a bottom card
+   on phones, where the notice sits too. */
 .klaro .cookie-modal {
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  width: 90% !important;
-  max-width: 600px !important;
-  max-height: 85vh !important;
-  border-radius: 24px !important;
   z-index: 9999 !important;
-  overflow: hidden !important;
-  /* Internal scrolling if needed */
-  display: flex !important;
-  flex-direction: column !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
 }
 
-.klaro .cm-modal .cm-body {
-  overflow-y: auto !important;
-  padding: 24px !important;
+.klaro .cookie-modal .cm-bg {
+  background: rgba(5, 9, 18, 0.6) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
-.klaro .cm-modal .cm-footer {
-  padding: 16px 24px !important;
-  background-color: rgba(0, 0, 0, 0.2) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+.klaro .cookie-modal .cm-modal.cm-klaro {
+  position: relative !important;
+  top: auto !important;
+  transform: none !important;
   margin: 0 !important;
+  width: 100% !important;
+  max-width: 560px !important;
+  max-height: 100% !important;
+  overflow-y: auto !important;
+}
+
+@media (max-width: 640px) {
+  .klaro .cookie-modal {
+    align-items: flex-end;
+    padding: 16px;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}
+
+.klaro .cookie-modal .cm-modal .cm-header {
+  padding: 28px 64px 20px 28px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.klaro .cookie-modal .cm-modal .cm-header h1 {
+  font-size: 1.5rem !important;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.klaro .cookie-modal .cm-modal .cm-header p {
+  color: #9ca3af;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+.klaro .cookie-modal .cm-modal .cm-body {
+  padding: 24px 28px !important;
+}
+
+.klaro .cookie-modal .cm-modal .cm-footer {
+  padding: 20px 28px 28px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.klaro .cookie-modal .cm-modal .cm-footer-buttons {
+  justify-content: flex-end !important;
+  flex-wrap: wrap !important; /* Klaro's later `flex-flow: row` resets it */
+  gap: 12px;
+}
+
+/* Labels stay on one line; buttons wrap as whole units and grow to fill
+   their row (before a choice: Decline + Accept selected, then Accept all). */
+.klaro .cookie-modal .cm-modal .cm-footer-buttons .cm-btn {
+  margin: 0 !important;
+  flex: 1 1 auto;
+  white-space: nowrap;
+}
+
+.klaro .cookie-modal .cm-modal .cm-footer-buttons .cm-btn:only-child {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 640px) {
+  .klaro .cookie-modal .cm-modal .cm-header,
+  .klaro .cookie-modal .cm-modal .cm-body,
+  .klaro .cookie-modal .cm-modal .cm-footer {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .klaro .cookie-modal .cm-modal .cm-header {
+    padding-right: 56px !important;
+  }
+  /* "Datenschutzeinstellungen" is one long word */
+  .klaro .cookie-modal .cm-modal .cm-header h1 {
+    font-size: 1.25rem !important;
+    hyphens: auto;
+  }
+  .klaro .cookie-modal .cm-modal .cm-footer-buttons .cm-btn {
+    white-space: normal;
+  }
+  .klaro .cookie-modal .cm-modal .cm-footer-buttons {
+    flex-direction: column !important;
+  }
 }
 
 .klaro .cm-powered-by {
   display: none !important;
 }
 
-/* Close Button (X) */
-.klaro .cm-modal .hide {
-  top: 20px !important;
-  right: 20px !important;
+/* Close button */
+.klaro .cookie-modal .cm-modal .hide {
+  top: 18px !important;
+  right: 18px !important;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 9999px;
+  transition: background-color 0.2s;
 }
 
-.klaro .cm-modal .hide svg path {
-  fill: #9ca3af !important;
-  transition: fill 0.2s;
+.klaro .cookie-modal .cm-modal .hide:hover {
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
-.klaro .cm-modal .hide:hover svg path {
-  fill: #f59e0b !important;
+.klaro .cookie-modal .cm-modal .hide svg {
+  stroke: #9ca3af !important;
+  transition: stroke 0.2s;
+}
+
+.klaro .cookie-modal .cm-modal .hide:hover svg {
+  stroke: #f59e0b !important;
+}
+
+/* Switches: flat track, amber when on */
+.klaro .cookie-modal .cm-list-label .slider {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+}
+
+.klaro .cookie-modal .cm-list-input:focus-visible + .cm-list-label .slider {
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.4) !important;
 }
 
 /* --- Buttons --- */
@@ -155,32 +279,45 @@
   border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-/* --- Typography & Toggles --- */
-.klaro p,
-.klaro h1,
-.klaro h2,
-.klaro strong,
-.klaro li,
-.klaro span {
+/* The dialog's "Accept selected" / "Save" carries both success and info
+   classes. Beside "Accept all" it is the site's outlined secondary button;
+   alone (after a choice has been made) it is the primary action. */
+.klaro .cookie-modal .cm-btn.cm-btn-accept {
+  background-color: rgba(255, 255, 255, 0.05) !important;
   color: #f3f4f6 !important;
+  border: 1px solid #f59e0b !important;
 }
 
-.klaro a {
+.klaro .cookie-modal .cm-btn.cm-btn-accept:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.klaro .cookie-modal .cm-btn.cm-btn-accept:only-child {
+  background-color: #f59e0b !important;
+  color: #0b1220 !important;
+  border: none !important;
+}
+
+.klaro .cookie-modal .cm-btn.cm-btn-accept:only-child:hover {
+  background-color: #d97706 !important;
+}
+
+/* --- Links --- */
+.klaro .cookie-notice a,
+.klaro .cookie-modal a {
   color: #38bdf8 !important;
   text-decoration: none !important;
 }
 
-.klaro .cm-switch-input:checked+.cm-switch {
-  background-color: #f59e0b !important;
+/* "↓ 1 service" disclosure under a purpose */
+.klaro .cookie-modal .cm-caret a {
+  color: #9ca3af !important;
+  font-size: 0.875rem;
+  transition: color 0.2s;
 }
 
-.klaro .cm-switch {
-  border-radius: 9999px !important;
-  background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.klaro .cm-switch::before {
-  background-color: #fff !important;
+.klaro .cookie-modal .cm-caret a:hover {
+  color: #f59e0b !important;
 }
 
 /* --- Custom Lists (Fix for iPhone) --- */

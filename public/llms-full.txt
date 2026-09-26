@@ -82,8 +82,6 @@ I work on the product side of a multi-tenant Microsoft Fabric environment — ar
 
 Before that I spent years building production BI in fintech: revenue and pipeline forecasting, scenario planning, and the metric layer underneath them — used in rolling executive planning. That side of the work is grounded in formal training in economics and quantitative methods.
 
-I grew up around contemporary art, which is probably why I can't leave a badly laid-out chart alone. It's also the part of this work I enjoy most — the point where something technically dense becomes something a person can read at a glance.
-
 #### Questions? I reply fast.
 
 Contact me
@@ -318,8 +316,6 @@ Ich arbeite auf der Produktseite einer Multi-Tenant-Umgebung in Microsoft Fabric
 ##### Forecasting und Entscheidungsmodelle
 
 Davor habe ich jahrelang produktive BI im Fintech-Umfeld gebaut: Umsatz- und Pipeline-Forecasting, Szenarioplanung und die Metrik-Schicht darunter — im Einsatz in der rollierenden Planung auf Führungsebene. Diese Seite der Arbeit ist in einer formalen Ausbildung in Wirtschaftswissenschaften und quantitativen Methoden verankert.
-
-Ich bin im Umfeld zeitgenössischer Kunst aufgewachsen. Wahrscheinlich kann ich deshalb kein schlecht gesetztes Chart stehen lassen. Es ist auch der Teil dieser Arbeit, der mir am meisten Spaß macht — der Punkt, an dem etwas technisch Dichtes zu etwas wird, das ein Mensch auf einen Blick lesen kann.
 
 #### Fragen? Ich antworte schnell.
 
