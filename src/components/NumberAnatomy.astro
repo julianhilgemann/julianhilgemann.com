@@ -1,0 +1,262 @@
+---
+// "Anatomy of a number" — the About page's core idea drawn out: a dashboard
+// figure as the top layer over its definitions, its data model, and the
+// choices about what to leave out (100 dots, a few kept).
+//
+// The markup is the exploded end state, which is also what reduced motion and
+// no-JS visitors see. src/scripts/about.ts collapses the layers and opens
+// them on scroll ([data-layer] carries both y positions).
+//
+// Every visible string arrives through props/expressions: the llms generator
+// flattens literal markup, and none of this should read as page copy.
+interface Props {
+    /** Top to bottom: the number, definitions, data model, choices. */
+    labels: string[];
+    kpi: { label: string; value: string; delta: string };
+    ariaLabel: string;
+}
+
+const { labels, kpi, ariaLabel } = Astro.props;
+
+// 2:1 isometric projection of a 150-unit square plane, top vertex at x=140.
+const ISO = "matrix(0.866 0.5 -0.866 0.5 140 0)";
+const EXPLODED = [14, 100, 186, 272];
+const COLLAPSED = [130, 144, 158, 172];
+
+// Definitions: rows of code-like segments [indent, ...widths], coloured by kind.
+const codeRows: Array<Array<[number, string]>> = [
+    [[24, "info"], [52, "text"]],
+    [[12, "gap"], [40, "text"], [28, "info"]],
+    [[30, "accent"], [62, "text"]],
+    [[24, "info"], [36, "text"], [20, "dim"]],
+    [[12, "gap"], [56, "text"]],
+    [[26, "info"], [46, "text"]],
+    [[12, "gap"], [30, "accent"], [40, "text"]],
+];
+const codeFill: Record<string, string> = {
+    info: "rgba(56,189,248,0.7)",
+    text: "rgba(255,255,255,0.28)",
+    accent: "rgba(245,158,11,0.75)",
+    dim: "rgba(255,255,255,0.14)",
+};
+
+// Data model: a star schema.
+const dims = [
+    [14, 14],
+    [100, 14],
+    [14, 108],
+    [100, 108],
+];
+
+// Choices: 10 x 10 — "a hundred decisions about what to leave out".
+const kept = new Set([3, 12, 17, 28, 34, 41, 47, 55, 62, 68, 73, 81, 86, 94]);
+const dots = Array.from({ length: 100 }, (_, i) => ({
+    x: 19 + (i % 10) * 12.5,
+    y: 19 + Math.floor(i / 10) * 12.5,
+    lit: kept.has(i),
+}));
+
+// Render bottom layer first so the number sits on top of the stack.
+const order = [3, 2, 1, 0];
+---
+
+<svg
+    data-anatomy
+    viewBox="0 0 430 450"
+    role="img"
+    aria-label={ariaLabel}
+    class="anatomy w-full h-auto overflow-visible"
+>
+    <defs>
+        <radialGradient id="anatomy-glow">
+            <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.22"></stop>
+            <stop offset="60%" stop-color="#38BDF8" stop-opacity="0.06"></stop>
+            <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"></stop>
+        </radialGradient>
+    </defs>
+
+    <!-- Exploded-view guides; fade in with the labels. -->
+    <g data-anatomy-guide stroke="rgba(255,255,255,0.14)" stroke-dasharray="2 5">
+        <line x1="10" y1="89" x2="10" y2="347"></line>
+        <line x1="270" y1="89" x2="270" y2="347"></line>
+    </g>
+
+    {
+        order.map((i) => (
+            <g
+                data-layer
+                data-collapsed={COLLAPSED[i]}
+                data-exploded={EXPLODED[i]}
+                transform={`translate(0 ${EXPLODED[i]})`}
+            >
+                <g data-layer-lift>
+                    {i === 3 && <ellipse cx="140" cy="160" rx="170" ry="46" fill="url(#anatomy-glow)" />}
+                    <g transform={ISO}>
+                        <rect
+                            width="150"
+                            height="150"
+                            rx="12"
+                            class:list={["anatomy-plane", `anatomy-plane-${i}`]}
+                            vector-effect="non-scaling-stroke"
+                        />
+
+                        {i === 0 && (
+                            <>
+                                <text x="18" y="34" class="anatomy-kpi-label">{kpi.label}</text>
+                                <text x="18" y="74" class="anatomy-kpi-value">{kpi.value}</text>
+                                <text x="18" y="96" class="anatomy-kpi-delta">{kpi.delta}</text>
+                                <polyline
+                                    points="18,128 38,121 56,125 76,111 96,115 114,101 132,104"
+                                    fill="none"
+                                    stroke="#F59E0B"
+                                    stroke-width="2.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    vector-effect="non-scaling-stroke"
+                                />
+                            </>
+                        )}
+
+                        {i === 1 &&
+                            codeRows.map((row, r) => {
+                                let x = 18;
+                                return row.map(([w, kind]) => {
+                                    const seg = { x, w, kind };
+                                    x += w + 6;
+                                    return seg.kind === "gap" ? null : (
+                                        <rect x={seg.x} y={20 + r * 16} width={seg.w} height="6" rx="3" fill={codeFill[seg.kind]} />
+                                    );
+                                });
+                            })}
+
+                        {i === 2 && (
+                            <>
+                                {dims.map(([x, y]) => (
+                                    <line
+                                        x1={x + 18}
+                                        y1={y + 14}
+                                        x2="75"
+                                        y2="75"
+                                        stroke="rgba(255,255,255,0.3)"
+                                        vector-effect="non-scaling-stroke"
+                                    />
+                                ))}
+                                {dims.map(([x, y]) => (
+                                    <rect
+                                        x={x}
+                                        y={y}
+                                        width="36"
+                                        height="28"
+                                        rx="4"
+                                        fill="rgba(255,255,255,0.06)"
+                                        stroke="rgba(255,255,255,0.4)"
+                                        vector-effect="non-scaling-stroke"
+                                    />
+                                ))}
+                                <rect
+                                    x="54"
+                                    y="57"
+                                    width="42"
+                                    height="36"
+                                    rx="4"
+                                    fill="rgba(56,189,248,0.2)"
+                                    stroke="#38BDF8"
+                                    vector-effect="non-scaling-stroke"
+                                />
+                            </>
+                        )}
+
+                        {i === 3 &&
+                            dots.map((d) => (
+                                <circle data-dot cx={d.x} cy={d.y} r="2.4" class:list={["anatomy-dot", { "is-lit": d.lit }]} />
+                            ))}
+                    </g>
+
+                    <g data-layer-label class="anatomy-label">
+                        <circle cx="277" cy="75" r="2.5" class={i === 0 ? "anatomy-label-dot-accent" : "anatomy-label-dot"} />
+                        <line x1="283" y1="75" x2="294" y2="75" stroke="rgba(255,255,255,0.25)" />
+                        <text x="300" y="80">{labels[i].toUpperCase()}</text>
+                    </g>
+                </g>
+            </g>
+        ))
+    }
+</svg>
+
+<style>
+    .anatomy-plane {
+        stroke-width: 1.25;
+        transition: stroke 0.3s ease;
+    }
+    .anatomy-plane-0 {
+        fill: rgba(20, 30, 50, 0.94);
+        stroke: rgba(245, 158, 11, 0.85);
+    }
+    .anatomy-plane-1 {
+        fill: rgba(14, 30, 48, 0.88);
+        stroke: rgba(56, 189, 248, 0.5);
+    }
+    .anatomy-plane-2 {
+        fill: rgba(17, 24, 39, 0.85);
+        stroke: rgba(255, 255, 255, 0.25);
+    }
+    .anatomy-plane-3 {
+        fill: rgba(17, 24, 39, 0.75);
+        stroke: rgba(255, 255, 255, 0.16);
+    }
+
+    .anatomy-kpi-label {
+        font-size: 11px;
+        fill: #9ca3af;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+    }
+    .anatomy-kpi-value {
+        font-size: 30px;
+        font-weight: 700;
+        fill: #fff;
+    }
+    .anatomy-kpi-delta {
+        font-size: 12px;
+        font-weight: 600;
+        fill: #f59e0b;
+    }
+
+    .anatomy-dot {
+        fill: rgba(255, 255, 255, 0.14);
+        transition: fill 0.8s ease;
+    }
+    .anatomy-dot.is-lit {
+        fill: #f59e0b;
+    }
+
+    .anatomy-label text {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+        fill: #9ca3af;
+        transition: fill 0.3s ease;
+    }
+    .anatomy-label-dot {
+        fill: rgba(255, 255, 255, 0.5);
+    }
+    .anatomy-label-dot-accent {
+        fill: #f59e0b;
+    }
+    /* Hover focus (set by about.ts): the lifted layer's label lights up. */
+    [data-layer].is-focus .anatomy-label text {
+        fill: #fff;
+    }
+    [data-layer].is-focus .anatomy-plane-2,
+    [data-layer].is-focus .anatomy-plane-3 {
+        stroke: rgba(255, 255, 255, 0.55);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .anatomy-dot,
+        .anatomy-plane,
+        .anatomy-label text {
+            transition: none;
+        }
+    }
+</style>

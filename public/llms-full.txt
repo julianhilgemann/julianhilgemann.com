@@ -10,7 +10,37 @@ Services & Packages
 
 About me
 
-#### Current Projects
+#### Current project
+
+In active development
+
+##### FX Macro Data Platform
+
+A data platform for macroeconomic and FX time series, built so that every number can be traced back to what was knowable at the moment it was published.
+
+Macro data gets revised. A GDP print or an inflation reading is published, then corrected — sometimes more than once, sometimes quietly. Keep only the latest value and you lose the version that mattered for a backtest, a research note or an audit. So the platform keeps every vintage: provider responses are stored untouched, and the warehouse records both the period a value describes and the day it became known.
+
+- Raw data is immutable
+
+- Every revision becomes a new vintage
+
+- The warehouse rebuilds from raw
+
+- Failures are loud, never silent
+
+Every stage runs in its own Docker container
+
+[View on GitHub](https://github.com/julianhilgemann/fx_macro_platform) [All projects](/projects)
+
+#### Questions? I reply fast.
+
+Contact me
+
+---
+
+## projects
+
+### Projects
 
 A selection of my recent open-source work and public project contributions, hosted on GitHub.
 
@@ -175,21 +205,21 @@ START PROJECT sequence
 
 ## hub
 
-Homepage
+### Julian Hilgemann
 
+Power BI & Microsoft Fabric decision systems
+
+Homepage
 Main Website
 
 GitHub
-
 Code & Projects
 
 LinkedIn
-
 Connect & Network
 
 Contact
-
-Download
+Save to contacts
 
 ---
 
@@ -197,11 +227,13 @@ Download
 
 ### Welcome
 
-Select a Language
+Select a language · Sprache wählen
 
-ENGLISH
+English
+Continue in English
 
-DEUTSCH
+Deutsch
+Weiter auf Deutsch
 
 ---
 
@@ -215,7 +247,37 @@ Leistungen & Preise
 
 Über mich
 
-#### Aktuelle Projekte
+#### Aktuelles Projekt
+
+In aktiver Entwicklung
+
+##### FX Macro Data Platform
+
+Eine Datenplattform für makroökonomische und FX-Zeitreihen – so gebaut, dass sich jede Zahl darauf zurückführen lässt, was zum Zeitpunkt ihrer Veröffentlichung bekannt war.
+
+Makrodaten werden revidiert. Ein BIP- oder Inflationswert wird veröffentlicht und später korrigiert – manchmal mehrfach, manchmal stillschweigend. Wer nur den jeweils letzten Wert speichert, verliert genau die Version, auf die es für einen Backtest, eine Research-Notiz oder ein Audit ankam. Deshalb bewahrt die Plattform jeden Stand auf: Antworten der Datenquellen werden unverändert abgelegt, und das Warehouse hält fest, welchen Zeitraum ein Wert beschreibt und seit wann er bekannt ist.
+
+- Rohdaten sind unveränderlich
+
+- Jede Revision wird ein neuer Stand
+
+- Das Warehouse lässt sich aus Rohdaten neu aufbauen
+
+- Fehler sind laut, nie still
+
+Jede Stufe läuft in einem eigenen Docker-Container
+
+[Auf GitHub ansehen](https://github.com/julianhilgemann/fx_macro_platform) [Alle Projekte](/de/projects)
+
+#### Fragen? Ich antworte schnell.
+
+Kontakt aufnehmen
+
+---
+
+## de/projects
+
+### Projekte
 
 Eine Auswahl meiner aktuellen Open-Source-Arbeit und öffentlichen Projektbeiträge auf GitHub.
 
@@ -380,21 +442,21 @@ PROJEKT-SEQUENZ STARTEN
 
 ## de/hub
 
-Startseite
+### Julian Hilgemann
 
+Entscheidungssysteme mit Power BI & Microsoft Fabric
+
+Startseite
 Haupt-Website
 
 GitHub
-
 Code & Projekte
 
 LinkedIn
-
 Vernetzen & Networking
 
 Kontakt
-
-Download
+In Kontakte speichern
 
 ---
 

@@ -29,7 +29,12 @@ const PAGE_META = {
     index: {
         title: 'Home',
         group: 'en',
-        desc: 'Landing page: positioning statement and summaries of current open-source data projects.',
+        desc: 'Landing page: positioning statement and the current project, the FX Macro Data Platform, with its architecture.',
+    },
+    projects: {
+        title: 'Projects',
+        group: 'en',
+        desc: 'Open-source data projects: analytics engineering, forecasting, data visualisation and creative coding, each with concept and architecture.',
     },
     about: {
         title: 'About',
@@ -59,7 +64,12 @@ const PAGE_META = {
     'de/index': {
         title: 'Startseite',
         group: 'de',
-        desc: 'German landing page: positioning statement and current open-source data projects.',
+        desc: 'German landing page: positioning statement and the current project, the FX Macro Data Platform.',
+    },
+    'de/projects': {
+        title: 'Projekte',
+        group: 'de',
+        desc: 'German project list: open-source data projects with concept and architecture.',
     },
     'de/about': {
         title: 'Über mich',
@@ -115,12 +125,14 @@ const GROUP_HEADINGS = [
 // top-down hits the substantive pages before the legal boilerplate.
 const PAGE_ORDER = [
     'index',
+    'projects',
     'about',
     'services',
     'page-engine',
     'hub',
     'start',
     'de/index',
+    'de/projects',
     'de/about',
     'de/services',
     'de/page-engine',

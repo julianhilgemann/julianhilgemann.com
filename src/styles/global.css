@@ -48,6 +48,9 @@
 
 /* --- Bottom Banner (Notice) --- */
 .klaro .cookie-notice {
+  /* The Klaro config uses the "top" theme, which sets `top`; with `bottom`
+     also set the notice stretched over the whole viewport. */
+  top: auto !important;
   bottom: 24px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
@@ -232,4 +235,255 @@
   content: none !important;
   display: none !important;
   color: transparent !important;
+}
+/* --- Motion (homepage, see src/scripts/home.ts) --- */
+
+/* Pre-paint hide for the hero intro. The class is set by an inline script in
+   Hero.astro and removed by home.ts once GSAP holds each element's state. */
+html.motion-intro [data-intro] {
+  visibility: hidden;
+}
+
+/* SplitText line masks clip at the line box, which cuts descenders on tight
+   headline leading. Pad the mask and pull the layout back so nothing moves. */
+.split-line-mask {
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+/* Cursor spotlight for glass cards: a soft wash inside the card plus a lit
+   arc of the border, both centred on --mx/--my (set from pointermove in
+   src/scripts/motion.ts). Isolation makes the card a stacking context, so
+   z-index -1 keeps the wash above the card background but behind its text. */
+.spotlight-card {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight-card::before,
+.spotlight-card::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.spotlight-card::before {
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), rgba(56, 189, 248, 0.07), transparent 45%);
+}
+.spotlight-card::after {
+  inset: -1px;
+  padding: 1px;
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(245, 158, 11, 0.6), transparent 45%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+@media (hover: hover) and (pointer: fine) {
+  .spotlight-card:hover::before,
+  .spotlight-card:hover::after {
+    opacity: 1;
+  }
+}
+
+/* --- About page (EN + DE share these; motion lives in src/scripts/about.ts) --- */
+
+/* Faint blueprint dot grid behind the top of content pages (PageBackdrop). */
+.page-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 25%, transparent 75%);
+  mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 25%, transparent 75%);
+}
+/* Slow drifting glow (About intro, NetworkBackdrop on /start and /hub). */
+.ambient-blob {
+  animation: ambient-drift 16s ease-in-out infinite alternate;
+}
+.ambient-blob-late {
+  animation-delay: -8s;
+}
+@keyframes ambient-drift {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(-40px, 30px) scale(1.08);
+  }
+}
+
+/* "How I work" cards: numbered by counter so the digits stay out of the
+   markup (and out of the generated llms docs). Hover uses the individual
+   `translate` property, which never collides with GSAP's `transform`. */
+.work-list {
+  counter-reset: work;
+}
+.work-list > li {
+  counter-increment: work;
+  transition: translate 0.3s ease, background-color 0.3s ease;
+}
+.work-num::before {
+  content: counter(work, decimal-leading-zero);
+}
+@media (hover: hover) and (pointer: fine) {
+  .work-list > li:hover {
+    translate: 0 -4px;
+  }
+}
+
+/* Timeline rail dots; about.ts lights them as the reader reaches each entry. */
+.timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 0.125rem;
+  width: 15px;
+  height: 15px;
+  border-radius: 9999px;
+  border: 2px solid rgba(245, 158, 11, 0.45);
+  background: #0b1220;
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.timeline-dot.is-lit {
+  background: #f59e0b;
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.12), 0 0 18px rgba(245, 158, 11, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-blob {
+    animation: none;
+  }
+  .work-list > li,
+  .timeline-dot {
+    transition: none;
+  }
+}
+
+/* --- Gateway pages (/start, /hub): link cards --- */
+
+/* One card, two layouts. Phones: a compact row (icon · text · arrow).
+   From `sm`: a tile with icon and arrow on top, text anchored to the bottom.
+   Hover lift and press use the individual `translate` / `scale` properties,
+   which never collide with GSAP's `transform` during the intro. */
+.link-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.125rem;
+  border-radius: 1rem;
+  transition: translate 0.3s ease, scale 0.15s ease, border-color 0.3s ease, background-color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.link-card:active {
+  scale: 0.98;
+}
+.link-card:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 3px;
+}
+.link-card.is-primary,
+.link-card.is-suggested {
+  border-color: rgba(245, 158, 11, 0.45);
+}
+.link-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #9ca3af;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+.link-icon svg {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+.link-title {
+  display: block;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #fff;
+}
+.link-sub {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.8125rem;
+  color: #9ca3af;
+}
+/* --nx / --ny set per card: the direction the arrow points (↗ → ↓). */
+.link-arrow {
+  color: rgba(255, 255, 255, 0.35);
+  transition: color 0.3s ease, translate 0.3s ease;
+}
+.is-primary .link-arrow,
+.is-suggested .link-arrow {
+  color: #f59e0b;
+}
+
+@media (min-width: 640px) {
+  .link-card {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr;
+    align-items: start;
+    gap: 2.5rem 1rem;
+    padding: 1.75rem;
+    min-height: 13rem;
+    border-radius: 1.5rem;
+  }
+  .link-card .link-text {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    align-self: end;
+  }
+  .link-card .link-arrow {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .link-icon {
+    width: 3.25rem;
+    height: 3.25rem;
+    font-size: 1.0625rem;
+  }
+  .link-icon svg {
+    width: 1.625rem;
+    height: 1.625rem;
+  }
+  .link-title {
+    font-size: 1.375rem;
+  }
+  .link-sub {
+    font-size: 0.9375rem;
+    margin-top: 0.25rem;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link-card:hover {
+    translate: 0 -4px;
+    border-color: rgba(245, 158, 11, 0.45);
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+  .link-card:hover .link-icon {
+    background: rgba(245, 158, 11, 0.12);
+    border-color: rgba(245, 158, 11, 0.4);
+    color: #f59e0b;
+  }
+  .link-card:hover .link-arrow {
+    color: #f59e0b;
+    translate: var(--nx, 4px) var(--ny, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-card,
+  .link-arrow {
+    transition: none;
+  }
 }

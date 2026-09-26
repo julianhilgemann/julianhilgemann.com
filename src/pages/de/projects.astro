@@ -1,0 +1,39 @@
+---
+import Layout from "../../layouts/LayoutDE.astro";
+import MotionIntro from "../../components/MotionIntro.astro";
+import PageBackdrop from "../../components/PageBackdrop.astro";
+import Projects from "../../components/de/Projects.astro";
+import SecondaryCTA from "../../components/de/SecondaryCTA.astro";
+---
+
+<Layout
+    title="Projekte | Julian Hilgemann"
+    description="Open-Source-Datenprojekte: Analytics Engineering, Forecasting, Datenvisualisierung und Creative Coding — jeweils mit der Architektur dahinter."
+    fullWidth={true}
+>
+    <MotionIntro />
+
+    <section class="relative isolate px-8 sm:px-12 lg:px-16 pb-20 md:pb-28">
+        <PageBackdrop />
+
+        <div class="max-w-[1200px] mx-auto">
+            <div class="max-w-3xl mb-12 md:mb-16">
+                <h1 data-page-title data-intro class="text-5xl md:text-6xl font-bold tracking-tight mb-8">
+                    Projekte
+                </h1>
+                <p data-intro data-intro-fade class="text-xl md:text-2xl text-text-secondary leading-relaxed">
+                    Eine Auswahl meiner aktuellen Open-Source-Arbeit und
+                    öffentlichen Projektbeiträge auf GitHub.
+                </p>
+            </div>
+
+            <Projects />
+        </div>
+    </section>
+
+    <SecondaryCTA />
+</Layout>
+
+<script>
+    import "../../scripts/page";
+</script>

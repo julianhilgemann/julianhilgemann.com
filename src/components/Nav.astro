@@ -8,12 +8,14 @@ interface NavItem {
 
 const navItemsEN: NavItem[] = [
     { name: "Home", href: "/" },
+    { name: "Projects", href: "/projects" },
     { name: "Services", href: "/services" },
     { name: "About", href: "/about" },
 ];
 
 const navItemsDE: NavItem[] = [
     { name: "Home", href: "/de" },
+    { name: "Projekte", href: "/de/projects" },
     { name: "Leistungen", href: "/de/services" },
     { name: "Über mich", href: "/de/about" },
 ];
@@ -71,53 +73,22 @@ const isActive = (href: string) => {
 
         <!-- Desktop Navigation -->
         <nav class="hidden md:flex items-center shrink-0 relative z-50">
-            <div class="flex justify-end w-[100px]">
-                <a
-                    href={navItems[0].href}
-                    class:list={[
-                        "text-sm font-medium transition-colors duration-300 ease-in-out",
-                        isActive(navItems[0].href)
-                            ? "text-primary"
-                            : "text-white hover:text-primary",
-                    ]}
-                >
-                    {navItems[0].name}
-                </a>
-            </div>
-
-            <span class="w-px h-3 bg-white/10 block mx-8" aria-hidden="true"
-            ></span>
-
-            <div class="flex justify-center">
-                <a
-                    href={navItems[1].href}
-                    class:list={[
-                        "text-sm font-medium transition-colors duration-300 ease-in-out",
-                        isActive(navItems[1].href)
-                            ? "text-primary"
-                            : "text-white hover:text-primary",
-                    ]}
-                >
-                    {navItems[1].name}
-                </a>
-            </div>
-
-            <span class="w-px h-3 bg-white/10 block mx-8" aria-hidden="true"
-            ></span>
-
-            <div class="flex justify-start w-[100px]">
-                <a
-                    href={navItems[2].href}
-                    class:list={[
-                        "text-sm font-medium transition-colors duration-300 ease-in-out",
-                        isActive(navItems[2].href)
-                            ? "text-primary"
-                            : "text-white hover:text-primary",
-                    ]}
-                >
-                    {navItems[2].name}
-                </a>
-            </div>
+            {
+                navItems.map((item, i) => (
+                    <>
+                        {i > 0 && <span class="w-px h-3 bg-white/10 block mx-4 lg:mx-8" aria-hidden="true" />}
+                        <a
+                            href={item.href}
+                            class:list={[
+                                "text-sm font-medium transition-colors duration-300 ease-in-out",
+                                isActive(item.href) ? "text-primary" : "text-white hover:text-primary",
+                            ]}
+                        >
+                            {item.name}
+                        </a>
+                    </>
+                ))
+            }
         </nav>
 
         <!-- Right Side: Lang & Desktop Contact & Mobile Toggle -->

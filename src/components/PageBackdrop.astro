@@ -1,0 +1,11 @@
+---
+// Backdrop for content pages (About, Projects): a faint blueprint dot grid
+// and two slow glows behind the top of the page. Render it first inside a
+// `relative isolate` section; it bleeds up behind the fixed nav.
+---
+
+<div aria-hidden="true" class="pointer-events-none absolute inset-x-0 -top-32 h-[1000px] -z-10 overflow-hidden">
+    <div class="page-grid absolute inset-0"></div>
+    <div class="ambient-blob absolute -top-40 -right-40 w-[560px] h-[560px] rounded-full bg-primary/[0.12] blur-[120px]"></div>
+    <div class="ambient-blob ambient-blob-late absolute top-[420px] -left-48 w-[460px] h-[460px] rounded-full bg-info/[0.12] blur-[120px]"></div>
+</div>

@@ -1,0 +1,30 @@
+---
+// A badly laid-out bar chart that tidies itself — the closing note of the
+// About page ("can't leave a badly laid-out chart alone"). The markup is the
+// tidy end state, which is what reduced motion and no-JS visitors see;
+// src/scripts/about.ts scrambles it on load and straightens it on scroll.
+interface Props {
+    ariaLabel: string;
+}
+
+const { ariaLabel } = Astro.props;
+
+const BASELINE = 176;
+// Sorted, aligned, one accent: the chart the scrambled version becomes.
+const heights = [132, 108, 90, 72, 58, 44, 30];
+const bars = heights.map((h, i) => ({ x: 26 + i * 40, h }));
+---
+
+<figure data-tidy-chart role="img" aria-label={ariaLabel} class="glass rounded-2xl p-6 md:p-8 select-none">
+    <svg viewBox="0 0 320 200" class="w-full h-auto overflow-visible" aria-hidden="true">
+        <g stroke="rgba(255,255,255,0.09)" stroke-dasharray="3 5">
+            {[44, 88, 132].map((y) => <line data-gridline x1="16" x2="304" y1={y} y2={y} />)}
+        </g>
+        {
+            bars.map((b, i) => (
+                <rect data-bar x={b.x} y={BASELINE - b.h} width="26" height={b.h} rx="3" fill={i === 0 ? "#F59E0B" : "#475569"} />
+            ))
+        }
+        <line x1="16" x2="304" y1={BASELINE} y2={BASELINE} stroke="rgba(255,255,255,0.3)" />
+    </svg>
+</figure>

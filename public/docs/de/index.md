@@ -6,9 +6,27 @@ Leistungen & Preise
 
 Über mich
 
-## Aktuelle Projekte
+## Aktuelles Projekt
 
-Eine Auswahl meiner aktuellen Open-Source-Arbeit und öffentlichen Projektbeiträge auf GitHub.
+In aktiver Entwicklung
+
+### FX Macro Data Platform
+
+Eine Datenplattform für makroökonomische und FX-Zeitreihen – so gebaut, dass sich jede Zahl darauf zurückführen lässt, was zum Zeitpunkt ihrer Veröffentlichung bekannt war.
+
+Makrodaten werden revidiert. Ein BIP- oder Inflationswert wird veröffentlicht und später korrigiert – manchmal mehrfach, manchmal stillschweigend. Wer nur den jeweils letzten Wert speichert, verliert genau die Version, auf die es für einen Backtest, eine Research-Notiz oder ein Audit ankam. Deshalb bewahrt die Plattform jeden Stand auf: Antworten der Datenquellen werden unverändert abgelegt, und das Warehouse hält fest, welchen Zeitraum ein Wert beschreibt und seit wann er bekannt ist.
+
+- Rohdaten sind unveränderlich
+
+- Jede Revision wird ein neuer Stand
+
+- Das Warehouse lässt sich aus Rohdaten neu aufbauen
+
+- Fehler sind laut, nie still
+
+Jede Stufe läuft in einem eigenen Docker-Container
+
+[Auf GitHub ansehen](https://github.com/julianhilgemann/fx_macro_platform) [Alle Projekte](/de/projects)
 
 ## Fragen? Ich antworte schnell.
 

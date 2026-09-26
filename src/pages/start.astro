@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import MotionIntro from "../components/MotionIntro.astro";
+import NetworkBackdrop from "../components/NetworkBackdrop.astro";
 ---
 
 <Layout
@@ -19,138 +21,60 @@ import Layout from "../layouts/Layout.astro";
         }
     </style>
 
-    <!-- Background Blobs (Simplified Hero Effect) -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div
-            class="absolute top-0 right-0 w-[500px] h-[500px] translate-x-1/3 -translate-y-1/4"
-        >
-            <div
-                class="w-full h-full bg-primary/10 rounded-full blur-[140px] animate-blob"
-            >
-            </div>
-        </div>
-        <div
-            class="absolute bottom-0 left-0 w-[400px] h-[400px] -translate-x-1/3 translate-y-1/3"
-        >
-            <div
-                class="w-full h-full bg-info/10 rounded-full blur-[120px] animate-blob animation-delay-2000"
-            >
-            </div>
-        </div>
-    </div>
+    <MotionIntro />
 
-    <div
-        class="flex-1 w-full flex flex-col items-center justify-center p-4 z-10 my-auto"
-    >
-        <div class="text-center mb-12 w-full max-w-4xl">
+    <div data-network class="relative isolate flex-1 min-h-[100svh] flex flex-col justify-center px-5 sm:px-8 py-16">
+        <NetworkBackdrop />
+
+        <div class="w-full max-w-2xl mx-auto text-center flex flex-col items-center">
+            <!-- The greeting rolls between the two languages (src/scripts/gateway.ts);
+                 its mask is the outer span. -->
             <h1
-                class="text-4xl sm:text-6xl font-black mb-6 tracking-tight text-white drop-shadow-sm"
+                data-greeting
+                data-greeting-en="Welcome"
+                data-greeting-de="Willkommen"
+                data-intro
+                class="mt-5 text-5xl sm:text-7xl font-bold tracking-tight leading-[1.1] w-full"
             >
-                Welcome
+                <span class="block overflow-hidden pb-[0.14em] -mb-[0.14em]"><span data-greeting-word class="inline-block">Welcome</span></span>
             </h1>
-            <div
-                class="flex items-center justify-center gap-2 text-text-secondary"
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="opacity-80"
-                >
+
+            <!-- After the h1 in source (so the generated docs open on it), first on screen. -->
+            <p data-intro data-intro-fade class="order-first inline-flex items-center gap-2 text-[11px] sm:text-sm font-medium uppercase tracking-[0.14em] sm:tracking-[0.2em] text-text-secondary text-balance">
+                <svg class="hidden sm:block" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"
-                    ></path>
+                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
                     <path d="M2 12h20"></path>
                 </svg>
-                <span
-                    class="text-sm sm:text-base font-medium uppercase tracking-wider"
-                    >Select a Language</span
-                >
-            </div>
-        </div>
+                Select a language · Sprache wählen
+            </p>
 
-        <div
-            class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl px-4"
-        >
-            <!-- English -->
-            <a href="/hub" class="hub-card glass group">
-                <div class="text-center">
-                    <span class="hub-text text-xl sm:text-2xl tracking-[0.2em]"
-                        >ENGLISH</span
-                    >
-                </div>
-            </a>
-
-            <!-- German -->
-            <a href="/de/hub" class="hub-card glass group">
-                <div class="text-center">
-                    <span class="hub-text text-xl sm:text-2xl tracking-[0.2em]"
-                        >DEUTSCH</span
-                    >
-                </div>
-            </a>
+            <nav data-intro data-intro-stagger aria-label="Language · Sprache" class="mt-10 sm:mt-14 grid gap-3 sm:gap-5 sm:grid-cols-2 text-left w-full">
+                <a href="/hub" hreflang="en" lang="en" data-lang-card="en" class="link-card glass spotlight-card">
+                    <span class="link-icon" aria-hidden="true">{"EN"}</span>
+                    <span class="link-text">
+                        <span class="link-title">English</span>
+                        <span class="link-sub">Continue in English</span>
+                    </span>
+                    <span class="link-arrow" style="--nx: 4px; --ny: 0px">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
+                    </span>
+                </a>
+                <a href="/de/hub" hreflang="de" lang="de" data-lang-card="de" class="link-card glass spotlight-card">
+                    <span class="link-icon" aria-hidden="true">{"DE"}</span>
+                    <span class="link-text">
+                        <span class="link-title">Deutsch</span>
+                        <span class="link-sub">Weiter auf Deutsch</span>
+                    </span>
+                    <span class="link-arrow" style="--nx: 4px; --ny: 0px">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
+                    </span>
+                </a>
+            </nav>
         </div>
     </div>
 </Layout>
 
-<style>
-    @keyframes blob {
-        0% {
-            transform: translate(0, 0) scale(1);
-        }
-        33% {
-            transform: translate(30px, -50px) scale(1.1);
-        }
-        66% {
-            transform: translate(-20px, 20px) scale(0.9);
-        }
-        100% {
-            transform: translate(0, 0) scale(1);
-        }
-    }
-    .animate-blob {
-        animation: blob 7s infinite ease-in-out;
-    }
-    .animation-delay-2000 {
-        animation-delay: 2s;
-    }
-
-    /* Card Styling */
-    .hub-card {
-        @apply flex flex-col items-center justify-center p-6 sm:p-10 rounded-2xl sm:rounded-3xl border border-white/10 transition-all duration-500 relative overflow-hidden;
-        min-height: 120px;
-    }
-
-    @media (min-width: 640px) {
-        .hub-card {
-            min-height: 180px;
-        }
-    }
-
-    /* Hover States (Only on devices that support hover) */
-    @media (hover: hover) {
-        /* Hover State: Glow and Border */
-        .hub-card:hover {
-            @apply border-primary/60 bg-white/5;
-            box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
-            transform: translateY(-4px);
-        }
-
-        /* Text Hover */
-        .hub-card:hover .hub-text {
-            @apply text-primary;
-            text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
-        }
-    }
-
-    /* Text Styling */
-    .hub-text {
-        @apply font-bold text-text-primary transition-colors duration-300 block;
-    }
-</style>
+<script>
+    import "../scripts/gateway";
+</script>

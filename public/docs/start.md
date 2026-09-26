@@ -1,7 +1,9 @@
 # Welcome
 
-Select a Language
+Select a language · Sprache wählen
 
-ENGLISH
+English
+Continue in English
 
-DEUTSCH
+Deutsch
+Weiter auf Deutsch

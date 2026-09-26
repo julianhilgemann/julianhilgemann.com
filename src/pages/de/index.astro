@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/LayoutDE.astro";
 import Hero from "../../components/de/Hero.astro";
-import Projects from "../../components/de/Projects.astro";
+import CurrentProject from "../../components/de/CurrentProject.astro";
 import SecondaryCTA from "../../components/de/SecondaryCTA.astro";
 ---
 
@@ -14,9 +14,13 @@ import SecondaryCTA from "../../components/de/SecondaryCTA.astro";
     <!-- Hero Section -->
     <Hero />
 
-    <!-- Projects Section -->
-    <Projects />
+    <!-- Current project (full list lives on /projects) -->
+    <CurrentProject />
 
     <!-- Secondary CTA -->
     <SecondaryCTA />
 </Layout>
+
+<script>
+    import "../../scripts/home";
+</script>

@@ -1,6 +1,32 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SecondaryCTA from "../components/SecondaryCTA.astro";
+import MotionIntro from "../components/MotionIntro.astro";
+import NumberAnatomy from "../components/NumberAnatomy.astro";
+import TidyChart from "../components/TidyChart.astro";
+import PageBackdrop from "../components/PageBackdrop.astro";
+
+// Figure labels, stats and tags only restate the prose around them, so they
+// live here instead of in literal markup: the llms generator flattens literal
+// text into the page's docs, where these would read as duplicate copy.
+const ui = {
+    anatomy: {
+        labels: ["The number", "Definitions", "Data model", "Choices"],
+        kpi: { label: "REVENUE", value: "€4.2M", delta: "▲ 12% vs plan" },
+        ariaLabel:
+            "Illustration: a dashboard number as the top layer, with its definitions, its data model and the choices about what to leave out underneath.",
+    },
+    now: "Now",
+    before: "Before",
+    fabricStats: [
+        { value: 150, label: "customers" },
+        { value: 100, label: "tables" },
+        { value: 700, label: "measures" },
+    ],
+    fabricTags: ["Microsoft Fabric", "TMDL", "VS Code", "Git", "DevOps", "Warehouse & Lakehouse"],
+    fintechTags: ["Revenue forecasting", "Pipeline forecasting", "Scenario planning", "Metric layer"],
+    chart: "Illustration: a cluttered bar chart straightening itself into a sorted one with a single highlighted bar. Click to replay.",
+};
 ---
 
 <Layout
@@ -8,104 +34,209 @@ import SecondaryCTA from "../components/SecondaryCTA.astro";
     description="I build BI as a product — owned models, trusted numbers, and interfaces people actually use."
     fullWidth={true}
 >
-    <section class="pb-16 md:pb-24 px-8 sm:px-12 lg:px-16">
-        <div class="max-w-3xl mx-auto text-left">
-            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-8">
-                About Me
-            </h1>
+    <MotionIntro />
 
-            <div class="text-xl text-text-secondary leading-relaxed space-y-6">
-                <p>
-                    I build BI as a product, not as a report. That means I own
-                    what I ship — the model underneath, the numbers on the
-                    surface, and whether anyone still trusts them six months
-                    later.
-                </p>
-                <p>
-                    Most reporting breaks in one of two directions: the numbers
-                    are right but nobody uses them, or it looks good and the
-                    model underneath won't hold. I work where those two meet.
-                </p>
-                <p>
-                    Companies behave less like fixed structures than like living
-                    systems. Revenue moves in cycles, customers adapt, markets
-                    shift. Underneath the motion there is structure — dynamics
-                    you can model.
-                </p>
-                <p>
-                    So a number on a dashboard isn't just a number. It's the
-                    visible surface of a data model, a set of definitions, and a
-                    hundred decisions about what to leave out.
-                </p>
-                <p class="text-white font-medium border-l-4 border-primary pl-6">
+    <!-- ── Intro: text beside the anatomy figure (sticky on desktop) ── -->
+    <section class="relative isolate px-8 sm:px-12 lg:px-16 pb-20 md:pb-28 lg:pb-4">
+        <PageBackdrop />
+
+        <div class="max-w-[1200px] mx-auto grid lg:grid-cols-12 gap-x-16 gap-y-10">
+            <div class="lg:col-span-7">
+                <h1 data-page-title data-intro class="text-5xl md:text-6xl font-bold tracking-tight mb-10">
+                    About Me
+                </h1>
+
+                <div class="text-lg md:text-xl text-text-secondary leading-relaxed space-y-6">
+                    <p data-intro data-intro-fade class="text-xl md:text-2xl text-text-primary">
+                        I build BI as a product, not as a report. That means I own
+                        what I ship — the model underneath, the numbers on the
+                        surface, and whether anyone still trusts them six months
+                        later.
+                    </p>
+                    <p data-intro data-intro-fade>
+                        Most reporting breaks in one of two directions: the numbers
+                        are right but nobody uses them, or it looks good and the
+                        model underneath won't hold. I work where those two meet.
+                    </p>
+                    <p data-intro data-intro-fade>
+                        Companies behave less like fixed structures than like living
+                        systems. Revenue moves in cycles, customers adapt, markets
+                        shift. Underneath the motion there is structure —
+                        dynamics you can model.
+                    </p>
+                    <p data-intro data-intro-fade>
+                        So a number on a dashboard isn't just a number. It's the
+                        visible surface of a data model, a set of definitions, and a
+                        hundred decisions about what to leave out.
+                    </p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:flex lg:flex-col lg:justify-center -mx-4 sm:mx-0">
+                <div data-intro data-intro-visual class="lg:sticky lg:top-24 max-w-md mx-auto lg:max-w-none w-full">
+                    <NumberAnatomy {...ui.anatomy} />
+                </div>
+            </div>
+
+            <!-- Bottom padding lives on this row, not the grid: it is what gives
+                 the sticky figure (spanning both rows) room to stay put. -->
+            <div class="lg:col-span-7 lg:pb-24">
+                <p
+                    data-quote
+                    data-intro
+                    data-intro-fade
+                    class="text-2xl md:text-3xl font-semibold text-white leading-snug border-l-4 border-primary pl-6"
+                >
                     I build those abstractions to be technically sound and to
                     match how people actually decide.
                 </p>
             </div>
+        </div>
+    </section>
 
-            <h2 class="text-2xl md:text-3xl font-bold mt-16 mb-6">How I work</h2>
-            <ul class="space-y-4 text-lg text-text-secondary leading-relaxed">
-                <li>
-                    <strong class="text-white">Clarity before code.</strong> Architecture
+    <!-- ── How I work ── -->
+    <section class="px-8 sm:px-12 lg:px-16 py-20 md:py-28 border-t border-white/5">
+        <div class="max-w-[1200px] mx-auto">
+            <h2 data-reveal-lines class="text-3xl md:text-5xl font-bold mb-10 md:mb-14">How I work</h2>
+            <ul data-reveal-stagger class="work-list grid md:grid-cols-3 gap-5 md:gap-6">
+                <li class="glass spotlight-card rounded-2xl p-7 md:p-8 text-lg text-text-secondary leading-relaxed hover:bg-white/[0.04]">
+                    <div class="flex items-center justify-between mb-8" aria-hidden="true">
+                        <span class="flex items-center justify-center w-11 h-11 rounded-xl bg-info/10 border border-info/20 text-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </span>
+                        <span class="work-num text-sm font-semibold tracking-widest text-white/25"></span>
+                    </div>
+                    <strong class="block text-white text-xl mb-3">Clarity before code.</strong> Architecture
                     follows from a clear picture of what the product is for, not
                     the other way around.
                 </li>
-                <li>
-                    <strong class="text-white">Craft in the details.</strong> Correct
+                <li class="glass spotlight-card rounded-2xl p-7 md:p-8 text-lg text-text-secondary leading-relaxed hover:bg-white/[0.04]">
+                    <div class="flex items-center justify-between mb-8" aria-hidden="true">
+                        <span class="flex items-center justify-center w-11 h-11 rounded-xl bg-info/10 border border-info/20 text-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                        </span>
+                        <span class="work-num text-sm font-semibold tracking-widest text-white/25"></span>
+                    </div>
+                    <strong class="block text-white text-xl mb-3">Craft in the details.</strong> Correct
                     isn't enough. Naming, layout, load times and edge cases decide
                     whether people come back.
                 </li>
-                <li>
-                    <strong class="text-white">Impact you can see.</strong> A dashboard
+                <li class="glass spotlight-card rounded-2xl p-7 md:p-8 text-lg text-text-secondary leading-relaxed hover:bg-white/[0.04]">
+                    <div class="flex items-center justify-between mb-8" aria-hidden="true">
+                        <span class="flex items-center justify-center w-11 h-11 rounded-xl bg-info/10 border border-info/20 text-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        </span>
+                        <span class="work-num text-sm font-semibold tracking-widest text-white/25"></span>
+                    </div>
+                    <strong class="block text-white text-xl mb-3">Impact you can see.</strong> A dashboard
                     nobody opens is a failed project, however elegant the model.
                 </li>
             </ul>
+        </div>
+    </section>
 
-            <h2 class="text-2xl md:text-3xl font-bold mt-16 mb-6">
-                What I've built
-            </h2>
-            <div class="grid gap-4">
-                <div class="glass p-6 md:p-8 rounded-xl">
-                    <h3 class="font-bold text-white text-lg mb-3">
-                        Multi-tenant Fabric product
-                    </h3>
-                    <p class="text-text-secondary leading-relaxed">
-                        I work on the product side of a multi-tenant Microsoft
-                        Fabric environment — around 150 customers, each with
-                        their own Dev, Test and Prod workspaces. The model runs
-                        to roughly 100 tables and 700 measures, and my job is
-                        keeping it fast and correct while it keeps growing. I
-                        build in VS Code against TMDL files with Git and DevOps
-                        behind it, rather than clicking through the service.
-                        Alongside that I'm rebuilding the transformation layer,
-                        moving dataflows into properly modeled warehouses and
-                        lakehouses.
-                    </p>
-                </div>
-
-                <div class="glass p-6 md:p-8 rounded-xl">
-                    <h3 class="font-bold text-white text-lg mb-3">
-                        Forecasting and decision models
-                    </h3>
-                    <p class="text-text-secondary leading-relaxed">
-                        Before that I spent years building production BI in
-                        fintech: revenue and pipeline forecasting, scenario
-                        planning, and the metric layer underneath them — used in
-                        rolling executive planning. That side of the work is
-                        grounded in formal training in economics and
-                        quantitative methods.
-                    </p>
-                </div>
+    <!-- ── What I've built: timeline ── -->
+    <section class="px-8 sm:px-12 lg:px-16 py-20 md:py-28 border-t border-white/5">
+        <div class="max-w-[1200px] mx-auto grid lg:grid-cols-12 gap-x-16 gap-y-10">
+            <div class="lg:col-span-4">
+                <h2 data-reveal-lines class="text-3xl md:text-5xl font-bold lg:sticky lg:top-32">
+                    What I've built
+                </h2>
             </div>
 
-            <p class="text-xl text-text-secondary leading-relaxed mt-16">
+            <div data-timeline class="lg:col-span-8 relative">
+                <div class="absolute left-[7px] top-2 bottom-2 w-px bg-white/10" aria-hidden="true">
+                    <div data-timeline-fill class="absolute inset-0 origin-top bg-gradient-to-b from-primary via-primary/60 to-info/60"></div>
+                </div>
+
+                <article class="relative pl-8 md:pl-12 pb-12">
+                    <span data-timeline-dot class="timeline-dot is-lit" aria-hidden="true"></span>
+                    <p class="text-xs uppercase tracking-[0.2em] font-semibold text-primary mb-4">{ui.now}</p>
+                    <div data-reveal class="glass spotlight-card rounded-2xl p-5 sm:p-6 md:p-8">
+                        <h3 class="font-bold text-white text-xl md:text-2xl mb-6">
+                            Multi-tenant Fabric product
+                        </h3>
+                        <div class="grid grid-cols-3 gap-3 pb-6 mb-6 border-b border-white/10" aria-hidden="true">
+                            {
+                                ui.fabricStats.map((s) => (
+                                    <div>
+                                        <p class="text-2xl sm:text-3xl md:text-4xl font-bold text-white tabular-nums" data-count={s.value} data-prefix="~">
+                                            ~{s.value}
+                                        </p>
+                                        <p class="text-[10px] sm:text-xs uppercase tracking-wider text-text-secondary mt-1">{s.label}</p>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        <p class="text-text-secondary leading-relaxed">
+                            I work on the product side of a multi-tenant Microsoft
+                            Fabric environment — around 150 customers, each with
+                            their own Dev, Test and Prod workspaces. The model runs
+                            to roughly 100 tables and 700 measures, and my job is
+                            keeping it fast and correct while it keeps growing. I
+                            build in VS Code against TMDL files with Git and DevOps
+                            behind it, rather than clicking through the service.
+                            Alongside that I'm rebuilding the transformation layer,
+                            moving dataflows into properly modeled warehouses and
+                            lakehouses.
+                        </p>
+                        <ul class="flex flex-wrap gap-2 mt-6" aria-hidden="true">
+                            {
+                                ui.fabricTags.map((tag) => (
+                                    <li class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10">{tag}</li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="relative pl-8 md:pl-12">
+                    <span data-timeline-dot class="timeline-dot is-lit" aria-hidden="true"></span>
+                    <p class="text-xs uppercase tracking-[0.2em] font-semibold text-info mb-4">{ui.before}</p>
+                    <div data-reveal class="glass spotlight-card rounded-2xl p-5 sm:p-6 md:p-8">
+                        <h3 class="font-bold text-white text-xl md:text-2xl mb-4">
+                            Forecasting and decision models
+                        </h3>
+                        <p class="text-text-secondary leading-relaxed">
+                            Before that I spent years building production BI in
+                            fintech: revenue and pipeline forecasting, scenario
+                            planning, and the metric layer underneath them — used in
+                            rolling executive planning. That side of the work is
+                            grounded in formal training in economics and
+                            quantitative methods.
+                        </p>
+                        <ul class="flex flex-wrap gap-2 mt-6" aria-hidden="true">
+                            {
+                                ui.fintechTags.map((tag) => (
+                                    <li class="text-xs bg-white/5 px-2 py-1 rounded text-text-secondary border border-white/10">{tag}</li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Closing note ── -->
+    <section class="px-8 sm:px-12 lg:px-16 py-20 md:py-28 border-t border-white/5">
+        <div class="max-w-[1200px] mx-auto grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <p data-reveal class="text-2xl md:text-3xl text-text-secondary leading-snug">
                 I grew up around contemporary art, which is probably why I can't
                 leave a badly laid-out chart alone. It's also the part of this
-                work I enjoy most — the point where something technically dense
-                becomes something a person can read at a glance.
+                work I enjoy most — <span class="text-white">the point where something
+                technically dense becomes something a person can read at a
+                glance.</span>
             </p>
+            <div data-reveal>
+                <TidyChart ariaLabel={ui.chart} />
+            </div>
         </div>
     </section>
 
     <SecondaryCTA />
 </Layout>
+
+<script>
+    import "../scripts/about";
+</script>

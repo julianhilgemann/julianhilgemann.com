@@ -338,18 +338,26 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
         </div>
     </div>
 
-    <!-- Mobile sticky total: thumb-reachable, hidden once the panel is on screen -->
+    <!-- Mobile sticky total: thumb-reachable, hidden once the panel is on screen.
+         Sized as a bottom sheet rather than a toolbar strip — on a phone it is
+         the only view of the result while the controls are being worked
+         through, so the total and the jump button both need real weight. -->
     <div
         data-sticky
-        class="lg:hidden fixed bottom-0 left-0 right-0 z-40 glass border-t border-white/10 px-5 py-3 flex items-center justify-between gap-4 translate-y-full transition-transform duration-300"
+        class="lg:hidden fixed bottom-0 left-0 right-0 z-40 glass rounded-t-2xl shadow-[0_-12px_32px_rgba(0,0,0,0.45)] px-5 pt-4 translate-y-full transition-transform duration-300"
+        style="padding-bottom: max(1.25rem, env(safe-area-inset-bottom));"
     >
-        <div class="min-w-0">
-            <p class="text-[10px] uppercase tracking-wider text-text-secondary truncate">{t.result.totalLabel}</p>
-            <p class="text-xl font-bold text-white leading-tight" data-sticky-total>—</p>
+        <!-- Live miniature of the stacked bar: every control change is felt
+             here even while the full chart is out of view. -->
+        <div class="flex gap-[2px] h-1.5 w-full rounded-full overflow-hidden" data-sticky-bar aria-hidden="true"></div>
+        <p class="mt-4 text-[11px] uppercase tracking-wider text-text-secondary truncate">{t.result.totalLabel}</p>
+        <div class="mt-1 flex items-center justify-between gap-4">
+            <p class="min-w-0 text-[1.75rem] font-bold text-white leading-tight tabular-nums whitespace-nowrap" data-sticky-total>—</p>
+            <a href="#pricing-result" data-sticky-jump class="shrink-0 inline-flex items-center gap-2 bg-primary text-navy-950 font-bold text-[15px] py-3.5 px-5 rounded-full active:scale-[0.97] transition-transform">
+                {t.chart.stickyJump}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+            </a>
         </div>
-        <a href="#pricing-result" data-sticky-jump class="shrink-0 bg-primary text-navy-950 font-bold text-sm py-2.5 px-5 rounded-full">
-            {t.chart.legendHeading}
-        </a>
     </div>
 </Section>
 
@@ -360,8 +368,11 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
        all six inside the dark lightness band and >= 3:1 contrast.
        Tiers inside a family are NOT separate hues — lightness steps cannot
        clear the normal-vision floor inside the band, so tiers are separated by
-       the surface gap and resolved in the legend instead. */
-    #pricing-calculator {
+       the surface gap and resolved in the legend instead.
+       The sticky bar sits outside #pricing-calculator (it has to span the
+       viewport), so it declares the same tokens for its miniature bar. */
+    #pricing-calculator,
+    [data-sticky] {
         --seg-foundation: #eb635e;
         --seg-sources: #08a2af;
         --seg-pages: #bb8d07;
@@ -506,7 +517,8 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
         gap: 2px;
         min-width: 1px;
     }
-    #pricing-calculator :global(.seg-uplift-fill) {
+    #pricing-calculator :global(.seg-uplift-fill),
+    [data-sticky] :global(.seg-uplift-fill) {
         background-image: repeating-linear-gradient(
             45deg,
             transparent 0 3px,
@@ -546,6 +558,14 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
         transform: translateY(1px);
     }
 
+    /* Sticky miniature: segments persist between renders so flex-grow can
+       transition — the bar visibly re-proportions as the scope changes. */
+    [data-sticky] :global(.mini-seg) {
+        flex: 0 0 0px;
+        min-width: 2px;
+        transition: flex-grow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
     details > summary::-webkit-details-marker {
         display: none;
     }
@@ -557,7 +577,8 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
             transition: none !important;
         }
         #pricing-calculator :global(.seg),
-        #pricing-calculator :global(.legend-row) {
+        #pricing-calculator :global(.legend-row),
+        [data-sticky] :global(.mini-seg) {
             transition: none !important;
         }
     }
@@ -621,6 +642,32 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
         // padded container to span the viewport), so it is queried from document.
         const stickyEl = document.querySelector<HTMLElement>("[data-sticky]")!;
         const stickyTotalEl = document.querySelector<HTMLElement>("[data-sticky-total]")!;
+        const stickyBarEl = document.querySelector<HTMLElement>("[data-sticky-bar]")!;
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+        // The total counts to its new value instead of snapping, so a stepper
+        // press reads as cause and effect. It always lands on the exact figure.
+        let shownTotal: number | null = null;
+        let totalFrame = 0;
+        const paintTotal = (n: number) => {
+            shownTotal = n;
+            totalEl.textContent = fmt(n);
+            stickyTotalEl.textContent = fmt(n);
+        };
+        function showTotal(to: number) {
+            cancelAnimationFrame(totalFrame);
+            const from = shownTotal;
+            if (from === null || from === to || reduceMotion.matches) return paintTotal(to);
+            const start = performance.now();
+            const duration = 450;
+            const step = (now: number) => {
+                const p = Math.min(1, (now - start) / duration);
+                const eased = 1 - Math.pow(1 - p, 3);
+                paintTotal(p < 1 ? Math.round(from + (to - from) * eased) : to);
+                if (p < 1) totalFrame = requestAnimationFrame(step);
+            };
+            totalFrame = requestAnimationFrame(step);
+        }
 
         const unitWord = (group: string, qty: number) =>
             group === "sources"
@@ -801,9 +848,24 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
                     )
                     .join("")}`;
 
+            // ── sticky miniature ──
+            FAMILY_ORDER.forEach((famId) => {
+                let el = stickyBarEl.querySelector<HTMLElement>(`[data-fam="${famId}"]`);
+                if (!el) {
+                    el = document.createElement("span");
+                    el.dataset.fam = famId;
+                    el.className = "mini-seg" + (famId === "uplift" ? " seg-uplift-fill" : "");
+                    el.style.backgroundColor = `var(--seg-${famId})`;
+                    stickyBarEl.appendChild(el);
+                }
+                const fi = families.findIndex((f) => f.id === famId);
+                const value = fi === -1 ? 0 : famTotals[fi];
+                el.hidden = value <= 0;
+                el.style.flexGrow = String(value);
+            });
+
             // ── totals & thresholds ──
-            totalEl.textContent = fmt(r.total);
-            stickyTotalEl.textContent = fmt(r.total);
+            showTotal(r.total);
             if (r.threshold === "none") {
                 thresholdEl.hidden = true;
             } else {
