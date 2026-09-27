@@ -15,10 +15,13 @@ interface Props {
     noHeader?: boolean;
 }
 
+// Link-preview image, 1200 x 630. Drawn and rendered by scripts/og-image.html.
+const DEFAULT_IMAGE = "/og-image-de.jpg";
+
 const {
     title,
     description = "Julian Hilgemann - Aus Daten werden Entscheidungen",
-    image = "/favicon.png",
+    image = DEFAULT_IMAGE,
     type = "website",
     fullWidth = false,
     noTopPadding = false,
@@ -37,9 +40,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <link
             rel="icon"
             type="image/x-icon"
-            href="/assets/icons/favicon_bk.ico"
+            href="/favicon.ico"
         />
-        <link rel="apple-touch-icon" href="/assets/icons/favicon_bk.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
         <link rel="canonical" href={canonicalURL} />
@@ -50,6 +53,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={new URL(image, Astro.url)} />
+        {image === DEFAULT_IMAGE && (
+            <>
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta
+                    property="og:image:alt"
+                    content="Julian Hilgemann: eine Dashboard-Zahl als oberste Ebene, darunter ihre Definitionen, ihr Datenmodell und die Auswahl dessen, was weggelassen wird."
+                />
+            </>
+        )}
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image" />

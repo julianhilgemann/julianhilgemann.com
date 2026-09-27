@@ -1,0 +1,199 @@
+<!doctype html>
+<!--
+  Social preview image (og:image) for julianhilgemann.com, 1200 x 630.
+  English by default; open with #de for the German version (only the figure's
+  labels differ).
+
+  The figure mirrors src/components/NumberAnatomy.astro in its exploded state,
+  with the layers pulled closer so the stack fits the frame. It sits centred so
+  apps that crop previews to a square still show it whole. The backdrop is a
+  still, dimmed take on the hero network (src/scripts/hero-network.ts).
+
+  Render from the repo root on macOS (needs Google Chrome and a network
+  connection for the Inter font), then commit the two JPEGs. JPEG keeps each
+  file well under the ~300 KB some apps (WhatsApp) accept for previews.
+
+    CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    for L in en de; do
+      OUT="public/og-image$([ $L = de ] && echo -de)"
+      "$CHROME" --headless=new --hide-scrollbars --force-device-scale-factor=1 \
+        --window-size=1200,630 --virtual-time-budget=5000 \
+        --screenshot="$OUT.png" "file://$PWD/scripts/og-image.html#$L"
+      sips -s format jpeg -s formatOptions 88 "$OUT.png" --out "$OUT.jpg" && rm "$OUT.png"
+    done
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=block">
+<style>
+    html, body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #0B1220;
+    }
+    body {
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        color: #F3F4F6;
+        -webkit-font-smoothing: antialiased;
+    }
+    .card { position: relative; width: 1200px; height: 630px; overflow: hidden; }
+
+    #net { position: absolute; inset: 0; filter: blur(1.5px); opacity: 0.55; }
+    .glow { position: absolute; border-radius: 50%; pointer-events: none; }
+    .glow-orange {
+        left: -260px; bottom: -330px; width: 820px; height: 720px;
+        background: radial-gradient(closest-side, rgba(245, 158, 11, 0.16), rgba(245, 158, 11, 0));
+    }
+    .glow-blue {
+        left: 170px; top: -45px; width: 860px; height: 720px;
+        background: radial-gradient(closest-side, rgba(56, 189, 248, 0.11), rgba(56, 189, 248, 0));
+    }
+
+    .name { position: absolute; left: 80px; top: 76px; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+
+    #fig { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 540px; overflow: visible; }
+
+    /* Figure styles, copied from NumberAnatomy.astro */
+    .plane { stroke-width: 1.25; }
+    .plane-0 { fill: rgba(20, 30, 50, 0.94); stroke: rgba(245, 158, 11, 0.85); }
+    .plane-1 { fill: rgba(14, 30, 48, 0.88); stroke: rgba(56, 189, 248, 0.5); }
+    .plane-2 { fill: rgba(17, 24, 39, 0.85); stroke: rgba(255, 255, 255, 0.25); }
+    .plane-3 { fill: rgba(17, 24, 39, 0.75); stroke: rgba(255, 255, 255, 0.16); }
+    .kpi-label { font-size: 11px; fill: #9CA3AF; font-weight: 600; letter-spacing: 0.08em; }
+    .kpi-value { font-size: 30px; font-weight: 700; fill: #fff; }
+    .kpi-delta { font-size: 12px; font-weight: 600; fill: #F59E0B; }
+    .dot { fill: rgba(255, 255, 255, 0.14); }
+    .dot.lit { fill: #F59E0B; }
+    .label text { font-size: 15px; font-weight: 600; letter-spacing: 1.3px; fill: #9CA3AF; }
+</style>
+</head>
+<body>
+<div class="card">
+    <canvas id="net" width="1200" height="630"></canvas>
+    <div class="glow glow-orange"></div>
+    <div class="glow glow-blue"></div>
+
+    <div class="name">Julian Hilgemann</div>
+
+    <svg id="fig" viewBox="0 -6 430 412"></svg>
+</div>
+
+<script>
+// Figure strings, as on the About pages (ui.anatomy).
+const COPY = {
+    en: {
+        labels: ["The number", "Definitions", "Data model", "Choices"],
+        kpi: { label: "REVENUE", value: "€4.2M", delta: "▲ 12% vs plan" },
+    },
+    de: {
+        labels: ["Die Zahl", "Definitionen", "Datenmodell", "Auswahl"],
+        kpi: { label: "UMSATZ", value: "4,2 Mio", delta: "▲ 12 % ggü. Plan" },
+    },
+};
+const lang = location.hash === "#de" ? "de" : "en";
+const t = COPY[lang];
+document.documentElement.lang = lang;
+
+// ── Figure: same geometry as NumberAnatomy.astro, layers 80 apart (86 there).
+const ISO = "matrix(0.866 0.5 -0.866 0.5 140 0)";
+const OFFSETS = [0, 80, 160, 240];
+const codeRows = [
+    [[24, "info"], [52, "text"]],
+    [[12, "gap"], [40, "text"], [28, "info"]],
+    [[30, "accent"], [62, "text"]],
+    [[24, "info"], [36, "text"], [20, "dim"]],
+    [[12, "gap"], [56, "text"]],
+    [[26, "info"], [46, "text"]],
+    [[12, "gap"], [30, "accent"], [40, "text"]],
+];
+const codeFill = {
+    info: "rgba(56,189,248,0.7)",
+    text: "rgba(255,255,255,0.28)",
+    accent: "rgba(245,158,11,0.75)",
+    dim: "rgba(255,255,255,0.14)",
+};
+const dims = [[14, 14], [100, 14], [14, 108], [100, 108]];
+const kept = new Set([3, 12, 17, 28, 34, 41, 47, 55, 62, 68, 73, 81, 86, 94]);
+
+function layerContent(i) {
+    if (i === 0) {
+        return `<text x="18" y="34" class="kpi-label">${t.kpi.label}</text>
+            <text x="18" y="74" class="kpi-value">${t.kpi.value}</text>
+            <text x="18" y="96" class="kpi-delta">${t.kpi.delta}</text>
+            <polyline points="18,128 38,121 56,125 76,111 96,115 114,101 132,104" fill="none" stroke="#F59E0B"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`;
+    }
+    if (i === 1) {
+        return codeRows.map((row, r) => {
+            let x = 18;
+            return row.map(([w, kind]) => {
+                const seg = kind === "gap" ? "" :
+                    `<rect x="${x}" y="${20 + r * 16}" width="${w}" height="6" rx="3" fill="${codeFill[kind]}"/>`;
+                x += w + 6;
+                return seg;
+            }).join("");
+        }).join("");
+    }
+    if (i === 2) {
+        return dims.map(([x, y]) =>
+            `<line x1="${x + 18}" y1="${y + 14}" x2="75" y2="75" stroke="rgba(255,255,255,0.3)" vector-effect="non-scaling-stroke"/>`).join("") +
+            dims.map(([x, y]) =>
+            `<rect x="${x}" y="${y}" width="36" height="28" rx="4" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.4)" vector-effect="non-scaling-stroke"/>`).join("") +
+            `<rect x="54" y="57" width="42" height="36" rx="4" fill="rgba(56,189,248,0.2)" stroke="#38BDF8" vector-effect="non-scaling-stroke"/>`;
+    }
+    return Array.from({ length: 100 }, (_, d) =>
+        `<circle cx="${19 + (d % 10) * 12.5}" cy="${19 + Math.floor(d / 10) * 12.5}" r="2.4" class="dot${kept.has(d) ? " lit" : ""}"/>`).join("");
+}
+
+let svg = `<defs><radialGradient id="glow">
+    <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.22"/>
+    <stop offset="60%" stop-color="#38BDF8" stop-opacity="0.06"/>
+    <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+</radialGradient></defs>
+<g stroke="rgba(255,255,255,0.14)" stroke-dasharray="2 5">
+    <line x1="10" y1="75" x2="10" y2="${75 + OFFSETS[3]}"/>
+    <line x1="270" y1="75" x2="270" y2="${75 + OFFSETS[3]}"/>
+</g>`;
+for (const i of [3, 2, 1, 0]) {
+    svg += `<g transform="translate(0 ${OFFSETS[i]})">
+        ${i === 3 ? '<ellipse cx="140" cy="160" rx="170" ry="46" fill="url(#glow)"/>' : ""}
+        <g transform="${ISO}">
+            <rect width="150" height="150" rx="12" class="plane plane-${i}" vector-effect="non-scaling-stroke"/>
+            ${layerContent(i)}
+        </g>
+        <g class="label">
+            <circle cx="277" cy="75" r="2.5" fill="${i === 0 ? "#F59E0B" : "rgba(255,255,255,0.5)"}"/>
+            <line x1="283" y1="75" x2="294" y2="75" stroke="rgba(255,255,255,0.25)"/>
+            <text x="300" y="80">${t.labels[i].toUpperCase()}</text>
+        </g>
+    </g>`;
+}
+document.getElementById("fig").innerHTML = svg;
+
+// ── Backdrop: a still frame of the hero network, seeded so renders repeat.
+let seed = 7;
+const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+const ctx = document.getElementById("net").getContext("2d");
+const pts = Array.from({ length: 64 }, () => ({ x: rand() * 1200, y: rand() * 630, r: rand() * 3 + 1 }));
+const LINK_DIST = 180;
+for (let a = 0; a < pts.length; a++) {
+    for (let b = a + 1; b < pts.length; b++) {
+        const d = Math.hypot(pts[a].x - pts[b].x, pts[a].y - pts[b].y);
+        if (d < LINK_DIST) {
+            ctx.strokeStyle = `rgba(255,255,255,${(1 - d / LINK_DIST) * 0.35})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(pts[a].x, pts[a].y); ctx.lineTo(pts[b].x, pts[b].y); ctx.stroke();
+        }
+    }
+}
+for (const p of pts) {
+    ctx.fillStyle = "rgba(255,255,255,0.35)";
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+}
+</script>
+</body>
+</html>
