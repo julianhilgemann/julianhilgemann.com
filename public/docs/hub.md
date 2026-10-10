@@ -1,6 +1,6 @@
 # Julian Hilgemann
 
-Power BI & Microsoft Fabric decision systems
+Data platform engineer. From signal to number, and back.
 
 Homepage
 Main Website

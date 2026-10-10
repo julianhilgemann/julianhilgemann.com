@@ -1,12 +1,12 @@
-# Turn Data Into Decisions That Drive Revenue
+# I build the systems between a measurement and a decision.
 
-I design and build decision-ready Power BI dashboards that teams can use immediately. From messy data to clear KPIs, trusted numbers, and confident decisions.
+Data platform engineer in Munich. Microsoft Fabric at work, containers and DuckDB at home, TouchDesigner after hours.
 
-Services & Packages
+The full story
 
-About me
+Projects
 
-## Current project
+## Now building
 
 In active development
 
@@ -26,7 +26,22 @@ Macro data gets revised. A GDP print or an inflation reading is published, then 
 
 Every stage runs in its own Docker container
 
-[View on GitHub](https://github.com/julianhilgemann/fx_macro_platform) [All projects](/projects)
+[View on GitHub](https://github.com/julianhilgemann/fx_macro_platform) [Why structure is the product](/story#structure)
+
+## What I do
+
+Platforms
+Microsoft Fabric and Azure at work, containers at home.
+
+Models and warehouses
+The layer every number depends on.
+
+Expression
+Data as sound and motion.
+
+## Selected work
+
+[All projects](/projects)
 
 ## Questions? I reply fast.
 

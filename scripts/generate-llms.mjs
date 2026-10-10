@@ -17,11 +17,11 @@ const SKIP_PAGES = new Set(['404']);
 
 const PRICING_CONFIG = path.join(SRC_DIR, 'data', 'pricing-config.json');
 // Pages whose real content lives in data rather than markup.
-const ENRICHED_PAGES = new Set(['services', 'de/services']);
+const ENRICHED_PAGES = new Set(['services']);
 
-const SITE_TITLE = 'Julian Hilgemann — Power BI & Microsoft Fabric Decision Systems';
+const SITE_TITLE = 'Julian Hilgemann — Data Platform Engineer';
 const SITE_SUMMARY =
-    'Portfolio and technical documentation for Julian Hilgemann, an analytics engineer building production Power BI and Microsoft Fabric systems: semantic models, KPI and metric layers, forecasting, and decision interfaces. Published in English at / and in German at /de/.';
+    'Portfolio and technical documentation for Julian Hilgemann, a data platform engineer building the systems between a measurement and a decision: Microsoft Fabric and Azure platforms, models and warehouses, forecasting, and the expressive work that runs the same pipeline backwards. English only; the German pages that remain are the legal ones.';
 
 // Keyed by page path relative to src/pages, without the .astro extension.
 // `group` controls which H2 the link lands under in llms.txt.
@@ -36,10 +36,15 @@ const PAGE_META = {
         group: 'en',
         desc: 'Open-source data projects: analytics engineering, forecasting, data visualisation and creative coding, each with concept and architecture.',
     },
-    about: {
-        title: 'About',
+    story: {
+        title: 'Story',
         group: 'en',
-        desc: 'Working philosophy and experience: multi-tenant Microsoft Fabric product work, semantic model scale, TMDL and Git-based workflow, and forecasting background.',
+        desc: 'The narrative spine of the site: seven chapters from signal through belief, measurement, structure, inference and the number, then back out as expansion.',
+    },
+    work: {
+        title: 'Work',
+        group: 'en',
+        desc: 'Short CV: multi-tenant Microsoft Fabric product work, semantic model scale, TMDL and Git-based workflow, and the earlier fintech forecasting background.',
     },
     services: {
         title: 'Services & Pricing',
@@ -55,41 +60,6 @@ const PAGE_META = {
         title: 'Link Hub',
         group: 'en',
         desc: 'Contact and profile links: GitHub, LinkedIn, and a downloadable vCard.',
-    },
-    start: {
-        title: 'Language Select',
-        group: 'en',
-        desc: 'Entry gateway routing visitors to the English or German version of the site.',
-    },
-    'de/index': {
-        title: 'Startseite',
-        group: 'de',
-        desc: 'German landing page: positioning statement and the current project, the FX Macro Data Platform.',
-    },
-    'de/projects': {
-        title: 'Projekte',
-        group: 'de',
-        desc: 'German project list: open-source data projects with concept and architecture.',
-    },
-    'de/about': {
-        title: 'Über mich',
-        group: 'de',
-        desc: 'German about page: working philosophy, Microsoft Fabric product work, semantic model scale, and forecasting background.',
-    },
-    'de/services': {
-        title: 'Leistungen & Preise',
-        group: 'de',
-        desc: 'German services page: packages, deliverables, delivery standards, and the pricing calculator.',
-    },
-    'de/page-engine': {
-        title: 'Page Engine (DE)',
-        group: 'de',
-        desc: 'German version of the decision engine architecture breakdown.',
-    },
-    'de/hub': {
-        title: 'Link Hub (DE)',
-        group: 'de',
-        desc: 'German contact and profile link hub.',
     },
     impressum: {
         title: 'Impressum',
@@ -117,7 +87,6 @@ const PAGE_META = {
 
 const GROUP_HEADINGS = [
     ['en', '## Core Pages (English)'],
-    ['de', '## Core Pages (German)'],
     ['legal', '## Legal & Site Utilities'],
 ];
 
@@ -125,18 +94,12 @@ const GROUP_HEADINGS = [
 // top-down hits the substantive pages before the legal boilerplate.
 const PAGE_ORDER = [
     'index',
+    'story',
     'projects',
-    'about',
+    'work',
     'services',
     'page-engine',
     'hub',
-    'start',
-    'de/index',
-    'de/projects',
-    'de/about',
-    'de/services',
-    'de/page-engine',
-    'de/hub',
     'impressum',
     'datenschutz',
     'cookie-einstellungen',

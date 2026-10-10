@@ -3,7 +3,6 @@ import "../styles/global.css";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/de/Footer.astro";
 import ContactModal from "../components/de/ContactModal.astro";
-import LanguageModal from "../components/LanguageModal.astro";
 
 interface Props {
     title: string;
@@ -179,6 +178,5 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         </main>
         <Footer />
         <ContactModal />
-        <LanguageModal />
     </body>
 </html>

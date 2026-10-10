@@ -1,0 +1,620 @@
+---
+import Layout from "../layouts/Layout.astro";
+import MotionIntro from "../components/MotionIntro.astro";
+import PageBackdrop from "../components/PageBackdrop.astro";
+import StoryField from "../components/StoryField.astro";
+import NumberAnatomy from "../components/NumberAnatomy.astro";
+
+// Hyperadapted lives on its own domain, which holds a placeholder for now —
+// hence the "Coming Soon" label on every link that points at it. The footer
+// keeps the same constant.
+const HYPERADAPTED = "https://www.hyperadapted.com";
+const HYPERADAPTED_LABEL = "Coming Soon: Hyperadapted";
+
+// Figure labels, chapter numbers and tags only restate the prose beside them,
+// so they travel as expressions: the llms generator flattens literal markup
+// into the page docs, where these would read as duplicate copy.
+const ui = {
+    scrollHint: "Scroll to compress.",
+    chapters: ["01", "02", "03", "04", "05", "06", "07"],
+    layers: ["raw", "staged", "modeled"],
+    fields: {
+        signal: "A dense, flowing field of noise with three colour bands drifting through it, like frequencies.",
+        belief:
+            "A blurred object passes through a lens and comes into focus on the far side, while the probability curve beneath it narrows from a wide prior onto a narrow posterior.",
+        measurement:
+            "A sampling grid sweeps across the field; some points are taken and lit, and the gaps between them stay visible.",
+        structure:
+            "The points link into a graph that settles into three layers, with the lineage edges between them lit.",
+        inference:
+            "A line of past points extends past the last one and opens into a fan of uncertainty.",
+        expansion:
+            "The number bursts into rays and particles, in both accent colours at once.",
+        coda: "The field settles into a slow, quiet loop around an empty centre.",
+    },
+    anatomy: {
+        labels: ["The number", "Definitions", "Data model", "Choices"],
+        kpi: { label: "REVENUE", value: "€4.2M", delta: "▲ 12% vs plan" },
+        ariaLabel:
+            "Illustration: a dashboard number as the top layer, with its definitions, its data model and the choices about what to leave out underneath.",
+    },
+    burstValue: "€4.2M",
+};
+---
+
+<Layout
+    title="Story | Julian Hilgemann"
+    description="One signal from the world into a database, down to a single number, and back out as sound. Seven chapters on compression and expansion."
+    fullWidth={true}
+>
+    <MotionIntro />
+
+    <!-- ── Opening: the whole arc in three lines ── -->
+    <section class="story-intro relative isolate px-8 sm:px-12 lg:px-16">
+        <PageBackdrop />
+
+        <div class="max-w-[1200px] mx-auto">
+            <h1
+                data-page-title
+                data-intro
+                class="text-5xl md:text-7xl font-bold tracking-tight max-w-4xl mb-10"
+            >
+                From signal to number, and back.
+            </h1>
+
+            <div class="max-w-2xl text-lg md:text-xl text-text-secondary leading-relaxed space-y-6">
+                <p data-intro data-intro-fade class="text-xl md:text-2xl text-text-primary">
+                    This page follows one signal from the world into a database,
+                    down to a single number, and back out as sound.
+                </p>
+                <p data-intro data-intro-fade>
+                    Everything I do with data is either compression or expansion.
+                    Compression to navigate, expansion to express. I build every
+                    stage of that chain, and the number in the middle is the
+                    narrowest point of it.
+                </p>
+                <p data-intro data-intro-fade class="text-text-primary">
+                    It starts as signal.
+                </p>
+            </div>
+
+            <p
+                data-intro
+                data-intro-fade
+                class="story-hint mt-14 text-sm font-medium tracking-[0.2em] uppercase text-white/40"
+            >
+                {ui.scrollHint}
+            </p>
+        </div>
+    </section>
+
+    <!-- ── Chapter 1, Signal ── -->
+    <section id="signal" class="story-chapter ch-1" data-chapter>
+        <div class="story-card glass" data-card>
+            <div class="grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
+            <div class="lg:col-span-6 story-column">
+                <p class="story-marker" data-ch-marker>{ui.chapters[0]}<span class="story-marker-rule"></span>Signal</p>
+                <h2 data-ch-title class="story-headline">Reality has no sample rate.</h2>
+                <div data-ch-body class="story-body">
+                    <p>
+                        Light, sound, pressure, faces: the world reaches you all at
+                        once, in continuous time, at a bandwidth nothing could
+                        store. It is denser than any instrument, any database and
+                        any brain can hold.
+                    </p>
+                    <p>Noise is just signal you haven't modelled yet.</p>
+                </div>
+                <a
+                    href={HYPERADAPTED}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="story-link"
+                    data-ch-link
+                >
+                    {HYPERADAPTED_LABEL} <span aria-hidden="true">→</span>
+                </a>
+            </div>
+            <div class="lg:col-span-6 -mx-4 sm:mx-0">
+                <StoryField state="signal" label={ui.fields.signal} />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Chapter 2, Belief ── -->
+    <section id="belief" class="story-chapter ch-2" data-chapter>
+        <div class="story-card glass" data-card>
+            <div class="grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
+            <div class="lg:col-span-6 story-column">
+                <p class="story-marker" data-ch-marker>{ui.chapters[1]}<span class="story-marker-rule"></span>Belief</p>
+                <h2 data-ch-title class="story-headline">
+                    We don't see the world. We see our best current guess about it.
+                </h2>
+                <div data-ch-body class="story-body">
+                    <p>
+                        Perception is inference: a prior, updated by evidence, never
+                        the thing itself. Your brain doesn't record the signal. It
+                        guesses, and keeps correcting the guess.
+                    </p>
+                    <p>Resolution: the image sharpens, the decision lands.</p>
+                </div>
+                <a
+                    href={HYPERADAPTED}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="story-link"
+                    data-ch-link
+                >
+                    {HYPERADAPTED_LABEL} <span aria-hidden="true">→</span>
+                </a>
+            </div>
+            <div class="lg:col-span-6 -mx-4 sm:mx-0">
+                <StoryField state="belief" label={ui.fields.belief} />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Chapter 3, Measurement ── -->
+    <section id="measurement" class="story-chapter ch-3" data-chapter>
+        <div class="story-card glass" data-card>
+            <div class="grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
+            <div class="lg:col-span-6 story-column">
+                <p class="story-marker" data-ch-marker>
+                    {ui.chapters[2]}<span class="story-marker-rule"></span>Measurement
+                </p>
+                <h2 data-ch-title class="story-headline">To measure is to decide what to lose.</h2>
+                <div data-ch-body class="story-body">
+                    <p>
+                        Every measurement picks a rate, a resolution and a blind
+                        spot. Data starts when someone decides what to write down —
+                        and, with it, what not to.
+                    </p>
+                    <p>Every measure is a choice.</p>
+                </div>
+                <a
+                    href="https://github.com/julianhilgemann/fx_macro_platform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="story-link"
+                    data-ch-link
+                >
+                    See the ingestion layer: FRED, ECB, Bundesbank <span aria-hidden="true">→</span>
+                </a>
+            </div>
+            <div class="lg:col-span-6 -mx-4 sm:mx-0">
+                <StoryField state="measurement" label={ui.fields.measurement} />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Chapter 4, Structure ── -->
+    <section id="structure" class="story-chapter ch-4" data-chapter>
+        <div class="story-card glass" data-card>
+            <div class="grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
+            <div class="lg:col-span-6 story-column">
+                <p class="story-marker" data-ch-marker>
+                    {ui.chapters[3]}<span class="story-marker-rule"></span>Structure
+                </p>
+                <h2 data-ch-title class="story-headline">
+                    A number means nothing outside the system that holds it.
+                </h2>
+                <div data-ch-body class="story-body">
+                    <p>
+                        Samples become tables, tables become models, models depend
+                        on each other. That graph is the real product. Hundreds of
+                        workspaces, thousands of objects, one lineage that has to
+                        hold across Dev, Test and Prod.
+                    </p>
+                    <p>Tables. Models. Dependencies.</p>
+                </div>
+                <a href="/work#platform" class="story-link" data-ch-link>
+                    See the platform <span aria-hidden="true">→</span>
+                </a>
+            </div>
+            <div class="lg:col-span-6 -mx-4 sm:mx-0">
+                <StoryField state="structure" label={ui.fields.structure} layers={ui.layers} />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Chapter 5, Inference ── -->
+    <section id="inference" class="story-chapter ch-5" data-chapter>
+        <div class="story-card glass" data-card>
+            <div class="grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
+            <div class="lg:col-span-6 story-column">
+                <p class="story-marker" data-ch-marker>
+                    {ui.chapters[4]}<span class="story-marker-rule"></span>Inference
+                </p>
+                <h2 data-ch-title class="story-headline">A forecast is perception pointed at the future.</h2>
+                <div data-ch-body class="story-body">
+                    <p>
+                        With enough structure, the past makes testable claims about
+                        what we haven't seen. The curve from the second chapter
+                        comes back here as the fan around the line: same shape, now
+                        pointed forward.
+                    </p>
+                    <p>Then, a forecast.</p>
+                </div>
+                <a
+                    href="https://github.com/julianhilgemann/pipeline-forecast"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="story-link"
+                    data-ch-link
+                >
+                    See the forecasting work <span aria-hidden="true">→</span>
+                </a>
+            </div>
+            <div class="lg:col-span-6 -mx-4 sm:mx-0">
+                <StoryField state="inference" label={ui.fields.inference} />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Chapter 6, Number: the narrowest point ── -->
+    <section id="number" class="story-chapter ch-6" data-chapter>
+        <div class="story-card glass" data-card>
+            <div class="grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
+            <div class="lg:col-span-6 story-column">
+                <p class="story-marker" data-ch-marker>{ui.chapters[5]}<span class="story-marker-rule"></span>Number</p>
+                <h2 data-ch-title class="story-headline">
+                    Everything collapses into one number. This is where most people
+                    think data ends.
+                </h2>
+                <div data-ch-body class="story-body">
+                    <p>
+                        A KPI is a whole system compressed until someone can act on
+                        it. Every stage so far is underneath it, and none of it is
+                        visible.
+                    </p>
+                    <p class="story-beat">One number.</p>
+                </div>
+                <a href="/work#bi" class="story-link" data-ch-link>
+                    See the dashboard years <span aria-hidden="true">→</span>
+                </a>
+            </div>
+            <div class="lg:col-span-6 -mx-4 sm:mx-0">
+                <NumberAnatomy {...ui.anatomy} />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Chapter 7, Expansion: the pipeline runs backwards ── -->
+    <section id="expansion" class="story-chapter ch-7" data-chapter>
+        <div class="story-card glass" data-card>
+            <div class="grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
+            <div class="lg:col-span-6 story-column">
+                <p class="story-marker" data-ch-marker>
+                    {ui.chapters[6]}<span class="story-marker-rule"></span>Expansion
+                </p>
+                <h2 data-ch-title class="story-headline">
+                    A number can be opened up again, into something you feel.
+                </h2>
+                <div data-ch-body class="story-body">
+                    <p>
+                        Run the pipeline backwards: the number drives frequency,
+                        motion and light. The noise from the first chapter is back,
+                        and this time it has rhythm.
+                    </p>
+                    <p>The last bar of the chart is the first bar of the track.</p>
+                </div>
+                <a href="/projects" class="story-link" data-ch-link>
+                    See what comes out <span aria-hidden="true">→</span>
+                </a>
+            </div>
+            <div class="lg:col-span-6 -mx-4 sm:mx-0">
+                <StoryField state="expansion" label={ui.fields.expansion} value={ui.burstValue} />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Coda: both directions, and the mirror of the opening line ── -->
+    <section id="coda" class="story-chapter ch-coda" data-chapter>
+        <div class="story-card story-card-coda glass" data-card>
+            <div class="max-w-[760px] mx-auto text-center">
+                <div class="max-w-sm mx-auto mb-8">
+                    <StoryField state="coda" label={ui.fields.coda} />
+                </div>
+                <h2 data-ch-title class="text-3xl md:text-5xl font-bold tracking-tight mb-8">
+                    Compression to navigate. Expansion to express.
+                </h2>
+                <div data-ch-body class="text-lg md:text-xl text-text-secondary leading-relaxed space-y-5 max-w-xl mx-auto">
+                    <p>
+                        I build in both directions: the systems that turn the world
+                        into numbers, and the pieces that turn numbers back into
+                        something you can hear.
+                    </p>
+                    <p class="text-text-primary">It ends as signal.</p>
+                </div>
+                <div data-ch-link class="mt-12 flex flex-wrap gap-4 justify-center">
+                <a
+                    data-magnetic
+                    href="/projects"
+                    class="glass hover:bg-white/10 text-white font-medium py-3 px-8 rounded-full transition-colors duration-300 border !border-primary inline-flex justify-center"
+                >
+                    Projects
+                </a>
+                <a
+                    data-magnetic
+                    href="/work"
+                    class="glass hover:bg-white/10 text-white font-medium py-3 px-8 rounded-full transition-colors duration-300 border border-white/10 inline-flex justify-center"
+                >
+                    Work
+                </a>
+                <a
+                    data-magnetic
+                    href="#"
+                    class="glass hover:bg-white/10 text-white font-medium py-3 px-8 rounded-full transition-colors duration-300 border border-white/10 inline-flex justify-center js-open-contact"
+                    data-location="story-coda"
+                >
+                        Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<script>
+    import "../scripts/story";
+</script>
+
+<style>
+    /* ── Chapters as full-height cards ──
+       Each chapter owns a screen. The card inside it is what slides in, and
+       everything else rides on the card's own opacity, so a chapter is never
+       half-arrived. */
+    .story-intro {
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 7rem;
+        padding-bottom: 4rem;
+    }
+
+    .story-chapter {
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        padding: 4rem 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+        .story-chapter {
+            padding: 4rem 2rem;
+        }
+    }
+
+    .story-card {
+        position: relative;
+        isolation: isolate;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        max-width: 1200px;
+        /* Tall enough to own the screen it sits on, capped so a very tall
+           window does not stretch the card past its content. */
+        min-height: min(74svh, 660px);
+        margin: 0 auto;
+        border-radius: 2rem;
+        padding: clamp(1.5rem, 3.5vw, 3.25rem);
+    }
+
+    .story-card-coda {
+        max-width: 900px;
+    }
+
+    /* The chapter you are on keeps a slow light travelling round its edge, so
+       a finished chapter still reads as something live rather than a
+       screenshot. It only runs while the chapter is the one in view. */
+    @property --story-angle {
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: false;
+    }
+
+    .story-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: conic-gradient(
+            from var(--story-angle),
+            transparent 0deg 55deg,
+            rgb(245 158 11 / 0.55) 95deg,
+            transparent 135deg 245deg,
+            rgb(56 189 248 / 0.45) 290deg,
+            transparent 330deg 360deg
+        );
+        -webkit-mask:
+            linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask:
+            linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 1.2s ease;
+        pointer-events: none;
+    }
+
+    .story-card.is-live::before {
+        opacity: 1;
+        animation: story-border 14s linear infinite;
+    }
+
+    @keyframes story-border {
+        to {
+            --story-angle: 360deg;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .story-card::before {
+            animation: none;
+            opacity: 0.45;
+        }
+    }
+
+    /* The chapter marker: number, a rule, the chapter's name. */
+    .story-marker {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        margin-bottom: 1.5rem;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.75rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgb(255 255 255 / 0.45);
+    }
+
+    .story-marker-rule {
+        width: 2.25rem;
+        height: 1px;
+        background: rgb(255 255 255 / 0.18);
+    }
+
+    .story-headline {
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        margin-bottom: 1.75rem;
+        text-wrap: balance;
+    }
+
+    .story-body {
+        color: #9ca3af;
+        line-height: 1.75;
+    }
+
+    .story-body > p + p {
+        margin-top: 1.25rem;
+    }
+
+    /* The last line of each chapter carries the bridge word or the short beat,
+       so it reads a step brighter than the paragraph above it. */
+    .story-body > p:last-child {
+        color: #f3f4f6;
+    }
+
+    .story-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        margin-top: 2rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: rgb(255 255 255 / 0.65);
+        transition: color 0.3s ease;
+    }
+
+    .story-link:hover {
+        color: #f59e0b;
+    }
+
+    /* ── Typography that compresses ──
+       Measure and letter-spacing tighten from chapter 1 to 6, weight rises
+       toward the number, then chapter 7 opens up again. Small enough to feel
+       rather than see. */
+    .story-column {
+        max-width: 34rem;
+    }
+
+    .ch-1 .story-headline {
+        font-size: clamp(1.75rem, 4vw, 2.75rem);
+        letter-spacing: 0.005em;
+    }
+    .ch-1 .story-column {
+        max-width: 36rem;
+    }
+
+    .ch-2 .story-headline {
+        font-size: clamp(1.75rem, 4vw, 2.7rem);
+        letter-spacing: 0;
+    }
+    .ch-2 .story-column {
+        max-width: 34.5rem;
+    }
+
+    .ch-3 .story-headline {
+        font-size: clamp(1.8rem, 4vw, 2.65rem);
+        letter-spacing: -0.008em;
+    }
+    .ch-3 .story-column {
+        max-width: 33rem;
+    }
+
+    .ch-4 .story-headline {
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        letter-spacing: -0.014em;
+    }
+    .ch-4 .story-column {
+        max-width: 31.5rem;
+    }
+
+    .ch-5 .story-headline {
+        font-size: clamp(1.85rem, 4vw, 2.55rem);
+        letter-spacing: -0.02em;
+    }
+    .ch-5 .story-column {
+        max-width: 30rem;
+    }
+
+    /* The narrowest point: tightest measure, heaviest weight. */
+    .ch-6 .story-headline {
+        font-size: clamp(1.9rem, 4vw, 2.6rem);
+        font-weight: 800;
+        letter-spacing: -0.028em;
+    }
+    .ch-6 .story-column {
+        max-width: 28rem;
+    }
+
+    .ch-6 .story-beat {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 1.05rem;
+        letter-spacing: -0.02em;
+        color: #f59e0b;
+    }
+
+    /* And it opens back up. */
+    .ch-7 .story-headline {
+        font-size: clamp(1.9rem, 4.4vw, 3rem);
+        font-weight: 700;
+        letter-spacing: 0.004em;
+    }
+    .ch-7 .story-column {
+        max-width: 36rem;
+    }
+
+    .ch-7 .story-marker {
+        color: rgb(245 158 11 / 0.75);
+    }
+
+    .ch-7 .story-marker-rule {
+        background: rgb(245 158 11 / 0.4);
+    }
+
+    .story-hint {
+        /* The scroll hint is the first instruction in the page's own verbs. */
+        color: rgb(255 255 255 / 0.4);
+    }
+
+    @media (min-width: 1024px) {
+        .story-chapter .story-column {
+            /* The reading column never widens past its chapter's measure, even
+               when the grid cell is wider. */
+            padding-right: 1rem;
+        }
+    }
+</style>

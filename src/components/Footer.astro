@@ -1,12 +1,32 @@
 ---
 const year = new Date().getFullYear();
+
+// Hyperadapted lives on its own domain, which holds a placeholder for now
+// (src/pages/story.astro holds the same constant and label).
+const HYPERADAPTED = "https://www.hyperadapted.com";
 ---
 
 <footer
     class="w-full max-w-[1200px] mx-auto px-4 py-12 mt-20 border-t border-white/5"
 >
+    <!-- Row 0: the cross-site link. Once Hyperadapted is live this becomes
+         the pair's mutual link, each site naming the other as its missing half. -->
+    <p class="text-center text-sm text-text-secondary mb-10">
+        <a
+            href={HYPERADAPTED}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group inline-flex items-center gap-2 hover:text-primary transition-colors duration-300"
+        >
+            <span class="text-white group-hover:text-primary transition-colors duration-300"
+                >Coming Soon: Hyperadapted</span
+            >
+            <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+        </a>
+    </p>
+
     <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-        <!-- Row 1: Social Icons & Language -->
+        <!-- Row 1: Social Icons -->
         <div
             class="flex gap-4 order-1 md:flex-1 md:justify-start w-full justify-center"
         >
@@ -56,26 +76,6 @@ const year = new Date().getFullYear();
                     ></path></svg
                 >
             </a>
-            <!-- Language Trigger -->
-            <button
-                type="button"
-                class="opacity-70 hover:opacity-100 hover:text-primary transition-all duration-300 js-open-language"
-                aria-label="Change Language"
-            >
-                <svg
-                    class="w-6 h-6 fill-none stroke-current transition-all duration-300"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"
-                    ></path>
-                    <path d="M2 12h20"></path>
-                </svg>
-            </button>
         </div>
 
         <!-- Row 2: Links -->
@@ -103,6 +103,11 @@ const year = new Date().getFullYear();
                 href="#"
                 class="hover:text-primary hover:underline js-open-contact transition-all duration-300"
                 data-location="footer-link">Contact</a
+            >
+            <a
+                href="/de/impressum"
+                class="hover:text-primary hover:underline transition-all duration-300"
+                >Deutsch</a
             >
         </div>
 
