@@ -5,14 +5,13 @@
  * Hooks:
  *   (load intro: [data-page-title], [data-intro-fade] via playIntro)
  *   [data-timeline]        rail fills and dots light as entries are reached
- *   [data-count]           figures count up once (data-prefix is kept)
+ *   (the stat figures use the shared [data-count] hook in motion.ts)
  */
 import { gsap, ScrollTrigger, playIntro, initPageMotion } from "./motion";
 
 if (initPageMotion()) {
     playIntro();
     timeline();
-    counters();
 }
 
 function timeline() {
@@ -38,22 +37,6 @@ function timeline() {
             start: "top 65%",
             onEnter: () => dot.classList.add("is-lit"),
             onLeaveBack: () => dot.classList.remove("is-lit"),
-        });
-    });
-}
-
-function counters() {
-    document.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => {
-        const target = Number(el.dataset.count);
-        const prefix = el.dataset.prefix ?? "";
-        const state = { value: 0 };
-        el.textContent = `${prefix}0`;
-        gsap.to(state, {
-            value: target,
-            duration: 1.6,
-            ease: "power2.out",
-            onUpdate: () => (el.textContent = `${prefix}${Math.round(state.value)}`),
-            scrollTrigger: { trigger: el, start: "top 85%", once: true },
         });
     });
 }

@@ -624,3 +624,58 @@ html.motion-intro [data-intro] {
     transition: none;
   }
 }
+
+/* ── Orbiting light on the contact buttons ──
+   A single bright segment travels the rounded edge, so the one action on the
+   page keeps signalling that it is live. Applied with `.orbit-ring` to the
+   contact CTAs; it needs `border-radius` on the element itself, which it
+   inherits. */
+@property --orbit-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.orbit-ring {
+  position: relative;
+  isolation: isolate;
+}
+
+.orbit-ring::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--orbit-angle),
+    transparent 0deg 232deg,
+    rgb(245 158 11 / 0.85) 288deg,
+    rgb(253 224 71 / 0.95) 310deg,
+    rgb(245 158 11 / 0.85) 332deg,
+    transparent 356deg 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: orbit-ring 4.5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes orbit-ring {
+  to {
+    --orbit-angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-ring::before {
+    animation: none;
+    opacity: 0.6;
+  }
+}

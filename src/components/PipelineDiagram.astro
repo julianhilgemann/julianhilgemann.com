@@ -65,7 +65,11 @@ const layouts: Layout[] = [
     {
         id: "tall",
         viewBox: "0 0 420 716",
-        class: "lg:hidden w-full h-auto max-w-[440px] md:max-w-[540px] mx-auto",
+        // Height-driven below lg: a 420x716 drawing sized by width overflows a
+        // phone screen, and a diagram you have to scroll through stops being a
+        // diagram. Sized by the viewport instead, the width follows from the
+        // aspect ratio and the whole pipeline fits on one screen.
+        class: "lg:hidden block mx-auto h-[64svh] max-h-[716px] w-auto max-w-full",
         box: { w: 360, h: 124 },
         boxes: tallYs.map((y) => ({ x: TALL_X, y })),
         art: (b) => `translate(${b.x + 14} ${b.y + 20}) scale(0.85)`,

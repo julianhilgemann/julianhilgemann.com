@@ -499,6 +499,25 @@ const loop = (() => {
         opacity: 0.95;
     }
 
+    /* Below lg the chapter stacks, so the figure is sized by height: a
+       width-driven drawing pushes the rest of the card off a phone screen,
+       and a chapter is meant to be one screen. Width follows from the aspect
+       ratio, which is why it overrides the utility class. */
+    @media (max-width: 1023.98px) {
+        .story-field svg {
+            width: auto;
+            max-width: 100%;
+            max-height: 26svh;
+            margin-inline: auto;
+        }
+    }
+
+    @media (max-width: 1023.98px) and (max-height: 760px) {
+        .story-field svg {
+            max-height: 22svh;
+        }
+    }
+
     .story-field-tag {
         font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
         font-size: 9px;

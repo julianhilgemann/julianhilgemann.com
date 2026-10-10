@@ -30,14 +30,15 @@ Every stage runs in its own Docker container
 
 ## What I do
 
-Platforms
-Microsoft Fabric and Azure at work, containers at home.
+One chain, three stages. A measurement has to land somewhere, be modelled into something that holds, and leave as a number someone can act on. I build all three, not just the one that shows.
 
-Models and warehouses
-The layer every number depends on.
+- **Platforms** Microsoft Fabric, run like a product. Every customer gets their own Dev, Test and Prod. I build against source files in VS Code, with Git and DevOps behind each change, so an environment can be rebuilt rather than remembered. [How that runs today](/work#platform)
 
-Expression
-Data as sound and motion.
+- **Data Warehousing** Modelled once, so it can be reused. Transformations move out of ad-hoc dataflows into warehouses and lakehouses with real models: a named grain, declared relationships, and lineage you can walk from a dashboard figure back to its row. [The case for structure](/story#structure)
+
+- **Business Intelligence** The number people actually act on. Dashboards, forecasts and scenario planning, over a metric layer that holds still. A number is only worth acting on if you can say what it leaves out, so the definitions and the uncertainty travel with it. [Forecasting and decision models](/work#bi)
+
+And then the same chain backwards — a number opened back up into colour, motion and sound. [That is the other half of the work.](/story#expansion)
 
 ## Selected work
 

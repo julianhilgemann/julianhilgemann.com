@@ -53,7 +53,7 @@ const ui = {
     <section class="story-intro relative isolate px-8 sm:px-12 lg:px-16">
         <PageBackdrop />
 
-        <div class="max-w-[1200px] mx-auto">
+        <div class="story-intro-inner max-w-[1200px] mx-auto">
             <h1
                 data-page-title
                 data-intro
@@ -81,7 +81,7 @@ const ui = {
             <p
                 data-intro
                 data-intro-fade
-                class="story-hint mt-14 text-sm font-medium tracking-[0.2em] uppercase text-white/40"
+                class="story-hint text-sm font-medium tracking-[0.2em] uppercase text-white/40"
             >
                 {ui.scrollHint}
             </p>
@@ -316,9 +316,9 @@ const ui = {
 
     <!-- ── Coda: both directions, and the mirror of the opening line ── -->
     <section id="coda" class="story-chapter ch-coda" data-chapter>
-        <div class="story-card story-card-coda glass" data-card>
-            <div class="max-w-[760px] mx-auto text-center">
-                <div class="max-w-sm mx-auto mb-8">
+        <div class="story-card glass" data-card>
+            <div class="max-w-[820px] mx-auto text-center">
+                <div class="coda-figure max-w-sm mx-auto mb-8">
                     <StoryField state="coda" label={ui.fields.coda} />
                 </div>
                 <h2 data-ch-title class="text-3xl md:text-5xl font-bold tracking-tight mb-8">
@@ -370,25 +370,42 @@ const ui = {
        Each chapter owns a screen. The card inside it is what slides in, and
        everything else rides on the card's own opacity, so a chapter is never
        half-arrived. */
+    /* The first screen starts where every other page's does: the layout's own
+       `pt-32` is the nav clearance, so the intro adds none of its own and
+       claims a screen minus that offset. Same title position as /work and
+       /projects; the scroll hint rides the bottom edge of the screen. */
     .story-intro {
-        min-height: 100svh;
+        min-height: calc(100svh - 8rem);
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        padding-top: 7rem;
         padding-bottom: 4rem;
+    }
+
+    .story-intro-inner {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        width: 100%;
     }
 
     .story-chapter {
         min-height: 100svh;
         display: flex;
         align-items: center;
-        padding: 4rem 1.25rem;
+        padding: 5.5rem 1.25rem 2.5rem;
     }
 
     @media (min-width: 640px) {
         .story-chapter {
             padding: 4rem 2rem;
+        }
+    }
+
+    @media (max-width: 1023.98px) {
+        .story-card {
+            /* Let the content decide on a phone; the section already owns a
+               full screen and the card should not add to it. */
+            min-height: 0;
         }
     }
 
@@ -406,64 +423,6 @@ const ui = {
         margin: 0 auto;
         border-radius: 2rem;
         padding: clamp(1.5rem, 3.5vw, 3.25rem);
-    }
-
-    .story-card-coda {
-        max-width: 900px;
-    }
-
-    /* The chapter you are on keeps a slow light travelling round its edge, so
-       a finished chapter still reads as something live rather than a
-       screenshot. It only runs while the chapter is the one in view. */
-    @property --story-angle {
-        syntax: "<angle>";
-        initial-value: 0deg;
-        inherits: false;
-    }
-
-    .story-card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: inherit;
-        padding: 1px;
-        background: conic-gradient(
-            from var(--story-angle),
-            transparent 0deg 55deg,
-            rgb(245 158 11 / 0.55) 95deg,
-            transparent 135deg 245deg,
-            rgb(56 189 248 / 0.45) 290deg,
-            transparent 330deg 360deg
-        );
-        -webkit-mask:
-            linear-gradient(#000 0 0) content-box,
-            linear-gradient(#000 0 0);
-        -webkit-mask-composite: xor;
-        mask:
-            linear-gradient(#000 0 0) content-box,
-            linear-gradient(#000 0 0);
-        mask-composite: exclude;
-        opacity: 0;
-        transition: opacity 1.2s ease;
-        pointer-events: none;
-    }
-
-    .story-card.is-live::before {
-        opacity: 1;
-        animation: story-border 14s linear infinite;
-    }
-
-    @keyframes story-border {
-        to {
-            --story-angle: 360deg;
-        }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .story-card::before {
-            animation: none;
-            opacity: 0.45;
-        }
     }
 
     /* The chapter marker: number, a rule, the chapter's name. */
@@ -606,8 +565,65 @@ const ui = {
     }
 
     .story-hint {
-        /* The scroll hint is the first instruction in the page's own verbs. */
+        /* The scroll hint is the first instruction in the page's own verbs.
+           `auto` pushes it to the foot of the first screen, with a floor so it
+           never crowds the paragraph above it on a short one. */
+        margin-top: auto;
+        padding-top: 3.5rem;
         color: rgb(255 255 255 / 0.4);
+    }
+
+    /* Short phones (an SE is 667px tall): the figure already scales with the
+       viewport, but the text does not, so a chapter spilled onto a second
+       screen. Everything tightens a step here. Placed after the per-chapter
+       rules so it wins on equal specificity. */
+    @media (max-width: 1023.98px) and (max-height: 760px) {
+        .story-chapter {
+            padding: 5rem 1rem 2rem;
+        }
+
+        .story-card {
+            padding: 1.25rem;
+        }
+
+        .story-marker {
+            margin-bottom: 1rem;
+        }
+
+        .story-chapter .story-headline {
+            font-size: clamp(1.4rem, 5.2vw, 1.75rem);
+            margin-bottom: 1rem;
+        }
+
+        .story-body {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .story-body > p + p {
+            margin-top: 0.85rem;
+        }
+
+        .story-link {
+            margin-top: 1.25rem;
+            font-size: 0.9rem;
+        }
+
+        /* The coda carries a figure, a headline, two paragraphs and three
+           buttons, so it needs one more step than the chapters. */
+        .ch-coda [data-ch-title] {
+            font-size: 1.55rem;
+            margin-bottom: 1rem;
+        }
+
+        .ch-coda [data-ch-body] {
+            font-size: 0.95rem;
+        }
+
+        .coda-figure {
+            max-width: 15rem;
+            margin-bottom: 1rem;
+        }
     }
 
     @media (min-width: 1024px) {

@@ -14,6 +14,7 @@
  *   [data-reveal]          fade + rise on scroll
  *   [data-reveal-stagger]  children fade + rise in sequence on scroll
  *   [data-reveal-batch]    children rise one by one as each scrolls into view (tall items)
+ *   [data-count]           a figure counts up once (data-prefix is kept)
  *   [data-magnetic]        pulls toward the cursor (fine pointers only)
  *   .spotlight-card        cursor-following light (see global.css); runs even
  *                          under reduced motion, since nothing moves
@@ -56,6 +57,18 @@ export function riseLines(el: HTMLElement, vars: gsap.TweenVars = {}) {
         ...vars,
     });
     return { split, tween };
+}
+
+/** Keep an endless animation off the compositor while nobody can see it. */
+export function whileVisible(el: Element, make: () => gsap.core.Animation | gsap.core.Animation[]) {
+    const made = make();
+    const anims = Array.isArray(made) ? made : [made];
+    ScrollTrigger.create({
+        trigger: el,
+        start: "top bottom",
+        end: "bottom top",
+        onToggle: (self) => anims.forEach((a) => (self.isActive ? a.play() : a.pause())),
+    });
 }
 
 /**
@@ -167,6 +180,21 @@ function initReveals() {
                     ease: "power3.out",
                     clearProps: "transform,opacity,visibility",
                 }),
+        });
+    });
+
+    // Markup ships the final figure, so no-JS and reduced-motion readers see it.
+    document.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => {
+        const target = Number(el.dataset.count);
+        const prefix = el.dataset.prefix ?? "";
+        const state = { value: 0 };
+        el.textContent = `${prefix}0`;
+        gsap.to(state, {
+            value: target,
+            duration: 1.6,
+            ease: "power2.out",
+            onUpdate: () => (el.textContent = `${prefix}${Math.round(state.value)}`),
+            scrollTrigger: { trigger: el, start: "top 85%", once: true },
         });
     });
 

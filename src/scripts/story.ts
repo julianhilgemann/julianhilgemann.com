@@ -7,10 +7,10 @@
  * and finishing as it settles. It runs `once`, on entry, so a chapter never
  * waits on further scrolling to complete.
  *
- * When that timeline finishes the chapter goes live: the card's border picks
- * up a slow travelling gradient and the figure starts its idle loop, so a
- * finished chapter still looks like something you can touch. Both stop when
- * the chapter leaves the viewport.
+ * When that timeline finishes the figure starts its idle loop, so a finished
+ * chapter still looks alive. The loop stops when the chapter leaves the
+ * viewport. (The travelling light lives on the contact buttons now — see
+ * `.orbit-ring` in global.css — not on the cards.)
  *
  * Hooks:
  *   (load intro: [data-page-title], [data-intro-fade] via playIntro)
@@ -41,8 +41,9 @@ function chapters() {
         const field = section.querySelector<HTMLElement>("[data-field]");
         const figure = section.querySelector<SVGSVGElement>("[data-anatomy]");
 
+        // Once a chapter has arrived its figure keeps moving, so a finished
+        // chapter still looks like something you can touch.
         const goLive = () => {
-            card?.classList.add("is-live");
             if (field) fieldIdle(field);
             if (figure) anatomyIdle(figure);
         };

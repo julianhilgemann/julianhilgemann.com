@@ -27,7 +27,7 @@
  *   expansion    [data-f=core] [data-f=rays] [data-f=motes]
  *   coda         [data-f=cloud] [data-f=orbit]
  */
-import { gsap, ScrollTrigger } from "./motion";
+import { gsap, whileVisible } from "./motion";
 
 const EASE = "power2.out";
 
@@ -48,18 +48,6 @@ function drawOn(tl: gsap.core.Timeline, el: SVGGeometryElement, at: number, dura
         { strokeDashoffset: 0, duration, ease: "none" },
         at,
     );
-}
-
-/** Keep an endless animation off the compositor while nobody can see it. */
-function whileVisible(fig: Element, make: () => gsap.core.Animation | gsap.core.Animation[]) {
-    const made = make();
-    const anims = Array.isArray(made) ? made : [made];
-    ScrollTrigger.create({
-        trigger: fig,
-        start: "top bottom",
-        end: "bottom top",
-        onToggle: (self) => anims.forEach((a) => (self.isActive ? a.play() : a.pause())),
-    });
 }
 
 /** A loop that fires every `min`–`max` seconds for as long as the figure lives. */

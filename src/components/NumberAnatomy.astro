@@ -184,6 +184,24 @@ const order = [3, 2, 1, 0];
 </svg>
 
 <style>
+    /* Below lg the Story chapter stacks, and a 430x450 drawing sized by width
+       pushes the rest of the card off a phone screen. Height drives it there
+       instead, and the width follows from the aspect ratio. */
+    @media (max-width: 1023.98px) {
+        .anatomy {
+            width: auto;
+            max-width: 100%;
+            max-height: 26svh;
+            margin-inline: auto;
+        }
+    }
+
+    @media (max-width: 1023.98px) and (max-height: 760px) {
+        .anatomy {
+            max-height: 22svh;
+        }
+    }
+
     .anatomy-plane {
         stroke-width: 1.25;
         transition: stroke 0.3s ease;
