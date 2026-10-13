@@ -13,7 +13,9 @@ const DOCS_DIR = path.join(PUBLIC_DIR, 'docs');
 // Never delete or overwrite it during cleanup.
 const PRESERVE_IN_DOCS = new Set(['llmcntxt.md']);
 
-const SKIP_PAGES = new Set(['404']);
+// design-system is the token and component catalogue: noindex, and nothing
+// in it is about the site's subject.
+const SKIP_PAGES = new Set(['404', 'design-system']);
 
 const PRICING_CONFIG = path.join(SRC_DIR, 'data', 'pricing-config.json');
 // Pages whose real content lives in data rather than markup.
@@ -41,10 +43,10 @@ const PAGE_META = {
         group: 'en',
         desc: 'The narrative spine of the site: seven chapters from signal through belief, measurement, structure, inference and the number, then back out as expansion.',
     },
-    work: {
-        title: 'Work',
+    timeline: {
+        title: 'Timeline',
         group: 'en',
-        desc: 'Short CV: multi-tenant Microsoft Fabric product work, semantic model scale, TMDL and Git-based workflow, and the earlier fintech forecasting background.',
+        desc: 'CV as a timeline, newest first: the multi-tenant Microsoft Fabric product role, data products in fintech, graduate studies in quantitative economics, insurance and real estate, the business administration degree and its forecasting thesis, audio engineering, the Abitur in Moscow and school in Berlin.',
     },
     services: {
         title: 'Services & Pricing',
@@ -96,7 +98,7 @@ const PAGE_ORDER = [
     'index',
     'story',
     'projects',
-    'work',
+    'timeline',
     'services',
     'page-engine',
     'hub',

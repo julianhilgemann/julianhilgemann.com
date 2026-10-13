@@ -14,10 +14,12 @@
  * finished, static diagram.
  */
 import { gsap, ScrollTrigger, finePointer } from "./motion";
+import { color, rgba } from "../styles/tokens.mjs";
 
-const AMBER = "#F59E0B";
-const BLUE = "#38BDF8";
-const BOX_STROKE = "rgba(255, 255, 255, 0.12)";
+// Token colours; the resting values match PipelineDiagram.astro's styles.
+const AMBER = color.primary.DEFAULT;
+const BLUE = color.info;
+const BOX_STROKE = rgba(color.contrast, 0.12);
 
 export function initPipelineDiagram() {
     const root = document.querySelector<HTMLElement>("[data-pipeline]");
@@ -93,7 +95,7 @@ function run(svg: SVGSVGElement, wide: boolean) {
         .to(pulse, { opacity: 0, duration: 0.3 });
     // Ties sit at the start, middle and end of the rail.
     ties.forEach((tie, i) => {
-        railLoop.call(() => flash(tie, "stroke", BLUE, "rgba(56, 189, 248, 0.3)", 0.9), [], (i / Math.max(1, ties.length - 1)) * RAIL_TIME);
+        railLoop.call(() => flash(tie, "stroke", BLUE, rgba(BLUE, 0.3), 0.9), [], (i / Math.max(1, ties.length - 1)) * RAIL_TIME);
     });
 
     const setAmbient = (on: boolean) => {
@@ -107,7 +109,7 @@ function run(svg: SVGSVGElement, wide: boolean) {
     let rowIndex = 0;
     const legTime = wide ? 1 : 0.75;
 
-    const flashBox = (i: number) => flash(boxes[i], "stroke", "rgba(245, 158, 11, 0.75)", BOX_STROKE, 1.1);
+    const flashBox = (i: number) => flash(boxes[i], "stroke", rgba(AMBER, 0.75), BOX_STROKE, 1.1);
 
     function journey() {
         const packet = packets[packetIndex++ % packets.length];
@@ -124,12 +126,12 @@ function run(svg: SVGSVGElement, wide: boolean) {
         tl.call(() => {
             flashBox(0);
             const led = gsap.utils.random(leds);
-            if (led) flash(led, "fill", AMBER, "rgba(56, 189, 248, 0.55)", 0.8);
+            if (led) flash(led, "fill", AMBER, rgba(BLUE, 0.55), 0.8);
         });
         leg(flows[0], AMBER);
         tl.call(() => {
             flashBox(1);
-            if (sheet) flash(sheet, "stroke", AMBER, "rgba(245, 158, 11, 0.55)", 0.9);
+            if (sheet) flash(sheet, "stroke", AMBER, rgba(AMBER, 0.55), 0.9);
             if (vintage) vintage.textContent = `v${++vintageNo}`;
         });
         tl.to({}, { duration: 0.35 });
@@ -138,7 +140,7 @@ function run(svg: SVGSVGElement, wide: boolean) {
             flashBox(2);
             spins.forEach((t) => gsap.fromTo(t, { timeScale: 4 }, { timeScale: 1, duration: 1.6, ease: "power2.out" }));
             const row = rows[rowIndex++ % rows.length];
-            if (row) flash(row, "fill", "rgba(245, 158, 11, 0.7)", "rgba(255, 255, 255, 0.07)", 1);
+            if (row) flash(row, "fill", rgba(AMBER, 0.7), rgba(color.contrast, 0.07), 1);
         });
         tl.to({}, { duration: 0.45 });
         // Modelled data leaves the warehouse in the "system" colour.
@@ -154,7 +156,7 @@ function run(svg: SVGSVGElement, wide: boolean) {
                 gsap.fromTo(
                     dot,
                     { fill: AMBER, attr: { r: 3.8 } },
-                    { fill: "rgba(255, 255, 255, 0.55)", attr: { r: 2.2 }, duration: 1.2, ease: "power2.out" },
+                    { fill: rgba(color.contrast, 0.55), attr: { r: 2.2 }, duration: 1.2, ease: "power2.out" },
                 );
             }
         });

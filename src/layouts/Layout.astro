@@ -14,6 +14,8 @@ interface Props {
 	noHeader?: boolean;
 	noFooter?: boolean;
 	noAnalytics?: boolean;
+	/** Keep the page out of search results (the /design-system catalogue). */
+	noindex?: boolean;
 }
 
 // Link-preview image, 1200 x 630. Drawn and rendered by scripts/og-image.html.
@@ -29,6 +31,7 @@ const {
 	noHeader = false,
 	noFooter = false,
 	noAnalytics = false,
+	noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -45,6 +48,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<link rel="canonical" href={canonicalURL} />
+		{noindex && <meta name="robots" content="noindex" />}
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content={type} />
@@ -166,14 +170,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 		)}
 	</head>
 	<body
-		class="bg-background text-text-primary min-h-[100svh] flex flex-col selection:bg-primary selection:text-white"
+		class="bg-background text-ink min-h-[100svh] flex flex-col"
 	>
 		{!noHeader && <Nav lang="en" />}
 		<main
 			class:list={[
 				"flex-grow w-full",
-				noTopPadding ? "" : "pt-32",
-				fullWidth ? "" : "max-w-[1200px] mx-auto px-8 sm:px-12 lg:px-16",
+				noTopPadding ? "" : "pt-nav",
+				fullWidth ? "" : "page-container",
 			]}
 		>
 			<slot />

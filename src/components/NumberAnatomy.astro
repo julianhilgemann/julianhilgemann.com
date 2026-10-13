@@ -1,4 +1,6 @@
 ---
+import { color, rgba } from "../styles/tokens.mjs";
+
 // "Anatomy of a number" — the About page's core idea drawn out: a dashboard
 // figure as the top layer over its definitions, its data model, and the
 // choices about what to leave out (100 dots, a few kept).
@@ -33,11 +35,17 @@ const codeRows: Array<Array<[number, string]>> = [
     [[26, "info"], [46, "text"]],
     [[12, "gap"], [30, "accent"], [40, "text"]],
 ];
+// Colours come from the design tokens: SVG presentation attributes cannot
+// read CSS variables.
+const INFO = color.info;
+const PRIMARY = color.primary.DEFAULT;
+const ink = (a: number) => rgba(color.contrast, a);
+
 const codeFill: Record<string, string> = {
-    info: "rgba(56,189,248,0.7)",
-    text: "rgba(255,255,255,0.28)",
-    accent: "rgba(245,158,11,0.75)",
-    dim: "rgba(255,255,255,0.14)",
+    info: rgba(INFO, 0.7),
+    text: ink(0.28),
+    accent: rgba(PRIMARY, 0.75),
+    dim: ink(0.14),
 };
 
 // Data model: a star schema.
@@ -69,14 +77,14 @@ const order = [3, 2, 1, 0];
 >
     <defs>
         <radialGradient id="anatomy-glow">
-            <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.22"></stop>
-            <stop offset="60%" stop-color="#38BDF8" stop-opacity="0.06"></stop>
-            <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"></stop>
+            <stop offset="0%" stop-color={PRIMARY} stop-opacity="0.22"></stop>
+            <stop offset="60%" stop-color={INFO} stop-opacity="0.06"></stop>
+            <stop offset="100%" stop-color={INFO} stop-opacity="0"></stop>
         </radialGradient>
     </defs>
 
     <!-- Exploded-view guides; fade in with the labels. -->
-    <g data-anatomy-guide stroke="rgba(255,255,255,0.14)" stroke-dasharray="2 5">
+    <g data-anatomy-guide stroke={ink(0.14)} stroke-dasharray="2 5">
         <line x1="10" y1="89" x2="10" y2="347"></line>
         <line x1="270" y1="89" x2="270" y2="347"></line>
     </g>
@@ -108,7 +116,7 @@ const order = [3, 2, 1, 0];
                                 <polyline
                                     points="18,128 38,121 56,125 76,111 96,115 114,101 132,104"
                                     fill="none"
-                                    stroke="#F59E0B"
+                                    stroke={PRIMARY}
                                     stroke-width="2.5"
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
@@ -137,7 +145,7 @@ const order = [3, 2, 1, 0];
                                         y1={y + 14}
                                         x2="75"
                                         y2="75"
-                                        stroke="rgba(255,255,255,0.3)"
+                                        stroke={ink(0.3)}
                                         vector-effect="non-scaling-stroke"
                                     />
                                 ))}
@@ -148,8 +156,8 @@ const order = [3, 2, 1, 0];
                                         width="36"
                                         height="28"
                                         rx="4"
-                                        fill="rgba(255,255,255,0.06)"
-                                        stroke="rgba(255,255,255,0.4)"
+                                        fill={ink(0.06)}
+                                        stroke={ink(0.4)}
                                         vector-effect="non-scaling-stroke"
                                     />
                                 ))}
@@ -159,8 +167,8 @@ const order = [3, 2, 1, 0];
                                     width="42"
                                     height="36"
                                     rx="4"
-                                    fill="rgba(56,189,248,0.2)"
-                                    stroke="#38BDF8"
+                                    fill={rgba(INFO, 0.2)}
+                                    stroke={INFO}
                                     vector-effect="non-scaling-stroke"
                                 />
                             </>
@@ -174,7 +182,7 @@ const order = [3, 2, 1, 0];
 
                     <g data-layer-label class="anatomy-label">
                         <circle cx="277" cy="75" r="2.5" class={i === 0 ? "anatomy-label-dot-accent" : "anatomy-label-dot"} />
-                        <line x1="283" y1="75" x2="294" y2="75" stroke="rgba(255,255,255,0.25)" />
+                        <line x1="283" y1="75" x2="294" y2="75" stroke={ink(0.25)} />
                         <text x="300" y="80">{labels[i].toUpperCase()}</text>
                     </g>
                 </g>
@@ -207,67 +215,67 @@ const order = [3, 2, 1, 0];
         transition: stroke 0.3s ease;
     }
     .anatomy-plane-0 {
-        fill: rgba(20, 30, 50, 0.94);
-        stroke: rgba(245, 158, 11, 0.85);
+        fill: rgb(var(--color-surface-raised) / 0.94);
+        stroke: rgb(var(--color-primary) / 0.85);
     }
     .anatomy-plane-1 {
-        fill: rgba(14, 30, 48, 0.88);
-        stroke: rgba(56, 189, 248, 0.5);
+        fill: rgb(var(--color-surface-raised) / 0.88);
+        stroke: rgb(var(--color-info) / 0.5);
     }
     .anatomy-plane-2 {
-        fill: rgba(17, 24, 39, 0.85);
-        stroke: rgba(255, 255, 255, 0.25);
+        fill: rgb(var(--color-surface) / 0.85);
+        stroke: rgb(var(--color-contrast) / 0.25);
     }
     .anatomy-plane-3 {
-        fill: rgba(17, 24, 39, 0.75);
-        stroke: rgba(255, 255, 255, 0.16);
+        fill: rgb(var(--color-surface) / 0.75);
+        stroke: rgb(var(--color-contrast) / 0.16);
     }
 
     .anatomy-kpi-label {
         font-size: 11px;
-        fill: #9ca3af;
+        fill: rgb(var(--color-ink-muted));
         font-weight: 600;
         letter-spacing: 0.08em;
     }
     .anatomy-kpi-value {
         font-size: 30px;
         font-weight: 700;
-        fill: #fff;
+        fill: rgb(var(--color-ink-strong));
     }
     .anatomy-kpi-delta {
         font-size: 12px;
         font-weight: 600;
-        fill: #f59e0b;
+        fill: rgb(var(--color-primary));
     }
 
     .anatomy-dot {
-        fill: rgba(255, 255, 255, 0.14);
+        fill: rgb(var(--color-contrast) / 0.14);
         transition: fill 0.8s ease;
     }
     .anatomy-dot.is-lit {
-        fill: #f59e0b;
+        fill: rgb(var(--color-primary));
     }
 
     .anatomy-label text {
         font-size: 14px;
         font-weight: 600;
         letter-spacing: 1.2px;
-        fill: #9ca3af;
+        fill: rgb(var(--color-ink-muted));
         transition: fill 0.3s ease;
     }
     .anatomy-label-dot {
-        fill: rgba(255, 255, 255, 0.5);
+        fill: rgb(var(--color-contrast) / 0.5);
     }
     .anatomy-label-dot-accent {
-        fill: #f59e0b;
+        fill: rgb(var(--color-primary));
     }
     /* Hover focus (set by about.ts): the lifted layer's label lights up. */
     [data-layer].is-focus .anatomy-label text {
-        fill: #fff;
+        fill: rgb(var(--color-ink-strong));
     }
     [data-layer].is-focus .anatomy-plane-2,
     [data-layer].is-focus .anatomy-plane-3 {
-        stroke: rgba(255, 255, 255, 0.55);
+        stroke: rgb(var(--color-contrast) / 0.55);
     }
 
     @media (prefers-reduced-motion: reduce) {

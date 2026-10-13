@@ -1,11 +1,10 @@
 /**
- * Work page motion. Shared hooks (reveals, magnetic CTA, spotlight cards)
+ * Timeline page motion. Shared hooks (reveals, spotlight cards)
  * come from motion.ts; this file owns the two pieces the CV adds.
  *
  * Hooks:
  *   (load intro: [data-page-title], [data-intro-fade] via playIntro)
  *   [data-timeline]        rail fills and dots light as entries are reached
- *   (the stat figures use the shared [data-count] hook in motion.ts)
  */
 import { gsap, ScrollTrigger, playIntro, initPageMotion } from "./motion";
 

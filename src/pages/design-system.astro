@@ -1,0 +1,477 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { color, alpha, viz, gradientSheet, type, space, layout, radius, motion, button } from "../styles/tokens.mjs";
+
+// The design system's catalogue: every token and component, rendered with
+// the same classes the site uses, so this page is also the check that they
+// still agree. Values print straight from src/styles/tokens.mjs.
+//
+// Not linked from the site, kept out of search (noindex) and out of the
+// generated llms docs (SKIP_PAGES in scripts/generate-llms.mjs).
+
+const colorGroups = [
+    {
+        title: "Surfaces",
+        note: "Deepest to highest. Glass is the background at 70% with a blur.",
+        items: [
+            { name: "background", cls: "bg-background", value: color.background },
+            { name: "surface", cls: "bg-surface", value: color.surface },
+            { name: "surface-raised", cls: "bg-surface-raised", value: color.surfaceRaised },
+        ],
+    },
+    {
+        title: "Ink",
+        note: "One text scale. Headings strong, emphasis default, copy muted, labels faint.",
+        items: [
+            { name: "ink-strong", cls: "bg-ink-strong", value: color.ink.strong },
+            { name: "ink", cls: "bg-ink", value: color.ink.DEFAULT },
+            { name: "ink-muted", cls: "bg-ink-muted", value: color.ink.muted },
+            { name: "ink-faint", cls: "bg-ink-faint", value: color.ink.faint },
+        ],
+    },
+    {
+        title: "Accents",
+        note: "Blue is system and structure. Orange is the number, the decision, every call to action.",
+        items: [
+            { name: "primary", cls: "bg-primary", value: color.primary.DEFAULT },
+            { name: "primary-strong", cls: "bg-primary-strong", value: color.primary.strong },
+            { name: "primary-glow", cls: "bg-primary-glow", value: color.primary.glow },
+            { name: "info", cls: "bg-info", value: color.info },
+            { name: "warn", cls: "bg-warn", value: color.warn },
+        ],
+    },
+];
+
+const overlays = [
+    { name: "line-subtle", cls: "border-line-subtle", value: alpha.line.subtle, kind: "line" },
+    { name: "line", cls: "border-line", value: alpha.line.DEFAULT, kind: "line" },
+    { name: "line-strong", cls: "border-line-strong", value: alpha.line.strong, kind: "line" },
+    { name: "wash-subtle", cls: "bg-wash-subtle", value: alpha.wash.subtle, kind: "wash" },
+    { name: "wash", cls: "bg-wash", value: alpha.wash.DEFAULT, kind: "wash" },
+    { name: "wash-strong", cls: "bg-wash-strong", value: alpha.wash.strong, kind: "wash" },
+];
+
+const typeSteps = [
+    { name: "display", cls: "text-display", sample: "From signal to number.", use: "Hero, Story opening" },
+    { name: "h1", cls: "text-h1", sample: "Projects", use: "Page titles" },
+    { name: "h2", cls: "text-h2", sample: "What I do", use: "Section headings" },
+    { name: "h3", cls: "text-h3", sample: "Multi-tenant Fabric product", use: "Card titles" },
+    { name: "lead", cls: "text-lead", sample: "The first paragraph of a page, one step up from the copy.", use: "Intro paragraphs" },
+];
+
+const spaceSteps = [
+    { name: "gutter", cls: "px-gutter", value: `${space.gutter.base} → ${space.gutter.sm} → ${space.gutter.lg}`, use: "Page side padding (.page-container)" },
+    { name: "section", cls: "py-section", value: space.section, use: "Section padding (.section)" },
+    { name: "head", cls: "mb-head", value: space.head, use: "Section heading to content" },
+    { name: "card", cls: "p-card", value: space.card, use: "Card padding (.card)" },
+    { name: "grid", cls: "gap-grid", value: space.grid, use: "Gap between cards" },
+    { name: "nav", cls: "pt-nav", value: space.nav, use: "Clearance under the fixed nav" },
+];
+
+const radii = [
+    { name: "chip", cls: "rounded-chip", value: radius.chip },
+    { name: "control", cls: "rounded-control", value: radius.control },
+    { name: "card", cls: "rounded-card", value: radius.card },
+    { name: "panel", cls: "rounded-panel", value: radius.panel },
+    { name: "pill", cls: "rounded-pill", value: radius.pill },
+];
+
+const motionRows = [
+    { name: "duration-fast", value: motion.duration.fast, use: "Buttons, links: colour" },
+    { name: "duration-base", value: motion.duration.base, use: "Cards, chips, icon tiles (the default)" },
+    { name: "duration-slow", value: motion.duration.slow, use: "Image fades, disclosure" },
+    { name: "duration-enter / exit", value: `${motion.duration.enter} / ${motion.duration.exit}`, use: "Overlays: the mobile menu arrives slower than it leaves" },
+    { name: "ease-out", value: motion.ease.out, use: "Every transition and arrival (the default)" },
+    { name: "ease-in", value: motion.ease.in, use: "Departures" },
+    { name: "ease-in-out", value: motion.ease.inOut, use: "Loops: scroll cue, disclosure" },
+    { name: "lift", value: motion.lift, use: "Card hover" },
+    { name: "press", value: motion.press, use: "Button :active scale" },
+    { name: "reveal", value: `${motion.reveal.y}px · ${motion.reveal.duration}s · ${motion.reveal.ease}`, use: "Scroll reveals (GSAP)" },
+];
+
+const vizItems = Object.entries(viz);
+---
+
+<Layout
+    title="Design System | Julian Hilgemann"
+    description="Tokens and components of julianhilgemann.com."
+    fullWidth={true}
+    noindex={true}
+>
+    <!-- ── Intro ── -->
+    <section class="pb-section">
+        <div class="page-container">
+            <p class="eyebrow mb-6">julianhilgemann.com</p>
+            <h1 class="text-h1 text-ink-strong mb-8">Design system</h1>
+            <p class="text-lead text-ink max-w-measure">
+                Every value on the site starts in one file,
+                <code class="font-mono text-primary">src/styles/tokens.mjs</code>.
+                Tailwind turns it into CSS variables and utilities, the component
+                layer builds on those, and the figures read the same values.
+            </p>
+            <ol class="mt-10 grid gap-grid md:grid-cols-3 text-sm">
+                <li class="card">
+                    <p class="eyebrow mb-3"><span class="eyebrow-num">01</span><span class="eyebrow-rule"></span>Tokens</p>
+                    <p class="text-ink-muted"><code class="font-mono text-ink">tokens.mjs</code>: colour, type, space, shape, motion. Change a value, rebuild, done.</p>
+                </li>
+                <li class="card">
+                    <p class="eyebrow mb-3"><span class="eyebrow-num">02</span><span class="eyebrow-rule"></span>Utilities</p>
+                    <p class="text-ink-muted"><code class="font-mono text-ink">text-ink-muted</code>, <code class="font-mono text-ink">rounded-card</code>, <code class="font-mono text-ink">py-section</code>, <code class="font-mono text-ink">text-h2</code>. Only token colours compile.</p>
+                </li>
+                <li class="card">
+                    <p class="eyebrow mb-3"><span class="eyebrow-num">03</span><span class="eyebrow-rule"></span>Components</p>
+                    <p class="text-ink-muted"><code class="font-mono text-ink">components.css</code>: <code class="font-mono text-ink">.btn</code>, <code class="font-mono text-ink">.card</code>, <code class="font-mono text-ink">.eyebrow</code>, <code class="font-mono text-ink">.chip</code>, <code class="font-mono text-ink">.badge</code> and the rest, below.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ── Colour ── -->
+    <section class="section border-t border-line-subtle">
+        <div class="page-container">
+            <h2 class="text-h2 text-ink-strong mb-head">Colour</h2>
+
+            <div class="space-y-12">
+                {
+                    colorGroups.map((group) => (
+                        <div>
+                            <div class="mb-5 md:flex md:items-baseline md:gap-6">
+                                <h3 class="text-h3 text-ink-strong">{group.title}</h3>
+                                <p class="mt-1 md:mt-0 text-sm text-ink-muted">{group.note}</p>
+                            </div>
+                            <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-grid">
+                                {group.items.map((item) => (
+                                    <li>
+                                        <span class:list={["block h-20 rounded-control border border-line", item.cls]} />
+                                        <span class="mt-3 block text-sm font-medium text-ink-strong">{item.name}</span>
+                                        <code class="block font-mono text-xs text-ink-faint">{item.value}</code>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))
+                }
+
+                <div>
+                    <div class="mb-5 md:flex md:items-baseline md:gap-6">
+                        <h3 class="text-h3 text-ink-strong">Lines and washes</h3>
+                        <p class="mt-1 md:mt-0 text-sm text-ink-muted">The contrast colour at fixed opacities. Every hairline and hover fill is one of these six.</p>
+                    </div>
+                    <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-grid">
+                        {
+                            overlays.map((o) => (
+                                <li>
+                                    <span class:list={["block h-20 rounded-control", o.kind === "line" ? `border-2 ${o.cls}` : `${o.cls} border border-line-subtle`]} />
+                                    <span class="mt-3 block text-sm font-medium text-ink-strong">{o.name}</span>
+                                    <code class="block font-mono text-xs text-ink-faint">{`${Math.round(o.value * 100)}%`}</code>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="mb-5 md:flex md:items-baseline md:gap-6">
+                        <h3 class="text-h3 text-ink-strong">Chart palette</h3>
+                        <p class="mt-1 md:mt-0 text-sm text-ink-muted">Validated categorical hues for the pricing chart. Data only, never UI.</p>
+                    </div>
+                    <ul class="flex gap-[2px] h-8 rounded-control overflow-hidden">
+                        {vizItems.map(([name]) => <li class="flex-1" style={`background: var(--seg-${name})`} title={name} />)}
+                    </ul>
+                    <ul class="mt-3 grid grid-cols-3 sm:grid-cols-6 gap-2">
+                        {vizItems.map(([name, value]) => (
+                            <li class="font-mono text-xs text-ink-faint">{name}<br />{value}</li>
+                        ))}
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="mb-5 md:flex md:items-baseline md:gap-6">
+                        <h3 class="text-h3 text-ink-strong">Gradient sheet</h3>
+                        <p class="mt-1 md:mt-0 text-sm text-ink-muted">Behind the homepage hero and the contact screens, in layer order: ground first, strongest last.</p>
+                    </div>
+                    <ul class="flex gap-[2px] h-8 rounded-control overflow-hidden border border-line-subtle">
+                        {gradientSheet.map((value) => <li class="flex-1" style={`background: ${value}`} title={value} />)}
+                    </ul>
+                    <ul class="mt-3 grid grid-cols-5 gap-2">
+                        {gradientSheet.map((value, i) => (
+                            <li class="font-mono text-xs text-ink-faint">{`layer ${i}`}<br />{value}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Type ── -->
+    <section class="section border-t border-line-subtle">
+        <div class="page-container">
+            <h2 class="text-h2 text-ink-strong mb-head">Type</h2>
+            <p class="text-ink-muted max-w-measure mb-10">
+                System fonts. Each step is one class carrying size, line height,
+                tracking and weight, fluid between a 375px phone and a 1280px desktop.
+            </p>
+            <ul class="divide-y divide-line-subtle border-y border-line-subtle">
+                {
+                    typeSteps.map((step) => (
+                        <li class="py-6 grid gap-3 md:grid-cols-[12rem_1fr] md:items-baseline">
+                            <div>
+                                <code class="font-mono text-sm text-primary">{step.cls}</code>
+                                <span class="block text-xs text-ink-faint mt-1">{step.use}</span>
+                                <code class="block font-mono text-[11px] text-ink-faint mt-1">{type[step.name].size}</code>
+                            </div>
+                            <p class:list={[step.cls, step.name === "lead" ? "text-ink" : "text-ink-strong"]}>{step.sample}</p>
+                        </li>
+                    ))
+                }
+                <li class="py-6 grid gap-3 md:grid-cols-[12rem_1fr] md:items-baseline">
+                    <div>
+                        <code class="font-mono text-sm text-primary">text-lg text-ink-muted</code>
+                        <span class="block text-xs text-ink-faint mt-1">Body copy</span>
+                    </div>
+                    <p class="text-lg text-ink-muted leading-relaxed max-w-measure">
+                        Body copy uses Tailwind's base sizes in the muted ink, with the
+                        last line of a passage a step brighter when it carries the point.
+                    </p>
+                </li>
+                <li class="py-6 grid gap-3 md:grid-cols-[12rem_1fr] md:items-baseline">
+                    <div>
+                        <code class="font-mono text-sm text-primary">.stat-value / .stat-label</code>
+                        <span class="block text-xs text-ink-faint mt-1">Counted figures</span>
+                    </div>
+                    <p class="flex items-baseline gap-3">
+                        <span class="stat-value">~700</span>
+                        <span class="stat-label">measures, one model</span>
+                    </p>
+                </li>
+                <li class="py-6 grid gap-3 md:grid-cols-[12rem_1fr] md:items-baseline">
+                    <div>
+                        <code class="font-mono text-sm text-primary">.eyebrow</code>
+                        <span class="block text-xs text-ink-faint mt-1">Labels above a title</span>
+                    </div>
+                    <div class="space-y-3">
+                        <p class="eyebrow"><span class="eyebrow-num">04</span><span class="eyebrow-rule"></span>Structure</p>
+                        <p class="eyebrow tone-info"><span class="eyebrow-num">04</span><span class="eyebrow-rule"></span>Structure, in .tone-info</p>
+                        <p class="eyebrow eyebrow-tone tone-info">Measurement (.eyebrow-tone)</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ── Space and shape ── -->
+    <section class="section border-t border-line-subtle">
+        <div class="page-container grid gap-16 lg:grid-cols-2">
+            <div>
+                <h2 class="text-h2 text-ink-strong mb-head">Space</h2>
+                <ul class="space-y-6">
+                    {
+                        spaceSteps.map((s) => (
+                            <li>
+                                <div class="flex items-baseline justify-between gap-4">
+                                    <code class="font-mono text-sm text-primary">{s.cls}</code>
+                                    <code class="font-mono text-[11px] text-ink-faint text-right">{s.value}</code>
+                                </div>
+                                <p class="text-sm text-ink-muted mt-1">{s.use}</p>
+                                <span class="mt-2 block h-2 rounded-pill bg-info/60" style={`width: var(--space-${s.name})`} />
+                            </li>
+                        ))
+                    }
+                </ul>
+                <p class="mt-8 text-sm text-ink-muted">
+                    Content column: <code class="font-mono text-ink">.page-container</code>,
+                    {layout.container} wide including its gutters. Body copy stops at
+                    <code class="font-mono text-ink">max-w-measure</code> ({layout.measure}).
+                </p>
+            </div>
+            <div>
+                <h2 class="text-h2 text-ink-strong mb-head">Shape</h2>
+                <ul class="grid grid-cols-2 sm:grid-cols-3 gap-grid">
+                    {
+                        radii.map((r) => (
+                            <li>
+                                <span class:list={["block h-24 border border-line-strong bg-wash", r.cls]} />
+                                <code class="mt-3 block font-mono text-sm text-primary">{r.cls}</code>
+                                <code class="block font-mono text-xs text-ink-faint">{r.value}</code>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Components ── -->
+    <section class="section border-t border-line-subtle">
+        <div class="page-container">
+            <h2 class="text-h2 text-ink-strong mb-head">Components</h2>
+
+            <div class="grid gap-grid lg:grid-cols-2">
+                <div class="card">
+                    <p class="eyebrow mb-6">Buttons</p>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <a href="#" class="btn btn-primary">Primary</a>
+                        <a href="#" class="btn">Secondary</a>
+                        <a href="#" class="btn btn-solid">Solid</a>
+                    </div>
+                    <div class="mt-5 flex flex-wrap items-center gap-4">
+                        <a href="#" class="btn btn-primary btn-sm">Small</a>
+                        <a href="#" class="btn btn-primary btn-lg">Large</a>
+                        <a href="#" class="btn btn-primary orbit-ring">With .orbit-ring</a>
+                    </div>
+                    <p class="mt-6 text-sm text-ink-muted">
+                        <code class="font-mono text-ink">.btn</code> plus <code class="font-mono text-ink">.btn-primary</code> (the
+                        orange edge of the main action), <code class="font-mono text-ink">.btn-solid</code> (the one
+                        transactional step), <code class="font-mono text-ink">.btn-sm</code> / <code class="font-mono text-ink">.btn-lg</code>.
+                        Padding {button.padY} × {button.padX}, radius pill. The contact button carries
+                        <code class="font-mono text-ink">.orbit-ring</code>; one per screen.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <p class="eyebrow mb-6">Links</p>
+                    <p class="space-x-6">
+                        <a href="#" class="arrow-link">
+                            Arrow link
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
+                        </a>
+                        <a href="#" class="arrow-link tone-info">
+                            In .tone-info
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
+                        </a>
+                    </p>
+                    <p class="mt-5 text-ink-muted">
+                        Running text with a <a href="#" class="text-link">text link</a> inside it.
+                    </p>
+                    <p class="mt-6 text-sm text-ink-muted">
+                        <code class="font-mono text-ink">.arrow-link</code> for the quiet next step,
+                        hover in the tone; <code class="font-mono text-ink">.text-link</code> inside prose.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <p class="eyebrow mb-6">Labels</p>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <span class="badge"><span class="badge-dot motion-safe:animate-pulse" aria-hidden="true"></span>In active development</span>
+                        <span class="badge">Estimate</span>
+                        <span class="badge badge-solid">Included</span>
+                        <span class="badge tone-info">System</span>
+                    </div>
+                    <ul class="chip-list mt-5">
+                        <li class="chip">Microsoft Fabric</li>
+                        <li class="chip">Warehouse</li>
+                        <li class="chip">DAX</li>
+                        <li class="chip">Forecasting</li>
+                    </ul>
+                    <p class="mt-6 text-sm text-ink-muted">
+                        <code class="font-mono text-ink">.badge</code> (status, in the tone; <code class="font-mono text-ink">.badge-solid</code>,
+                        <code class="font-mono text-ink">.badge-dot</code>) and <code class="font-mono text-ink">.chip</code> in a
+                        <code class="font-mono text-ink">.chip-list</code> (stack and topic tags).
+                    </p>
+                </div>
+
+                <div class="card">
+                    <p class="eyebrow mb-6">Icon tiles and controls</p>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <span class="icon-tile tone-info" aria-hidden="true">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"></path><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"></path></svg>
+                        </span>
+                        <span class="icon-tile" aria-hidden="true">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><rect x="7" y="12" width="3" height="6" rx="1"></rect><rect x="12.5" y="8" width="3" height="10" rx="1"></rect><rect x="18" y="4.5" width="3" height="13.5" rx="1"></rect></svg>
+                        </span>
+                        <button type="button" class="icon-btn" aria-label="Close (example)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                    <p class="mt-6 text-sm text-ink-muted">
+                        <code class="font-mono text-ink">.icon-tile</code> draws in the tone and brightens with its
+                        <code class="font-mono text-ink">.card-hover</code>; <code class="font-mono text-ink">.icon-btn</code> is the round
+                        icon-only control (close, expand, menu).
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="text-h3 text-ink-strong mt-16 mb-6">Surfaces</h3>
+            <div class="grid gap-grid md:grid-cols-3">
+                <div class="card">
+                    <p class="eyebrow mb-3">.card</p>
+                    <p class="text-ink-muted">Glass, a hairline, the card radius and padding. Static.</p>
+                </div>
+                <div class="card card-hover spotlight-card tone-info">
+                    <p class="eyebrow mb-3"><span class="eyebrow-num">.card-hover</span></p>
+                    <p class="text-ink-muted">Lifts by {motion.lift} and fills a wash on hover. With <code class="font-mono text-ink">.spotlight-card</code>, the cursor light.</p>
+                    <span class="icon-tile mt-5" aria-hidden="true">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                    </span>
+                </div>
+                <div class="panel p-card">
+                    <p class="eyebrow mb-3">.panel</p>
+                    <p class="text-ink-muted">The large container: dialog, diagram frame, Story chapter. Panel radius, padding of its own.</p>
+                </div>
+            </div>
+
+            <h3 class="text-h3 text-ink-strong mt-16 mb-2">Tone</h3>
+            <p class="text-ink-muted max-w-measure mb-6">
+                Components with an accent draw in <code class="font-mono text-ink">--tone</code>: orange by
+                default, blue under <code class="font-mono text-ink">.tone-info</code> on the component or any
+                ancestor. Blue for system and structure, orange for the number.
+            </p>
+            <div class="grid gap-grid sm:grid-cols-2">
+                {
+                    ["tone-info", "tone-primary"].map((tone) => (
+                        <div class:list={["card card-hover", tone]}>
+                            <p class="eyebrow mb-5"><span class="eyebrow-num">{tone}</span><span class="eyebrow-rule"></span>Stage</p>
+                            <div class="flex items-center gap-4">
+                                <span class="icon-tile" aria-hidden="true">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+                                </span>
+                                <span class="badge">Badge</span>
+                            </div>
+                            <ul class="chip-list mt-5">
+                                <li class="chip">Chip</li>
+                                <li class="chip">Hover the card</li>
+                            </ul>
+                            <a href="#" class="arrow-link mt-5">
+                                Arrow link
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
+                            </a>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Motion ── -->
+    <section class="section border-t border-line-subtle">
+        <div class="page-container">
+            <h2 class="text-h2 text-ink-strong mb-head">Motion</h2>
+            <p class="text-ink-muted max-w-measure mb-10">
+                Micro-interactions and fade + rise reveals. Hover lifts and presses use the
+                individual <code class="font-mono text-ink">translate</code> / <code class="font-mono text-ink">scale</code>
+                properties, never <code class="font-mono text-ink">transform</code>, which GSAP owns. Everything
+                stops under reduced motion.
+            </p>
+            <ul class="divide-y divide-line-subtle border-y border-line-subtle">
+                {
+                    motionRows.map((m) => (
+                        <li class="py-4 grid gap-1 sm:grid-cols-[12rem_1fr_1fr] sm:items-baseline">
+                            <code class="font-mono text-sm text-primary">{m.name}</code>
+                            <code class="font-mono text-xs text-ink">{m.value}</code>
+                            <span class="text-sm text-ink-muted">{m.use}</span>
+                        </li>
+                    ))
+                }
+            </ul>
+            <div data-reveal-stagger class="mt-10 grid gap-grid sm:grid-cols-3">
+                <div class="card card-hover text-ink-muted">Reveals rise {motion.reveal.y}px…</div>
+                <div class="card card-hover text-ink-muted">…over {motion.reveal.duration}s…</div>
+                <div class="card card-hover text-ink-muted">…{motion.reveal.stagger}s apart.</div>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<script>
+    import "../scripts/page";
+</script>

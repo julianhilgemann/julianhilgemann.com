@@ -4,14 +4,17 @@
 // screen of their own.
 //
 // "What I do" is the site's own argument in miniature — foundation, structure,
-// surface — so each stage carries its specifics, its scale and a link to the
-// proof rather than a two-word label. Markers, stat figures and stack chips
-// travel as expressions: the llms generator flattens literal markup into the
-// page docs, where these would read as duplicate copy (the same facts reach
-// the corpus through the prose on /work). The card prose stays literal.
+// surface — so each stage carries its specifics and a link to the proof rather
+// than a two-word label. No counted figures: the cards describe the work, not
+// its size. Markers and stack chips travel as expressions: the llms generator
+// flattens literal markup into the page docs, where these would read as
+// duplicate copy (the same facts reach the corpus through the prose on /timeline).
+// The card prose stays literal.
 //
 // Each tile is tagged with the Story chapter it belongs to, which is what
-// keeps the homepage and the narrative pointing at each other. The tiles only
+// keeps the homepage and the narrative pointing at each other, and drawn in
+// that chapter's accent: blue for the system chapters, orange for the
+// expressive end. The tiles only
 // link out to work that exists — there is no TouchDesigner or audio piece on
 // the site yet, so the expressive end is represented by the shader work.
 const chain = {
@@ -20,15 +23,10 @@ const chain = {
         { num: "02", name: "Structure" },
         { num: "03", name: "Surface" },
     ],
-    stats: [
-        { value: 150, label: "customer tenants" },
-        { value: 100, label: "modelled tables" },
-        { value: 700, label: "measures, one model" },
-    ],
     stacks: [
-        ["Microsoft Fabric", "Multi-tenant", "Git + DevOps", "VS Code"],
-        ["Warehouse", "Lakehouse", "Dimensional models", "SQL"],
-        ["Power BI", "TMDL", "DAX", "Forecasting"],
+        ["Microsoft Fabric", "Multi-tenant", "Data pipelines", "Git + DevOps"],
+        ["Warehouse", "Lakehouse", "Postgres + dbt", "SQL"],
+        ["Power BI", "DAX", "Excel", "Forecasting"],
     ],
 };
 
@@ -36,6 +34,7 @@ const tiles = [
     {
         title: "FX Macro Data Platform",
         chapter: "Structure",
+        tone: "info",
         note: "Macro time series kept by vintage, so every number can be traced back to what was knowable when it was published.",
         image: "/assets/agentic_hla.webp",
         href: "https://github.com/julianhilgemann/fx_macro_platform",
@@ -44,6 +43,7 @@ const tiles = [
     {
         title: "Interactive Yield Curve Heatmap",
         chapter: "Measurement",
+        tone: "info",
         note: "Thirty years of the curve in one frame: colour carries the level, the shape carries the regime.",
         image: "/assets/interactive_yield_curve_app.webp",
         href: "https://julianhilgemann.github.io/yield_curve_heatmap_app/",
@@ -52,6 +52,7 @@ const tiles = [
     {
         title: "B2B Pipeline Forecasting",
         chapter: "Inference",
+        tone: "info",
         note: "A forecast with its uncertainty attached, built to be argued with rather than believed.",
         image: "/assets/pipeline_forecast.webp",
         href: "https://github.com/julianhilgemann/pipeline-forecast",
@@ -60,6 +61,7 @@ const tiles = [
     {
         title: "ShaderGradient Playground",
         chapter: "Expansion",
+        tone: "primary",
         note: "Numbers driving colour and motion on the GPU. The same loop as the dashboards, run backwards.",
         image: "/assets/shadergradient.webp",
         href: "https://julianhilgemann.github.io/shader_gradient_app/",
@@ -69,101 +71,92 @@ const tiles = [
 ---
 
 <!-- ── What I do: one chain, three stages ── -->
-<section id="what-i-do" class="min-h-[100svh] py-16 md:py-20 flex items-center border-t border-white/5">
-    <div class="w-full max-w-[1200px] mx-auto px-8 sm:px-12 lg:px-16">
+<!-- Tighter padding than a plain .section: the three cards have to share one screen with the heading. -->
+<section id="what-i-do" class="section-screen py-16 md:py-20 border-t border-line-subtle">
+    <div class="page-container">
         <div class="md:flex md:items-end md:justify-between md:gap-12 mb-8 md:mb-12">
-            <h2 data-reveal-lines class="text-3xl md:text-5xl font-bold">What I do</h2>
-            <p data-reveal class="mt-5 md:mt-0 md:text-right max-w-xl text-lg text-text-secondary leading-relaxed">
+            <h2 data-reveal-lines class="text-h2 text-ink-strong">What I do</h2>
+            <p data-reveal class="mt-5 md:mt-0 md:text-right max-w-xl text-lg text-ink-muted leading-relaxed">
                 One chain, three stages. A measurement has to land somewhere, be
                 modelled into something that holds, and leave as a number someone
-                can act on. I build all three, not just the one that shows.
+                can act on. I work across all three.
             </p>
         </div>
 
-        <ol data-reveal-stagger class="what-chain grid gap-5 lg:gap-6 md:grid-cols-3">
-            <li class="what-stage">
-                <div class="what-card glass spotlight-card">
-                    <p class="what-marker" aria-hidden="true">
-                        <span class="what-num">{chain.markers[0].num}</span>
-                        <span class="what-rule"></span>
+        <ol data-reveal-stagger class="what-chain grid gap-grid md:grid-cols-3">
+            <li class="what-stage tone-info">
+                <div class="what-card card card-hover spotlight-card">
+                    <p class="eyebrow" aria-hidden="true">
+                        <span class="eyebrow-num">{chain.markers[0].num}</span>
+                        <span class="eyebrow-rule"></span>
                         {chain.markers[0].name}
                     </p>
 
-                    <span class="what-icon" aria-hidden="true">
+                    <span class="icon-tile mt-5" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
                     </span>
 
-                    <strong class="what-title">Platforms</strong>
+                    <strong class="block mt-5 text-h3 text-ink-strong">Platforms</strong>
                     <p class="what-lead">Microsoft Fabric, run like a product.</p>
                     <p class="what-body">
-                        Every customer gets their own Dev, Test and Prod. I build
-                        against source files in VS Code, with Git and DevOps behind
-                        each change, so an environment can be rebuilt rather than
-                        remembered.
+                        A multi-tenant setup where every customer gets their own
+                        Dev, Test and Prod on shared capacity. Changes go through
+                        source files, Git and DevOps, so an environment can be
+                        rebuilt rather than remembered.
                     </p>
 
-                    <p class="what-stat">
-                        <span class="what-stat-value" data-count={chain.stats[0].value} data-prefix="~">{`~${chain.stats[0].value}`}</span>
-                        <span class="what-stat-label">{chain.stats[0].label}</span>
-                    </p>
+                    <ul class="chip-list mt-5">{chain.stacks[0].map((item) => <li class="chip">{item}</li>)}</ul>
 
-                    <ul class="what-chips">{chain.stacks[0].map((item) => <li>{item}</li>)}</ul>
-
-                    <a href="/work#platform" class="what-link">
+                    <a href="/timeline#platform" class="what-link arrow-link">
                         How that runs today
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
                     </a>
                 </div>
             </li>
 
-            <li class="what-stage">
-                <div class="what-card glass spotlight-card">
-                    <p class="what-marker" aria-hidden="true">
-                        <span class="what-num">{chain.markers[1].num}</span>
-                        <span class="what-rule"></span>
+            <li class="what-stage tone-info">
+                <div class="what-card card card-hover spotlight-card">
+                    <p class="eyebrow" aria-hidden="true">
+                        <span class="eyebrow-num">{chain.markers[1].num}</span>
+                        <span class="eyebrow-rule"></span>
                         {chain.markers[1].name}
                     </p>
 
-                    <span class="what-icon" aria-hidden="true">
+                    <span class="icon-tile mt-5" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"></path><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"></path></svg>
                     </span>
 
-                    <strong class="what-title">Data Warehousing</strong>
+                    <strong class="block mt-5 text-h3 text-ink-strong">Data Warehousing</strong>
                     <p class="what-lead">Modelled once, so it can be reused.</p>
                     <p class="what-body">
-                        Transformations move out of ad-hoc dataflows into
-                        warehouses and lakehouses with real models: a named grain,
+                        Warehouses and lakehouses with real models: a named grain,
                         declared relationships, and lineage you can walk from a
-                        dashboard figure back to its row.
+                        dashboard figure back to its row. On Fabric today, on
+                        Postgres and dbt before that.
                     </p>
 
-                    <p class="what-stat">
-                        <span class="what-stat-value" data-count={chain.stats[1].value} data-prefix="~">{`~${chain.stats[1].value}`}</span>
-                        <span class="what-stat-label">{chain.stats[1].label}</span>
-                    </p>
+                    <ul class="chip-list mt-5">{chain.stacks[1].map((item) => <li class="chip">{item}</li>)}</ul>
 
-                    <ul class="what-chips">{chain.stacks[1].map((item) => <li>{item}</li>)}</ul>
-
-                    <a href="/story#structure" class="what-link">
+                    <a href="/story#structure" class="what-link arrow-link">
                         The case for structure
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
                     </a>
                 </div>
             </li>
 
-            <li class="what-stage">
-                <div class="what-card glass spotlight-card">
-                    <p class="what-marker" aria-hidden="true">
-                        <span class="what-num">{chain.markers[2].num}</span>
-                        <span class="what-rule"></span>
+            <li class="what-stage tone-primary">
+                <div class="what-card card card-hover spotlight-card">
+                    <p class="eyebrow" aria-hidden="true">
+                        <span class="eyebrow-num">{chain.markers[2].num}</span>
+                        <span class="eyebrow-rule"></span>
                         {chain.markers[2].name}
                     </p>
 
-                    <span class="what-icon" aria-hidden="true">
+                    <span class="icon-tile mt-5" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><rect x="7" y="12" width="3" height="6" rx="1"></rect><rect x="12.5" y="8" width="3" height="10" rx="1"></rect><rect x="18" y="4.5" width="3" height="13.5" rx="1"></rect></svg>
                     </span>
 
-                    <strong class="what-title">Business Intelligence</strong>
+                    <strong class="block mt-5 text-h3 text-ink-strong">Business Intelligence</strong>
                     <p class="what-lead">The number people actually act on.</p>
                     <p class="what-body">
                         Dashboards, forecasts and scenario planning, over a metric
@@ -172,59 +165,54 @@ const tiles = [
                         uncertainty travel with it.
                     </p>
 
-                    <p class="what-stat">
-                        <span class="what-stat-value" data-count={chain.stats[2].value} data-prefix="~">{`~${chain.stats[2].value}`}</span>
-                        <span class="what-stat-label">{chain.stats[2].label}</span>
-                    </p>
+                    <ul class="chip-list mt-5">{chain.stacks[2].map((item) => <li class="chip">{item}</li>)}</ul>
 
-                    <ul class="what-chips">{chain.stacks[2].map((item) => <li>{item}</li>)}</ul>
-
-                    <a href="/work#bi" class="what-link">
-                        Forecasting and decision models
+                    <a href="/timeline#bi" class="what-link arrow-link">
+                        Data products in fintech
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
                     </a>
                 </div>
             </li>
         </ol>
 
-        <p data-reveal class="mt-7 md:mt-8 text-text-secondary leading-relaxed">
+        <p data-reveal class="mt-7 md:mt-8 text-ink-muted leading-relaxed">
             And then the same chain backwards — a number opened back up into
             colour, motion and sound.
-            <a href="/story#expansion" class="what-back">That is the other half of the work.</a>
+            <a href="/story#expansion" class="text-link">That is the other half of the work.</a>
         </p>
     </div>
 </section>
 
 <!-- ── Selected work: the range, visible at a glance ── -->
-<section class="min-h-[100svh] py-20 md:py-28 flex items-center border-t border-white/5">
-    <div class="w-full max-w-[1200px] mx-auto px-8 sm:px-12 lg:px-16">
-        <h2 data-reveal-lines class="text-3xl md:text-5xl font-bold mb-10 md:mb-14">Selected work</h2>
+<section class="section section-screen border-t border-line-subtle">
+    <div class="page-container">
+        <h2 data-reveal-lines class="text-h2 text-ink-strong mb-head">Selected work</h2>
 
-        <ul data-reveal-stagger class="grid sm:grid-cols-2 gap-5 md:gap-6">
+        <ul data-reveal-stagger class="grid sm:grid-cols-2 gap-grid">
             {
                 tiles.map((tile) => (
-                    <li>
+                    <li class={`tone-${tile.tone}`}>
                         <a
                             href={tile.href}
                             target={tile.external ? "_blank" : undefined}
                             rel={tile.external ? "noopener noreferrer" : undefined}
-                            class="work-tile glass spotlight-card group block rounded-2xl overflow-hidden h-full hover:bg-white/[0.04] transition-colors duration-300"
+                            class="card card-hover spotlight-card p-0 group block overflow-hidden h-full"
                         >
-                            <span class="block relative aspect-[16/9] overflow-hidden bg-white/[0.02]">
+                            <span class="block relative aspect-[16/9] overflow-hidden bg-wash-subtle">
                                 <img
                                     src={tile.image}
                                     alt=""
                                     loading="lazy"
                                     decoding="async"
-                                    class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+                                    class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-slow"
                                 />
                             </span>
-                            <span class="block p-6 md:p-7">
-                                <span class="work-tile-chapter">{tile.chapter}</span>
-                                <strong class="block text-white text-lg md:text-xl font-bold mt-3 mb-2">
+                            <span class="block p-card">
+                                <span class="eyebrow eyebrow-tone">{tile.chapter}</span>
+                                <strong class="block text-h3 text-ink-strong mt-3 mb-2">
                                     {tile.title}
                                 </strong>
-                                <span class="block text-text-secondary leading-relaxed">{tile.note}</span>
+                                <span class="block text-ink-muted leading-relaxed">{tile.note}</span>
                             </span>
                         </a>
                     </li>
@@ -233,13 +221,9 @@ const tiles = [
         </ul>
 
         <p class="mt-10">
-            <a
-                href="/projects"
-                class="group inline-flex items-center gap-2 text-text-secondary hover:text-primary transition-colors"
-            >
+            <a href="/projects" class="arrow-link">
                 All projects
                 <svg
-                    class="transition-transform duration-300 group-hover:translate-x-1"
                     width="18"
                     height="18"
                     viewBox="0 0 24 24"
@@ -257,39 +241,25 @@ const tiles = [
 
 <style>
     /* ── What I do ──
-       Three stages of one chain. The accent says which end of it a stage sits
-       at — on the marker and the icon, not on a rule of its own — and
-       hovering one stage dims the others, so the section answers the pointer
-       instead of sitting still. */
+       Three stages of one chain, built from the shared card, eyebrow, icon
+       tile and chip (src/styles/components.css). The stage's tone says
+       which end of the chain it sits at, and hovering one stage dims the
+       others, so the section answers the pointer instead of sitting still. */
     .what-stage {
         display: flex;
         flex-direction: column;
-        /* Blue is system and structure; orange is the number. */
-        --accent: 56 189 248;
-    }
-
-    .what-stage:last-child {
-        --accent: 245 158 11;
     }
 
     .what-card {
         display: flex;
         flex-direction: column;
         flex: 1;
-        border-radius: 1rem;
-        padding: 1.5rem;
-        /* Colours and opacity only: a transition on transform would fight the
-           reveal tween on the stage above it. */
+        /* .card-hover's list plus opacity, for the dimming below. */
         transition:
-            opacity 0.35s ease,
-            background-color 0.35s ease,
-            transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    @media (min-width: 768px) {
-        .what-card {
-            padding: 1.75rem;
-        }
+            opacity var(--dur-base) var(--ease-out),
+            background-color var(--dur-base) var(--ease-out),
+            border-color var(--dur-base) var(--ease-out),
+            translate var(--dur-base) var(--ease-out);
     }
 
     @media (hover: hover) and (pointer: fine) {
@@ -298,183 +268,34 @@ const tiles = [
         .what-chain:has(.what-stage:hover) .what-stage:not(:hover) .what-card {
             opacity: 0.5;
         }
-
-        .what-stage:hover .what-card {
-            background-color: rgb(255 255 255 / 0.04);
-        }
-    }
-
-    @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-        .what-stage:hover .what-card {
-            transform: translateY(-6px);
-        }
-    }
-
-    .what-marker {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: rgb(255 255 255 / 0.4);
-    }
-
-    .what-num {
-        color: rgb(var(--accent) / 0.9);
-    }
-
-    .what-rule {
-        width: 1.5rem;
-        height: 1px;
-        background: rgb(255 255 255 / 0.18);
-    }
-
-    .what-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 3rem;
-        height: 3rem;
-        margin-top: 1.25rem;
-        border-radius: 0.85rem;
-        color: rgb(var(--accent));
-        background: rgb(var(--accent) / 0.1);
-        border: 1px solid rgb(var(--accent) / 0.2);
-        transition:
-            background-color 0.35s ease,
-            border-color 0.35s ease;
-    }
-
-    .what-stage:hover .what-icon,
-    .what-stage:focus-within .what-icon {
-        background: rgb(var(--accent) / 0.18);
-        border-color: rgb(var(--accent) / 0.45);
-    }
-
-    .what-title {
-        display: block;
-        margin-top: 1.25rem;
-        font-size: 1.375rem;
-        font-weight: 700;
-        color: #fff;
-        letter-spacing: -0.01em;
     }
 
     .what-lead {
         margin-top: 0.5rem;
         font-size: 1.0625rem;
         font-weight: 600;
-        color: #f3f4f6;
         line-height: 1.5;
+        color: rgb(var(--color-ink));
     }
 
     .what-body {
         margin-top: 0.75rem;
-        color: #9ca3af;
         line-height: 1.7;
-    }
-
-    .what-stat {
-        display: flex;
-        align-items: baseline;
-        gap: 0.6rem;
-        margin-top: 1.25rem;
-        padding-top: 1rem;
-        border-top: 1px solid rgb(255 255 255 / 0.08);
-    }
-
-    .what-stat-value {
-        font-size: 1.75rem;
-        font-weight: 700;
-        color: #fff;
-        font-variant-numeric: tabular-nums;
-    }
-
-    .what-stat-label {
-        font-size: 0.7rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: #9ca3af;
-    }
-
-    .what-chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-        margin-top: 1rem;
-    }
-
-    .what-chips li {
-        padding: 0.2rem 0.55rem;
-        border-radius: 0.4rem;
-        font-size: 0.7rem;
-        color: #9ca3af;
-        background: rgb(255 255 255 / 0.04);
-        border: 1px solid rgb(255 255 255 / 0.08);
-        transition:
-            color 0.3s ease,
-            border-color 0.3s ease;
-    }
-
-    .what-stage:hover .what-chips li,
-    .what-stage:focus-within .what-chips li {
-        color: #f3f4f6;
-        border-color: rgb(var(--accent) / 0.3);
+        color: rgb(var(--color-ink-muted));
     }
 
     /* `auto` keeps the three links on one line across the row, however much
        prose sits above them. */
     .what-link {
-        display: inline-flex;
-        align-items: center;
         align-self: flex-start;
-        gap: 0.45rem;
         margin-top: auto;
         padding-top: 1.25rem;
         font-size: 0.9rem;
-        font-weight: 500;
-        color: rgb(255 255 255 / 0.6);
-        transition: color 0.3s ease;
     }
 
-    .what-link:hover {
-        color: rgb(var(--accent));
-    }
-
-    .what-link svg {
-        transition: transform 0.3s ease;
-    }
-
-    .what-link:hover svg {
-        transform: translateX(3px);
-    }
-
-    .what-back {
-        color: #f3f4f6;
-        text-decoration: underline;
-        text-decoration-color: rgb(245 158 11 / 0.45);
-        text-underline-offset: 0.3em;
-        transition: color 0.3s ease;
-    }
-
-    .what-back:hover {
-        color: #f59e0b;
-    }
-
-    .work-tile-chapter {
-        display: inline-block;
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: rgb(56 189 248 / 0.8);
-    }
-
-    /* The expressive end of the range is the one warm tile. */
-    .work-tile:last-of-type .work-tile-chapter,
-    li:last-child .work-tile .work-tile-chapter {
-        color: rgb(245 158 11 / 0.85);
+    @media (prefers-reduced-motion: reduce) {
+        .what-card {
+            transition: none;
+        }
     }
 </style>

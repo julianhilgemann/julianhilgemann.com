@@ -50,20 +50,20 @@ const ui = {
     <MotionIntro />
 
     <!-- ── Opening: the whole arc in three lines ── -->
-    <section class="story-intro relative isolate px-8 sm:px-12 lg:px-16">
+    <section class="story-intro relative isolate">
         <PageBackdrop />
 
-        <div class="story-intro-inner max-w-[1200px] mx-auto">
+        <div class="story-intro-inner page-container">
             <h1
                 data-page-title
                 data-intro
-                class="text-5xl md:text-7xl font-bold tracking-tight max-w-4xl mb-10"
+                class="text-display text-ink-strong max-w-4xl mb-10"
             >
                 From signal to number, and back.
             </h1>
 
-            <div class="max-w-2xl text-lg md:text-xl text-text-secondary leading-relaxed space-y-6">
-                <p data-intro data-intro-fade class="text-xl md:text-2xl text-text-primary">
+            <div class="max-w-measure text-lg md:text-xl text-ink-muted leading-relaxed space-y-6">
+                <p data-intro data-intro-fade class="text-lead text-ink">
                     This page follows one signal from the world into a database,
                     down to a single number, and back out as sound.
                 </p>
@@ -73,7 +73,7 @@ const ui = {
                     stage of that chain, and the number in the middle is the
                     narrowest point of it.
                 </p>
-                <p data-intro data-intro-fade class="text-text-primary">
+                <p data-intro data-intro-fade class="text-ink">
                     It starts as signal.
                 </p>
             </div>
@@ -81,7 +81,7 @@ const ui = {
             <p
                 data-intro
                 data-intro-fade
-                class="story-hint text-sm font-medium tracking-[0.2em] uppercase text-white/40"
+                class="story-hint eyebrow"
             >
                 {ui.scrollHint}
             </p>
@@ -89,11 +89,11 @@ const ui = {
     </section>
 
     <!-- ── Chapter 1, Signal ── -->
-    <section id="signal" class="story-chapter ch-1" data-chapter>
-        <div class="story-card glass" data-card>
+    <section id="signal" class="story-chapter ch-1 tone-neutral" data-chapter>
+        <div class="story-card panel" data-card>
             <div class="grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
             <div class="lg:col-span-6 story-column">
-                <p class="story-marker" data-ch-marker>{ui.chapters[0]}<span class="story-marker-rule"></span>Signal</p>
+                <p class="story-marker eyebrow" data-ch-marker><span class="eyebrow-num">{ui.chapters[0]}</span><span class="eyebrow-rule"></span>Signal</p>
                 <h2 data-ch-title class="story-headline">Reality has no sample rate.</h2>
                 <div data-ch-body class="story-body">
                     <p>
@@ -108,10 +108,10 @@ const ui = {
                     href={HYPERADAPTED}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="story-link"
+                    class="story-link arrow-link"
                     data-ch-link
                 >
-                    {HYPERADAPTED_LABEL} <span aria-hidden="true">→</span>
+                    {HYPERADAPTED_LABEL} <span class="arrow" aria-hidden="true">→</span>
                 </a>
             </div>
             <div class="lg:col-span-6 -mx-4 sm:mx-0">
@@ -122,11 +122,11 @@ const ui = {
     </section>
 
     <!-- ── Chapter 2, Belief ── -->
-    <section id="belief" class="story-chapter ch-2" data-chapter>
-        <div class="story-card glass" data-card>
+    <section id="belief" class="story-chapter ch-2 tone-primary" data-chapter>
+        <div class="story-card panel" data-card>
             <div class="grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
             <div class="lg:col-span-6 story-column">
-                <p class="story-marker" data-ch-marker>{ui.chapters[1]}<span class="story-marker-rule"></span>Belief</p>
+                <p class="story-marker eyebrow" data-ch-marker><span class="eyebrow-num">{ui.chapters[1]}</span><span class="eyebrow-rule"></span>Belief</p>
                 <h2 data-ch-title class="story-headline">
                     We don't see the world. We see our best current guess about it.
                 </h2>
@@ -142,10 +142,10 @@ const ui = {
                     href={HYPERADAPTED}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="story-link"
+                    class="story-link arrow-link"
                     data-ch-link
                 >
-                    {HYPERADAPTED_LABEL} <span aria-hidden="true">→</span>
+                    {HYPERADAPTED_LABEL} <span class="arrow" aria-hidden="true">→</span>
                 </a>
             </div>
             <div class="lg:col-span-6 -mx-4 sm:mx-0">
@@ -156,12 +156,12 @@ const ui = {
     </section>
 
     <!-- ── Chapter 3, Measurement ── -->
-    <section id="measurement" class="story-chapter ch-3" data-chapter>
-        <div class="story-card glass" data-card>
+    <section id="measurement" class="story-chapter ch-3 tone-info" data-chapter>
+        <div class="story-card panel" data-card>
             <div class="grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
             <div class="lg:col-span-6 story-column">
-                <p class="story-marker" data-ch-marker>
-                    {ui.chapters[2]}<span class="story-marker-rule"></span>Measurement
+                <p class="story-marker eyebrow" data-ch-marker>
+                    <span class="eyebrow-num">{ui.chapters[2]}</span><span class="eyebrow-rule"></span>Measurement
                 </p>
                 <h2 data-ch-title class="story-headline">To measure is to decide what to lose.</h2>
                 <div data-ch-body class="story-body">
@@ -176,10 +176,10 @@ const ui = {
                     href="https://github.com/julianhilgemann/fx_macro_platform"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="story-link"
+                    class="story-link arrow-link"
                     data-ch-link
                 >
-                    See the ingestion layer: FRED, ECB, Bundesbank <span aria-hidden="true">→</span>
+                    See the ingestion layer: FRED, ECB, Bundesbank <span class="arrow" aria-hidden="true">→</span>
                 </a>
             </div>
             <div class="lg:col-span-6 -mx-4 sm:mx-0">
@@ -190,12 +190,12 @@ const ui = {
     </section>
 
     <!-- ── Chapter 4, Structure ── -->
-    <section id="structure" class="story-chapter ch-4" data-chapter>
-        <div class="story-card glass" data-card>
+    <section id="structure" class="story-chapter ch-4 tone-info" data-chapter>
+        <div class="story-card panel" data-card>
             <div class="grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
             <div class="lg:col-span-6 story-column">
-                <p class="story-marker" data-ch-marker>
-                    {ui.chapters[3]}<span class="story-marker-rule"></span>Structure
+                <p class="story-marker eyebrow" data-ch-marker>
+                    <span class="eyebrow-num">{ui.chapters[3]}</span><span class="eyebrow-rule"></span>Structure
                 </p>
                 <h2 data-ch-title class="story-headline">
                     A number means nothing outside the system that holds it.
@@ -209,8 +209,8 @@ const ui = {
                     </p>
                     <p>Tables. Models. Dependencies.</p>
                 </div>
-                <a href="/work#platform" class="story-link" data-ch-link>
-                    See the platform <span aria-hidden="true">→</span>
+                <a href="/timeline#platform" class="story-link arrow-link" data-ch-link>
+                    See the platform <span class="arrow" aria-hidden="true">→</span>
                 </a>
             </div>
             <div class="lg:col-span-6 -mx-4 sm:mx-0">
@@ -221,12 +221,12 @@ const ui = {
     </section>
 
     <!-- ── Chapter 5, Inference ── -->
-    <section id="inference" class="story-chapter ch-5" data-chapter>
-        <div class="story-card glass" data-card>
+    <section id="inference" class="story-chapter ch-5 tone-info" data-chapter>
+        <div class="story-card panel" data-card>
             <div class="grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
             <div class="lg:col-span-6 story-column">
-                <p class="story-marker" data-ch-marker>
-                    {ui.chapters[4]}<span class="story-marker-rule"></span>Inference
+                <p class="story-marker eyebrow" data-ch-marker>
+                    <span class="eyebrow-num">{ui.chapters[4]}</span><span class="eyebrow-rule"></span>Inference
                 </p>
                 <h2 data-ch-title class="story-headline">A forecast is perception pointed at the future.</h2>
                 <div data-ch-body class="story-body">
@@ -242,10 +242,10 @@ const ui = {
                     href="https://github.com/julianhilgemann/pipeline-forecast"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="story-link"
+                    class="story-link arrow-link"
                     data-ch-link
                 >
-                    See the forecasting work <span aria-hidden="true">→</span>
+                    See the forecasting work <span class="arrow" aria-hidden="true">→</span>
                 </a>
             </div>
             <div class="lg:col-span-6 -mx-4 sm:mx-0">
@@ -256,11 +256,11 @@ const ui = {
     </section>
 
     <!-- ── Chapter 6, Number: the narrowest point ── -->
-    <section id="number" class="story-chapter ch-6" data-chapter>
-        <div class="story-card glass" data-card>
+    <section id="number" class="story-chapter ch-6 tone-primary" data-chapter>
+        <div class="story-card panel" data-card>
             <div class="grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
             <div class="lg:col-span-6 story-column">
-                <p class="story-marker" data-ch-marker>{ui.chapters[5]}<span class="story-marker-rule"></span>Number</p>
+                <p class="story-marker eyebrow" data-ch-marker><span class="eyebrow-num">{ui.chapters[5]}</span><span class="eyebrow-rule"></span>Number</p>
                 <h2 data-ch-title class="story-headline">
                     Everything collapses into one number. This is where most people
                     think data ends.
@@ -273,8 +273,8 @@ const ui = {
                     </p>
                     <p class="story-beat">One number.</p>
                 </div>
-                <a href="/work#bi" class="story-link" data-ch-link>
-                    See the dashboard years <span aria-hidden="true">→</span>
+                <a href="/timeline#bi" class="story-link arrow-link" data-ch-link>
+                    See the dashboard years <span class="arrow" aria-hidden="true">→</span>
                 </a>
             </div>
             <div class="lg:col-span-6 -mx-4 sm:mx-0">
@@ -285,12 +285,12 @@ const ui = {
     </section>
 
     <!-- ── Chapter 7, Expansion: the pipeline runs backwards ── -->
-    <section id="expansion" class="story-chapter ch-7" data-chapter>
-        <div class="story-card glass" data-card>
+    <section id="expansion" class="story-chapter ch-7 tone-primary" data-chapter>
+        <div class="story-card panel" data-card>
             <div class="grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
             <div class="lg:col-span-6 story-column">
-                <p class="story-marker" data-ch-marker>
-                    {ui.chapters[6]}<span class="story-marker-rule"></span>Expansion
+                <p class="story-marker eyebrow" data-ch-marker>
+                    <span class="eyebrow-num">{ui.chapters[6]}</span><span class="eyebrow-rule"></span>Expansion
                 </p>
                 <h2 data-ch-title class="story-headline">
                     A number can be opened up again, into something you feel.
@@ -303,8 +303,8 @@ const ui = {
                     </p>
                     <p>The last bar of the chart is the first bar of the track.</p>
                 </div>
-                <a href="/projects" class="story-link" data-ch-link>
-                    See what comes out <span aria-hidden="true">→</span>
+                <a href="/projects" class="story-link arrow-link" data-ch-link>
+                    See what comes out <span class="arrow" aria-hidden="true">→</span>
                 </a>
             </div>
             <div class="lg:col-span-6 -mx-4 sm:mx-0">
@@ -316,41 +316,38 @@ const ui = {
 
     <!-- ── Coda: both directions, and the mirror of the opening line ── -->
     <section id="coda" class="story-chapter ch-coda" data-chapter>
-        <div class="story-card glass" data-card>
+        <div class="story-card panel" data-card>
             <div class="max-w-[820px] mx-auto text-center">
                 <div class="coda-figure max-w-sm mx-auto mb-8">
                     <StoryField state="coda" label={ui.fields.coda} />
                 </div>
-                <h2 data-ch-title class="text-3xl md:text-5xl font-bold tracking-tight mb-8">
+                <h2 data-ch-title class="text-h2 text-ink-strong mb-8">
                     Compression to navigate. Expansion to express.
                 </h2>
-                <div data-ch-body class="text-lg md:text-xl text-text-secondary leading-relaxed space-y-5 max-w-xl mx-auto">
+                <div data-ch-body class="text-lg md:text-xl text-ink-muted leading-relaxed space-y-5 max-w-xl mx-auto">
                     <p>
                         I build in both directions: the systems that turn the world
                         into numbers, and the pieces that turn numbers back into
                         something you can hear.
                     </p>
-                    <p class="text-text-primary">It ends as signal.</p>
+                    <p class="text-ink">It ends as signal.</p>
                 </div>
                 <div data-ch-link class="mt-12 flex flex-wrap gap-4 justify-center">
                 <a
-                    data-magnetic
                     href="/projects"
-                    class="glass hover:bg-white/10 text-white font-medium py-3 px-8 rounded-full transition-colors duration-300 border !border-primary inline-flex justify-center"
+                    class="btn btn-primary"
                 >
                     Projects
                 </a>
                 <a
-                    data-magnetic
-                    href="/work"
-                    class="glass hover:bg-white/10 text-white font-medium py-3 px-8 rounded-full transition-colors duration-300 border border-white/10 inline-flex justify-center"
+                    href="/timeline"
+                    class="btn"
                 >
-                    Work
+                    Timeline
                 </a>
                 <a
-                    data-magnetic
                     href="#"
-                    class="glass hover:bg-white/10 text-white font-medium py-3 px-8 rounded-full transition-colors duration-300 border border-white/10 inline-flex justify-center js-open-contact"
+                    class="btn js-open-contact"
                     data-location="story-coda"
                 >
                         Contact
@@ -371,11 +368,11 @@ const ui = {
        everything else rides on the card's own opacity, so a chapter is never
        half-arrived. */
     /* The first screen starts where every other page's does: the layout's own
-       `pt-32` is the nav clearance, so the intro adds none of its own and
-       claims a screen minus that offset. Same title position as /work and
+       `pt-nav` is the nav clearance, so the intro adds none of its own and
+       claims a screen minus that offset. Same title position as /timeline and
        /projects; the scroll hint rides the bottom edge of the screen. */
     .story-intro {
-        min-height: calc(100svh - 8rem);
+        min-height: calc(100svh - var(--space-nav));
         display: flex;
         flex-direction: column;
         padding-bottom: 4rem;
@@ -409,6 +406,8 @@ const ui = {
         }
     }
 
+    /* The card is a .panel (radius, glass); this adds the screen-owning
+       layout. */
     .story-card {
         position: relative;
         isolation: isolate;
@@ -416,32 +415,22 @@ const ui = {
         flex-direction: column;
         justify-content: center;
         width: 100%;
-        max-width: 1200px;
+        max-width: var(--container-max);
         /* Tall enough to own the screen it sits on, capped so a very tall
            window does not stretch the card past its content. */
         min-height: min(74svh, 660px);
         margin: 0 auto;
-        border-radius: 2rem;
         padding: clamp(1.5rem, 3.5vw, 3.25rem);
     }
 
-    /* The chapter marker: number, a rule, the chapter's name. */
+    /* The chapter marker is the shared .eyebrow: number in the chapter's
+       tone, a rule, the chapter's name. */
     .story-marker {
-        display: flex;
-        align-items: center;
-        gap: 0.9rem;
         margin-bottom: 1.5rem;
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 0.75rem;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: rgb(255 255 255 / 0.45);
     }
 
-    .story-marker-rule {
+    .story-marker .eyebrow-rule {
         width: 2.25rem;
-        height: 1px;
-        background: rgb(255 255 255 / 0.18);
     }
 
     .story-headline {
@@ -449,10 +438,11 @@ const ui = {
         letter-spacing: -0.01em;
         margin-bottom: 1.75rem;
         text-wrap: balance;
+        color: rgb(var(--color-ink-strong));
     }
 
     .story-body {
-        color: #9ca3af;
+        color: rgb(var(--color-ink-muted));
         line-height: 1.75;
     }
 
@@ -463,22 +453,13 @@ const ui = {
     /* The last line of each chapter carries the bridge word or the short beat,
        so it reads a step brighter than the paragraph above it. */
     .story-body > p:last-child {
-        color: #f3f4f6;
+        color: rgb(var(--color-ink));
     }
 
+    /* An .arrow-link; its hover takes the chapter's tone. */
     .story-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
         margin-top: 2rem;
         font-size: 0.95rem;
-        font-weight: 500;
-        color: rgb(255 255 255 / 0.65);
-        transition: color 0.3s ease;
-    }
-
-    .story-link:hover {
-        color: #f59e0b;
     }
 
     /* ── Typography that compresses ──
@@ -540,10 +521,10 @@ const ui = {
     }
 
     .ch-6 .story-beat {
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-family: var(--font-mono);
         font-size: 1.05rem;
         letter-spacing: -0.02em;
-        color: #f59e0b;
+        color: rgb(var(--color-primary));
     }
 
     /* And it opens back up. */
@@ -557,11 +538,11 @@ const ui = {
     }
 
     .ch-7 .story-marker {
-        color: rgb(245 158 11 / 0.75);
+        color: rgb(var(--color-primary) / 0.75);
     }
 
-    .ch-7 .story-marker-rule {
-        background: rgb(245 158 11 / 0.4);
+    .ch-7 .story-marker .eyebrow-rule {
+        background: rgb(var(--color-primary) / 0.4);
     }
 
     .story-hint {
@@ -570,7 +551,6 @@ const ui = {
            never crowds the paragraph above it on a short one. */
         margin-top: auto;
         padding-top: 3.5rem;
-        color: rgb(255 255 255 / 0.4);
     }
 
     /* Short phones (an SE is 667px tall): the figure already scales with the

@@ -1,4 +1,6 @@
 ---
+import { color } from "../styles/tokens.mjs";
+
 // Still frames of the Story page's field, one state per chapter. Each state
 // is the same scene under different parameters — noise, cohesion, sample
 // spacing, brightness — which is what makes the chapters read as one idea.
@@ -20,6 +22,12 @@ interface Props {
 }
 
 const { state, label, layers = [], value = "", class: className } = Astro.props;
+
+// Accents from the design tokens: SVG presentation attributes cannot read
+// CSS variables, so the values come in as strings.
+const INFO = color.info;
+const PRIMARY = color.primary.DEFAULT;
+const BG = color.background;
 
 // Seeded, so the field is the same frame in every build: one scene held
 // still, not a new random cloud per deploy.
@@ -61,8 +69,8 @@ const band = (baseY: number, amp: number, freq: number, seed: number) => {
 // read as three hills, not as a spectrum.
 const bands = [
     { d: band(84, 16, 0.062, 3), stroke: "currentColor", o: 0.16 },
-    { d: band(150, 30, 0.009, 7), stroke: "#38BDF8", o: 0.2 },
-    { d: band(214, 21, 0.028, 13), stroke: "#F59E0B", o: 0.16 },
+    { d: band(150, 30, 0.009, 7), stroke: INFO, o: 0.2 },
+    { d: band(214, 21, 0.028, 13), stroke: PRIMARY, o: 0.16 },
 ];
 
 // ── Chapter 2, Belief: a blurred object passes through a lens and comes into
@@ -233,7 +241,7 @@ const loop = (() => {
     <svg viewBox={`0 0 ${W} ${H}`} class="w-full h-auto block" fill="none" aria-hidden="true">
         {
             state === "signal" && (
-                <g class="text-white">
+                <g class="text-ink-strong">
                     <g data-f="noise">
                         {noise.map((p) => (
                             <circle cx={p.x} cy={p.y} r={p.r} fill="currentColor" opacity={p.o} />
@@ -248,7 +256,7 @@ const loop = (() => {
 
         {
             state === "belief" && (
-                <g class="text-white">
+                <g class="text-ink-strong">
                     <g data-f="blur">
                         <circle cx="96" cy={EYE} r="30" fill="currentColor" opacity="0.07" />
                         {blur.map((p) => (
@@ -274,20 +282,20 @@ const loop = (() => {
                     <path data-f="lens" d={LENS} stroke="currentColor" stroke-width="1.5" opacity="0.4" />
 
                     <g data-f="sharp">
-                        <circle cx="392" cy={EYE} r="17" fill="#F59E0B" opacity="0.85" />
-                        <circle cx="392" cy={EYE} r="27" stroke="#F59E0B" stroke-width="1" opacity="0.3" />
+                        <circle cx="392" cy={EYE} r="17" fill={PRIMARY} opacity="0.85" />
+                        <circle cx="392" cy={EYE} r="27" stroke={PRIMARY} stroke-width="1" opacity="0.3" />
                     </g>
 
                     <line x1="0" y1={BASE} x2={W} y2={BASE} stroke="currentColor" stroke-width="1" opacity="0.1" />
                     <path data-f="prior" d={prior} stroke="currentColor" stroke-width="1.25" opacity="0.18" />
-                    <path data-f="posterior" d={posterior} stroke="#F59E0B" stroke-width="1.75" opacity="0.8" />
+                    <path data-f="posterior" d={posterior} stroke={PRIMARY} stroke-width="1.75" opacity="0.8" />
                 </g>
             )
         }
 
         {
             state === "measurement" && (
-                <g class="text-white">
+                <g class="text-ink-strong">
                     <g data-f="haze">
                         {noise.slice(0, 150).map((p) => (
                             <circle cx={p.x} cy={p.y} r={p.r} fill="currentColor" opacity={r2(p.o * 0.45)} />
@@ -317,7 +325,7 @@ const loop = (() => {
                                 cx={c.x}
                                 cy={c.y}
                                 r="2.6"
-                                fill="#38BDF8"
+                                fill={INFO}
                                 opacity={c.taken ? c.o : 0}
                             />
                         </>
@@ -328,7 +336,7 @@ const loop = (() => {
                         y1="14"
                         x2={sweepX}
                         y2={H - 14}
-                        stroke="#38BDF8"
+                        stroke={INFO}
                         stroke-width="1.5"
                         opacity="0.6"
                     />
@@ -338,7 +346,7 @@ const loop = (() => {
 
         {
             state === "structure" && (
-                <g class="text-white">
+                <g class="text-ink-strong">
                     {graph.edges.map((e) => (
                         <line
                             data-f="edge"
@@ -346,7 +354,7 @@ const loop = (() => {
                             y1={e.y1}
                             x2={e.x2}
                             y2={e.y2}
-                            stroke={e.lit ? "#38BDF8" : "currentColor"}
+                            stroke={e.lit ? INFO : "currentColor"}
                             stroke-width={e.lit ? 1.4 : 1}
                             opacity={e.lit ? 0.55 : 0.16}
                         />
@@ -354,12 +362,12 @@ const loop = (() => {
                     {graph.nodes.map((row, l) =>
                         row.map((n) => (
                             <g data-f="node" data-layer={l}>
-                                <circle cx={n.x} cy={n.y} r={l === 2 ? 7 : 5} fill="#0B1220" />
+                                <circle cx={n.x} cy={n.y} r={l === 2 ? 7 : 5} fill={BG} />
                                 <circle
                                     cx={n.x}
                                     cy={n.y}
                                     r={l === 2 ? 7 : 5}
-                                    stroke="#38BDF8"
+                                    stroke={INFO}
                                     stroke-width="1.5"
                                     opacity={0.35 + l * 0.22}
                                 />
@@ -384,14 +392,14 @@ const loop = (() => {
 
         {
             state === "inference" && (
-                <g class="text-white">
+                <g class="text-ink-strong">
                     <g data-f="fan">
-                        <path d={fanFill} fill="#38BDF8" opacity="0.08" />
-                        <path d={fanTop} stroke="#38BDF8" stroke-width="1" opacity="0.35" stroke-dasharray="4 4" />
-                        <path d={fanBottom} stroke="#38BDF8" stroke-width="1" opacity="0.35" stroke-dasharray="4 4" />
+                        <path d={fanFill} fill={INFO} opacity="0.08" />
+                        <path d={fanTop} stroke={INFO} stroke-width="1" opacity="0.35" stroke-dasharray="4 4" />
+                        <path d={fanBottom} stroke={INFO} stroke-width="1" opacity="0.35" stroke-dasharray="4 4" />
                     </g>
                     <g data-f="trend">
-                        <path d={trend} stroke="#38BDF8" stroke-width="1.75" opacity="0.8" stroke-dasharray="6 5" />
+                        <path d={trend} stroke={INFO} stroke-width="1.75" opacity="0.8" stroke-dasharray="6 5" />
                     </g>
                     <path data-f="history-line" d={histPath} stroke="currentColor" stroke-width="1.5" opacity="0.5" />
                     <g data-f="history">
@@ -399,7 +407,7 @@ const loop = (() => {
                             <circle cx={p.x} cy={p.y} r="2.4" fill="currentColor" opacity="0.65" />
                         ))}
                     </g>
-                    <circle data-f="last" cx={last.x} cy={last.y} r="4" fill="#38BDF8" />
+                    <circle data-f="last" cx={last.x} cy={last.y} r="4" fill={INFO} />
                     <line
                         x1={last.x}
                         y1="20"
@@ -415,14 +423,14 @@ const loop = (() => {
 
         {
             state === "expansion" && (
-                <g class="text-white">
+                <g class="text-ink-strong">
                     <g data-f="motes">
                     {burst.motes.map((m) => (
                         <circle
                             cx={m.x}
                             cy={m.y}
                             r={m.r}
-                            fill={m.warm ? "#F59E0B" : "#38BDF8"}
+                            fill={m.warm ? PRIMARY : INFO}
                             opacity={m.o}
                         />
                     ))}
@@ -435,21 +443,21 @@ const loop = (() => {
                             y1={ray.y1}
                             x2={ray.x2}
                             y2={ray.y2}
-                            stroke={ray.warm ? "#F59E0B" : "#38BDF8"}
+                            stroke={ray.warm ? PRIMARY : INFO}
                             stroke-width={ray.w}
                             opacity={ray.o}
                         />
                     ))}
                     </g>
                     <g data-f="core">
-                    <circle cx={burst.cx} cy={burst.cy} r="37" fill="#0B1220" opacity="0.85" />
-                    <circle cx={burst.cx} cy={burst.cy} r="37" stroke="#F59E0B" stroke-width="1.5" opacity="0.7" />
+                    <circle cx={burst.cx} cy={burst.cy} r="37" fill={BG} opacity="0.85" />
+                    <circle cx={burst.cx} cy={burst.cy} r="37" stroke={PRIMARY} stroke-width="1.5" opacity="0.7" />
                     <text
                         x={burst.cx}
                         y={burst.cy + 7}
                         text-anchor="middle"
                         class="story-field-value"
-                        fill="#F59E0B"
+                        fill={PRIMARY}
                     >
                         {value}
                     </text>
@@ -460,7 +468,7 @@ const loop = (() => {
 
         {
             state === "coda" && (
-                <g class="text-white">
+                <g class="text-ink-strong">
                     <g data-f="cloud">
                         {loop.map((p) => (
                             <circle cx={p.x} cy={p.y} r={p.r} fill="currentColor" opacity={p.o} />
@@ -472,7 +480,7 @@ const loop = (() => {
                         cy={H / 2}
                         rx="140"
                         ry="84"
-                        stroke="#F59E0B"
+                        stroke={PRIMARY}
                         stroke-width="1"
                         opacity="0.16"
                     />
@@ -482,7 +490,7 @@ const loop = (() => {
                         cy={H / 2}
                         rx="108"
                         ry="64"
-                        stroke="#38BDF8"
+                        stroke={INFO}
                         stroke-width="1"
                         opacity="0.16"
                     />
@@ -519,14 +527,14 @@ const loop = (() => {
     }
 
     .story-field-tag {
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-family: var(--font-mono);
         font-size: 9px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
     }
 
     .story-field-value {
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-family: var(--font-mono);
         /* Has to fit inside the r=37 core with room to spare, at whatever
            value the chapter passes in. */
         font-size: 17px;

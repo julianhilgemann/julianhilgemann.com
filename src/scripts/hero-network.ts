@@ -6,6 +6,7 @@
  * through the field. The loop only runs while the hero is on screen and the
  * tab is visible; with reduced motion it paints a single static frame.
  */
+import { channels, color } from "../styles/tokens.mjs";
 
 interface Point {
     x: number;
@@ -32,11 +33,15 @@ const POINTER_RADIUS = 220;
 const POINTER_CORE = 70;
 const PULSE_DURATION = 1200;
 const PULSE_REACH = 460;
-const ACCENT = [245, 158, 11];
+/** The accent the pointer lights points in: the design token's orange, as RGB. */
+const ACCENT = channels(color.primary.DEFAULT).split(" ").map(Number);
+
+/** Points rest in the contrast colour and warm toward the accent near the pointer. */
+const BASE = channels(color.contrast).split(" ").map(Number);
 
 const mix = (a: number, b: number, t: number) => Math.round(a + (b - a) * t);
 const tint = (t: number, alpha: number) =>
-    `rgba(${mix(255, ACCENT[0], t)}, ${mix(255, ACCENT[1], t)}, ${mix(255, ACCENT[2], t)}, ${alpha})`;
+    `rgba(${mix(BASE[0], ACCENT[0], t)}, ${mix(BASE[1], ACCENT[1], t)}, ${mix(BASE[2], ACCENT[2], t)}, ${alpha})`;
 
 export function initHeroNetwork(section: HTMLElement, canvas: HTMLCanvasElement, reducedMotion: boolean) {
     const ctx = canvas.getContext("2d");

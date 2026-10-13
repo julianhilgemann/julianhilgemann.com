@@ -1,6 +1,6 @@
 /**
  * Entry for pages that only use the shared hooks from motion.ts (e.g. the
- * Projects pages): load intro, scroll reveals, magnetic CTA, spotlight cards.
+ * Projects pages): load intro, scroll reveals, spotlight cards.
  */
 import { initPageMotion, playIntro } from "./motion";
 

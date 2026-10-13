@@ -17,5 +17,7 @@ export default defineConfig({
         '/about': '/story',
         // The language picker's only job was choosing a language.
         '/start': '/hub',
+        // The Work page became the Timeline.
+        '/work': '/timeline',
     },
 });

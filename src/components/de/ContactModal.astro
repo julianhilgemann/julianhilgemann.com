@@ -4,21 +4,21 @@
 
 <dialog
     id="contact-modal"
-    class="backdrop:bg-black/80 bg-transparent p-0 m-auto max-w-lg w-[90%] open:animate-fade-in backdrop:open:animate-fade-in"
+    class="bg-transparent p-0 m-auto max-w-lg w-[90%]"
 >
     <div
-        class="glass !bg-[#0B1221] border border-white/10 rounded-3xl p-8 relative overflow-hidden"
+        class="panel bg-surface shadow-panel p-8 sm:p-10 relative overflow-hidden"
     >
         <!-- Close Button -->
         <button
             id="close-modal"
-            class="absolute top-4 right-4 text-text-secondary hover:text-white transition-colors"
+            class="icon-btn absolute top-4 right-4"
             aria-label="Close modal"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -33,8 +33,8 @@
 
         <!-- Content -->
         <div class="text-center">
-            <h2 class="text-3xl font-bold mb-4 text-white">Let's Connect</h2>
-            <p class="text-text-secondary mb-8 text-lg leading-relaxed">
+            <h2 class="text-3xl font-bold tracking-tight mb-4 text-ink-strong">Let's Connect</h2>
+            <p class="text-ink-muted mb-8 text-lg leading-relaxed">
                 Daten in Entscheidungen verwandeln?<br />
                 Ich bin offen für neue Projekte.<br />
                 Schreiben Sie mir!<br />
@@ -43,7 +43,7 @@
 
             <a
                 href="mailto:hilgemann.julian@gmail.com"
-                class="inline-flex items-center gap-3 glass hover:bg-white/10 border !border-primary text-white font-bold py-4 px-8 rounded-full transition-all duration-300 ease-in-out group"
+                class="btn btn-primary btn-lg"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -55,26 +55,21 @@
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="group-hover:text-primary group-hover:drop-shadow-[0_0_5px_rgba(245,158,11,0.5)] transition-all duration-300"
                 >
                     <path
                         d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
                     ></path>
                     <polyline points="22,6 12,13 2,6"></polyline>
                 </svg>
-                <span
-                    class="group-hover:text-primary group-hover:drop-shadow-[0_0_5px_rgba(245,158,11,0.5)] transition-all duration-300"
-                >
-                    E-Mail senden
-                </span>
+                <span>E-Mail senden</span>
             </a>
 
-            <p class="mt-8 text-sm text-text-secondary/60">
+            <p class="mt-8 text-sm text-ink-faint">
                 Lieber LinkedIn?<br />
                 <a
                     href="https://linkedin.com/in/julian-hilgemann"
                     target="_blank"
-                    class="text-primary hover:underline"
+                    class="text-link"
                     >Vernetzen Sie sich...</a
                 >
             </p>
@@ -146,14 +141,21 @@
 </script>
 
 <style>
-    /* Fad-in animation for dialog */
+    /* The dialog arrives with the site's fade + settle. */
     dialog[open] {
-        animation: fade-in 0.3s ease-out forwards;
+        animation: fade-in var(--dur-base) var(--ease-out) forwards;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        dialog[open] {
+            animation: none;
+        }
     }
 
     dialog::backdrop {
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(4px);
+        background: var(--scrim);
+        backdrop-filter: blur(var(--scrim-blur));
+        -webkit-backdrop-filter: blur(var(--scrim-blur));
     }
 
     @keyframes fade-in {

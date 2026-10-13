@@ -84,6 +84,6 @@ It ends as signal.
 
 Projects
 
-Work
+Timeline
 
 Contact

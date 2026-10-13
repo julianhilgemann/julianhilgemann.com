@@ -12,7 +12,7 @@ const navItems: NavItem[] = [
     { name: "Home", href: "/" },
     { name: "Story", href: "/story" },
     { name: "Projects", href: "/projects" },
-    { name: "Work", href: "/work" },
+    { name: "Timeline", href: "/timeline" },
     { name: "Services", href: "/services" },
 ];
 
@@ -29,17 +29,17 @@ const isActive = (href: string) => {
 };
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 pointer-events-none">
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 pointer-events-none">
     <!-- Main Navbar Container -->
     <div
-        class="glass mx-auto mt-4 w-[calc(100%-2rem)] max-w-[1200px] rounded-[32px] px-4 py-3 md:px-6 md:py-3 flex items-center justify-between pointer-events-auto shadow-sm relative z-50 transition-colors duration-300"
+        class="glass mx-auto mt-4 w-[calc(100%-2rem)] max-w-page rounded-pill px-4 py-3 md:px-6 md:py-3 flex items-center justify-between pointer-events-auto shadow-sm relative z-50 transition-colors"
         id="navbar-container"
     >
         <!-- Logo Area -->
         <div class="flex flex-1 justify-start z-50">
             <a
                 href="/"
-                class="font-bold tracking-tight hover:text-primary transition-colors duration-300 ease-in-out shrink-0"
+                class="font-bold tracking-tight hover:text-primary transition-colors shrink-0"
             >
                 <span class="text-lg">Julian Hilgemann</span>
             </a>
@@ -50,12 +50,12 @@ const isActive = (href: string) => {
             {
                 navItems.map((item, i) => (
                     <>
-                        {i > 0 && <span class="w-px h-3 bg-white/10 block mx-3 lg:mx-5" aria-hidden="true" />}
+                        {i > 0 && <span class="w-px h-3 bg-line block mx-3 lg:mx-5" aria-hidden="true" />}
                         <a
                             href={item.href}
                             class:list={[
-                                "text-sm font-medium transition-colors duration-300 ease-in-out",
-                                isActive(item.href) ? "text-primary" : "text-white hover:text-primary",
+                                "text-sm font-medium transition-colors",
+                                isActive(item.href) ? "text-primary" : "text-ink-strong hover:text-primary",
                             ]}
                         >
                             {item.name}
@@ -70,7 +70,7 @@ const isActive = (href: string) => {
             <!-- Desktop Contact CTA -->
             <a
                 href="#"
-                class="orbit-ring hidden md:inline-flex glass hover:bg-white/10 text-white text-sm font-medium py-2 px-4 rounded-full transition-colors duration-300 ease-in-out border !border-primary text-center whitespace-nowrap js-open-contact"
+                class="btn btn-primary btn-sm orbit-ring hidden md:inline-flex whitespace-nowrap js-open-contact"
                 data-location="header-cta"
             >
                 {contactText}
@@ -79,48 +79,36 @@ const isActive = (href: string) => {
             <!-- Mobile Menu Toggle Button -->
             <button
                 id="mobile-menu-toggle"
-                class="md:hidden flex items-center justify-center w-10 h-10 rounded-full border border-white/10 hover:border-white/20 transition-colors relative"
-                aria-label="Toggle Menu"
+                type="button"
+                class="icon-btn md:hidden relative"
+                aria-label="Open menu"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
             >
-                <div
-                    class="relative w-[18px] h-[14px] flex flex-col justify-between text-white"
-                    id="nav-toggle-icon"
-                >
-                    <span
-                        class="w-full h-[2px] bg-current rounded-full transition-all duration-300 origin-center"
-                        id="nav-line-1"></span>
-                    <span
-                        class="w-full h-[2px] bg-current rounded-full transition-all duration-300 origin-center"
-                        id="nav-line-2"></span>
-                    <span
-                        class="w-full h-[2px] bg-current rounded-full transition-all duration-300 origin-center"
-                        id="nav-line-3"></span>
-                </div>
+                <span class="nav-icon" aria-hidden="true">
+                    <span class="nav-line nav-line-1"></span>
+                    <span class="nav-line nav-line-2"></span>
+                    <span class="nav-line nav-line-3"></span>
+                </span>
             </button>
         </div>
     </div>
 
-    <!-- Mobile Dropdown Menu -->
-    <div
-        id="mobile-menu"
-        class="fixed inset-x-0 bottom-0 top-[4.5rem] p-4 pointer-events-none z-40"
-    >
-        <div
-            class="glass flex flex-col items-center bg-[#0d1527] w-full h-full rounded-3xl overflow-hidden transition-all duration-[400ms] ease-[cubic-bezier(0.25,1,0.5,1)] origin-top opacity-0 scale-y-0"
-            id="mobile-menu-inner"
-        >
-            <nav
-                class="flex flex-col w-full py-6 px-4 gap-6 pointer-events-auto max-w-sm mx-auto"
-            >
+    <!-- Mobile menu: opened and closed by toggling [data-open] on the header;
+         the choreography is in the <style> block below. -->
+    <div id="mobile-menu" class="mobile-menu md:hidden">
+        <div class="mobile-panel" id="mobile-menu-inner">
+            <nav aria-label="Main" class="flex flex-col w-full py-6 px-4 gap-6 max-w-sm mx-auto">
                 {
-                    navItems.map((item) => (
+                    navItems.map((item, i) => (
                         <a
                             href={item.href}
+                            style={`--i: ${i}`}
                             class:list={[
-                                "text-2xl font-medium text-center transition-colors duration-300 nav-link-mobile",
+                                "mobile-item text-2xl font-medium text-center",
                                 isActive(item.href)
                                     ? "text-primary"
-                                    : "text-white hover:text-primary",
+                                    : "text-ink-strong hover:text-primary",
                             ]}
                         >
                             {item.name}
@@ -128,17 +116,16 @@ const isActive = (href: string) => {
                     ))
                 }
 
-                <hr class="border-white/10 w-full my-2" />
+                <hr class="mobile-item border-line w-full my-2" style={`--i: ${navItems.length}`} />
 
-                <div class="flex flex-col items-center gap-4 w-full">
+                <div class="mobile-item flex flex-col items-center gap-4 w-full" style={`--i: ${navItems.length + 1}`}>
                     <a
                         href="#"
-                        class="glass hover:bg-white/10 text-white text-lg font-medium py-3 px-8 rounded-full transition-all duration-300 border !border-primary text-center w-full js-open-contact nav-link-mobile"
+                        class="btn btn-primary btn-lg w-full text-lg js-open-contact"
                         data-location="mobile-menu-cta"
                     >
                         {contactText}
                     </a>
-
                 </div>
             </nav>
         </div>
@@ -146,112 +133,50 @@ const isActive = (href: string) => {
 </header>
 
 <script>
+    // Open and close by toggling [data-open] on the header; the choreography
+    // (panel, links, icon, scrim) is CSS, in the <style> block below.
     const setupMobileMenu = () => {
+        const header = document.getElementById("site-header");
         const toggle = document.getElementById("mobile-menu-toggle");
         const menu = document.getElementById("mobile-menu");
-        const menuInner = document.getElementById("mobile-menu-inner");
-        const iconElement = document.getElementById("nav-toggle-icon");
-        const line1 = document.getElementById("nav-line-1");
-        const line2 = document.getElementById("nav-line-2");
-        const line3 = document.getElementById("nav-line-3");
-        const navbarContainer = document.getElementById("navbar-container");
-        const body = document.body;
+        const panel = document.getElementById("mobile-menu-inner");
+        if (!header || !toggle || !menu || !panel) return;
 
-        if (
-            !toggle ||
-            !menu ||
-            !menuInner ||
-            !iconElement ||
-            !navbarContainer ||
-            !line1 ||
-            !line2 ||
-            !line3
-        )
-            return;
-
-        let isOpen = false;
-
-        const closeMenu = () => {
-            if (!isOpen) return;
-            isOpen = false;
-
-            // Icon animation back to hamburger
-            iconElement.classList.remove("!text-primary");
-            line1.classList.remove("translate-y-[6px]", "rotate-45");
-            line2.classList.remove("opacity-0");
-            line3.classList.remove("-translate-y-[6px]", "-rotate-45");
-
-            // Menu animation out
-            menuInner.classList.remove("opacity-100", "scale-y-100");
-            menuInner.classList.add("opacity-0", "scale-y-0");
-
-            // Remove scroll lock
-            body.style.overflow = "";
-
-            // Make menu unclickable after animation
-            setTimeout(() => {
-                if (!isOpen) menu.classList.add("pointer-events-none");
-            }, 300);
+        const isOpen = () => header.hasAttribute("data-open");
+        const setOpen = (open: boolean) => {
+            header.toggleAttribute("data-open", open);
+            toggle.setAttribute("aria-expanded", String(open));
+            toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+            document.body.style.overflow = open ? "hidden" : "";
         };
 
-        const openMenu = () => {
-            if (isOpen) return;
-            isOpen = true;
-
-            // Icon animation to X and change color
-            iconElement.classList.add("!text-primary");
-            line1.classList.add("translate-y-[6px]", "rotate-45");
-            line2.classList.add("opacity-0");
-            line3.classList.add("-translate-y-[6px]", "-rotate-45");
-
-            // Menu animation in
-            menu.classList.remove("pointer-events-none");
-            // small delay to ensure display block is applied before animating
-            requestAnimationFrame(() => {
-                menuInner.classList.remove("opacity-0", "scale-y-0");
-                menuInner.classList.add("opacity-100", "scale-y-100");
-            });
-
-            // Add scroll lock
-            body.style.overflow = "hidden";
-        };
-
-        const toggleMenu = (e: Event) => {
+        toggle.addEventListener("click", (e) => {
             e.stopPropagation();
-            if (isOpen) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
-        };
+            setOpen(!isOpen());
+        });
 
-        toggle.addEventListener("click", toggleMenu);
-
-        // Close menu on click outside
+        // A tap outside the panel (the scrim) closes it.
         document.addEventListener("click", (e) => {
-            if (
-                isOpen &&
-                !menuInner.contains(e.target as Node) &&
-                !toggle.contains(e.target as Node)
-            ) {
-                closeMenu();
+            if (isOpen() && !panel.contains(e.target as Node) && !toggle.contains(e.target as Node)) {
+                setOpen(false);
             }
         });
 
-        // Handle escape key
         document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && isOpen) {
-                closeMenu();
+            if (e.key === "Escape" && isOpen()) {
+                setOpen(false);
+                toggle.focus();
             }
         });
 
-        // Close menu when clicking a link
-        const navLinks = document.querySelectorAll(".nav-link-mobile");
-        navLinks.forEach((link) => {
-            link.addEventListener("click", () => {
-                // If it's a contact button, the modal script will handle the opening, we just need to close the menu
-                closeMenu();
-            });
+        // Following a link closes the menu; the contact link's dialog
+        // (ContactModal.astro) opens over it as it goes.
+        menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setOpen(false)));
+
+        // Widening past the phone layout hides the toggle, so never leave the
+        // page scroll-locked behind a menu nobody can close.
+        window.matchMedia("(min-width: 768px)").addEventListener("change", (e) => {
+            if (e.matches) setOpen(false);
         });
     };
 
@@ -260,3 +185,148 @@ const isActive = (href: string) => {
     // Run on astro page swap
     document.addEventListener("astro:page-load", setupMobileMenu);
 </script>
+
+<style>
+    /* ── Mobile menu ──
+       A blind that unrolls from under the nav bar. clip-path reveals the
+       panel top-down, so its text is never squashed (a scaleY transition
+       did that) and the panel is opaque throughout, so the page never shows
+       through the links. Arrivals are slower than departures: on open the
+       panel unrolls and the links follow one by one; on close the links
+       leave first, together, then the panel rolls back up. `visibility`
+       flips only once the close has finished, which also takes the links out
+       of the tab order while the menu is shut. Timings are the
+       enter / exit motion tokens. */
+    .mobile-menu {
+        position: fixed;
+        inset: 4.5rem 0 0 0;
+        z-index: 40;
+        padding: 1rem;
+        pointer-events: none;
+    }
+
+    /* The page recedes behind the panel; tapping it closes the menu. */
+    .mobile-menu::before {
+        content: "";
+        position: absolute;
+        inset: -4.5rem 0 0 0;
+        background: var(--scrim);
+        opacity: 0;
+        transition: opacity var(--dur-exit) var(--ease-in) 60ms;
+    }
+
+    .mobile-panel {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-panel);
+        background-color: rgb(var(--color-surface));
+        clip-path: inset(0 0 100% 0 round var(--radius-panel));
+        visibility: hidden;
+        transition:
+            clip-path var(--dur-exit) var(--ease-in) 60ms,
+            visibility 0s linear calc(var(--dur-exit) + 60ms);
+    }
+
+    .mobile-item {
+        opacity: 0;
+        translate: 0 -0.5rem;
+        transition:
+            opacity var(--dur-fast) var(--ease-in),
+            translate var(--dur-fast) var(--ease-in),
+            color var(--dur-fast) var(--ease-out);
+    }
+
+    [data-open] .mobile-menu {
+        pointer-events: auto;
+    }
+
+    [data-open] .mobile-menu::before {
+        opacity: 1;
+        transition: opacity var(--dur-enter) var(--ease-out);
+    }
+
+    [data-open] .mobile-panel {
+        clip-path: inset(0 0 0 0 round var(--radius-panel));
+        visibility: visible;
+        transition:
+            clip-path var(--dur-enter) var(--ease-out),
+            visibility 0s;
+    }
+
+    [data-open] .mobile-item {
+        --delay: calc(80ms + var(--i, 0) * 30ms);
+        opacity: 1;
+        translate: 0 0;
+        transition:
+            opacity var(--dur-enter) var(--ease-out) var(--delay),
+            translate var(--dur-enter) var(--ease-out) var(--delay),
+            color var(--dur-fast) var(--ease-out);
+    }
+
+    /* ── Toggle icon ──
+       Two beats each way. Opening: the three lines meet in the middle, then
+       turn into a cross. Closing: the cross straightens, then the lines
+       spread back out. */
+    .nav-icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 18px;
+        height: 14px;
+        color: rgb(var(--color-ink-strong));
+        transition: color var(--dur-base) var(--ease-out);
+    }
+
+    .nav-line {
+        display: block;
+        width: 100%;
+        height: 2px;
+        border-radius: 9999px;
+        background-color: currentColor;
+        transition:
+            rotate var(--dur-fast) var(--ease-in-out),
+            translate var(--dur-fast) var(--ease-in-out) var(--dur-fast),
+            opacity 0s linear var(--dur-fast);
+    }
+
+    [data-open] .nav-icon {
+        color: rgb(var(--color-primary));
+    }
+
+    [data-open] .nav-line {
+        transition:
+            translate var(--dur-fast) var(--ease-in-out),
+            rotate var(--dur-fast) var(--ease-in-out) var(--dur-fast),
+            opacity 0s linear var(--dur-fast);
+    }
+
+    [data-open] .nav-line-1 {
+        translate: 0 6px;
+        rotate: 45deg;
+    }
+
+    [data-open] .nav-line-2 {
+        opacity: 0;
+    }
+
+    [data-open] .nav-line-3 {
+        translate: 0 -6px;
+        rotate: -45deg;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .mobile-menu::before,
+        .mobile-panel,
+        .mobile-item,
+        .nav-icon,
+        .nav-line {
+            transition: none !important;
+        }
+    }
+</style>

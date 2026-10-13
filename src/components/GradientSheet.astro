@@ -1,0 +1,40 @@
+---
+// The moving gradient sheet (src/scripts/gradient-sheet.ts) as a backdrop.
+// Render it first inside a `relative isolate` section: that section sizes the
+// canvas and receives the pointer. The script below starts every sheet on
+// the page, so it works whatever motion script the page loads.
+//
+//   start  moment the animation opens on, and the still frame under reduced
+//          motion; give two sheets on one page different ones
+//   fade   melt the top and bottom edges into the page, for a sheet in the
+//          middle of a page rather than at its top
+//   intro  hide before first paint; the page script fades it in (the hero)
+//   class  stacking (`-z-10` by default) and anything else
+interface Props {
+    start?: number;
+    fade?: boolean;
+    intro?: boolean;
+    class?: string;
+}
+
+const { start, fade = false, intro = false, class: className = "-z-10" } = Astro.props;
+---
+
+<canvas
+    data-gradient-sheet
+    data-start={start}
+    data-intro={intro ? "" : undefined}
+    aria-hidden="true"
+    class:list={["absolute inset-0 w-full h-full pointer-events-none", fade && "sheet-fade", className]}
+></canvas>
+
+<script>
+    import { initGradientSheet } from "../scripts/gradient-sheet";
+
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelectorAll<HTMLCanvasElement>("[data-gradient-sheet]").forEach((canvas) => {
+        const section = canvas.parentElement;
+        const start = canvas.dataset.start ? Number(canvas.dataset.start) : undefined;
+        if (section) initGradientSheet(section, canvas, reducedMotion, start);
+    });
+</script>
