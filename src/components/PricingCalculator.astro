@@ -19,22 +19,24 @@ const onboardingCfg = cfg.modules.find((m) => m.id === "onboarding")!;
 const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
 ---
 
-<Section id="pricing" class="!pt-0 pb-20 md:pb-28">
+<Section id="pricing" class="!pt-0">
     <div
         id="pricing-calculator"
         data-lang={lang}
-        class="w-full max-w-[1200px] mx-auto px-6 sm:px-10 lg:px-16"
+        class="page-container"
     >
         <!-- Framing: the argument the number needs to land against -->
-        <div class="max-w-3xl mb-12 md:mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold leading-tight">
+        <!-- The page's only heading of rank one; sized as a section heading
+             because it is a sentence, not a title. -->
+        <div class="max-w-3xl mb-head">
+            <h1 class="text-h2 text-ink-strong">
                 {t.intro.heading}<br />
                 <span class="text-primary">{t.intro.headingAccent}</span>
-            </h2>
-            <div class="text-base md:text-lg text-text-secondary mt-6 space-y-4 leading-relaxed">
+            </h1>
+            <div class="text-base md:text-lg text-ink-muted mt-6 space-y-4 leading-relaxed">
                 {t.intro.body.map((p) => <p>{p}</p>)}
             </div>
-            <p class="mt-6 text-sm font-medium text-white/80 italic">
+            <p class="mt-6 text-sm font-medium text-ink italic">
                 {t.intro.kicker}
             </p>
         </div>
@@ -43,38 +45,38 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
             <!-- ── Controls ─────────────────────────────────────────── -->
             <div data-controls class="space-y-6 pb-28 lg:pb-0">
                 <!-- 1 · Foundation -->
-                <div class="glass rounded-2xl p-6 md:p-8">
+                <div class="card">
                     <div class="mb-6">
-                        <h3 class="text-lg font-bold text-white">{t.sections.foundation.title}</h3>
-                        <p class="text-sm text-text-secondary mt-1">{t.sections.foundation.hint}</p>
+                        <h3 class="text-lg font-bold text-ink-strong">{t.sections.foundation.title}</h3>
+                        <p class="text-sm text-ink-muted mt-1">{t.sections.foundation.hint}</p>
                     </div>
 
-                    <div class="rounded-xl bg-white/[0.03] border border-white/5 p-4 mb-6">
+                    <div class="rounded-control bg-wash-subtle border border-line-subtle p-4 mb-6">
                         <div class="flex items-start justify-between gap-4">
                             <div class="min-w-0">
-                                <p class="text-sm font-semibold text-white">{t.items.foundation.label}</p>
+                                <p class="text-sm font-semibold text-ink-strong">{t.items.foundation.label}</p>
                                 <ul class="mt-2 space-y-1">
                                     {t.items.foundation.includes.map((i) => (
-                                        <li class="text-xs text-text-secondary leading-relaxed">{i}</li>
+                                        <li class="text-xs text-ink-muted leading-relaxed">{i}</li>
                                     ))}
                                 </ul>
                             </div>
-                            <span class="shrink-0 text-sm font-semibold text-white tabular-nums">{fmt(cfg.base.price)}</span>
+                            <span class="shrink-0 text-sm font-semibold text-ink-strong tabular-nums">{fmt(cfg.base.price)}</span>
                         </div>
                     </div>
 
-                    <p class="text-sm font-semibold text-white mb-1">{t.controls.sourcesLabel}</p>
-                    <p class="text-xs text-text-secondary mb-4">{t.controls.sourcesHint}</p>
-                    <div class="divide-y divide-white/5">
+                    <p class="text-sm font-semibold text-ink-strong mb-1">{t.controls.sourcesLabel}</p>
+                    <p class="text-xs text-ink-muted mb-4">{t.controls.sourcesHint}</p>
+                    <div class="divide-y divide-line-subtle">
                         {sourcesCfg.tiers.map((tier) => (
                             <div class="flex items-center justify-between gap-4 py-3">
                                 <div class="min-w-0">
-                                    <p class="text-sm text-white">{t.items[`sources.${tier.id}`].label}</p>
-                                    <p class="text-xs text-text-secondary mt-0.5">{fmt(tier.price)} · {tier.label}</p>
+                                    <p class="text-sm text-ink-strong">{t.items[`sources.${tier.id}`].label}</p>
+                                    <p class="text-xs text-ink-muted mt-0.5">{fmt(tier.price)} · {tier.label}</p>
                                 </div>
                                 <div class="flex items-center gap-1 shrink-0">
                                     <button type="button" class="step-btn" data-step="-1" data-path={`sources.${tier.id}`} aria-label={`${t.controls.decrease}: ${t.items[`sources.${tier.id}`].label}`}>&minus;</button>
-                                    <output class="w-8 text-center text-sm font-semibold text-white tabular-nums" data-qty={`sources.${tier.id}`}>0</output>
+                                    <output class="w-8 text-center text-sm font-semibold text-ink-strong tabular-nums" data-qty={`sources.${tier.id}`}>0</output>
                                     <button type="button" class="step-btn" data-step="1" data-path={`sources.${tier.id}`} aria-label={`${t.controls.increase}: ${t.items[`sources.${tier.id}`].label}`}>+</button>
                                 </div>
                             </div>
@@ -84,22 +86,22 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
                 </div>
 
                 <!-- 2 · Output -->
-                <div class="glass rounded-2xl p-6 md:p-8">
+                <div class="card">
                     <div class="mb-6">
-                        <h3 class="text-lg font-bold text-white">{t.sections.output.title}</h3>
-                        <p class="text-sm text-text-secondary mt-1">{t.sections.output.hint}</p>
+                        <h3 class="text-lg font-bold text-ink-strong">{t.sections.output.title}</h3>
+                        <p class="text-sm text-ink-muted mt-1">{t.sections.output.hint}</p>
                     </div>
-                    <p class="text-xs text-text-secondary mb-4">{t.controls.pagesHint}</p>
-                    <div class="divide-y divide-white/5">
+                    <p class="text-xs text-ink-muted mb-4">{t.controls.pagesHint}</p>
+                    <div class="divide-y divide-line-subtle">
                         {pagesCfg.tiers.map((tier) => (
                             <div class="flex items-center justify-between gap-4 py-3">
                                 <div class="min-w-0">
-                                    <p class="text-sm text-white">{t.items[`pages.${tier.id}`].label}</p>
-                                    <p class="text-xs text-text-secondary mt-0.5">{fmt(tier.price)} · {tier.label}</p>
+                                    <p class="text-sm text-ink-strong">{t.items[`pages.${tier.id}`].label}</p>
+                                    <p class="text-xs text-ink-muted mt-0.5">{fmt(tier.price)} · {tier.label}</p>
                                 </div>
                                 <div class="flex items-center gap-1 shrink-0">
                                     <button type="button" class="step-btn" data-step="-1" data-path={`pages.${tier.id}`} aria-label={`${t.controls.decrease}: ${t.items[`pages.${tier.id}`].label}`}>&minus;</button>
-                                    <output class="w-8 text-center text-sm font-semibold text-white tabular-nums" data-qty={`pages.${tier.id}`}>0</output>
+                                    <output class="w-8 text-center text-sm font-semibold text-ink-strong tabular-nums" data-qty={`pages.${tier.id}`}>0</output>
                                     <button type="button" class="step-btn" data-step="1" data-path={`pages.${tier.id}`} aria-label={`${t.controls.increase}: ${t.items[`pages.${tier.id}`].label}`}>+</button>
                                 </div>
                             </div>
@@ -109,15 +111,15 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
                 </div>
 
                 <!-- 3 · Data layer -->
-                <div class="glass rounded-2xl p-6 md:p-8">
+                <div class="card">
                     <div class="mb-6">
-                        <h3 class="text-lg font-bold text-white">{t.sections.dataLayer.title}</h3>
-                        <p class="text-sm text-text-secondary mt-1">{t.sections.dataLayer.hint}</p>
+                        <h3 class="text-lg font-bold text-ink-strong">{t.sections.dataLayer.title}</h3>
+                        <p class="text-sm text-ink-muted mt-1">{t.sections.dataLayer.hint}</p>
                     </div>
 
                     <fieldset>
-                        <legend class="text-sm font-semibold text-white">{t.controls.semanticModelLabel}</legend>
-                        <p class="text-xs text-text-secondary mt-1 mb-3">{t.controls.semanticModelHint}</p>
+                        <legend class="text-sm font-semibold text-ink-strong">{t.controls.semanticModelLabel}</legend>
+                        <p class="text-xs text-ink-muted mt-1 mb-3">{t.controls.semanticModelHint}</p>
                         <div class="space-y-2">
                             {semanticCfg.options.map((o) => (
                                 <label class="opt">
@@ -135,9 +137,9 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
                         <p class="warn" data-warning="pagesOnCompactModel" hidden>{t.warnings.pagesOnCompactModel}</p>
                     </fieldset>
 
-                    <fieldset class="mt-6 pt-6 border-t border-white/5">
-                        <legend class="text-sm font-semibold text-white">{t.controls.transformLabel}</legend>
-                        <p class="text-xs text-text-secondary mt-1 mb-3">{t.controls.transformHint}</p>
+                    <fieldset class="mt-6 pt-6 border-t border-line-subtle">
+                        <legend class="text-sm font-semibold text-ink-strong">{t.controls.transformLabel}</legend>
+                        <p class="text-xs text-ink-muted mt-1 mb-3">{t.controls.transformHint}</p>
                         <div class="space-y-2">
                             {transformCfg.options.map((o) => (
                                 <label class="opt">
@@ -156,35 +158,35 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
                 </div>
 
                 <!-- 4 · Extras -->
-                <div class="glass rounded-2xl p-6 md:p-8">
+                <div class="card">
                     <div class="mb-6">
-                        <h3 class="text-lg font-bold text-white">{t.sections.extras.title}</h3>
-                        <p class="text-sm text-text-secondary mt-1">{t.sections.extras.hint}</p>
+                        <h3 class="text-lg font-bold text-ink-strong">{t.sections.extras.title}</h3>
+                        <p class="text-sm text-ink-muted mt-1">{t.sections.extras.hint}</p>
                     </div>
 
                     <!-- AI readiness: free, but its list value must stay visible -->
-                    <div class="rounded-xl border border-primary/30 bg-primary/[0.06] p-4 mb-6">
+                    <div class="rounded-control border border-primary/30 bg-primary/[0.06] p-4 mb-6">
                         <div class="flex items-start justify-between gap-4">
                             <div class="min-w-0">
-                                <p class="text-sm font-semibold text-white">
+                                <p class="text-sm font-semibold text-ink-strong">
                                     {t.items.aiReadiness.label}
-                                    <span class="ml-2 align-middle text-[10px] uppercase tracking-wider bg-primary text-navy-950 font-bold px-2 py-0.5 rounded-full">{aiCfg.badge}</span>
+                                    <span class="badge badge-solid ml-2 align-middle">{aiCfg.badge}</span>
                                 </p>
                                 <ul class="mt-2 space-y-1">
                                     {t.items.aiReadiness.includes.map((i) => (
-                                        <li class="text-xs text-text-secondary leading-relaxed">{i}</li>
+                                        <li class="text-xs text-ink-muted leading-relaxed">{i}</li>
                                     ))}
                                 </ul>
                             </div>
                             <span class="shrink-0 text-right">
-                                <s class="block text-xs text-text-secondary/70 tabular-nums">{fmt(aiCfg.listValue!)}</s>
+                                <s class="block text-xs text-ink-muted/70 tabular-nums">{fmt(aiCfg.listValue!)}</s>
                                 <span class="block text-sm font-bold text-primary tabular-nums">{fmt(0)}</span>
                             </span>
                         </div>
                     </div>
 
                     <fieldset>
-                        <legend class="text-sm font-semibold text-white mb-3">{t.controls.designLabel}</legend>
+                        <legend class="text-sm font-semibold text-ink-strong mb-3">{t.controls.designLabel}</legend>
                         <div class="space-y-2">
                             {designCfg.options!.map((o) => (
                                 <label class="opt">
@@ -201,8 +203,8 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
                         </div>
                     </fieldset>
 
-                    <fieldset class="mt-6 pt-6 border-t border-white/5">
-                        <legend class="text-sm font-semibold text-white mb-3">{t.controls.onboardingLabel}</legend>
+                    <fieldset class="mt-6 pt-6 border-t border-line-subtle">
+                        <legend class="text-sm font-semibold text-ink-strong mb-3">{t.controls.onboardingLabel}</legend>
                         <div class="space-y-2">
                             {onboardingCfg.options!.map((o) => (
                                 <label class="opt">
@@ -219,9 +221,9 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
                         </div>
                     </fieldset>
 
-                    <fieldset class="mt-6 pt-6 border-t border-white/5">
-                        <legend class="text-sm font-semibold text-white">{t.controls.customWorkLabel}</legend>
-                        <p class="text-xs text-text-secondary mt-1 mb-3">{t.controls.customWorkHint}</p>
+                    <fieldset class="mt-6 pt-6 border-t border-line-subtle">
+                        <legend class="text-sm font-semibold text-ink-strong">{t.controls.customWorkLabel}</legend>
+                        <p class="text-xs text-ink-muted mt-1 mb-3">{t.controls.customWorkHint}</p>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
                             {cfg.hourly.blocks.map((b) => (
                                 <label class="opt">
@@ -235,9 +237,9 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
                         </div>
                     </fieldset>
 
-                    <fieldset class="mt-6 pt-6 border-t border-white/5">
-                        <legend class="text-sm font-semibold text-white">{t.controls.complexityLabel}</legend>
-                        <p class="text-xs text-text-secondary mt-1 mb-3">{t.controls.complexityHint}</p>
+                    <fieldset class="mt-6 pt-6 border-t border-line-subtle">
+                        <legend class="text-sm font-semibold text-ink-strong">{t.controls.complexityLabel}</legend>
+                        <p class="text-xs text-ink-muted mt-1 mb-3">{t.controls.complexityHint}</p>
                         <div class="space-y-2">
                             {cfg.multipliers.factors.map((f) => (
                                 <label class="opt">
@@ -254,7 +256,7 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
                     </fieldset>
                 </div>
 
-                <button type="button" data-reset class="text-sm text-text-secondary hover:text-primary underline underline-offset-4 transition-colors">
+                <button type="button" data-reset class="text-sm text-ink-muted hover:text-primary underline underline-offset-4 transition-colors">
                     {t.controls.reset}
                 </button>
             </div>
@@ -265,72 +267,72 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
                  to the visible area and scrolls internally when it overflows. -->
             <div
                 id="pricing-result"
-                class="glass rounded-2xl p-6 md:p-8 lg:sticky lg:top-24 scroll-mt-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto panel-scroll"
+                class="card lg:sticky lg:top-24 scroll-mt-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto panel-scroll"
             >
                 <!-- Badge pinned to the header row: anchored to the number it
                      would drift left and right every time the total changes. -->
                 <div class="flex items-center justify-between gap-3">
-                    <p class="text-xs uppercase tracking-wider text-text-secondary">{t.result.totalLabel}</p>
-                    <span class="text-[10px] uppercase tracking-wider border border-primary/40 text-primary px-2 py-0.5 rounded-full shrink-0">{t.result.estimateBadge}</span>
+                    <p class="stat-label">{t.result.totalLabel}</p>
+                    <span class="badge shrink-0">{t.result.estimateBadge}</span>
                 </div>
-                <p class="text-4xl md:text-5xl font-bold text-white mt-2 tabular-nums" data-total>—</p>
-                <p class="text-xs text-text-secondary mt-1">{t.result.oneTime} · {t.result.vat}</p>
+                <p class="text-4xl md:text-5xl font-bold text-ink-strong mt-2 tabular-nums" data-total>—</p>
+                <p class="text-xs text-ink-muted mt-1">{t.result.oneTime} · {t.result.vat}</p>
 
                 <!-- Stacked bar -->
-                <h4 class="text-sm font-semibold text-white mt-8 mb-3">{t.chart.heading}</h4>
+                <h4 class="text-sm font-semibold text-ink-strong mt-8 mb-3">{t.chart.heading}</h4>
                 <div class="viz-root">
                     <div class="flex gap-[6px] h-6 w-full" data-bar role="img" aria-label={t.chart.heading}></div>
                 </div>
-                <div class="mt-2 h-4 text-xs text-text-secondary" data-bar-hint aria-live="polite"></div>
+                <div class="mt-2 h-4 text-xs text-ink-muted" data-bar-hint aria-live="polite"></div>
 
                 <!-- Legend: the primary interaction, not a hover-only affordance -->
-                <h4 class="text-sm font-semibold text-white mt-5 mb-2">{t.chart.legendHeading}</h4>
+                <h4 class="text-sm font-semibold text-ink-strong mt-5 mb-2">{t.chart.legendHeading}</h4>
                 <div data-legend class="space-y-1"></div>
 
-                <div data-free class="mt-5 pt-4 border-t border-white/10"></div>
+                <div data-free class="mt-5 pt-4 border-t border-line"></div>
 
-                <div data-threshold hidden class="mt-5 rounded-xl border border-primary/30 bg-primary/[0.06] p-4 text-sm text-white/90"></div>
+                <div data-threshold hidden class="mt-5 rounded-control border border-primary/30 bg-primary/[0.06] p-4 text-sm text-ink"></div>
 
                 <div class="mt-6 space-y-3">
-                    <a href="#" data-mailto class="block w-full text-center bg-primary hover:bg-primary/90 text-navy-950 font-bold py-3 px-6 rounded-full transition-all">
+                    <a href="#" data-mailto class="btn btn-solid w-full">
                         {t.cta.primary}
                     </a>
-                    <p class="text-[11px] text-text-secondary text-center">{t.cta.primarySub}</p>
-                    <button type="button" data-copy class="block w-full text-center glass hover:bg-white/10 text-white text-sm font-medium py-2.5 px-6 rounded-full transition-all border border-white/15">
+                    <p class="text-xs text-ink-muted text-center">{t.cta.primarySub}</p>
+                    <button type="button" data-copy class="btn btn-sm w-full">
                         {t.cta.copy}
                     </button>
                 </div>
 
-                <div class="mt-6 pt-5 border-t border-white/10 space-y-3">
-                    <p class="text-xs text-text-secondary leading-relaxed">{t.result.disclaimer}</p>
-                    <p class="text-xs text-text-secondary">{t.result.validity(cfg.validityDays)}</p>
-                    <p class="text-xs text-text-secondary">{t.result.ongoing}</p>
+                <div class="mt-6 pt-5 border-t border-line space-y-3">
+                    <p class="text-xs text-ink-muted leading-relaxed">{t.result.disclaimer}</p>
+                    <p class="text-xs text-ink-muted">{t.result.validity(cfg.validityDays)}</p>
+                    <p class="text-xs text-ink-muted">{t.result.ongoing}</p>
                     <!-- Static rather than a <details>: three short lines are not
                          worth a disclosure, and expanding one inside a sticky
                          panel reflowed everything around it. -->
                     <div>
-                        <p class="text-xs font-semibold text-white/80">{t.result.excludedHeading}</p>
+                        <p class="text-xs font-semibold text-ink">{t.result.excludedHeading}</p>
                         <ul class="mt-2 space-y-1">
                             {t.result.excluded.map((e) => (
-                                <li class="text-[11px] text-text-secondary leading-relaxed">{e}</li>
+                                <li class="text-xs text-ink-muted leading-relaxed">{e}</li>
                             ))}
                         </ul>
                     </div>
-                    <p class="text-[10px] text-text-secondary/60">{t.result.versionLabel(cfg.priceListVersion)}</p>
+                    <p class="text-xs text-ink-faint">{t.result.versionLabel(cfg.priceListVersion)}</p>
                 </div>
             </div>
         </div>
 
         <!-- Always-included standards (absorbed from the retired IncludedGrid) -->
-        <div class="mt-16 pt-12 border-t border-white/5">
-            <h3 class="text-xl md:text-2xl font-bold text-white">{t.alwaysIncluded.heading}</h3>
-            <p class="text-sm text-text-secondary mt-2 max-w-2xl">{t.alwaysIncluded.sub}</p>
-            <div class="grid md:grid-cols-2 gap-6 mt-8">
+        <div class="mt-16 pt-12 border-t border-line-subtle">
+            <h3 class="text-h3 text-ink-strong">{t.alwaysIncluded.heading}</h3>
+            <p class="text-sm text-ink-muted mt-2 max-w-2xl">{t.alwaysIncluded.sub}</p>
+            <div class="grid md:grid-cols-2 gap-grid mt-8">
                 {t.alwaysIncluded.groups.map((g) => (
-                    <div class="glass rounded-xl p-6">
-                        <h4 class="font-bold text-white mb-3">{g.title}</h4>
+                    <div class="card">
+                        <h4 class="font-bold text-ink-strong mb-3">{g.title}</h4>
                         <ul class="space-y-2 custom-bullets">
-                            {g.items.map((i) => <li class="text-sm text-text-secondary">{i}</li>)}
+                            {g.items.map((i) => <li class="text-sm text-ink-muted">{i}</li>)}
                         </ul>
                     </div>
                 ))}
@@ -344,16 +346,16 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
          through, so the total and the jump button both need real weight. -->
     <div
         data-sticky
-        class="lg:hidden fixed bottom-0 left-0 right-0 z-40 glass rounded-t-2xl shadow-[0_-12px_32px_rgba(0,0,0,0.45)] px-5 pt-4 translate-y-full transition-transform duration-300"
+        class="lg:hidden fixed bottom-0 left-0 right-0 z-40 glass rounded-t-card shadow-sheet px-5 pt-4 translate-y-full transition-transform"
         style="padding-bottom: max(1.25rem, env(safe-area-inset-bottom));"
     >
         <!-- Live miniature of the stacked bar: every control change is felt
              here even while the full chart is out of view. -->
         <div class="flex gap-[2px] h-1.5 w-full rounded-full overflow-hidden" data-sticky-bar aria-hidden="true"></div>
-        <p class="mt-4 text-[11px] uppercase tracking-wider text-text-secondary truncate">{t.result.totalLabel}</p>
+        <p class="mt-4 stat-label truncate">{t.result.totalLabel}</p>
         <div class="mt-1 flex items-center justify-between gap-4">
-            <p class="min-w-0 text-[1.75rem] font-bold text-white leading-tight tabular-nums whitespace-nowrap" data-sticky-total>—</p>
-            <a href="#pricing-result" data-sticky-jump class="shrink-0 inline-flex items-center gap-2 bg-primary text-navy-950 font-bold text-[15px] py-3.5 px-5 rounded-full active:scale-[0.97] transition-transform">
+            <p class="min-w-0 text-stat text-ink-strong tabular-nums whitespace-nowrap" data-sticky-total>—</p>
+            <a href="#pricing-result" data-sticky-jump class="btn btn-solid shrink-0">
                 {t.chart.stickyJump}
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
             </a>
@@ -362,25 +364,12 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
 </Section>
 
 <style>
-    /* Validated categorical palette — six family hues, OKLCH-generated and
-       checked with the dataviz validator against this site's #0B1220 surface:
-       adjacent CVD ΔE 12.9 (target 8), normal-vision ΔE 21.4 (floor 15),
-       all six inside the dark lightness band and >= 3:1 contrast.
-       Tiers inside a family are NOT separate hues — lightness steps cannot
-       clear the normal-vision floor inside the band, so tiers are separated by
-       the surface gap and resolved in the legend instead.
-       The sticky bar sits outside #pricing-calculator (it has to span the
-       viewport), so it declares the same tokens for its miniature bar. */
-    #pricing-calculator,
-    [data-sticky] {
-        --seg-foundation: #eb635e;
-        --seg-sources: #08a2af;
-        --seg-pages: #bb8d07;
-        --seg-dataLayer: #5b89f6;
-        --seg-extras: #42af4d;
-        --seg-uplift: #c165c7;
-        --viz-surface: #0b1220;
-    }
+    /* The six family hues (--seg-*) are the validated categorical palette in
+       src/styles/tokens.mjs (`viz`), set on :root so the sticky bar outside
+       #pricing-calculator sees them too. Tiers inside a family are NOT
+       separate hues — lightness steps cannot clear the normal-vision floor
+       inside the band, so tiers are separated by the surface gap and resolved
+       in the legend instead. */
 
     .step-btn {
         width: 2.25rem;
@@ -389,16 +378,19 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
         align-items: center;
         justify-content: center;
         border-radius: 9999px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        color: #fff;
+        border: 1px solid var(--line-strong);
+        color: rgb(var(--color-ink-strong));
         font-size: 1.125rem;
         line-height: 1;
-        transition: all 0.2s;
+        transition:
+            color var(--dur-fast) var(--ease-out),
+            background-color var(--dur-fast) var(--ease-out),
+            border-color var(--dur-fast) var(--ease-out);
         touch-action: manipulation;
     }
     .step-btn:hover:not(:disabled) {
-        border-color: #f59e0b;
-        color: #f59e0b;
+        border-color: rgb(var(--color-primary));
+        color: rgb(var(--color-primary));
     }
     .step-btn:disabled {
         opacity: 0.3;
@@ -415,20 +407,23 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
         justify-content: space-between;
         gap: 0.75rem;
         padding: 0.75rem;
-        border-radius: 0.75rem;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(255, 255, 255, 0.02);
-        transition: all 0.2s;
+        border-radius: var(--radius-control);
+        border: 1px solid var(--line);
+        background: var(--wash-subtle);
+        transition:
+            color var(--dur-fast) var(--ease-out),
+            background-color var(--dur-fast) var(--ease-out),
+            border-color var(--dur-fast) var(--ease-out);
     }
     .opt:hover .opt-body {
-        border-color: rgba(255, 255, 255, 0.2);
+        border-color: var(--line-strong);
     }
     .peer:checked ~ .opt-body {
-        border-color: #f59e0b;
-        background: rgba(245, 158, 11, 0.08);
+        border-color: rgb(var(--color-primary));
+        background: rgb(var(--color-primary) / 0.08);
     }
     .peer:focus-visible ~ .opt-body {
-        outline: 2px solid #38bdf8;
+        outline: var(--focus-width) solid rgb(var(--focus-color));
         outline-offset: 2px;
     }
     .opt-main {
@@ -438,19 +433,19 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
     }
     .opt-title {
         font-size: 0.875rem;
-        color: #fff;
+        color: rgb(var(--color-ink-strong));
         font-weight: 500;
     }
     .opt-sub {
         font-size: 0.6875rem;
-        color: #9ca3af;
+        color: rgb(var(--color-ink-muted));
         margin-top: 0.125rem;
         line-height: 1.4;
     }
     .opt-price {
         font-size: 0.8125rem;
         font-weight: 600;
-        color: #fff;
+        color: rgb(var(--color-ink-strong));
         white-space: nowrap;
         font-variant-numeric: tabular-nums;
     }
@@ -477,13 +472,13 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
 
     .panel-scroll {
         scrollbar-width: thin;
-        scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+        scrollbar-color: var(--line-strong) transparent;
     }
     .panel-scroll::-webkit-scrollbar {
         width: 6px;
     }
     .panel-scroll::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.18);
+        background: var(--line-strong);
         border-radius: 3px;
     }
 
@@ -491,10 +486,10 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
         margin-top: 0.75rem;
         font-size: 0.75rem;
         line-height: 1.5;
-        color: #fbbf24;
-        background: rgba(251, 191, 36, 0.08);
-        border: 1px solid rgba(251, 191, 36, 0.25);
-        border-radius: 0.5rem;
+        color: rgb(var(--color-warn));
+        background: rgb(var(--color-warn) / 0.08);
+        border: 1px solid rgb(var(--color-warn) / 0.25);
+        border-radius: var(--radius-chip);
         padding: 0.5rem 0.75rem;
     }
 
@@ -522,7 +517,7 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
         background-image: repeating-linear-gradient(
             45deg,
             transparent 0 3px,
-            rgba(11, 18, 32, 0.5) 3px 6px
+            rgb(var(--color-background) / 0.5) 3px 6px
         );
     }
     #pricing-calculator :global([data-bar].is-dimmed .seg:not(.is-active)) {
@@ -536,11 +531,11 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
         align-items: baseline;
         gap: 0.5rem;
         padding: 0.375rem 0.5rem;
-        border-radius: 0.5rem;
+        border-radius: var(--radius-chip);
         transition: background 0.15s;
     }
     #pricing-calculator :global(.legend-row:hover) {
-        background: rgba(255, 255, 255, 0.04);
+        background: var(--wash);
     }
     /* Focus = opacity only. Nothing is added, removed or resized, so the
        panel's height is identical whether or not a family is focused. */
@@ -563,7 +558,7 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
     [data-sticky] :global(.mini-seg) {
         flex: 0 0 0px;
         min-width: 2px;
-        transition: flex-grow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        transition: flex-grow 0.45s var(--ease-out);
     }
 
     details > summary::-webkit-details-marker {
@@ -797,9 +792,9 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
                 row.setAttribute("aria-pressed", "false");
                 row.innerHTML = `
                     <span class="legend-swatch${fam.id === "uplift" ? " seg-uplift-fill" : ""}" style="background-color:var(--seg-${fam.id})"></span>
-                    <span class="flex-1 min-w-0 text-sm text-white truncate">${FAMILY_LABEL[fam.id]}</span>
-                    <span class="text-sm font-semibold text-white tabular-nums">${fmt(famTotal)}</span>
-                    <span class="text-xs text-text-secondary tabular-nums w-9 text-right">${pct}%</span>`;
+                    <span class="flex-1 min-w-0 text-sm text-ink-strong truncate">${FAMILY_LABEL[fam.id]}</span>
+                    <span class="text-sm font-semibold text-ink-strong tabular-nums">${fmt(famTotal)}</span>
+                    <span class="text-xs text-ink-muted tabular-nums w-9 text-right">${pct}%</span>`;
                 row.addEventListener("click", () => {
                     pinnedFamily = pinnedFamily === fam.id ? null : fam.id;
                     setActiveFamily(pinnedFamily);
@@ -822,8 +817,8 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
                     .map((seg) => {
                         const d = derivation(seg);
                         return `<div class="flex items-baseline gap-2 text-xs">
-                            <span class="flex-1 min-w-0 text-text-secondary">${t.items[seg.labelKey]?.label ?? seg.labelKey}${d ? `<span class="block text-[11px] text-text-secondary/70">${d}</span>` : ""}</span>
-                            ${showSubValue ? `<span class="text-white/80 tabular-nums shrink-0">${fmt(seg.display)}</span>` : ""}
+                            <span class="flex-1 min-w-0 text-ink-muted">${t.items[seg.labelKey]?.label ?? seg.labelKey}${d ? `<span class="block text-xs text-ink-faint">${d}</span>` : ""}</span>
+                            ${showSubValue ? `<span class="text-ink tabular-nums shrink-0">${fmt(seg.display)}</span>` : ""}
                         </div>`;
                     })
                     .join("");
@@ -837,12 +832,12 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
 
             // ── free items ──
             freeEl.innerHTML = `
-                <p class="text-xs font-semibold text-white mb-2">${t.chart.freeHeading}</p>
+                <p class="text-xs font-semibold text-ink-strong mb-2">${t.chart.freeHeading}</p>
                 ${r.freeItems
                     .map(
                         (f) => `<div class="flex items-baseline gap-2 text-xs py-0.5">
-                            <span class="flex-1 min-w-0 text-text-secondary">${t.items[f.labelKey]?.label ?? f.labelKey}</span>
-                            ${f.listValue > 0 ? `<s class="text-text-secondary/60 tabular-nums">${fmt(f.listValue)}</s>` : ""}
+                            <span class="flex-1 min-w-0 text-ink-muted">${t.items[f.labelKey]?.label ?? f.labelKey}</span>
+                            ${f.listValue > 0 ? `<s class="text-ink-muted/60 tabular-nums">${fmt(f.listValue)}</s>` : ""}
                             <span class="text-primary font-semibold tabular-nums">${fmt(0)}</span>
                         </div>`,
                     )
@@ -999,7 +994,7 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
         // calculator, and only while the result panel itself is off screen.
         // A scroll handler rather than IntersectionObserver so the bar fails
         // *open* — an observer that never fires would hide it permanently.
-        const resultPanel = totalEl.closest(".glass") as HTMLElement | null;
+        const resultPanel = document.getElementById("pricing-result");
         const controlsEl = $<HTMLElement>("[data-controls]");
         function updateSticky() {
             if (!resultPanel || !controlsEl) return;

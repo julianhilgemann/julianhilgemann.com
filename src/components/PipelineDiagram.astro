@@ -65,7 +65,11 @@ const layouts: Layout[] = [
     {
         id: "tall",
         viewBox: "0 0 420 716",
-        class: "lg:hidden w-full h-auto max-w-[440px] md:max-w-[540px] mx-auto",
+        // Height-driven below lg: a 420x716 drawing sized by width overflows a
+        // phone screen, and a diagram you have to scroll through stops being a
+        // diagram. Sized by the viewport instead, the width follows from the
+        // aspect ratio and the whole pipeline fits on one screen.
+        class: "lg:hidden block mx-auto h-[64svh] max-h-[716px] w-auto max-w-full",
         box: { w: 360, h: 124 },
         boxes: tallYs.map((y) => ({ x: TALL_X, y })),
         art: (b) => `translate(${b.x + 14} ${b.y + 20}) scale(0.85)`,
@@ -259,23 +263,23 @@ const PACKETS = 4;
         overflow: visible;
     }
     .pipe-box {
-        fill: rgba(17, 24, 39, 0.72);
-        stroke: rgba(255, 255, 255, 0.12);
+        fill: rgb(var(--color-surface) / 0.72);
+        stroke: rgb(var(--color-contrast) / 0.12);
         stroke-width: 1;
     }
     .pipe-container rect {
         fill: none;
-        stroke: rgba(56, 189, 248, 0.55);
+        stroke: rgb(var(--color-info) / 0.55);
         stroke-width: 1.2;
     }
     .pipe-container line {
-        stroke: rgba(56, 189, 248, 0.4);
+        stroke: rgb(var(--color-info) / 0.4);
         stroke-width: 1;
     }
     .pipe-title {
         font-weight: 700;
         letter-spacing: 1.5px;
-        fill: #e5e7eb;
+        fill: rgb(var(--color-ink));
     }
     .pipe-title-wide {
         font-size: 12px;
@@ -284,7 +288,7 @@ const PACKETS = 4;
         font-size: 14.5px;
     }
     .pipe-desc {
-        fill: #9ca3af;
+        fill: rgb(var(--color-ink-muted));
     }
     .pipe-desc-wide {
         font-size: 13px;
@@ -293,7 +297,7 @@ const PACKETS = 4;
         font-size: 16px;
     }
     .pipe-rail-label {
-        fill: #9ca3af;
+        fill: rgb(var(--color-ink-muted));
     }
     .pipe-rail-label-wide {
         font-size: 12.5px;
@@ -304,33 +308,33 @@ const PACKETS = 4;
     .pipe-rail-title {
         font-weight: 700;
         letter-spacing: 1.5px;
-        fill: #e5e7eb;
+        fill: rgb(var(--color-ink));
     }
     .pipe-rail {
-        stroke: rgba(56, 189, 248, 0.45);
+        stroke: rgb(var(--color-info) / 0.45);
         stroke-width: 1.5;
     }
     .pipe-tie {
-        stroke: rgba(56, 189, 248, 0.3);
+        stroke: rgb(var(--color-info) / 0.3);
         stroke-width: 1;
         stroke-dasharray: 3 4;
     }
     .pipe-rail-node {
-        fill: #0b1220;
-        stroke: #38bdf8;
+        fill: rgb(var(--color-background));
+        stroke: rgb(var(--color-info));
         stroke-width: 1.5;
     }
     .pipe-rail-pulse {
-        fill: #38bdf8;
+        fill: rgb(var(--color-info));
         opacity: 0;
     }
     .pipe-flow {
-        stroke: rgba(255, 255, 255, 0.18);
+        stroke: rgb(var(--color-contrast) / 0.18);
         stroke-width: 1.5;
     }
     .pipe-flow-head {
         fill: none;
-        stroke: rgba(255, 255, 255, 0.3);
+        stroke: rgb(var(--color-contrast) / 0.3);
         stroke-width: 1.5;
         stroke-linecap: round;
         stroke-linejoin: round;
@@ -338,116 +342,116 @@ const PACKETS = 4;
 
     .pipe-wire {
         fill: none;
-        stroke: rgba(255, 255, 255, 0.14);
+        stroke: rgb(var(--color-contrast) / 0.14);
         stroke-width: 1.2;
     }
     .pipe-pill {
-        fill: rgba(255, 255, 255, 0.04);
-        stroke: rgba(255, 255, 255, 0.2);
+        fill: rgb(var(--color-contrast) / 0.04);
+        stroke: rgb(var(--color-contrast) / 0.2);
     }
     .pipe-led {
-        fill: rgba(56, 189, 248, 0.55);
+        fill: rgb(var(--color-info) / 0.55);
     }
     .pipe-mono {
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-family: var(--font-mono);
         font-size: 10.5px;
         font-weight: 600;
-        fill: rgba(255, 255, 255, 0.6);
+        fill: rgb(var(--color-contrast) / 0.6);
         letter-spacing: 0.5px;
     }
     .pipe-vintage {
         font-size: 10px;
-        fill: rgba(245, 158, 11, 0.8);
+        fill: rgb(var(--color-primary) / 0.8);
     }
 
     .pipe-sheet {
         stroke-width: 1;
     }
     .pipe-sheet-back {
-        fill: rgba(255, 255, 255, 0.02);
-        stroke: rgba(255, 255, 255, 0.12);
+        fill: rgb(var(--color-contrast) / 0.02);
+        stroke: rgb(var(--color-contrast) / 0.12);
     }
     .pipe-sheet-mid {
-        fill: rgba(255, 255, 255, 0.03);
-        stroke: rgba(255, 255, 255, 0.18);
+        fill: rgb(var(--color-contrast) / 0.03);
+        stroke: rgb(var(--color-contrast) / 0.18);
     }
     .pipe-sheet-front {
-        fill: #141e30;
-        stroke: rgba(245, 158, 11, 0.55);
+        fill: rgb(var(--color-surface-raised));
+        stroke: rgb(var(--color-primary) / 0.55);
     }
     .pipe-line {
-        fill: rgba(255, 255, 255, 0.22);
+        fill: rgb(var(--color-contrast) / 0.22);
     }
     .pipe-hash {
-        fill: rgba(245, 158, 11, 0.14);
+        fill: rgb(var(--color-primary) / 0.14);
     }
     .pipe-hash-text {
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-family: var(--font-mono);
         font-size: 8.5px;
-        fill: #f59e0b;
+        fill: rgb(var(--color-primary));
     }
 
     .pipe-gear {
-        fill: rgba(56, 189, 248, 0.14);
-        stroke: rgba(56, 189, 248, 0.7);
+        fill: rgb(var(--color-info) / 0.14);
+        stroke: rgb(var(--color-info) / 0.7);
         stroke-width: 1.2;
     }
     .pipe-gear-small {
-        fill: rgba(56, 189, 248, 0.08);
+        fill: rgb(var(--color-info) / 0.08);
     }
     .pipe-db {
-        fill: rgba(255, 255, 255, 0.04);
-        stroke: rgba(255, 255, 255, 0.4);
+        fill: rgb(var(--color-contrast) / 0.04);
+        stroke: rgb(var(--color-contrast) / 0.4);
         stroke-width: 1.2;
     }
     .pipe-db-top {
-        fill: rgba(255, 255, 255, 0.08);
+        fill: rgb(var(--color-contrast) / 0.08);
     }
     .pipe-db-row {
-        fill: rgba(255, 255, 255, 0.07);
+        fill: rgb(var(--color-contrast) / 0.07);
     }
 
     .pipe-panel {
-        fill: rgba(255, 255, 255, 0.03);
-        stroke: rgba(255, 255, 255, 0.22);
+        fill: rgb(var(--color-contrast) / 0.03);
+        stroke: rgb(var(--color-contrast) / 0.22);
     }
     .pipe-panel-dot {
-        fill: rgba(255, 255, 255, 0.3);
+        fill: rgb(var(--color-contrast) / 0.3);
     }
     .pipe-spark {
         fill: none;
-        stroke: #f59e0b;
+        stroke: rgb(var(--color-primary));
         stroke-width: 1.8;
         stroke-linecap: round;
         stroke-linejoin: round;
     }
     .pipe-bar {
-        fill: rgba(56, 189, 248, 0.55);
+        fill: rgb(var(--color-info) / 0.55);
     }
     .pipe-bar-live {
-        fill: #f59e0b;
+        fill: rgb(var(--color-primary));
     }
     .pipe-axis {
         fill: none;
-        stroke: rgba(255, 255, 255, 0.25);
+        stroke: rgb(var(--color-contrast) / 0.25);
     }
     .pipe-fit {
-        stroke: rgba(245, 158, 11, 0.7);
+        stroke: rgb(var(--color-primary) / 0.7);
         stroke-width: 1.2;
         stroke-dasharray: 3 3;
     }
     .pipe-dot {
-        fill: rgba(255, 255, 255, 0.55);
+        fill: rgb(var(--color-contrast) / 0.55);
     }
 
     .pipe-packet {
         opacity: 0;
     }
     .pipe-packet-glow {
-        fill: #f59e0b;
+        fill: rgb(var(--color-primary));
         opacity: 0.25;
     }
     .pipe-packet-core {
-        fill: #f59e0b;
+        fill: rgb(var(--color-primary));
     }
 </style>

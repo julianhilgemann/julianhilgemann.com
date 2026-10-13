@@ -1,3 +1,16 @@
+/* Site stylesheet, loaded by both layouts.
+
+   The design system lives in three places:
+     tokens.mjs      every value (colour, type, space, shape, motion); the
+                     Tailwind config writes them to :root as custom properties
+     components.css  the shared building blocks: buttons, cards, labels, links
+     this file       base styles and the site's signature effects
+
+   Vite inlines these imports before Tailwind runs, so the `@layer` blocks
+   inside them land in the right layer. Imports must stay first. */
+@import "./components.css";
+@import "./klaro.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,319 +18,24 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: theme('colors.background');
-    color: theme('colors.text.primary');
+    background-color: rgb(var(--color-background));
+    color: rgb(var(--color-ink));
   }
 
   body {
     @apply antialiased;
   }
-}
 
-/* Glassmorphism utilities */
-.glass {
-  background: rgba(11, 18, 32, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* --- Klaro cookie consent ---
-   Two surfaces, one look: the notice (first visit) and the settings dialog
-   (the notice's "Settings" link, or the footer's "Cookies" button, which
-   calls klaro.show()). Colours go through the variables Klaro's own
-   stylesheet reads (--dark1, --green1, … in klaro.min.css); the rules below
-   add the glass card, the layout and the button hierarchy. */
-.klaro {
-  --font-family: inherit;
-  --title-font-family: inherit;
-  --dark1: rgba(11, 18, 32, 0.9);      /* card surface */
-  --dark2: rgba(255, 255, 255, 0.08);  /* dividers */
-  --dark3: #9ca3af;
-  --light1: #f3f4f6;                   /* text */
-  --light2: rgba(255, 255, 255, 0.08);
-  --light3: #9ca3af;                   /* muted text */
-  --white2: rgba(255, 255, 255, 0.14); /* switch track, off */
-  --white3: #ffffff;                   /* switch knob */
-  --green1: #f59e0b;                   /* on / primary */
-  --green2: #d97706;
-  --green3: #f59e0b;
-  --border-radius: 12px;
-}
-
-/* Shared glass card */
-.klaro .cookie-notice:not(.cookie-modal-notice),
-.klaro .cookie-modal .cm-modal.cm-klaro {
-  background-color: rgba(11, 18, 32, 0.9) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
-  color: #f3f4f6;
-}
-
-/* Entrances: the site's fade + rise. `translate`, not `transform`, because
-   both cards pin `transform` with !important, which would block the animation. */
-@keyframes klaro-rise {
-  from { opacity: 0; translate: 0 12px; }
-}
-@keyframes klaro-fade {
-  from { opacity: 0; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .klaro .cookie-notice:not(.cookie-modal-notice),
-  .klaro .cookie-modal .cm-modal.cm-klaro {
-    animation: klaro-rise 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  ::selection {
+    background-color: rgb(var(--color-primary) / 0.35);
+    color: rgb(var(--color-ink-strong));
   }
-  .klaro .cookie-modal .cm-bg {
-    animation: klaro-fade 0.3s ease-out both;
+
+  /* One focus ring for everything a keyboard can reach. */
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: var(--focus-width) solid rgb(var(--focus-color));
+    outline-offset: var(--focus-offset);
   }
-}
-
-/* --- Notice (bottom banner) --- */
-.klaro .cookie-notice {
-  /* The Klaro config uses the "top" theme, which sets `top`; with `bottom`
-     also set the notice stretched over the whole viewport. */
-  top: auto !important;
-  bottom: 24px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 90% !important;
-  max-width: 1200px !important;
-  z-index: 5000 !important;
-}
-
-@media (max-width: 640px) {
-  .klaro .cookie-notice {
-    bottom: 16px !important;
-    width: calc(100% - 32px) !important;
-  }
-}
-
-/* --- Settings dialog ---
-   .cookie-modal is Klaro's full-screen layer (dimmed .cm-bg + the dialog);
-   .cm-modal is the dialog itself. Centred on larger screens, a bottom card
-   on phones, where the notice sits too. */
-.klaro .cookie-modal {
-  z-index: 9999 !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
-
-.klaro .cookie-modal .cm-bg {
-  background: rgba(5, 9, 18, 0.6) !important;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-.klaro .cookie-modal .cm-modal.cm-klaro {
-  position: relative !important;
-  top: auto !important;
-  transform: none !important;
-  margin: 0 !important;
-  width: 100% !important;
-  max-width: 560px !important;
-  max-height: 100% !important;
-  overflow-y: auto !important;
-}
-
-@media (max-width: 640px) {
-  .klaro .cookie-modal {
-    align-items: flex-end;
-    padding: 16px;
-    padding-bottom: max(16px, env(safe-area-inset-bottom));
-  }
-}
-
-.klaro .cookie-modal .cm-modal .cm-header {
-  padding: 28px 64px 20px 28px !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
-}
-
-.klaro .cookie-modal .cm-modal .cm-header h1 {
-  font-size: 1.5rem !important;
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-}
-
-.klaro .cookie-modal .cm-modal .cm-header p {
-  color: #9ca3af;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-top: 0.5rem;
-}
-
-.klaro .cookie-modal .cm-modal .cm-body {
-  padding: 24px 28px !important;
-}
-
-.klaro .cookie-modal .cm-modal .cm-footer {
-  padding: 20px 28px 28px !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
-}
-
-.klaro .cookie-modal .cm-modal .cm-footer-buttons {
-  justify-content: flex-end !important;
-  flex-wrap: wrap !important; /* Klaro's later `flex-flow: row` resets it */
-  gap: 12px;
-}
-
-/* Labels stay on one line; buttons wrap as whole units and grow to fill
-   their row (before a choice: Decline + Accept selected, then Accept all). */
-.klaro .cookie-modal .cm-modal .cm-footer-buttons .cm-btn {
-  margin: 0 !important;
-  flex: 1 1 auto;
-  white-space: nowrap;
-}
-
-.klaro .cookie-modal .cm-modal .cm-footer-buttons .cm-btn:only-child {
-  flex: 0 0 auto;
-}
-
-@media (max-width: 640px) {
-  .klaro .cookie-modal .cm-modal .cm-header,
-  .klaro .cookie-modal .cm-modal .cm-body,
-  .klaro .cookie-modal .cm-modal .cm-footer {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-  }
-  .klaro .cookie-modal .cm-modal .cm-header {
-    padding-right: 56px !important;
-  }
-  /* "Datenschutzeinstellungen" is one long word */
-  .klaro .cookie-modal .cm-modal .cm-header h1 {
-    font-size: 1.25rem !important;
-    hyphens: auto;
-  }
-  .klaro .cookie-modal .cm-modal .cm-footer-buttons .cm-btn {
-    white-space: normal;
-  }
-  .klaro .cookie-modal .cm-modal .cm-footer-buttons {
-    flex-direction: column !important;
-  }
-}
-
-.klaro .cm-powered-by {
-  display: none !important;
-}
-
-/* Close button */
-.klaro .cookie-modal .cm-modal .hide {
-  top: 18px !important;
-  right: 18px !important;
-  width: 36px;
-  height: 36px;
-  display: grid;
-  place-items: center;
-  border-radius: 9999px;
-  transition: background-color 0.2s;
-}
-
-.klaro .cookie-modal .cm-modal .hide:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-.klaro .cookie-modal .cm-modal .hide svg {
-  stroke: #9ca3af !important;
-  transition: stroke 0.2s;
-}
-
-.klaro .cookie-modal .cm-modal .hide:hover svg {
-  stroke: #f59e0b !important;
-}
-
-/* Switches: flat track, amber when on */
-.klaro .cookie-modal .cm-list-label .slider {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
-}
-
-.klaro .cookie-modal .cm-list-input:focus-visible + .cm-list-label .slider {
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.4) !important;
-}
-
-/* --- Buttons --- */
-.klaro .cm-btn {
-  border-radius: 12px !important;
-  font-weight: 600 !important;
-  font-family: inherit !important;
-  text-transform: none !important;
-  transition: all 0.2s ease !important;
-  padding: 12px 24px !important;
-  font-size: 0.95rem !important;
-  letter-spacing: 0.01em !important;
-}
-
-/* Accept */
-.klaro .cm-btn.cm-btn-success {
-  background-color: #f59e0b !important;
-  color: #0b1220 !important;
-  border: none !important;
-}
-
-.klaro .cm-btn.cm-btn-success:hover {
-  background-color: #d97706 !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important;
-}
-
-/* Decline / Info */
-.klaro .cm-btn.cm-btn-danger,
-.klaro .cm-btn.cm-btn-info {
-  background-color: rgba(255, 255, 255, 0.05) !important;
-  color: #9ca3af !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-.klaro .cm-btn.cm-btn-danger:hover,
-.klaro .cm-btn.cm-btn-info:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  color: #f3f4f6 !important;
-  border-color: rgba(255, 255, 255, 0.2) !important;
-}
-
-/* The dialog's "Accept selected" / "Save" carries both success and info
-   classes. Beside "Accept all" it is the site's outlined secondary button;
-   alone (after a choice has been made) it is the primary action. */
-.klaro .cookie-modal .cm-btn.cm-btn-accept {
-  background-color: rgba(255, 255, 255, 0.05) !important;
-  color: #f3f4f6 !important;
-  border: 1px solid #f59e0b !important;
-}
-
-.klaro .cookie-modal .cm-btn.cm-btn-accept:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.klaro .cookie-modal .cm-btn.cm-btn-accept:only-child {
-  background-color: #f59e0b !important;
-  color: #0b1220 !important;
-  border: none !important;
-}
-
-.klaro .cookie-modal .cm-btn.cm-btn-accept:only-child:hover {
-  background-color: #d97706 !important;
-}
-
-/* --- Links --- */
-.klaro .cookie-notice a,
-.klaro .cookie-modal a {
-  color: #38bdf8 !important;
-  text-decoration: none !important;
-}
-
-/* "↓ 1 service" disclosure under a purpose */
-.klaro .cookie-modal .cm-caret a {
-  color: #9ca3af !important;
-  font-size: 0.875rem;
-  transition: color 0.2s;
-}
-
-.klaro .cookie-modal .cm-caret a:hover {
-  color: #f59e0b !important;
 }
 
 /* --- Custom Lists (Fix for iPhone) --- */
@@ -358,9 +76,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  /* Circle */
-  background-color: theme('colors.text.secondary');
-  /* #9CA3AF */
+  background-color: rgb(var(--color-ink-muted));
   display: block;
 }
 
@@ -373,10 +89,11 @@
   display: none !important;
   color: transparent !important;
 }
-/* --- Motion (homepage, see src/scripts/home.ts) --- */
 
-/* Pre-paint hide for the hero intro. The class is set by an inline script in
-   Hero.astro and removed by home.ts once GSAP holds each element's state. */
+/* --- Motion (see src/scripts/motion.ts) --- */
+
+/* Pre-paint hide for load intros. MotionIntro.astro sets the class and the
+   page script removes it once GSAP holds each element's state. */
 html.motion-intro [data-intro] {
   visibility: hidden;
 }
@@ -408,12 +125,12 @@ html.motion-intro [data-intro] {
 .spotlight-card::before {
   inset: 0;
   z-index: -1;
-  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), rgba(56, 189, 248, 0.07), transparent 45%);
+  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), rgb(var(--color-info) / 0.07), transparent 45%);
 }
 .spotlight-card::after {
   inset: -1px;
   padding: 1px;
-  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(245, 158, 11, 0.6), transparent 45%);
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgb(var(--color-primary) / 0.6), transparent 45%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
@@ -425,16 +142,34 @@ html.motion-intro [data-intro] {
   }
 }
 
-/* --- About page (EN + DE share these; motion lives in src/scripts/about.ts) --- */
+/* --- Backdrops --- */
 
-/* Faint blueprint dot grid behind the top of content pages (PageBackdrop). */
-.page-grid {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-  background-size: 28px 28px;
-  -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 25%, transparent 75%);
-  mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 25%, transparent 75%);
+/* Faint blueprint dot grid behind every page. Fixed, so the content scrolls
+   over it and reads as a layer above; strongest under the nav, fading toward
+   the bottom corners. Sections that paint their own backdrop (the homepage
+   hero) cover it. `isolation` on body keeps it above the body's own
+   background but below everything in the page. */
+body {
+  isolation: isolate;
 }
-/* Slow drifting glow (About intro, NetworkBackdrop on /start and /hub). */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(rgb(var(--color-contrast) / 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 110% 100% at 50% 0%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 110% 100% at 50% 0%, #000 30%, transparent 100%);
+}
+/* A gradient sheet in the middle of a page (GradientSheet `fade`): its top
+   and bottom edges melt into the page instead of ending in a hard band. */
+.sheet-fade {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+}
+/* Slow drifting glow (PageBackdrop, NetworkBackdrop, the closing CTAs). */
 .ambient-blob {
   animation: ambient-drift 16s ease-in-out infinite alternate;
 }
@@ -450,26 +185,21 @@ html.motion-intro [data-intro] {
   }
 }
 
+/* --- Work page --- */
+
 /* "How I work" cards: numbered by counter so the digits stay out of the
-   markup (and out of the generated llms docs). Hover uses the individual
-   `translate` property, which never collides with GSAP's `transform`. */
+   markup (and out of the generated llms docs). */
 .work-list {
   counter-reset: work;
 }
 .work-list > li {
   counter-increment: work;
-  transition: translate 0.3s ease, background-color 0.3s ease;
 }
 .work-num::before {
   content: counter(work, decimal-leading-zero);
 }
-@media (hover: hover) and (pointer: fine) {
-  .work-list > li:hover {
-    translate: 0 -4px;
-  }
-}
 
-/* Timeline rail dots; about.ts lights them as the reader reaches each entry. */
+/* Timeline rail dots; work.ts lights them as the reader reaches each entry. */
 .timeline-dot {
   position: absolute;
   left: 0;
@@ -477,27 +207,29 @@ html.motion-intro [data-intro] {
   width: 15px;
   height: 15px;
   border-radius: 9999px;
-  border: 2px solid rgba(245, 158, 11, 0.45);
-  background: #0b1220;
-  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  border: 2px solid rgb(var(--color-primary) / 0.45);
+  background: rgb(var(--color-background));
+  transition:
+    background-color 0.4s var(--ease-out),
+    border-color 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out);
 }
 .timeline-dot.is-lit {
-  background: #f59e0b;
-  border-color: #f59e0b;
-  box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.12), 0 0 18px rgba(245, 158, 11, 0.5);
+  background: rgb(var(--color-primary));
+  border-color: rgb(var(--color-primary));
+  box-shadow: 0 0 0 6px rgb(var(--color-primary) / 0.12), 0 0 18px rgb(var(--color-primary) / 0.5);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .ambient-blob {
     animation: none;
   }
-  .work-list > li,
   .timeline-dot {
     transition: none;
   }
 }
 
-/* --- Gateway pages (/start, /hub): link cards --- */
+/* --- Gateway page (/hub): link cards --- */
 
 /* One card, two layouts. Phones: a compact row (icon · text · arrow).
    From `sm`: a tile with icon and arrow on top, text anchored to the bottom.
@@ -509,20 +241,19 @@ html.motion-intro [data-intro] {
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.125rem;
-  border-radius: 1rem;
-  transition: translate 0.3s ease, scale 0.15s ease, border-color 0.3s ease, background-color 0.3s ease;
+  border-radius: var(--radius-card);
+  transition:
+    translate var(--dur-base) var(--ease-out),
+    scale var(--dur-fast) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
   -webkit-tap-highlight-color: transparent;
 }
 .link-card:active {
-  scale: 0.98;
+  scale: var(--press);
 }
-.link-card:focus-visible {
-  outline: 2px solid #38bdf8;
-  outline-offset: 3px;
-}
-.link-card.is-primary,
-.link-card.is-suggested {
-  border-color: rgba(245, 158, 11, 0.45);
+.link-card.is-primary {
+  border-color: rgb(var(--color-primary) / 0.45);
 }
 .link-icon {
   display: flex;
@@ -530,13 +261,14 @@ html.motion-intro [data-intro] {
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
-  border-radius: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #9ca3af;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  border-radius: var(--radius-control);
+  background: var(--wash);
+  border: 1px solid var(--line);
+  color: rgb(var(--color-ink-muted));
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
 }
 .link-icon svg {
   width: 1.375rem;
@@ -546,22 +278,23 @@ html.motion-intro [data-intro] {
   display: block;
   font-size: 1.0625rem;
   font-weight: 700;
-  color: #fff;
+  color: rgb(var(--color-ink-strong));
 }
 .link-sub {
   display: block;
   margin-top: 0.125rem;
   font-size: 0.8125rem;
-  color: #9ca3af;
+  color: rgb(var(--color-ink-muted));
 }
 /* --nx / --ny set per card: the direction the arrow points (↗ → ↓). */
 .link-arrow {
-  color: rgba(255, 255, 255, 0.35);
-  transition: color 0.3s ease, translate 0.3s ease;
+  color: rgb(var(--color-ink-faint));
+  transition:
+    color var(--dur-base) var(--ease-out),
+    translate var(--dur-base) var(--ease-out);
 }
-.is-primary .link-arrow,
-.is-suggested .link-arrow {
-  color: #f59e0b;
+.is-primary .link-arrow {
+  color: rgb(var(--color-primary));
 }
 
 @media (min-width: 640px) {
@@ -572,7 +305,7 @@ html.motion-intro [data-intro] {
     gap: 2.5rem 1rem;
     padding: 1.75rem;
     min-height: 13rem;
-    border-radius: 1.5rem;
+    border-radius: var(--radius-panel);
   }
   .link-card .link-text {
     grid-column: 1 / -1;
@@ -603,17 +336,17 @@ html.motion-intro [data-intro] {
 
 @media (hover: hover) and (pointer: fine) {
   .link-card:hover {
-    translate: 0 -4px;
-    border-color: rgba(245, 158, 11, 0.45);
-    background-color: rgba(255, 255, 255, 0.04);
+    translate: 0 var(--lift);
+    border-color: rgb(var(--color-primary) / 0.45);
+    background-color: var(--wash);
   }
   .link-card:hover .link-icon {
-    background: rgba(245, 158, 11, 0.12);
-    border-color: rgba(245, 158, 11, 0.4);
-    color: #f59e0b;
+    background: rgb(var(--color-primary) / 0.12);
+    border-color: rgb(var(--color-primary) / 0.4);
+    color: rgb(var(--color-primary));
   }
   .link-card:hover .link-arrow {
-    color: #f59e0b;
+    color: rgb(var(--color-primary));
     translate: var(--nx, 4px) var(--ny, 0);
   }
 }
@@ -622,5 +355,60 @@ html.motion-intro [data-intro] {
   .link-card,
   .link-arrow {
     transition: none;
+  }
+}
+
+/* ── Orbiting light on the contact buttons ──
+   A single bright segment travels the rounded edge, so the one action on the
+   page keeps signalling that it is live. Applied with `.orbit-ring` to the
+   contact CTAs; it needs `border-radius` on the element itself, which it
+   inherits. */
+@property --orbit-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.orbit-ring {
+  position: relative;
+  isolation: isolate;
+}
+
+.orbit-ring::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--orbit-angle),
+    transparent 0deg 232deg,
+    rgb(var(--color-primary) / 0.85) 288deg,
+    rgb(var(--color-primary-glow) / 0.95) 310deg,
+    rgb(var(--color-primary) / 0.85) 332deg,
+    transparent 356deg 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: orbit-ring 4.5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes orbit-ring {
+  to {
+    --orbit-angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-ring::before {
+    animation: none;
+    opacity: 0.6;
   }
 }

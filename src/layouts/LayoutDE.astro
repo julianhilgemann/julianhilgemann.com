@@ -3,7 +3,6 @@ import "../styles/global.css";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/de/Footer.astro";
 import ContactModal from "../components/de/ContactModal.astro";
-import LanguageModal from "../components/LanguageModal.astro";
 
 interface Props {
     title: string;
@@ -163,22 +162,21 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         </script>
     </head>
     <body
-        class="bg-background text-text-primary min-h-[100svh] flex flex-col selection:bg-primary selection:text-white"
+        class="bg-background text-ink min-h-[100svh] flex flex-col"
     >
         {!noHeader && <Nav lang="de" />}
         <main
             class:list={[
                 "flex-grow w-full",
-                noTopPadding ? "" : "pt-32",
+                noTopPadding ? "" : "pt-nav",
                 fullWidth
                     ? ""
-                    : "max-w-[1200px] mx-auto px-8 sm:px-12 lg:px-16",
+                    : "page-container",
             ]}
         >
             <slot />
         </main>
         <Footer />
         <ContactModal />
-        <LanguageModal />
     </body>
 </html>

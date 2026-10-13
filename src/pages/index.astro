@@ -2,20 +2,24 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import CurrentProject from "../components/CurrentProject.astro";
+import SelectedWork from "../components/SelectedWork.astro";
 import SecondaryCTA from "../components/SecondaryCTA.astro";
 ---
 
 <Layout
-    title="Julian Hilgemann | Power BI Decision Dashboards & BI Systems"
-    description="I build production Power BI dashboards and decision interfaces - trusted metrics, clean models, and reporting used daily by leadership and operations."
+    title="Julian Hilgemann | Data Platform Engineer"
+    description="I build the systems between a measurement and a decision: data platforms, models and warehouses, and the expressive work that runs the same pipeline backwards."
     fullWidth={true}
     noTopPadding={true}
 >
     <!-- Hero Section -->
     <Hero />
 
-    <!-- Current project (full list lives on /projects) -->
+    <!-- Now building (full list lives on /projects) -->
     <CurrentProject />
+
+    <!-- What I do, then the range: four tiles -->
+    <SelectedWork />
 
     <!-- Secondary CTA -->
     <SecondaryCTA />

@@ -1,12 +1,12 @@
-# Turn Data Into Decisions That Drive Revenue
+# I build the systems between a measurement and a decision.
 
-I design and build decision-ready Power BI dashboards that teams can use immediately. From messy data to clear KPIs, trusted numbers, and confident decisions.
+Data platform engineer in Munich. Microsoft Fabric at work, containers and DuckDB at home, TouchDesigner after hours.
 
-Services & Packages
+The full story
 
-About me
+Projects
 
-## Current project
+## Now building
 
 In active development
 
@@ -26,7 +26,23 @@ Macro data gets revised. A GDP print or an inflation reading is published, then 
 
 Every stage runs in its own Docker container
 
-[View on GitHub](https://github.com/julianhilgemann/fx_macro_platform) [All projects](/projects)
+[View on GitHub](https://github.com/julianhilgemann/fx_macro_platform) [Why structure is the product](/story#structure)
+
+## What I do
+
+One chain, three stages. A measurement has to land somewhere, be modelled into something that holds, and leave as a number someone can act on. I work across all three.
+
+- **Platforms** Microsoft Fabric, run like a product. A multi-tenant setup where every customer gets their own Dev, Test and Prod on shared capacity. Changes go through source files, Git and DevOps, so an environment can be rebuilt rather than remembered. [How that runs today](/timeline#platform)
+
+- **Data Warehousing** Modelled once, so it can be reused. Warehouses and lakehouses with real models: a named grain, declared relationships, and lineage you can walk from a dashboard figure back to its row. On Fabric today, on Postgres and dbt before that. [The case for structure](/story#structure)
+
+- **Business Intelligence** The number people actually act on. Dashboards, forecasts and scenario planning, over a metric layer that holds still. A number is only worth acting on if you can say what it leaves out, so the definitions and the uncertainty travel with it. [Data products in fintech](/timeline#bi)
+
+And then the same chain backwards — a number opened back up into colour, motion and sound. [That is the other half of the work.](/story#expansion)
+
+## Selected work
+
+[All projects](/projects)
 
 ## Questions? I reply fast.
 

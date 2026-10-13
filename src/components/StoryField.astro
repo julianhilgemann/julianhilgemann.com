@@ -1,0 +1,544 @@
+---
+import { color } from "../styles/tokens.mjs";
+
+// Still frames of the Story page's field, one state per chapter. Each state
+// is the same scene under different parameters — noise, cohesion, sample
+// spacing, brightness — which is what makes the chapters read as one idea.
+//
+// The markup is each state's END state — what reduced-motion and no-JS
+// visitors see (see AGENTS.md on animated figures). src/scripts/story-field.ts
+// sets the starting state and scrubs to this one against the figure's own
+// scroll range, addressing the parts through the `data-f` hooks below.
+// Every string arrives as a prop: the labels only restate the prose beside
+// them, so routing them through expressions keeps them out of the generated
+// docs.
+
+interface Props {
+    state: "signal" | "belief" | "measurement" | "structure" | "inference" | "expansion" | "coda";
+    label: string;
+    layers?: string[];
+    value?: string;
+    class?: string;
+}
+
+const { state, label, layers = [], value = "", class: className } = Astro.props;
+
+// Accents from the design tokens: SVG presentation attributes cannot read
+// CSS variables, so the values come in as strings.
+const INFO = color.info;
+const PRIMARY = color.primary.DEFAULT;
+const BG = color.background;
+
+// Seeded, so the field is the same frame in every build: one scene held
+// still, not a new random cloud per deploy.
+function seeded(seed: number) {
+    let t = seed + 0x6d2b79f5;
+    return () => {
+        t = (t + 0x6d2b79f5) | 0;
+        let r = Math.imul(t ^ (t >>> 15), 1 | t);
+        r = (r + Math.imul(r ^ (r >>> 7), 61 | r)) ^ r;
+        return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+    };
+}
+
+const W = 480;
+const H = 300;
+const r2 = (n: number) => Math.round(n * 100) / 100;
+
+// ── Chapter 1, Signal: dense flowing noise, colour bands drifting like
+//    frequencies. Nothing is on a grid yet.
+const noise = (() => {
+    const rand = seeded(11);
+    return Array.from({ length: 320 }, () => ({
+        x: r2(rand() * W),
+        y: r2(rand() * H),
+        r: r2(0.5 + rand() * 1.2),
+        o: r2(0.08 + rand() * 0.42),
+    }));
+})();
+
+const band = (baseY: number, amp: number, freq: number, seed: number) => {
+    const rand = seeded(seed);
+    const pts = [];
+    for (let x = -10; x <= W + 10; x += 10) {
+        pts.push(`${x},${r2(baseY + Math.sin(x * freq) * amp + (rand() - 0.5) * 7)}`);
+    }
+    return `M${pts.join(" L")}`;
+};
+// Deliberately far apart in frequency: three bands at nearly the same rate
+// read as three hills, not as a spectrum.
+const bands = [
+    { d: band(84, 16, 0.062, 3), stroke: "currentColor", o: 0.16 },
+    { d: band(150, 30, 0.009, 7), stroke: INFO, o: 0.2 },
+    { d: band(214, 21, 0.028, 13), stroke: PRIMARY, o: 0.16 },
+];
+
+// ── Chapter 2, Belief: a blurred object passes through a lens and comes into
+//    focus on the other side, while the distribution underneath narrows from a
+//    wide prior to a narrow posterior. The optics occupy the upper band and the
+//    curves the lower one, so the two readings never cross each other.
+const EYE = 112; // the optical axis
+const BASE = 266; // the curves' baseline
+const MU = 240;
+const LENS = "M240,56 C276,84 276,140 240,168 C204,140 204,84 240,56 Z";
+
+const gauss = (sigma: number, scale: number, from = 0, to = W) => {
+    const pts = [];
+    for (let x = from; x <= to; x += 6) {
+        const z = (x - MU) / sigma;
+        pts.push(`${x},${r2(BASE - Math.exp(-0.5 * z * z) * scale)}`);
+    }
+    return `M${pts.join(" L")}`;
+};
+const prior = gauss(104, 62);
+// Cut at about 3 sigma: past that the posterior is flat on the baseline, and
+// a long accent-coloured line there reads as an underline, not a tail.
+const posterior = gauss(30, 62, 144, 336);
+
+// The thing itself: a soft cloud, never an edge.
+const blur = (() => {
+    const rand = seeded(23);
+    return Array.from({ length: 90 }, () => {
+        const a = rand() * Math.PI * 2;
+        const d = Math.pow(rand(), 0.6) * 33;
+        return {
+            x: r2(96 + Math.cos(a) * d),
+            y: r2(EYE + Math.sin(a) * d),
+            r: r2(0.6 + rand() * 1.5),
+            o: r2(0.1 + rand() * 0.38),
+        };
+    });
+})();
+
+// Three rays into the lens, three out: the passage, and the convergence.
+const rays = [
+    { x1: 126, y1: 88, x2: 212, y2: 97 },
+    { x1: 128, y1: 112, x2: 212, y2: 112 },
+    { x1: 126, y1: 136, x2: 212, y2: 127 },
+    { x1: 268, y1: 103, x2: 366, y2: 110 },
+    { x1: 268, y1: 112, x2: 366, y2: 112 },
+    { x1: 268, y1: 121, x2: 366, y2: 114 },
+];
+
+// ── Chapter 3, Measurement: a sampling grid over the signal. The points that
+//    got taken are lit; the gaps between them stay visible.
+const grid = (() => {
+    const rand = seeded(29);
+    const cells = [];
+    for (let gx = 0; gx < 11; gx++) {
+        for (let gy = 0; gy < 7; gy++) {
+            const x = 32 + gx * 42;
+            const y = 34 + gy * 39;
+            cells.push({ x, y, taken: rand() > 0.46, o: r2(0.3 + rand() * 0.5) });
+        }
+    }
+    return cells;
+})();
+const sweepX = 32 + 7 * 42;
+
+// ── Chapter 4, Structure: points link into a graph that settles into layers.
+//    Lineage edges run upward: raw, staged, modeled.
+const graph = (() => {
+    const rows = [
+        { y: 232, n: 6 },
+        { y: 150, n: 4 },
+        { y: 68, n: 2 },
+    ];
+    const nodes = rows.map((row) =>
+        Array.from({ length: row.n }, (_, i) => ({
+            x: r2((W / (row.n + 1)) * (i + 1)),
+            y: row.y,
+        })),
+    );
+    const edges: { x1: number; y1: number; x2: number; y2: number; lit: boolean }[] = [];
+    const rand = seeded(47);
+    for (let l = 0; l < nodes.length - 1; l++) {
+        nodes[l].forEach((from, i) => {
+            const up = nodes[l + 1];
+            const targets = [up[Math.min(i, up.length - 1)], up[Math.floor(rand() * up.length)]];
+            targets.forEach((to) => {
+                if (!edges.some((e) => e.x1 === from.x && e.x2 === to.x && e.y2 === to.y)) {
+                    edges.push({ x1: from.x, y1: from.y, x2: to.x, y2: to.y, lit: rand() > 0.55 });
+                }
+            });
+        });
+    }
+    return { nodes, edges };
+})();
+
+// ── Chapter 5, Inference: the history, then a line that extends past the last
+//    point and opens into an uncertainty fan.
+const FAN = 70;
+const history = (() => {
+    const rand = seeded(53);
+    let y = 150;
+    // Clamped so that last.y ± FAN always stays inside the viewBox: a fan
+    // clipped by the frame reads as a drawing mistake, not as uncertainty.
+    return Array.from({ length: 16 }, (_, i) => {
+        y += (rand() - 0.5) * 24;
+        y = Math.max(FAN + 42, Math.min(H - FAN - 42, y));
+        return { x: r2(24 + i * 15.5), y: r2(y) };
+    });
+})();
+const last = history[history.length - 1];
+const histPath = `M${history.map((p) => `${p.x},${p.y}`).join(" L")}`;
+const fanTop = `M${last.x},${last.y} L${W - 16},${r2(last.y - FAN)}`;
+const fanBottom = `M${last.x},${last.y} L${W - 16},${r2(last.y + FAN)}`;
+const fanFill = `M${last.x},${last.y} L${W - 16},${r2(last.y - FAN)} L${W - 16},${r2(last.y + FAN)} Z`;
+const trend = `M${last.x},${last.y} L${W - 16},${r2(last.y - 18)}`;
+
+// ── Chapter 7, Expansion: the number bursts. Rays and particles leave on a
+//    rhythm, and both accents arrive at once — the first full colour.
+const burst = (() => {
+    const rand = seeded(71);
+    const cx = W / 2;
+    const cy = H / 2;
+    const rays = Array.from({ length: 26 }, (_, i) => {
+        const a = (i / 26) * Math.PI * 2 + 0.3;
+        const len = 46 + rand() * 118;
+        const beat = i % 4 === 0;
+        return {
+            x1: r2(cx + Math.cos(a) * 34),
+            y1: r2(cy + Math.sin(a) * 34),
+            x2: r2(cx + Math.cos(a) * len),
+            y2: r2(cy + Math.sin(a) * len),
+            o: r2(beat ? 0.55 : 0.2 + rand() * 0.2),
+            w: beat ? 1.6 : 0.9,
+            warm: i % 3 !== 0,
+        };
+    });
+    const motes = Array.from({ length: 110 }, () => {
+        const a = rand() * Math.PI * 2;
+        const d = 54 + rand() * 180;
+        return {
+            x: r2(cx + Math.cos(a) * d),
+            y: r2(cy + Math.sin(a) * d * 0.72),
+            r: r2(0.6 + rand() * 1.5),
+            o: r2(0.12 + rand() * 0.45),
+            warm: rand() > 0.5,
+        };
+    });
+    return { cx, cy, rays, motes };
+})();
+
+// ── Coda: the field settles into a slow, quiet loop.
+const loop = (() => {
+    const rand = seeded(97);
+    return Array.from({ length: 140 }, () => {
+        const a = rand() * Math.PI * 2;
+        const d = 74 + rand() * 26;
+        return {
+            x: r2(W / 2 + Math.cos(a) * d * 1.55),
+            y: r2(H / 2 + Math.sin(a) * d * 0.92),
+            r: r2(0.5 + rand() * 1.1),
+            o: r2(0.08 + rand() * 0.3),
+        };
+    });
+})();
+---
+
+<figure class:list={["story-field", className]} data-field={state} aria-label={label} role="img">
+    <svg viewBox={`0 0 ${W} ${H}`} class="w-full h-auto block" fill="none" aria-hidden="true">
+        {
+            state === "signal" && (
+                <g class="text-ink-strong">
+                    <g data-f="noise">
+                        {noise.map((p) => (
+                            <circle cx={p.x} cy={p.y} r={p.r} fill="currentColor" opacity={p.o} />
+                        ))}
+                    </g>
+                    {bands.map((b) => (
+                        <path data-f="band" d={b.d} stroke={b.stroke} stroke-width="1.5" opacity={b.o} />
+                    ))}
+                </g>
+            )
+        }
+
+        {
+            state === "belief" && (
+                <g class="text-ink-strong">
+                    <g data-f="blur">
+                        <circle cx="96" cy={EYE} r="30" fill="currentColor" opacity="0.07" />
+                        {blur.map((p) => (
+                            <circle cx={p.x} cy={p.y} r={p.r} fill="currentColor" opacity={p.o} />
+                        ))}
+                    </g>
+
+                    {rays.map((ray) => (
+                        <line
+                            data-f="ray"
+                            x1={ray.x1}
+                            y1={ray.y1}
+                            x2={ray.x2}
+                            y2={ray.y2}
+                            stroke="currentColor"
+                            stroke-width="1"
+                            opacity="0.22"
+                        />
+                    ))}
+
+                    {/* Apparatus, not belief: the lens stays neutral so the one
+                        accent belongs to the guess it produces. */}
+                    <path data-f="lens" d={LENS} stroke="currentColor" stroke-width="1.5" opacity="0.4" />
+
+                    <g data-f="sharp">
+                        <circle cx="392" cy={EYE} r="17" fill={PRIMARY} opacity="0.85" />
+                        <circle cx="392" cy={EYE} r="27" stroke={PRIMARY} stroke-width="1" opacity="0.3" />
+                    </g>
+
+                    <line x1="0" y1={BASE} x2={W} y2={BASE} stroke="currentColor" stroke-width="1" opacity="0.1" />
+                    <path data-f="prior" d={prior} stroke="currentColor" stroke-width="1.25" opacity="0.18" />
+                    <path data-f="posterior" d={posterior} stroke={PRIMARY} stroke-width="1.75" opacity="0.8" />
+                </g>
+            )
+        }
+
+        {
+            state === "measurement" && (
+                <g class="text-ink-strong">
+                    <g data-f="haze">
+                        {noise.slice(0, 150).map((p) => (
+                            <circle cx={p.x} cy={p.y} r={p.r} fill="currentColor" opacity={r2(p.o * 0.45)} />
+                        ))}
+                    </g>
+                    {grid.map((c) => (
+                        <>
+                            <line
+                                x1={c.x}
+                                y1="26"
+                                x2={c.x}
+                                y2={H - 26}
+                                stroke="currentColor"
+                                stroke-width="0.5"
+                                opacity="0.05"
+                            />
+                            <circle
+                                cx={c.x}
+                                cy={c.y}
+                                r="2.2"
+                                stroke="currentColor"
+                                stroke-width="0.75"
+                                opacity="0.14"
+                            />
+                            <circle
+                                data-f="sample"
+                                cx={c.x}
+                                cy={c.y}
+                                r="2.6"
+                                fill={INFO}
+                                opacity={c.taken ? c.o : 0}
+                            />
+                        </>
+                    ))}
+                    <line
+                        data-f="sweep"
+                        x1={sweepX}
+                        y1="14"
+                        x2={sweepX}
+                        y2={H - 14}
+                        stroke={INFO}
+                        stroke-width="1.5"
+                        opacity="0.6"
+                    />
+                </g>
+            )
+        }
+
+        {
+            state === "structure" && (
+                <g class="text-ink-strong">
+                    {graph.edges.map((e) => (
+                        <line
+                            data-f="edge"
+                            x1={e.x1}
+                            y1={e.y1}
+                            x2={e.x2}
+                            y2={e.y2}
+                            stroke={e.lit ? INFO : "currentColor"}
+                            stroke-width={e.lit ? 1.4 : 1}
+                            opacity={e.lit ? 0.55 : 0.16}
+                        />
+                    ))}
+                    {graph.nodes.map((row, l) =>
+                        row.map((n) => (
+                            <g data-f="node" data-layer={l}>
+                                <circle cx={n.x} cy={n.y} r={l === 2 ? 7 : 5} fill={BG} />
+                                <circle
+                                    cx={n.x}
+                                    cy={n.y}
+                                    r={l === 2 ? 7 : 5}
+                                    stroke={INFO}
+                                    stroke-width="1.5"
+                                    opacity={0.35 + l * 0.22}
+                                />
+                            </g>
+                        )),
+                    )}
+                    {layers.map((name, i) => (
+                        <text
+                            data-f="layer-tag"
+                            x="12"
+                            y={[240, 158, 76][i]}
+                            class="story-field-tag"
+                            fill="currentColor"
+                            opacity="0.4"
+                        >
+                            {name}
+                        </text>
+                    ))}
+                </g>
+            )
+        }
+
+        {
+            state === "inference" && (
+                <g class="text-ink-strong">
+                    <g data-f="fan">
+                        <path d={fanFill} fill={INFO} opacity="0.08" />
+                        <path d={fanTop} stroke={INFO} stroke-width="1" opacity="0.35" stroke-dasharray="4 4" />
+                        <path d={fanBottom} stroke={INFO} stroke-width="1" opacity="0.35" stroke-dasharray="4 4" />
+                    </g>
+                    <g data-f="trend">
+                        <path d={trend} stroke={INFO} stroke-width="1.75" opacity="0.8" stroke-dasharray="6 5" />
+                    </g>
+                    <path data-f="history-line" d={histPath} stroke="currentColor" stroke-width="1.5" opacity="0.5" />
+                    <g data-f="history">
+                        {history.map((p) => (
+                            <circle cx={p.x} cy={p.y} r="2.4" fill="currentColor" opacity="0.65" />
+                        ))}
+                    </g>
+                    <circle data-f="last" cx={last.x} cy={last.y} r="4" fill={INFO} />
+                    <line
+                        x1={last.x}
+                        y1="20"
+                        x2={last.x}
+                        y2={H - 20}
+                        stroke="currentColor"
+                        stroke-width="0.75"
+                        opacity="0.14"
+                    />
+                </g>
+            )
+        }
+
+        {
+            state === "expansion" && (
+                <g class="text-ink-strong">
+                    <g data-f="motes">
+                    {burst.motes.map((m) => (
+                        <circle
+                            cx={m.x}
+                            cy={m.y}
+                            r={m.r}
+                            fill={m.warm ? PRIMARY : INFO}
+                            opacity={m.o}
+                        />
+                    ))}
+                    </g>
+                    <g data-f="rays">
+                    {burst.rays.map((ray) => (
+                        <line
+                            data-f="ray-line"
+                            x1={ray.x1}
+                            y1={ray.y1}
+                            x2={ray.x2}
+                            y2={ray.y2}
+                            stroke={ray.warm ? PRIMARY : INFO}
+                            stroke-width={ray.w}
+                            opacity={ray.o}
+                        />
+                    ))}
+                    </g>
+                    <g data-f="core">
+                    <circle cx={burst.cx} cy={burst.cy} r="37" fill={BG} opacity="0.85" />
+                    <circle cx={burst.cx} cy={burst.cy} r="37" stroke={PRIMARY} stroke-width="1.5" opacity="0.7" />
+                    <text
+                        x={burst.cx}
+                        y={burst.cy + 7}
+                        text-anchor="middle"
+                        class="story-field-value"
+                        fill={PRIMARY}
+                    >
+                        {value}
+                    </text>
+                    </g>
+                </g>
+            )
+        }
+
+        {
+            state === "coda" && (
+                <g class="text-ink-strong">
+                    <g data-f="cloud">
+                        {loop.map((p) => (
+                            <circle cx={p.x} cy={p.y} r={p.r} fill="currentColor" opacity={p.o} />
+                        ))}
+                    </g>
+                    <ellipse
+                        data-f="orbit"
+                        cx={W / 2}
+                        cy={H / 2}
+                        rx="140"
+                        ry="84"
+                        stroke={PRIMARY}
+                        stroke-width="1"
+                        opacity="0.16"
+                    />
+                    <ellipse
+                        data-f="orbit"
+                        cx={W / 2}
+                        cy={H / 2}
+                        rx="108"
+                        ry="64"
+                        stroke={INFO}
+                        stroke-width="1"
+                        opacity="0.16"
+                    />
+                </g>
+            )
+        }
+    </svg>
+</figure>
+
+<style>
+    .story-field {
+        /* The field sits behind and around its chapter text, so it never
+           competes with the reading column. */
+        opacity: 0.95;
+    }
+
+    /* Below lg the chapter stacks, so the figure is sized by height: a
+       width-driven drawing pushes the rest of the card off a phone screen,
+       and a chapter is meant to be one screen. Width follows from the aspect
+       ratio, which is why it overrides the utility class. */
+    @media (max-width: 1023.98px) {
+        .story-field svg {
+            width: auto;
+            max-width: 100%;
+            max-height: 26svh;
+            margin-inline: auto;
+        }
+    }
+
+    @media (max-width: 1023.98px) and (max-height: 760px) {
+        .story-field svg {
+            max-height: 22svh;
+        }
+    }
+
+    .story-field-tag {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .story-field-value {
+        font-family: var(--font-mono);
+        /* Has to fit inside the r=37 core with room to spare, at whatever
+           value the chapter passes in. */
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+    }
+</style>

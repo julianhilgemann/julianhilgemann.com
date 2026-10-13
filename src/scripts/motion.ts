@@ -14,18 +14,24 @@
  *   [data-reveal]          fade + rise on scroll
  *   [data-reveal-stagger]  children fade + rise in sequence on scroll
  *   [data-reveal-batch]    children rise one by one as each scrolls into view (tall items)
- *   [data-magnetic]        pulls toward the cursor (fine pointers only)
+ *   [data-count]           a figure counts up once (data-prefix is kept)
  *   .spotlight-card        cursor-following light (see global.css); runs even
  *                          under reduced motion, since nothing moves
  *
  * Tone follows cntxt/design.md: micro-interactions, fade + translateY
- * reveals, nothing that competes with the content.
+ * reveals, nothing that competes with the content. Distances and pace are
+ * design tokens (src/styles/tokens.mjs → motion).
  */
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 
+import { motion } from "../styles/tokens.mjs";
+
 gsap.registerPlugin(ScrollTrigger, SplitText);
+
+/** One rise, one pace for every reveal on the site (tokens.mjs → motion.reveal). */
+const REVEAL = motion.reveal;
 
 export { gsap, ScrollTrigger, SplitText };
 
@@ -58,6 +64,18 @@ export function riseLines(el: HTMLElement, vars: gsap.TweenVars = {}) {
     return { split, tween };
 }
 
+/** Keep an endless animation off the compositor while nobody can see it. */
+export function whileVisible(el: Element, make: () => gsap.core.Animation | gsap.core.Animation[]) {
+    const made = make();
+    const anims = Array.isArray(made) ? made : [made];
+    ScrollTrigger.create({
+        trigger: el,
+        start: "top bottom",
+        end: "bottom top",
+        onToggle: (self) => anims.forEach((a) => (self.isActive ? a.play() : a.pause())),
+    });
+}
+
 /**
  * The shared load intro. `extra` adds page-specific steps to the same
  * timeline before the pre-paint hide is released, so they can claim their
@@ -78,17 +96,17 @@ export function playIntro(extra?: (tl: gsap.core.Timeline) => void) {
     });
     const fades = document.querySelectorAll<HTMLElement>("[data-intro-fade]");
     if (fades.length) {
-        tl.from(fades, { autoAlpha: 0, y: 24, duration: 1, stagger: 0.1, ease: "power3.out" }, 0.3);
+        tl.from(fades, { autoAlpha: 0, y: REVEAL.y, duration: REVEAL.duration, stagger: REVEAL.stagger, ease: REVEAL.ease }, 0.3);
     }
     document.querySelectorAll<HTMLElement>("[data-intro-stagger]").forEach((group) => {
         tl.from(
             group.children,
             {
                 autoAlpha: 0,
-                y: 24,
-                duration: 0.9,
-                stagger: 0.08,
-                ease: "power3.out",
+                y: REVEAL.y,
+                duration: REVEAL.duration,
+                stagger: REVEAL.stagger,
+                ease: REVEAL.ease,
                 // Hand the children back to CSS so their hover transitions work.
                 clearProps: "transform,opacity,visibility",
             },
@@ -96,7 +114,7 @@ export function playIntro(extra?: (tl: gsap.core.Timeline) => void) {
         );
     });
     const visual = document.querySelector<HTMLElement>("[data-intro-visual]");
-    if (visual) tl.from(visual, { autoAlpha: 0, y: 32, duration: 1.4, ease: "power3.out" }, 0.35);
+    if (visual) tl.from(visual, { autoAlpha: 0, y: 32, duration: 1.4, ease: REVEAL.ease }, 0.35);
 
     extra?.(tl);
     releaseIntro();
@@ -113,7 +131,6 @@ export function initPageMotion(): boolean {
         return false;
     }
     initReveals();
-    initMagnetic();
     return true;
 }
 
@@ -145,16 +162,16 @@ function initReveals() {
     document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => {
         gsap.from(el, {
             autoAlpha: 0,
-            y: 28,
-            duration: 1,
-            ease: "power3.out",
+            y: REVEAL.y,
+            duration: REVEAL.duration,
+            ease: REVEAL.ease,
             scrollTrigger: { trigger: el, start: "top 88%", once: true },
         });
     });
 
     document.querySelectorAll<HTMLElement>("[data-reveal-batch]").forEach((el) => {
         const items = Array.from(el.children) as HTMLElement[];
-        gsap.set(items, { autoAlpha: 0, y: 48 });
+        gsap.set(items, { autoAlpha: 0, y: REVEAL.yLarge });
         ScrollTrigger.batch(items, {
             start: "top 90%",
             once: true,
@@ -162,44 +179,39 @@ function initReveals() {
                 gsap.to(batch, {
                     autoAlpha: 1,
                     y: 0,
-                    duration: 1,
-                    stagger: 0.12,
-                    ease: "power3.out",
+                    duration: REVEAL.duration,
+                    stagger: REVEAL.stagger,
+                    ease: REVEAL.ease,
                     clearProps: "transform,opacity,visibility",
                 }),
+        });
+    });
+
+    // Markup ships the final figure, so no-JS and reduced-motion readers see it.
+    document.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => {
+        const target = Number(el.dataset.count);
+        const prefix = el.dataset.prefix ?? "";
+        const state = { value: 0 };
+        el.textContent = `${prefix}0`;
+        gsap.to(state, {
+            value: target,
+            duration: 1.6,
+            ease: "power2.out",
+            onUpdate: () => (el.textContent = `${prefix}${Math.round(state.value)}`),
+            scrollTrigger: { trigger: el, start: "top 85%", once: true },
         });
     });
 
     document.querySelectorAll<HTMLElement>("[data-reveal-stagger]").forEach((el) => {
         gsap.from(el.children, {
             autoAlpha: 0,
-            y: 36,
-            duration: 0.9,
-            stagger: 0.12,
-            ease: "power3.out",
+            y: REVEAL.y,
+            duration: REVEAL.duration,
+            stagger: REVEAL.stagger,
+            ease: REVEAL.ease,
             // Hand the children back to CSS so their hover transitions work.
             clearProps: "transform,opacity,visibility",
             scrollTrigger: { trigger: el, start: "top 85%", once: true },
-        });
-    });
-}
-
-function initMagnetic() {
-    if (!finePointer) return;
-    const clamp = gsap.utils.clamp(-10, 10);
-    document.querySelectorAll<HTMLElement>("[data-magnetic]").forEach((el) => {
-        const xTo = gsap.quickTo(el, "x", { duration: 0.6, ease: "power3.out" });
-        const yTo = gsap.quickTo(el, "y", { duration: 0.6, ease: "power3.out" });
-        el.addEventListener("pointermove", (e) => {
-            const rect = el.getBoundingClientRect();
-            xTo(clamp((e.clientX - rect.left - rect.width / 2) * 0.3));
-            yTo(clamp((e.clientY - rect.top - rect.height / 2) * 0.3));
-        });
-        el.addEventListener("pointerenter", () => gsap.to(el, { scale: 1.03, duration: 0.3, ease: "power2.out" }));
-        el.addEventListener("pointerleave", () => {
-            xTo(0);
-            yTo(0);
-            gsap.to(el, { scale: 1, duration: 0.4, ease: "power2.out" });
         });
     });
 }

@@ -1,0 +1,282 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SecondaryCTA from "../components/SecondaryCTA.astro";
+import MotionIntro from "../components/MotionIntro.astro";
+import PageBackdrop from "../components/PageBackdrop.astro";
+
+// Tags and timeline markers only restate the prose in the cards, so they live
+// here rather than in literal markup: the llms generator flattens literal text
+// into the page docs, where these would read as duplicate copy. The markers
+// after "Now" are places, so the timeline reads as the route back.
+const ui = {
+    markers: ["Now", "Munich", "Kiel", "Berlin", "Brandenburg", "Berlin", "Moscow", "Berlin"],
+    fabricTags: ["Microsoft Fabric", "DAX", "TMDL", "Data pipelines", "APIs", "Fabric data apps", "Coding agents", "Git + DevOps"],
+    fintechTags: ["Postgres", "dbt", "Power BI", "Fabric & Azure", "Excel", "Forecasting", "Due diligence"],
+    languages: ["English", "German", "Russian"],
+};
+---
+
+<Layout
+    title="Timeline | Julian Hilgemann"
+    description="Timeline: a multi-tenant Microsoft Fabric product now, data products in fintech before that, and before those econometrics, music production and art."
+    fullWidth={true}
+>
+    <MotionIntro />
+
+    <!-- ── Intro ── -->
+    <section class="relative isolate pb-16 md:pb-20">
+        <PageBackdrop />
+
+        <div class="page-container">
+            <h1 data-page-title data-intro class="text-h1 text-ink-strong mb-10">
+                Timeline
+            </h1>
+
+            <div class="max-w-measure text-lg md:text-xl text-ink-muted leading-relaxed space-y-6">
+                <p data-intro data-intro-fade class="text-lead text-ink">
+                    Art and sound first, then economics, finance and platforms. The
+                    same thread throughout: a signal, and what it takes to turn it
+                    into a number.
+                </p>
+                <p data-intro data-intro-fade>
+                    I'm a data platform engineer in Munich. Microsoft Fabric and
+                    Azure at work, containers and DuckDB at home, TouchDesigner
+                    after hours. I speak {ui.languages.join(", ")}.
+                </p>
+            </div>
+
+            <div data-intro data-intro-fade class="mt-10">
+                <a
+                    href="https://linkedin.com/in/julian-hilgemann"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm"
+                >
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── The path, newest first. #platform and #bi are what the Story
+         chapters deep-link into. Everything before the two roles is
+         quieter: a neutral marker and no chips. ── -->
+    <section class="section border-t border-line-subtle">
+        <div class="page-container grid lg:grid-cols-12 gap-x-16 gap-y-10">
+            <div class="lg:col-span-4">
+                <h2 data-reveal-lines class="text-h2 text-ink-strong lg:sticky lg:top-nav">
+                    The path so far
+                </h2>
+            </div>
+
+            <div data-timeline class="lg:col-span-8 relative">
+                <div class="absolute left-[7px] top-2 bottom-2 w-px bg-line" aria-hidden="true">
+                    <div data-timeline-fill class="absolute inset-0 origin-top bg-gradient-to-b from-primary via-primary/60 to-info/60"></div>
+                </div>
+
+                <article id="platform" class="relative pl-8 md:pl-12 pb-12 scroll-mt-nav">
+                    <span data-timeline-dot class="timeline-dot is-lit" aria-hidden="true"></span>
+                    <p class="eyebrow eyebrow-tone mb-4">{ui.markers[0]}</p>
+                    <div data-reveal class="card spotlight-card">
+                        <h3 class="text-h3 text-ink-strong mb-4">
+                            Multi-tenant Fabric product
+                        </h3>
+                        <p class="text-ink-muted leading-relaxed">
+                            I work remotely from Munich as a contributor on the
+                            product team behind a multi-tenant analytics product on
+                            Microsoft Fabric. One large semantic model serves many
+                            customers, each with their own Dev, Test and Prod
+                            workspaces, all running on shared Fabric capacity. On
+                            shared capacity a slow measure is everyone's problem, so
+                            the work is about scale: DAX measures that stay fast as
+                            the model grows, data pipelines and APIs that feed it,
+                            and data apps built on top. Most of it I build
+                            agentically, with coding agents working on the model's
+                            source files and Git behind every change.
+                        </p>
+                        <ul class="chip-list mt-6" aria-hidden="true">
+                            {
+                                ui.fabricTags.map((tag) => (
+                                    <li class="chip">{tag}</li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+                </article>
+
+                <article id="bi" class="relative pl-8 md:pl-12 pb-12 scroll-mt-nav">
+                    <span data-timeline-dot class="timeline-dot is-lit" aria-hidden="true"></span>
+                    <p class="eyebrow eyebrow-tone tone-info mb-4">{ui.markers[1]}</p>
+                    <div data-reveal class="card spotlight-card">
+                        <h3 class="text-h3 text-ink-strong mb-4">
+                            Data products in fintech
+                        </h3>
+                        <p class="text-ink-muted leading-relaxed">
+                            Before that I built data products inside a fintech in
+                            Munich, end to end: gathering the requirements, building
+                            the warehouse, and putting Power BI dashboards on top.
+                            Postgres and dbt underneath, Power BI on Fabric and
+                            Azure, and Excel wherever finance needed it. The other
+                            half of the job was finance itself: revenue forecasting,
+                            scenario planning, KPI reporting, financial modelling and
+                            M&amp;A due diligence, plus the stakeholder work of
+                            agreeing what a number means before anyone builds it.
+                        </p>
+                        <ul class="chip-list mt-6" aria-hidden="true">
+                            {
+                                ui.fintechTags.map((tag) => (
+                                    <li class="chip">{tag}</li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="relative pl-8 md:pl-12 pb-12">
+                    <span data-timeline-dot class="timeline-dot is-lit" aria-hidden="true"></span>
+                    <p class="eyebrow eyebrow-tone tone-neutral mb-4">{ui.markers[2]}</p>
+                    <div data-reveal class="card spotlight-card">
+                        <h3 class="text-h3 text-ink-strong mb-4">
+                            Graduate studies in Quantitative Economics
+                        </h3>
+                        <p class="text-ink-muted leading-relaxed">
+                            At Christian-Albrechts University Kiel, focused on time
+                            series econometrics and foreign exchange markets. I left
+                            the programme for work in Munich. The interest in FX
+                            stayed: it is what the FX Macro Data Platform is built
+                            around.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="relative pl-8 md:pl-12 pb-12">
+                    <span data-timeline-dot class="timeline-dot is-lit" aria-hidden="true"></span>
+                    <p class="eyebrow eyebrow-tone tone-neutral mb-4">{ui.markers[3]}</p>
+                    <div data-reveal class="card spotlight-card">
+                        <h3 class="text-h3 text-ink-strong mb-4">
+                            Insurance and real estate
+                        </h3>
+                        <p class="text-ink-muted leading-relaxed">
+                            Work in insurance and real estate in Berlin, between the
+                            two degrees.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="relative pl-8 md:pl-12 pb-12">
+                    <span data-timeline-dot class="timeline-dot is-lit" aria-hidden="true"></span>
+                    <p class="eyebrow eyebrow-tone tone-neutral mb-4">{ui.markers[4]}</p>
+                    <div data-reveal class="card spotlight-card">
+                        <h3 class="text-h3 text-ink-strong mb-4">
+                            Bachelor's in Business Administration
+                        </h3>
+                        <p class="text-ink-muted leading-relaxed">
+                            At Technical University Brandenburg. My thesis was in
+                            multivariate macroeconometric forecasting: which
+                            macroeconomic aggregates hold up as forecasters of
+                            inflation against ARMA and VARMA benchmarks, as a way
+                            into how monetary policy reaches prices. That is where
+                            the time series started.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="relative pl-8 md:pl-12 pb-12">
+                    <span data-timeline-dot class="timeline-dot is-lit" aria-hidden="true"></span>
+                    <p class="eyebrow eyebrow-tone tone-neutral mb-4">{ui.markers[5]}</p>
+                    <div data-reveal class="card spotlight-card">
+                        <h3 class="text-h3 text-ink-strong mb-4">
+                            Audio engineering and music production
+                        </h3>
+                        <p class="text-ink-muted leading-relaxed">
+                            Before university I was deep into audio engineering and
+                            digital music production in Ableton Live. That is where
+                            signal processing started for me: sampling, filters, EQ,
+                            compression. It came back later in time series
+                            econometrics, where a moving average is a low-pass
+                            filter and a business cycle is a frequency band. Same
+                            mathematics, different signal.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="relative pl-8 md:pl-12 pb-12">
+                    <span data-timeline-dot class="timeline-dot is-lit" aria-hidden="true"></span>
+                    <p class="eyebrow eyebrow-tone tone-neutral mb-4">{ui.markers[6]}</p>
+                    <div data-reveal class="card spotlight-card">
+                        <h3 class="text-h3 text-ink-strong mb-4">
+                            Abitur at a German school abroad
+                        </h3>
+                        <p class="text-ink-muted leading-relaxed">
+                            Germany's university-entrance qualification, taken at a
+                            German school in Moscow and taught to the
+                            Baden-Württemberg curriculum.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="relative pl-8 md:pl-12">
+                    <span data-timeline-dot class="timeline-dot is-lit" aria-hidden="true"></span>
+                    <p class="eyebrow eyebrow-tone tone-neutral mb-4">{ui.markers[7]}</p>
+                    <div data-reveal class="card spotlight-card">
+                        <h3 class="text-h3 text-ink-strong mb-4">
+                            School, with a focus on art
+                        </h3>
+                        <p class="text-ink-muted leading-relaxed">
+                            I grew up in Berlin and went to the
+                            Kurt-Schwitters-Oberschule, where my focus was art,
+                            until the move to Moscow.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── How I work ── -->
+    <section class="section border-t border-line-subtle">
+        <div class="page-container">
+            <h2 data-reveal-lines class="text-h2 text-ink-strong mb-head">How I work</h2>
+            <ul data-reveal-stagger class="work-list grid md:grid-cols-3 gap-grid">
+                <li class="card card-hover spotlight-card tone-info text-lg text-ink-muted leading-relaxed">
+                    <div class="flex items-center justify-between mb-8" aria-hidden="true">
+                        <span class="icon-tile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </span>
+                        <span class="work-num eyebrow"></span>
+                    </div>
+                    <strong class="block text-h3 text-ink-strong mb-3">Clarity before code.</strong> Architecture
+                    follows from a clear picture of what the product is for, not
+                    the other way around.
+                </li>
+                <li class="card card-hover spotlight-card tone-info text-lg text-ink-muted leading-relaxed">
+                    <div class="flex items-center justify-between mb-8" aria-hidden="true">
+                        <span class="icon-tile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                        </span>
+                        <span class="work-num eyebrow"></span>
+                    </div>
+                    <strong class="block text-h3 text-ink-strong mb-3">Craft in the details.</strong> Correct
+                    isn't enough. Naming, layout, load times and edge cases decide
+                    whether people come back.
+                </li>
+                <li class="card card-hover spotlight-card tone-info text-lg text-ink-muted leading-relaxed">
+                    <div class="flex items-center justify-between mb-8" aria-hidden="true">
+                        <span class="icon-tile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        </span>
+                        <span class="work-num eyebrow"></span>
+                    </div>
+                    <strong class="block text-h3 text-ink-strong mb-3">Impact you can see.</strong> A dashboard
+                    nobody opens is a failed project, however elegant the model.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <SecondaryCTA />
+</Layout>
+
+<script>
+    import "../scripts/timeline";
+</script>

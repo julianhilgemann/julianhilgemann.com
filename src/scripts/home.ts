@@ -1,15 +1,15 @@
 /**
- * Homepage motion (EN + DE). Shared hooks (reveals, magnetic buttons,
- * spotlight cards) come from motion.ts; this file owns the homepage pieces.
+ * Homepage motion (EN + DE). Shared hooks (reveals, spotlight cards) come
+ * from motion.ts; this file owns the homepage pieces.
  *
  * Hooks:
  *   [data-hero]            hero section (pointer target, exit trigger)
+ *   [data-gradient-sheet]  gradient sheet behind everything; started by GradientSheet.astro, faded in here
  *   [data-hero-canvas]     node network canvas
  *   [data-hero-title]      headline; lines rise out of masks on load
  *   [data-accent]          word inside the headline that resolves from digits
  *   [data-hero-fade]       fades up after the headline
  *   [data-hero-content]    drifts out as the hero scrolls away
- *   [data-depth]           blob layer following the pointer at this ratio
  *   [data-scroll-cue]      appears last
  *   [data-pipeline]        current-project architecture diagram (pipeline-diagram.ts)
  */
@@ -17,7 +17,6 @@ import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 import {
     gsap,
     SplitText,
-    finePointer,
     reducedMotion,
     riseLines,
     introPending,
@@ -31,13 +30,13 @@ gsap.registerPlugin(ScrambleTextPlugin);
 
 const hero = document.querySelector<HTMLElement>("[data-hero]");
 const canvas = document.querySelector<HTMLCanvasElement>("[data-hero-canvas]");
+const gradient = hero?.querySelector<HTMLCanvasElement>("[data-gradient-sheet]");
 
 if (hero && canvas) initHeroNetwork(hero, canvas, reducedMotion);
 
 if (initPageMotion()) {
     heroIntro();
     heroExit();
-    heroBlobs();
     initPipelineDiagram();
 }
 
@@ -85,6 +84,7 @@ function heroIntro() {
         }
     }
 
+    if (gradient) tl.from(gradient, { autoAlpha: 0, duration: 2, ease: "power2.out" }, 0);
     if (canvas) tl.from(canvas, { autoAlpha: 0, duration: 2.4, ease: "power2.out" }, 0);
     if (fades.length) {
         tl.from(fades, { autoAlpha: 0, y: 24, duration: 1, stagger: 0.12, ease: "power3.out" }, 0.45);
@@ -106,28 +106,4 @@ function heroExit() {
         ease: "none",
         scrollTrigger: { trigger: hero, start: "top top", end: "bottom 25%", scrub: 0.5 },
     });
-}
-
-function heroBlobs() {
-    if (!hero || !finePointer) return;
-    const layers = Array.from(hero.querySelectorAll<HTMLElement>("[data-depth]")).map((el) => ({
-        depth: Number(el.dataset.depth) || 0.05,
-        x: gsap.quickTo(el, "x", { duration: 2.2, ease: "power3.out" }),
-        y: gsap.quickTo(el, "y", { duration: 2.2, ease: "power3.out" }),
-    }));
-    hero.addEventListener("pointermove", (e) => {
-        const rect = hero.getBoundingClientRect();
-        const dx = e.clientX - rect.left - rect.width / 2;
-        const dy = e.clientY - rect.top - rect.height / 2;
-        layers.forEach((l) => {
-            l.x(dx * l.depth * 2);
-            l.y(dy * l.depth * 2);
-        });
-    });
-    hero.addEventListener("pointerleave", () =>
-        layers.forEach((l) => {
-            l.x(0);
-            l.y(0);
-        }),
-    );
 }
