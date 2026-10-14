@@ -6,7 +6,7 @@ import GradientSheet from "./GradientSheet.astro";
 <section
     id="hero"
     data-hero
-    class="min-h-[100svh] py-28 md:py-0 flex flex-col justify-center relative isolate overflow-hidden"
+    class="min-h-[100svh] pt-24 pb-20 md:py-0 flex flex-col justify-center relative isolate overflow-hidden"
 >
     <MotionIntro />
 
@@ -16,18 +16,13 @@ import GradientSheet from "./GradientSheet.astro";
     <GradientSheet intro class="-z-40" />
 
     <!-- ========================================== -->
-    <!-- LAYER 2: Canvas Particles (-z-30)          -->
-    <!-- ========================================== -->
-    <canvas data-hero-canvas data-intro class="absolute inset-0 w-full h-full pointer-events-none -z-30"></canvas>
-
-    <!-- ========================================== -->
-    <!-- LAYER 3: Global Glass Layer (-z-20)        -->
-    <!-- Blurs the particles AND the gradient       -->
+    <!-- LAYER 2: Global Glass Layer (-z-20)        -->
+    <!-- Tints and softens the gradient             -->
     <!-- ========================================== -->
     <div class="absolute inset-0 bg-background/20 backdrop-blur-[5px] pointer-events-none -z-20"></div>
 
     <!-- ========================================== -->
-    <!-- LAYER 4: Content & Buttons (Top, z-10)     -->
+    <!-- LAYER 3: Content & Buttons (Top, z-10)     -->
     <!-- ========================================== -->
     <div
         data-hero-content
@@ -57,16 +52,10 @@ import GradientSheet from "./GradientSheet.astro";
                 containers and DuckDB at home, TouchDesigner after hours.
             </p>
 
-            <div data-hero-fade data-intro class="flex flex-col sm:flex-row gap-4 pointer-events-auto">
-                <a
-                    href="/story"
-                    class="btn btn-primary"
-                >
-                    The full story
-                </a>
+            <div data-hero-fade data-intro class="flex pointer-events-auto">
                 <a
                     href="/projects"
-                    class="btn"
+                    class="btn btn-primary"
                 >
                     Projects
                 </a>
@@ -74,15 +63,16 @@ import GradientSheet from "./GradientSheet.astro";
         </div>
     </div>
 
-    <!-- Scroll cue (desktop, where the hero fills the viewport) -->
+    <!-- Scroll cue. Below md it sits in the hero's bottom padding (py-28),
+         so it never overlaps the content on a short phone. -->
     <a
         href="#now-building"
         data-scroll-cue
         data-intro
         aria-label="Scroll to what I'm building now"
-        class="hidden md:flex absolute bottom-10 inset-x-0 mx-auto w-10 h-16 items-start justify-center z-10 group"
+        class="flex absolute bottom-5 md:bottom-10 inset-x-0 mx-auto w-10 h-12 md:h-16 items-start justify-center z-10 group"
     >
-        <span class="relative block w-px h-14 bg-line-strong overflow-hidden group-hover:bg-ink-faint transition-colors">
+        <span class="relative block w-px h-10 md:h-14 bg-line-strong overflow-hidden group-hover:bg-ink-faint transition-colors">
             <span class="scroll-cue-dot absolute left-0 top-0 w-px h-5 bg-gradient-to-b from-transparent to-primary"></span>
         </span>
     </a>

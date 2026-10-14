@@ -5,7 +5,6 @@
  * Hooks:
  *   [data-hero]            hero section (pointer target, exit trigger)
  *   [data-gradient-sheet]  gradient sheet behind everything; started by GradientSheet.astro, faded in here
- *   [data-hero-canvas]     node network canvas
  *   [data-hero-title]      headline; lines rise out of masks on load
  *   [data-accent]          word inside the headline that resolves from digits
  *   [data-hero-fade]       fades up after the headline
@@ -17,22 +16,17 @@ import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 import {
     gsap,
     SplitText,
-    reducedMotion,
     riseLines,
     introPending,
     releaseIntro,
     initPageMotion,
 } from "./motion";
-import { initHeroNetwork } from "./hero-network";
 import { initPipelineDiagram } from "./pipeline-diagram";
 
 gsap.registerPlugin(ScrambleTextPlugin);
 
 const hero = document.querySelector<HTMLElement>("[data-hero]");
-const canvas = document.querySelector<HTMLCanvasElement>("[data-hero-canvas]");
 const gradient = hero?.querySelector<HTMLCanvasElement>("[data-gradient-sheet]");
-
-if (hero && canvas) initHeroNetwork(hero, canvas, reducedMotion);
 
 if (initPageMotion()) {
     heroIntro();
@@ -85,7 +79,6 @@ function heroIntro() {
     }
 
     if (gradient) tl.from(gradient, { autoAlpha: 0, duration: 2, ease: "power2.out" }, 0);
-    if (canvas) tl.from(canvas, { autoAlpha: 0, duration: 2.4, ease: "power2.out" }, 0);
     if (fades.length) {
         tl.from(fades, { autoAlpha: 0, y: 24, duration: 1, stagger: 0.12, ease: "power3.out" }, 0.45);
     }
