@@ -1,6 +1,27 @@
 ---
 import MotionIntro from "./MotionIntro.astro";
 import GradientSheet from "./GradientSheet.astro";
+import ScrollCue from "./ScrollCue.astro";
+
+// What a measurement can end in: the headline's last words take turns
+// (home.ts). "a decision." is literal markup, so it is what no-JS and
+// reduced-motion visitors see and what the generated docs read; the rest
+// travel as an expression and stay out of the docs.
+const outcomes = [
+    ["a", "forecast"],
+    ["an", "analysis"],
+    ["an", "action"],
+    ["a", "strategy"],
+    ["a", "diagnosis"],
+    ["a", "budget"],
+    ["a", "dashboard"],
+    ["an", "insight"],
+    ["a", "price"],
+    ["a", "plan"],
+    ["an", "audit"],
+    ["an", "answer"],
+];
+const accent = "text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-glow";
 ---
 
 <section
@@ -19,7 +40,9 @@ import GradientSheet from "./GradientSheet.astro";
     <!-- LAYER 2: Global Glass Layer (-z-20)        -->
     <!-- Tints and softens the gradient             -->
     <!-- ========================================== -->
-    <div class="absolute inset-0 bg-background/20 backdrop-blur-[5px] pointer-events-none -z-20"></div>
+    <!-- No blur below md: on a phone, re-blurring a full-screen canvas every
+         frame costs scroll smoothness, and the canvas is soft already. -->
+    <div class="absolute inset-0 bg-background/20 md:backdrop-blur-[5px] pointer-events-none -z-20"></div>
 
     <!-- ========================================== -->
     <!-- LAYER 3: Content & Buttons (Top, z-10)     -->
@@ -34,13 +57,9 @@ import GradientSheet from "./GradientSheet.astro";
                 data-intro
                 class="text-display text-ink-strong mb-6 md:mb-8"
             >
-                <!-- nowrap: a line may break after an inline-block, which
-                     left the full stop alone on a line at 375px. -->
-                I build the systems between a measurement and a <span class="whitespace-nowrap"><span
-                    data-accent
-                    class="inline-block tabular-nums text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-glow"
-                    >decision</span
-                >.</span>
+                I build the systems between a measurement and <span data-cycle class="cycle"><span data-cycle-item>a <span class={accent}>decision</span>.</span>{outcomes.map(([article, word]) => (
+                    <span data-cycle-item aria-hidden="true">{article} <span class={accent}>{word}</span>.</span>
+                ))}</span>
             </h1>
 
             <p
@@ -63,38 +82,29 @@ import GradientSheet from "./GradientSheet.astro";
         </div>
     </div>
 
-    <!-- Scroll cue. Below md it sits in the hero's bottom padding (py-28),
-         so it never overlaps the content on a short phone. -->
-    <a
+    <!-- Scroll cue. Below md it sits in the hero's bottom padding, so it
+         never overlaps the content on a short phone. -->
+    <ScrollCue
         href="#now-building"
+        label="Scroll to what I'm building now"
         data-scroll-cue
         data-intro
-        aria-label="Scroll to what I'm building now"
-        class="flex absolute bottom-5 md:bottom-10 inset-x-0 mx-auto w-10 h-12 md:h-16 items-start justify-center z-10 group"
-    >
-        <span class="relative block w-px h-10 md:h-14 bg-line-strong overflow-hidden group-hover:bg-ink-faint transition-colors">
-            <span class="scroll-cue-dot absolute left-0 top-0 w-px h-5 bg-gradient-to-b from-transparent to-primary"></span>
-        </span>
-    </a>
+        class="absolute bottom-5 md:bottom-10 inset-x-0 mx-auto w-fit z-10"
+    />
 </section>
 
 <style>
-    @keyframes scroll-cue {
-        0% {
-            transform: translateY(-100%);
-        }
-        100% {
-            transform: translateY(300%);
-        }
+    /* The headline's last words: every phrase stacked in one grid cell, so
+       the slot is as wide as the widest of them and a swap never re-wraps
+       the headline. Only the first shows until home.ts takes over. */
+    .cycle {
+        display: inline-grid;
     }
-    .scroll-cue-dot {
-        animation: scroll-cue 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    .cycle > * {
+        grid-area: 1 / 1;
+        white-space: nowrap;
     }
-
-    @media (prefers-reduced-motion: reduce) {
-        .scroll-cue-dot {
-            animation: none;
-        }
+    .cycle > * + * {
+        visibility: hidden;
     }
 </style>
-

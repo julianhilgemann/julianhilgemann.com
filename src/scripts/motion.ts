@@ -48,12 +48,26 @@ export const introPending = () => root.classList.contains("motion-intro");
 /** Call once every intro element holds its hidden state inline. */
 export const releaseIntro = () => root.classList.remove("motion-intro");
 
-/** Split into masked lines, rise them in, then restore the original markup. */
-export function riseLines(el: HTMLElement, vars: gsap.TweenVars = {}) {
-    const split = SplitText.create(el, { type: "lines", mask: "lines", linesClass: "split-line" });
+/**
+ * Split into masked lines and rise them in. `splitVars` passes SplitText
+ * options through (`ignore` keeps an element whole).
+ *
+ * The split stays after the rise: reverting it straight away let the browser
+ * re-break the lines its own way, which on some headings visibly re-wrapped
+ * the text the moment it landed. Frozen line breaks would clip inside their
+ * masks once the element's width changes, so the first width change reverts
+ * it; by then the text is reflowing anyway.
+ */
+export function riseLines(el: HTMLElement, vars: gsap.TweenVars = {}, splitVars: Partial<SplitText.Vars> = {}) {
+    const split = SplitText.create(el, { type: "lines", mask: "lines", linesClass: "split-line", ...splitVars });
     gsap.set(el, { autoAlpha: 1 });
-    // Reverting afterwards matters: frozen line breaks would clip the text
-    // inside its masks as soon as the viewport is resized.
+    const width = el.offsetWidth;
+    const watch = new ResizeObserver(() => {
+        if (el.offsetWidth === width) return;
+        watch.disconnect();
+        split.revert();
+    });
+    watch.observe(el);
     const tween = gsap.from(split.lines, {
         yPercent: 110,
         duration: 1.15,
@@ -86,11 +100,7 @@ export function playIntro(extra?: (tl: gsap.core.Timeline) => void) {
 
     const tl = gsap.timeline({ delay: 0.1 });
     const title = document.querySelector<HTMLElement>("[data-page-title]");
-    if (title) {
-        const { split, tween } = riseLines(title);
-        tl.add(tween, 0);
-        tl.eventCallback("onComplete", () => split.revert());
-    }
+    if (title) tl.add(riseLines(title).tween, 0);
     document.querySelectorAll<HTMLElement>("[data-intro-backdrop]").forEach((el) => {
         tl.from(el, { autoAlpha: 0, duration: 2.4, ease: "power2.out" }, 0);
     });
@@ -153,9 +163,7 @@ function initReveals() {
             trigger: el,
             start: "top 88%",
             once: true,
-            onEnter: () => {
-                const { split } = riseLines(el, { onComplete: () => split.revert() });
-            },
+            onEnter: () => riseLines(el),
         });
     });
 

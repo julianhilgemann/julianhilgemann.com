@@ -1,182 +1,74 @@
 ---
 import ProjectCard from "./ProjectCard.astro";
 
+// The first link is where the card itself leads: the live app when there is
+// one, the repository otherwise.
 const projects = [
     {
         title: "Vantage Alpin: Analytics Engineering",
         category: "Production Data Stack",
         description:
             "Production financial reporting engine replacing legacy PDF reports with a dynamic, decision-ready Power BI system.",
-        tags: [
-            "Python",
-            "dbt",
-            "DuckDB",
-            "SQL",
-            "PowerBI",
-            "PowerQuery",
-            "DAX",
-        ],
         image: "/assets/vantage_dashboard_main.webp",
-        link: "https://github.com/julianhilgemann/BI-Pipeline/blob/main/README.md",
-        secondaryLink: {
-            url: "https://www.youtube.com/watch?v=QGwda9UsQHg",
-            text: "Watch on Youtube",
-            icon: "youtube"
-        },
-        content: `
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Concept</h3>
-            <p class="mb-6">This project acts as the central financial reporting engine for Vantage Alpin. It replaces legacy PDF reports with a dynamic Modern Data Stack (MDS) that processes stochastic transaction data into a clean Star Schema.</p>
-            
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Features</h3>
-            <ul class="space-y-2 text-ink-muted mb-6">
-                <li><span><strong>Controlled Stochasticity:</strong> Uses Non-Homogeneous Poisson Processes (NHPP) to model realistic demand patterns.</span></li>
-                <li><span><strong>Product Economics:</strong> Pricing follows Log-Normal distributions; popularity follows Pareto (Power Law).</span></li>
-                <li><span><strong>Marketing Attribution:</strong> Algorithmic allocation of ad spend to order lines based on revenue share.</span></li>
-            </ul>
-
-            <br class="block mb-4" />
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Architecture</h3>
-            <ul class="space-y-2 text-ink-muted mb-6">
-                <li><span><strong>Star Schema:</strong> Central <code>fct_transactions</code> table linking to Type 1 SCD product dimensions.</span></li>
-                <li><span><strong>Currency Normalization:</strong> Robust handling of multi-currency transactions (EUR/CHF) with daily rate lookups.</span></li>
-                <li><span><strong>DirectQuery-like Extract:</strong> Custom Parquet/CSV export workflow from DuckDB to Power BI for performant local development.</span></li>
-            </ul>
-        `,
+        links: [
+            { kind: "github", href: "https://github.com/julianhilgemann/BI-Pipeline/blob/main/README.md", label: "GitHub" },
+            { kind: "video", href: "https://www.youtube.com/watch?v=QGwda9UsQHg", label: "YouTube" },
+        ],
     },
     {
         title: "End-to-End SaaS Operating System",
         category: "Stochastic Financial Twin",
         description:
             "A full-stack simulation engine that translates static business plans into living data systems.",
-        tags: [
-            "Excel",
-            "Python",
-            "dbt",
-            "DuckDB",
-            "SQL",
-            "Streamlit",
-            "Prophet",
-        ],
         image: "/assets/agentic_hla.webp",
-        link: "https://github.com/julianhilgemann/Portfolio/blob/main/README.md",
-        content: `
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Concept</h3>
-            <p class="mb-6">This project implements a "Rapid Data Function"—instantiating an entire end-to-end data stack (Stochastic Simulation, Data Warehouse, Algorithmic Forecasting, and BI) purely from a static business definition.</p>
-            
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Features</h3>
-            <ul class="space-y-2 text-ink-muted mb-6">
-                <li><span><strong>Stochastic Engine:</strong> Simulates Customer Acquisition (Poisson), Retention (Hazard/Survival), and Revenue expansion.</span></li>
-                <li><span><strong>Regime-Aware Forecasting:</strong> A Prophet model that detects "Growth Regimes" to avoid overfitting on early-stage data.</span></li>
-            </ul>
-
-            <br class="block mb-4" />
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Architecture</h3>
-            <ul class="space-y-2 text-ink-muted mb-6">
-                <li><span><strong>Contract-First Engineering:</strong> The entire simulation scales dynamically based on a JSON contract extracted from the Excel Operating Plan.</span></li>
-                <li><span><strong>Medallion DWH:</strong> A rigorous dbt project structure (Bronze/Silver/Gold) ensuring clean lineage.</span></li>
-                <li><span><strong>Agentic Build Pipeline:</strong> Treating business logic as code, we use cursor/windsurf to scaffold the entire stack from specs.</span></li>
-            </ul>
-        `,
+        links: [
+            { kind: "github", href: "https://github.com/julianhilgemann/Portfolio/blob/main/README.md", label: "GitHub" },
+        ],
     },
     {
         title: "Interactive Yield Curve Heatmap",
-        category: "DATA VISUALIZATION",
+        category: "Data Visualization",
         description:
             "An interactive web application encoding 25+ years of German sovereign yield curve data into a single, high-performance canvas heatmap.",
-        tags: ["React", "D3.js", "Bundesbank API", "HTML5 Canvas"],
         image: "/assets/interactive_yield_curve_app.webp",
-        link: "https://github.com/julianhilgemann/heatmapp",
-        secondaryLink: {
-            url: "https://julianhilgemann.github.io/yield_curve_heatmap_app/",
-            text: "Live App",
-            icon: "external"
-        },
-        content: `
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Concept</h3>
-            <p class="mb-6">A web application that visualizes 25+ years of German sovereign yield curve data in a single view. The application fetches monthly Svensson zero-coupon yield estimates directly from the Bundesbank SDMX REST API.</p>
-            
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Features</h3>
-            <ul class="space-y-2 text-ink-muted mb-6">
-                <li><span><strong>High-Performance Rendering:</strong> Uses HTML5 Canvas and ImageData for pixel-level bilinear interpolation, providing smooth and accurate visuals.</span></li>
-                <li><span><strong>Interactive Controls:</strong> Configurable date and maturity ranges, 26 color palettes, and interactive tooltips for precision exploration.</span></li>
-                <li><span><strong>Data Integration:</strong> Live data fetching with automatic fallback to a synthetic Nelson-Siegel model dataset if the API is offline.</span></li>
-            </ul>
-
-            <br class="block mb-4" />
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Architecture</h3>
-            <ul class="space-y-2 text-ink-muted mb-6">
-                <li><span><strong>Frontend:</strong> React 18 for UI and D3 (v7) for color interpolators and scales.</span></li>
-                <li><span><strong>Export:</strong> On-device high-resolution PNG rendering via an offscreen 2560x1440 canvas.</span></li>
-            </ul>
-        `,
+        links: [
+            { kind: "live", href: "https://julianhilgemann.github.io/yield_curve_heatmap_app/", label: "Live app" },
+            { kind: "github", href: "https://github.com/julianhilgemann/heatmapp", label: "GitHub" },
+        ],
     },
     {
         title: "B2B Pipeline Forecasting Prototype",
         category: "Predictive Analytics",
         description:
             "Business-day sales pipeline forecasting prototype with competing outcomes, age-based conversion kernel estimation, and PIT reconstruction.",
-        tags: [
-            "DuckDB",
-            "Python",
-            "Forecasting",
-            "Analytics Engineering",
-        ],
         image: "/assets/pipeline_forecast.webp",
-        link: "https://github.com/julianhilgemann/pipeline-forecast",
-        content: `
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Concept</h3>
-            <p class="mb-6">Model how a B2B opportunity pipeline converts over time (in business days), then forecast future daily conversions by combining expected conversions from existing active stock and newly arriving opportunities. Built as a transparent, auditable forecasting framework.</p>
-            
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Features</h3>
-            <ul class="space-y-2 text-ink-muted mb-6">
-                <li><span><strong>Kernel Estimation:</strong> Competing-risk kernel estimation (won, lost, censored) from a trailing training window.</span></li>
-                <li><span><strong>PIT Reconstruction:</strong> Robust Point-in-Time reconstruction from SCD2 status history to prevent look-ahead leakage.</span></li>
-                <li><span><strong>Synthetic Data:</strong> Generator includes realistic behaviors like business-day seasonality, weekend suppression, and regime switches.</span></li>
-            </ul>
-
-            <br class="block mb-4" />
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Architecture</h3>
-            <ul class="space-y-2 text-ink-muted mb-6">
-                <li><span><strong>DuckDB Core:</strong> A fast analytics warehouse managing calendar, opportunity facts, and SCD2 status history.</span></li>
-                <li><span><strong>Evaluation Framework:</strong> Daily error metrics (MAE/RMSE/WAPE) and rolling multi-as-of backtesting with age-attributable error surfaces.</span></li>
-                <li><span><strong>Multi-panel Visualization:</strong> Structured forecast architecture rendering existing-pipeline and future-arrivals convolution heatmaps.</span></li>
-            </ul>
-        `,
+        links: [
+            { kind: "github", href: "https://github.com/julianhilgemann/pipeline-forecast", label: "GitHub" },
+        ],
     },
     {
         title: "ShaderGradient Playground",
         category: "Creative Coding & Graphics",
         description:
             "A browser-based, real-time shader gradient simulator built on Three.js and custom GLSL for rendering and exporting animating mesh gradients.",
-        tags: ["Three.js", "GLSL", "React", "Creative Coding"],
         image: "/assets/shadergradient.webp",
-        link: "https://github.com/julianhilgemann/shadergradient",
-        secondaryLink: {
-            url: "https://julianhilgemann.github.io/shader_gradient_app/",
-            text: "Live App",
-            icon: "external"
-        },
-        content: `
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Concept</h3>
-            <p class="mb-6">The playground renders a live, animating gradient mesh using a custom simplex-noise vertex shader. Dial in animated mesh gradient visuals—spheres, planes, water planes—and export them as looping GIFs or videos directly from the browser without any installation.</p>
-            
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Features</h3>
-            <ul class="space-y-2 text-ink-muted mb-6">
-                <li><span><strong>Real-Time Shading:</strong> 3 customizable gradient colors blended across geometry based on noise, full lighting/environment controls.</span></li>
-                <li><span><strong>Geometry & Camera:</strong> Tweak geometries (sphere, plane, etc.), noise displacement, and camera angles freely.</span></li>
-                <li><span><strong>Rich Export:</strong> Export looping animations as GIFs or videos (WebM/MP4 up to 4K), or copy the exact state as a React JSX snippet.</span></li>
-            </ul>
-
-            <br class="block mb-4" />
-            <h3 class="text-xl font-bold text-ink-strong mb-4">Architecture</h3>
-            <p>Built purely in the browser using Three.js and custom GLSL. It features an integrated preset system with localStorage, and client-side media encoders (omggif and WebCodecs/MediaRecorder API) for direct asset generation.</p>
-        `,
+        links: [
+            { kind: "live", href: "https://julianhilgemann.github.io/shader_gradient_app/", label: "Live app" },
+            { kind: "github", href: "https://github.com/julianhilgemann/shadergradient", label: "GitHub" },
+        ],
     },
-];
+] as const;
 ---
 
-<!-- The card list only; the Projects page supplies the heading. Cards rise
+<!-- The card list only; the Projects page supplies the heading. The first
+     card spans both columns, so five cards fill the grid evenly. Cards rise
      one by one as they scroll in ([data-reveal-batch], src/scripts/motion.ts). -->
-<div data-reveal-batch class="flex flex-col gap-6">
-    {projects.map((project) => <ProjectCard {...project} />)}
-</div>
+<ul data-reveal-batch class="grid sm:grid-cols-2 gap-grid">
+    {
+        projects.map((project, i) => (
+            <li class:list={[i === 0 && "sm:col-span-2"]}>
+                <ProjectCard {...project} links={[...project.links]} featured={i === 0} />
+            </li>
+        ))
+    }
+</ul>

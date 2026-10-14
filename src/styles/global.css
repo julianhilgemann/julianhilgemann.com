@@ -148,14 +148,20 @@ html.motion-intro [data-intro] {
    over it and reads as a layer above; strongest under the nav, fading toward
    the bottom corners. Sections that paint their own backdrop (the homepage
    hero) cover it. `isolation` on body keeps it above the body's own
-   background but below everything in the page. */
+   background but below everything in the page. Sized to the large viewport,
+   not `inset: 0`, so its fade does not stretch while a phone's toolbar
+   collapses mid-scroll. */
 body {
   isolation: isolate;
 }
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  height: 100lvh;
   z-index: -1;
   pointer-events: none;
   background-image: radial-gradient(rgb(var(--color-contrast) / 0.07) 1px, transparent 1px);

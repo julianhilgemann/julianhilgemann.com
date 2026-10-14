@@ -1,12 +1,16 @@
 ---
 // Closing screen of /services. Same shape as SecondaryCTA (heading, one
-// orbiting contact button), with a sentence of its own.
+// orbiting contact button, the gradient sheet behind them), with a sentence
+// of its own.
+import GradientSheet from "./GradientSheet.astro";
 ---
 
 <section
     id="cta-section"
-    class="section section-screen relative isolate overflow-hidden border-t border-line-subtle"
+    class="section section-screen relative isolate overflow-hidden"
 >
+    <GradientSheet start={22} fade class="-z-10 opacity-80" />
+
     <div class="page-container text-center">
         <h2 class="text-h2 text-ink-strong mb-6">
             Let’s design your decision system.

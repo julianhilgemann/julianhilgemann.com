@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ScrollCue from "../components/ScrollCue.astro";
 import { color, alpha, viz, gradientSheet, type, space, layout, radius, motion, button } from "../styles/tokens.mjs";
 
 // The design system's catalogue: every token and component, rendered with
@@ -387,6 +388,20 @@ const vizItems = Object.entries(viz);
                         <code class="font-mono text-ink">.icon-tile</code> draws in the tone and brightens with its
                         <code class="font-mono text-ink">.card-hover</code>; <code class="font-mono text-ink">.icon-btn</code> is the round
                         icon-only control (close, expand, menu).
+                    </p>
+                </div>
+
+                <div class="card">
+                    <p class="eyebrow mb-6">Scroll cue</p>
+                    <div class="flex items-end justify-around gap-6">
+                        <ScrollCue href="#" label="Scroll cue (example)" />
+                        <ScrollCue href="#" label="Scroll cue with a caption (example)" caption="Scroll to compress." />
+                    </div>
+                    <p class="mt-6 text-sm text-ink-muted">
+                        <code class="font-mono text-ink">ScrollCue.astro</code> at the foot of a page's first screen,
+                        with an optional caption. Inside a <code class="font-mono text-ink">.section-intro</code> it docks
+                        to the bottom of the viewport over a fade of the page colour and steps aside once the reader
+                        scrolls; the hero positions its own.
                     </p>
                 </div>
             </div>
