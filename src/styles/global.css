@@ -169,22 +169,6 @@ body::before {
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
   mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
 }
-/* Slow drifting glow (PageBackdrop, NetworkBackdrop, the closing CTAs). */
-.ambient-blob {
-  animation: ambient-drift 16s ease-in-out infinite alternate;
-}
-.ambient-blob-late {
-  animation-delay: -8s;
-}
-@keyframes ambient-drift {
-  from {
-    transform: translate(0, 0) scale(1);
-  }
-  to {
-    transform: translate(-40px, 30px) scale(1.08);
-  }
-}
-
 /* --- Work page --- */
 
 /* "How I work" cards: numbered by counter so the digits stay out of the
@@ -221,9 +205,6 @@ body::before {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ambient-blob {
-    animation: none;
-  }
   .timeline-dot {
     transition: none;
   }

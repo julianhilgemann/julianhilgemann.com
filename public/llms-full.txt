@@ -6,8 +6,6 @@
 
 Data platform engineer in Munich. Microsoft Fabric at work, containers and DuckDB at home, TouchDesigner after hours.
 
-The full story
-
 Projects
 
 #### Now building
