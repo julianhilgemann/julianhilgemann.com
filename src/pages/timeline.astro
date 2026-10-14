@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import SecondaryCTA from "../components/SecondaryCTA.astro";
 import MotionIntro from "../components/MotionIntro.astro";
+import ScrollCue from "../components/ScrollCue.astro";
 
 // Tags and timeline markers only restate the prose in the cards, so they live
 // here rather than in literal markup: the llms generator flattens literal text
@@ -23,42 +24,42 @@ const ui = {
     <MotionIntro />
 
     <!-- ── Intro ── -->
-    <section class="relative isolate pb-16 md:pb-20">
-        <div class="page-container">
-            <h1 data-page-title data-intro class="text-h1 text-ink-strong mb-10">
-                Timeline
-            </h1>
+    <section class="section-intro page-container relative isolate">
+        <h1 data-page-title data-intro class="text-h1 text-ink-strong mb-10">
+            Timeline
+        </h1>
 
-            <div class="max-w-measure text-lg md:text-xl text-ink-muted leading-relaxed space-y-6">
-                <p data-intro data-intro-fade class="text-lead text-ink">
-                    Art and sound first, then economics, finance and platforms. The
-                    same thread throughout: a signal, and what it takes to turn it
-                    into a number.
-                </p>
-                <p data-intro data-intro-fade>
-                    I'm a data platform engineer in Munich. Microsoft Fabric and
-                    Azure at work, containers and DuckDB at home, TouchDesigner
-                    after hours. I speak {ui.languages.join(", ")}.
-                </p>
-            </div>
-
-            <div data-intro data-intro-fade class="mt-10">
-                <a
-                    href="https://linkedin.com/in/julian-hilgemann"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn btn-sm"
-                >
-                    LinkedIn
-                </a>
-            </div>
+        <div class="max-w-measure text-lg md:text-xl text-ink-muted leading-relaxed space-y-6">
+            <p data-intro data-intro-fade class="text-lead text-ink">
+                Art and sound first, then economics, finance and platforms. The
+                same thread throughout: a signal, and what it takes to turn it
+                into a number.
+            </p>
+            <p data-intro data-intro-fade>
+                I'm a data platform engineer in Munich. Microsoft Fabric and
+                Azure at work, containers and DuckDB at home, TouchDesigner
+                after hours. I speak {ui.languages.join(", ")}.
+            </p>
         </div>
+
+        <div data-intro data-intro-fade class="mt-10">
+            <a
+                href="https://linkedin.com/in/julian-hilgemann"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-sm"
+            >
+                LinkedIn
+            </a>
+        </div>
+
+        <ScrollCue href="#path" label="Scroll to the path so far" data-intro data-intro-fade />
     </section>
 
     <!-- ── The path, newest first. #platform and #bi are what the Story
          chapters deep-link into. Everything before the two roles is
          quieter: a neutral marker and no chips. ── -->
-    <section class="section border-t border-line-subtle">
+    <section id="path" class="section border-t border-line-subtle">
         <div class="page-container grid lg:grid-cols-12 gap-x-16 gap-y-10">
             <div class="lg:col-span-4">
                 <h2 data-reveal-lines class="text-h2 text-ink-strong lg:sticky lg:top-nav">

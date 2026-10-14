@@ -53,7 +53,9 @@ function chapters() {
         const tl = gsap.timeline({ paused: true, onComplete: goLive });
 
         // The card arrives first, and everything else rides in on top of it.
-        if (card) tl.from(card, { y: 56, scale: 0.985, autoAlpha: 0, duration: 0.8, ease: "power3.out" }, 0);
+        // A rise, no scale: scaling a card this wide pulled its headline
+        // sideways and re-rendered the text as it settled.
+        if (card) tl.from(card, { y: 56, autoAlpha: 0, duration: 0.8, ease: "power3.out" }, 0);
         if (marker) tl.from(marker, { autoAlpha: 0, x: -14, duration: 0.5, ease: "power2.out" }, 0.12);
         if (title) gsap.set(title, { autoAlpha: 0 });
         if (body) {
@@ -72,12 +74,8 @@ function chapters() {
             started = true;
             // Split at entry, not at load: a split made up front goes stale
             // (and clips inside its mask) if the viewport changed on the way
-            // down. Reverted again once the lines have landed.
-            if (title) {
-                const { split, tween } = riseLines(title, { duration: 0.95, stagger: 0.07 });
-                tl.add(tween, 0.18);
-                tween.eventCallback("onComplete", () => split.revert());
-            }
+            // down. The lines stay split once they land (see riseLines).
+            if (title) tl.add(riseLines(title, { duration: 0.95, stagger: 0.07 }).tween, 0.18);
             tl.play();
         };
 

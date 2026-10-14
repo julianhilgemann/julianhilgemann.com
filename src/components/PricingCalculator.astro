@@ -1,5 +1,6 @@
 ---
 import Section from "./Section.astro";
+import ScrollCue from "./ScrollCue.astro";
 import { strings, type Lang } from "../lib/pricing-strings";
 import { pricingConfig as cfg, formatCurrency } from "../lib/pricing";
 
@@ -25,23 +26,28 @@ const aiCfg = cfg.modules.find((m) => m.id === "aiReadiness")!;
         data-lang={lang}
         class="page-container"
     >
-        <!-- Framing: the argument the number needs to land against -->
-        <!-- The page's only heading of rank one; sized as a section heading
-             because it is a sentence, not a title. -->
-        <div class="max-w-3xl mb-head">
-            <h1 class="text-h2 text-ink-strong">
-                {t.intro.heading}<br />
-                <span class="text-primary">{t.intro.headingAccent}</span>
-            </h1>
-            <div class="text-base md:text-lg text-ink-muted mt-6 space-y-4 leading-relaxed">
-                {t.intro.body.map((p) => <p>{p}</p>)}
+        <!-- Framing: the argument the number needs to land against. It owns
+             the page's first screen; the calculator starts below it. -->
+        <div class="section-intro">
+            <!-- The page's only heading of rank one; sized as a section heading
+                 because it is a sentence, not a title. -->
+            <div class="max-w-3xl">
+                <h1 class="text-h2 text-ink-strong">
+                    {t.intro.heading}<br />
+                    <span class="text-primary">{t.intro.headingAccent}</span>
+                </h1>
+                <div class="text-base md:text-lg text-ink-muted mt-6 space-y-4 leading-relaxed">
+                    {t.intro.body.map((p) => <p>{p}</p>)}
+                </div>
+                <p class="mt-6 text-sm font-medium text-ink italic">
+                    {t.intro.kicker}
+                </p>
             </div>
-            <p class="mt-6 text-sm font-medium text-ink italic">
-                {t.intro.kicker}
-            </p>
+
+            <ScrollCue href="#calculator" label={t.intro.scrollLabel} />
         </div>
 
-        <div class="grid lg:grid-cols-[minmax(0,1fr)_minmax(360px,420px)] gap-8 xl:gap-12 items-start">
+        <div id="calculator" class="grid lg:grid-cols-[minmax(0,1fr)_minmax(360px,420px)] gap-8 xl:gap-12 items-start scroll-mt-nav">
             <!-- ── Controls ─────────────────────────────────────────── -->
             <div data-controls class="space-y-6 pb-28 lg:pb-0">
                 <!-- 1 · Foundation -->

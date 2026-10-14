@@ -1,0 +1,38 @@
+---
+// The scroll cue at the foot of a page's first screen (`.scroll-cue` in
+// components.css). Inside a `.section-intro` it docks to the bottom of the
+// screen by itself; elsewhere the caller positions it through `class`. Any
+// other attribute (motion hooks such as `data-intro`) lands on the link, so
+// a motion script and the fade below never set the same opacity.
+//
+//   href     the section it scrolls to
+//   label    what it says to a screen reader
+//   caption  optional words above the line (Story: "Scroll to compress.")
+interface Props {
+    href: string;
+    label: string;
+    caption?: string;
+    class?: string;
+    [attr: string]: unknown;
+}
+
+const { href, label, caption, class: className, ...attrs } = Astro.props;
+---
+
+<div class:list={["scroll-cue", className]}>
+    <a href={href} aria-label={label} class="scroll-cue-link" {...attrs}>
+        {caption && <span class="eyebrow">{caption}</span>}
+        <span class="scroll-cue-line" aria-hidden="true"></span>
+    </a>
+</div>
+
+<script>
+    // A docked cue sits over the intro's last lines, so once the reader is
+    // scrolling it steps aside, and it comes back at the top of the page.
+    const docked = document.querySelectorAll(".section-intro > .scroll-cue");
+    const sync = () => docked.forEach((cue) => cue.classList.toggle("is-done", window.scrollY > 48));
+    if (docked.length) {
+        window.addEventListener("scroll", sync, { passive: true });
+        sync();
+    }
+</script>

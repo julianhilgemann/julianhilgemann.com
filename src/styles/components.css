@@ -32,6 +32,32 @@
         align-items: center;
     }
 
+    /* A page's opening screen: the rest of the first screen below the
+       layout's `pt-nav`, so the title starts on the shared line and the
+       page lands as one screen. Its ScrollCue docks to the foot of the
+       viewport over a fade of the page colour, so it shows on landing even
+       where the intro runs longer than a phone screen, and steps aside once
+       the reader scrolls (ScrollCue.astro). */
+    .section-intro {
+        min-height: calc(100svh - var(--space-nav));
+        display: flex;
+        flex-direction: column;
+    }
+    .section-intro > .scroll-cue {
+        position: sticky;
+        bottom: 0;
+        margin-top: auto;
+        margin-inline: calc(var(--space-gutter) * -1);
+        padding: 2.5rem var(--space-gutter) 1.25rem;
+        /* Solid behind the cue itself, fading only across the top padding. */
+        background: linear-gradient(to top, rgb(var(--color-background)) calc(100% - 2.5rem), rgb(var(--color-background) / 0));
+    }
+    @media (min-width: 768px) {
+        .section-intro > .scroll-cue {
+            padding-bottom: 2.5rem;
+        }
+    }
+
     /* ── Tone ──
        Components that carry an accent (eyebrow numbers, icon tiles, badges,
        arrow links) draw in `--tone`. Orange by default; set `.tone-info` on
@@ -359,12 +385,80 @@
         color: rgb(var(--color-ink-strong));
     }
 
+    /* ── Scroll cue ──
+       "There is more below": a hairline with a light running down it, at
+       the foot of a page's first screen. Markup in ScrollCue.astro: a
+       full-width strip that lets clicks through, with the link centred in
+       it and an optional caption above the line. `.is-done` fades it. */
+    .scroll-cue {
+        display: flex;
+        justify-content: center;
+        pointer-events: none;
+        transition: opacity var(--dur-slow) var(--ease-out);
+    }
+    .scroll-cue.is-done {
+        opacity: 0;
+    }
+    .scroll-cue-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.875rem;
+        min-width: 2.75rem;
+        pointer-events: auto;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .scroll-cue.is-done .scroll-cue-link {
+        pointer-events: none;
+    }
+    .scroll-cue-line {
+        position: relative;
+        display: block;
+        width: 1px;
+        height: 2.5rem;
+        overflow: hidden;
+        background: var(--line-strong);
+        transition: background-color var(--dur-base) var(--ease-out);
+    }
+    .scroll-cue-link:hover .scroll-cue-line {
+        background: rgb(var(--color-ink-faint));
+    }
+    .scroll-cue-line::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1.25rem;
+        background: linear-gradient(to bottom, transparent, rgb(var(--color-primary)));
+        animation: scroll-cue 2.2s var(--ease-in-out) infinite;
+    }
+    @media (min-width: 768px) {
+        .scroll-cue-line {
+            height: 3.5rem;
+        }
+    }
+    @keyframes scroll-cue {
+        from {
+            transform: translateY(-100%);
+        }
+        to {
+            transform: translateY(300%);
+        }
+    }
+
     @media (prefers-reduced-motion: reduce) {
         .btn,
         .card-hover,
         .arrow-link svg,
         .arrow-link .arrow {
             transition: none;
+        }
+        .scroll-cue {
+            transition: none;
+        }
+        .scroll-cue-line::after {
+            animation: none;
         }
     }
 }

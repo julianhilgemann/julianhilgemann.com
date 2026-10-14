@@ -23,6 +23,8 @@ export interface LocaleStrings {
         headingAccent: string;
         body: string[];
         kicker: string;
+        /** Screen-reader label of the scroll cue under the intro. */
+        scrollLabel: string;
     };
     sections: Record<"foundation" | "output" | "dataLayer" | "extras", { title: string; hint: string }>;
     controls: {
@@ -95,6 +97,7 @@ const en: LocaleStrings = {
             "That layer has a price, and most of it sits below the report surface. Configure a realistic scope below and see exactly where the money goes.",
         ],
         kicker: "Every line item is a deliverable, not a line on an invoice.",
+        scrollLabel: "Scroll to the calculator",
     },
     sections: {
         foundation: { title: "1 · Foundation", hint: "What are we connecting?" },
@@ -400,6 +403,7 @@ const de: LocaleStrings = {
             "Diese Ebene hat ihren Preis, und der größte Teil davon liegt unterhalb der Berichtsoberfläche. Konfigurieren Sie unten einen realistischen Umfang und sehen Sie genau, wofür das Budget verwendet wird.",
         ],
         kicker: "Jede Position ist ein Deliverable — keine Rechnungszeile.",
+        scrollLabel: "Zum Rechner scrollen",
     },
     sections: {
         foundation: { title: "1 · Fundament", hint: "Welche Systeme werden angebunden?" },

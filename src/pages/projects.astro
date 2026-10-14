@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import MotionIntro from "../components/MotionIntro.astro";
 import Projects from "../components/Projects.astro";
 import SecondaryCTA from "../components/SecondaryCTA.astro";
+import ScrollCue from "../components/ScrollCue.astro";
 ---
 
 <Layout
@@ -12,18 +13,22 @@ import SecondaryCTA from "../components/SecondaryCTA.astro";
 >
     <MotionIntro />
 
-    <section class="relative isolate pb-section">
-        <div class="page-container">
-            <div class="max-w-3xl mb-head">
-                <h1 data-page-title data-intro class="text-h1 text-ink-strong mb-8">
-                    Projects
-                </h1>
-                <p data-intro data-intro-fade class="text-lead text-ink-muted">
-                    A selection of my recent open-source work and public project
-                    contributions, hosted on GitHub.
-                </p>
-            </div>
+    <section class="section-intro page-container relative isolate">
+        <div class="max-w-3xl">
+            <h1 data-page-title data-intro class="text-h1 text-ink-strong mb-8">
+                Projects
+            </h1>
+            <p data-intro data-intro-fade class="text-lead text-ink-muted">
+                A selection of my recent open-source work and public project
+                contributions, hosted on GitHub.
+            </p>
+        </div>
 
+        <ScrollCue href="#project-list" label="Scroll to the projects" data-intro data-intro-fade />
+    </section>
+
+    <section id="project-list" class="pb-section scroll-mt-nav">
+        <div class="page-container">
             <Projects />
         </div>
     </section>

@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import MotionIntro from "../components/MotionIntro.astro";
 import StoryField from "../components/StoryField.astro";
 import NumberAnatomy from "../components/NumberAnatomy.astro";
+import ScrollCue from "../components/ScrollCue.astro";
 
 // Hyperadapted lives on its own domain, which holds a placeholder for now —
 // hence the "Coming Soon" label on every link that points at it. The footer
@@ -49,40 +50,38 @@ const ui = {
     <MotionIntro />
 
     <!-- ── Opening: the whole arc in three lines ── -->
-    <section class="story-intro relative isolate">
-        <div class="story-intro-inner page-container">
-            <h1
-                data-page-title
-                data-intro
-                class="text-display text-ink-strong max-w-4xl mb-10"
-            >
-                From signal to number, and back.
-            </h1>
+    <section class="section-intro page-container relative isolate">
+        <h1
+            data-page-title
+            data-intro
+            class="text-display text-ink-strong max-w-4xl mb-10"
+        >
+            From signal to number, and back.
+        </h1>
 
-            <div class="max-w-measure text-lg md:text-xl text-ink-muted leading-relaxed space-y-6">
-                <p data-intro data-intro-fade class="text-lead text-ink">
-                    This page follows one signal from the world into a database,
-                    down to a single number, and back out as sound.
-                </p>
-                <p data-intro data-intro-fade>
-                    Everything I do with data is either compression or expansion.
-                    Compression to navigate, expansion to express. I build every
-                    stage of that chain, and the number in the middle is the
-                    narrowest point of it.
-                </p>
-                <p data-intro data-intro-fade class="text-ink">
-                    It starts as signal.
-                </p>
-            </div>
-
-            <p
-                data-intro
-                data-intro-fade
-                class="story-hint eyebrow"
-            >
-                {ui.scrollHint}
+        <div class="max-w-measure text-lg md:text-xl text-ink-muted leading-relaxed space-y-6">
+            <p data-intro data-intro-fade class="text-lead text-ink">
+                This page follows one signal from the world into a database,
+                down to a single number, and back out as sound.
+            </p>
+            <p data-intro data-intro-fade>
+                Everything I do with data is either compression or expansion.
+                Compression to navigate, expansion to express. I build every
+                stage of that chain, and the number in the middle is the
+                narrowest point of it.
+            </p>
+            <p data-intro data-intro-fade class="text-ink">
+                It starts as signal.
             </p>
         </div>
+
+        <ScrollCue
+            href="#signal"
+            label="Scroll to the first chapter"
+            caption={ui.scrollHint}
+            data-intro
+            data-intro-fade
+        />
     </section>
 
     <!-- ── Chapter 1, Signal ── -->
@@ -364,24 +363,6 @@ const ui = {
        Each chapter owns a screen. The card inside it is what slides in, and
        everything else rides on the card's own opacity, so a chapter is never
        half-arrived. */
-    /* The first screen starts where every other page's does: the layout's own
-       `pt-nav` is the nav clearance, so the intro adds none of its own and
-       claims a screen minus that offset. Same title position as /timeline and
-       /projects; the scroll hint rides the bottom edge of the screen. */
-    .story-intro {
-        min-height: calc(100svh - var(--space-nav));
-        display: flex;
-        flex-direction: column;
-        padding-bottom: 4rem;
-    }
-
-    .story-intro-inner {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        width: 100%;
-    }
-
     .story-chapter {
         min-height: 100svh;
         display: flex;
@@ -540,14 +521,6 @@ const ui = {
 
     .ch-7 .story-marker .eyebrow-rule {
         background: rgb(var(--color-primary) / 0.4);
-    }
-
-    .story-hint {
-        /* The scroll hint is the first instruction in the page's own verbs.
-           `auto` pushes it to the foot of the first screen, with a floor so it
-           never crowds the paragraph above it on a short one. */
-        margin-top: auto;
-        padding-top: 3.5rem;
     }
 
     /* Short phones (an SE is 667px tall): the figure already scales with the
