@@ -6,10 +6,10 @@
 // "What I do" is the site's own argument in miniature — foundation, structure,
 // surface — so each stage carries its specifics and a link to the proof rather
 // than a two-word label. No counted figures: the cards describe the work, not
-// its size. Markers and stack chips travel as expressions: the llms generator
-// flattens literal markup into the page docs, where these would read as
-// duplicate copy (the same facts reach the corpus through the prose on /timeline).
-// The card prose stays literal.
+// its size, and no stack chips: the tools are named once, on /about. Markers
+// travel as expressions: the llms generator flattens literal markup into the
+// page docs, where they would read as duplicate copy. The card prose stays
+// literal.
 //
 // Each tile is tagged with the Story chapter it belongs to, which is what
 // keeps the homepage and the narrative pointing at each other, and drawn in
@@ -22,11 +22,6 @@ const chain = {
         { num: "01", name: "Foundation" },
         { num: "02", name: "Structure" },
         { num: "03", name: "Surface" },
-    ],
-    stacks: [
-        ["Microsoft Fabric", "Multi-tenant", "Data pipelines", "Git + DevOps"],
-        ["Warehouse", "Lakehouse", "Postgres + dbt", "SQL"],
-        ["Power BI", "DAX", "Excel", "Forecasting"],
     ],
 };
 
@@ -105,9 +100,7 @@ const tiles = [
                         rebuilt rather than remembered.
                     </p>
 
-                    <ul class="chip-list mt-5">{chain.stacks[0].map((item) => <li class="chip">{item}</li>)}</ul>
-
-                    <a href="/timeline#platform" class="what-link arrow-link">
+                    <a href="/about#platform" class="what-link arrow-link">
                         How that runs today
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
                     </a>
@@ -134,8 +127,6 @@ const tiles = [
                         dashboard figure back to its row. On Fabric today, on
                         Postgres and dbt before that.
                     </p>
-
-                    <ul class="chip-list mt-5">{chain.stacks[1].map((item) => <li class="chip">{item}</li>)}</ul>
 
                     <a href="/story#structure" class="what-link arrow-link">
                         The case for structure
@@ -165,9 +156,7 @@ const tiles = [
                         uncertainty travel with it.
                     </p>
 
-                    <ul class="chip-list mt-5">{chain.stacks[2].map((item) => <li class="chip">{item}</li>)}</ul>
-
-                    <a href="/timeline#bi" class="what-link arrow-link">
+                    <a href="/about#bi" class="what-link arrow-link">
                         Data products in fintech
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
                     </a>
@@ -241,8 +230,8 @@ const tiles = [
 
 <style>
     /* ── What I do ──
-       Three stages of one chain, built from the shared card, eyebrow, icon
-       tile and chip (src/styles/components.css). The stage's tone says
+       Three stages of one chain, built from the shared card, eyebrow and
+       icon tile (src/styles/components.css). The stage's tone says
        which end of the chain it sits at, and hovering one stage dims the
        others, so the section answers the pointer instead of sitting still. */
     .what-stage {

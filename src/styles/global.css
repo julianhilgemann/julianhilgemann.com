@@ -164,7 +164,7 @@ body::before {
   height: 100lvh;
   z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(rgb(var(--color-contrast) / 0.07) 1px, transparent 1px);
+  background-image: radial-gradient(rgb(var(--color-contrast) / 0.12) 1px, transparent 1px);
   background-size: 28px 28px;
   -webkit-mask-image: radial-gradient(ellipse 110% 100% at 50% 0%, #000 30%, transparent 100%);
   mask-image: radial-gradient(ellipse 110% 100% at 50% 0%, #000 30%, transparent 100%);

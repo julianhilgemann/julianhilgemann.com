@@ -18,7 +18,7 @@ import { color, rgba } from "../styles/tokens.mjs";
 
 // Token colours; the resting values match PipelineDiagram.astro's styles.
 const AMBER = color.primary.DEFAULT;
-const BLUE = color.info;
+const BLUE = color.info.DEFAULT;
 const BOX_STROKE = rgba(color.contrast, 0.12);
 
 export function initPipelineDiagram() {

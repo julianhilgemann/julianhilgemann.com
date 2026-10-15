@@ -39,7 +39,10 @@ export const color = {
         strong: "#D97706", // pressed / hovered solid orange
         glow: "#FDE047", // far end of the accent gradient
     },
-    info: "#38BDF8", // blue: system, structure, signal
+    info: {
+        DEFAULT: "#38BDF8", // blue: system, structure, signal
+        glow: "#67E8F9", // far end of the blue gradient (the hero's cycling words)
+    },
     warn: "#FBBF24", // pricing warnings
 };
 
@@ -74,10 +77,10 @@ export const viz = {
    toward the background so white text stays readable over any of them. */
 export const gradientSheet = [
     color.background,
-    mixHex(color.background, color.info, 0.17), // deep blue
+    mixHex(color.background, color.info.DEFAULT, 0.17), // deep blue
     mixHex(color.background, color.primary.DEFAULT, 0.78), // ember
     color.background,
-    mixHex(color.background, color.info, 0.65), // signal blue
+    mixHex(color.background, color.info.DEFAULT, 0.65), // signal blue
 ];
 
 /* ── Type ──────────────────────────────────────────────────────────────────
@@ -141,6 +144,8 @@ export const motion = {
         // Overlays (the mobile menu): things arrive slower than they leave.
         enter: "420ms",
         exit: "260ms",
+        // One lap of the technology tape on /about: slow enough to read.
+        tape: "23s",
     },
     ease: {
         out: "cubic-bezier(0.22, 1, 0.36, 1)", // arrivals and every hover
@@ -161,7 +166,7 @@ export const button = {
     weight: "500",
 };
 
-export const focus = { width: "2px", offset: "3px", color: color.info };
+export const focus = { width: "2px", offset: "3px", color: color.info.DEFAULT };
 
 /* ── Helpers ───────────────────────────────────────────────────────────── */
 
@@ -172,13 +177,13 @@ export function channels(hex) {
     return `${(n >> 16) & 255} ${(n >> 8) & 255} ${n & 255}`;
 }
 
-/** The hex colour `t` of the way from `a` to `b`: mixHex(color.background, color.info, 0.2). */
+/** The hex colour `t` of the way from `a` to `b`: mixHex(color.background, color.info.DEFAULT, 0.2). */
 export function mixHex(a, b, t) {
     const [ca, cb] = [a, b].map((hex) => channels(hex).split(" ").map(Number));
     return "#" + ca.map((v, i) => Math.round(v + (cb[i] - v) * t).toString(16).padStart(2, "0")).join("").toUpperCase();
 }
 
-/** A token colour at an opacity, for canvas and SVG: rgba(color.info, 0.4). */
+/** A token colour at an opacity, for canvas and SVG: rgba(color.info.DEFAULT, 0.4). */
 export function rgba(hex, a) {
     return `rgba(${channels(hex).split(" ").join(", ")}, ${a})`;
 }
@@ -200,7 +205,8 @@ export function cssVariables() {
         "--color-primary": channels(color.primary.DEFAULT),
         "--color-primary-strong": channels(color.primary.strong),
         "--color-primary-glow": channels(color.primary.glow),
-        "--color-info": channels(color.info),
+        "--color-info": channels(color.info.DEFAULT),
+        "--color-info-glow": channels(color.info.glow),
         "--color-warn": channels(color.warn),
 
         "--line-subtle": `rgb(var(--color-contrast) / ${alpha.line.subtle})`,
@@ -236,6 +242,7 @@ export function cssVariables() {
         "--dur-slow": motion.duration.slow,
         "--dur-enter": motion.duration.enter,
         "--dur-exit": motion.duration.exit,
+        "--dur-tape": motion.duration.tape,
         "--ease-out": motion.ease.out,
         "--ease-in": motion.ease.in,
         "--ease-in-out": motion.ease.inOut,

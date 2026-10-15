@@ -1,0 +1,113 @@
+---
+import { techStack } from "../data/tech-stack";
+
+// The tools on /about as a running tape. Each mark is drawn once, in a
+// hidden sprite, and the tape refers to it, so the list can appear twice:
+// two identical copies ride one track that slides left by exactly one copy
+// (-50%), which is what makes the loop seamless. Screen readers get the
+// first copy; the second is aria-hidden. Hovering pauses the tape, and under
+// reduced motion it stops and wraps into a still, centred list.
+//
+// The names travel as an expression, so they stay out of the llms docs.
+interface Props {
+    class?: string;
+}
+
+const { class: className } = Astro.props;
+const copies = [0, 1];
+---
+
+<div data-reveal class:list={["tape", className]}>
+    <svg width="0" height="0" class="absolute" aria-hidden="true" focusable="false">
+        {techStack.map((tech) => <symbol id={`tech-${tech.id}`} viewBox={tech.viewBox} set:html={tech.body} />)}
+    </svg>
+
+    <div class="tape-track">
+        {
+            copies.map((copy) => (
+                <ul class="tape-list" aria-label={copy ? undefined : "Technologies I use"} aria-hidden={copy ? "true" : undefined}>
+                    {techStack.map((tech) => (
+                        <li class="tape-item text-ink-muted hover:text-ink-strong transition-colors">
+                            <svg class="tape-icon" aria-hidden="true" focusable="false">
+                                <use href={`#tech-${tech.id}`} />
+                            </svg>
+                            {tech.name}
+                        </li>
+                    ))}
+                </ul>
+            ))
+        }
+    </div>
+</div>
+
+<style>
+    /* Full-bleed, melting into the page at both edges. */
+    .tape {
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+        mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    }
+
+    .tape-track {
+        display: flex;
+        width: max-content;
+        animation: tape-run var(--dur-tape) linear infinite;
+    }
+    /* Pointer only: on a touch screen a tap would leave it paused. */
+    @media (hover: hover) {
+        .tape:hover .tape-track {
+            animation-play-state: paused;
+        }
+    }
+
+    /* The trailing padding equals the gap, so the seam between the two
+       copies is spaced like every other pair. */
+    .tape-list {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+        padding-right: 3rem;
+    }
+
+    .tape-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        white-space: nowrap;
+    }
+
+    .tape-icon {
+        width: 1.75rem;
+        height: 1.75rem;
+        flex: none;
+        fill: currentColor;
+    }
+
+    /* `translate`, not `transform`: GSAP owns `transform` on anything it
+       reveals, and the wrapper is revealed. */
+    @keyframes tape-run {
+        to {
+            translate: -50% 0;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .tape {
+            -webkit-mask-image: none;
+            mask-image: none;
+        }
+        .tape-track {
+            animation: none;
+            width: auto;
+        }
+        .tape-list {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem 2.5rem;
+            padding: 0 var(--space-gutter);
+        }
+        .tape-list + .tape-list {
+            display: none;
+        }
+    }
+</style>

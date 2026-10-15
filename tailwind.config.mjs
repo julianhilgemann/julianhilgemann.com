@@ -35,7 +35,7 @@ export default {
                 faint: c("ink-faint"),
             },
             primary: { DEFAULT: c("primary"), strong: c("primary-strong"), glow: c("primary-glow") },
-            info: c("info"),
+            info: { DEFAULT: c("info"), glow: c("info-glow") },
             warn: c("warn"),
             // Fixed steps of the overlay scale; no opacity modifier on purpose.
             line: { subtle: "var(--line-subtle)", DEFAULT: "var(--line)", strong: "var(--line-strong)" },
