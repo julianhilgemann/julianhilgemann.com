@@ -3,22 +3,20 @@ import Layout from "../layouts/Layout.astro";
 import SecondaryCTA from "../components/SecondaryCTA.astro";
 import MotionIntro from "../components/MotionIntro.astro";
 import ScrollCue from "../components/ScrollCue.astro";
+import TechTape from "../components/TechTape.astro";
 
-// Tags and timeline markers only restate the prose in the cards, so they live
-// here rather than in literal markup: the llms generator flattens literal text
-// into the page docs, where these would read as duplicate copy. The markers
+// Timeline markers only restate the prose in the cards, so they live here
+// rather than in literal markup: the llms generator flattens literal text
+// into the page docs, where they would read as duplicate copy. The markers
 // after "Now" are places, so the timeline reads as the route back.
 const ui = {
     markers: ["Now", "Munich", "Kiel", "Berlin", "Brandenburg", "Berlin", "Moscow", "Berlin"],
-    fabricTags: ["Microsoft Fabric", "DAX", "TMDL", "Data pipelines", "APIs", "Fabric data apps", "Coding agents", "Git + DevOps"],
-    fintechTags: ["Postgres", "dbt", "Power BI", "Fabric & Azure", "Excel", "Forecasting", "Due diligence"],
-    languages: ["English", "German", "Russian"],
 };
 ---
 
 <Layout
-    title="Timeline | Julian Hilgemann"
-    description="Timeline: a multi-tenant Microsoft Fabric product now, data products in fintech before that, and before those econometrics, music production and art."
+    title="About | Julian Hilgemann"
+    description="About Julian Hilgemann, data platform engineer in Munich: a multi-tenant Microsoft Fabric product now, data products in fintech before that, and before those econometrics, music production and art."
     fullWidth={true}
 >
     <MotionIntro />
@@ -26,21 +24,23 @@ const ui = {
     <!-- ── Intro ── -->
     <section class="section-intro page-container relative isolate">
         <h1 data-page-title data-intro class="text-h1 text-ink-strong mb-10">
-            Timeline
+            About
         </h1>
 
-        <div class="max-w-measure text-lg md:text-xl text-ink-muted leading-relaxed space-y-6">
-            <p data-intro data-intro-fade class="text-lead text-ink">
-                Art and sound first, then economics, finance and platforms. The
-                same thread throughout: a signal, and what it takes to turn it
-                into a number.
-            </p>
-            <p data-intro data-intro-fade>
-                I'm a data platform engineer in Munich. Microsoft Fabric and
-                Azure at work, containers and DuckDB at home, TouchDesigner
-                after hours. I speak {ui.languages.join(", ")}.
-            </p>
-        </div>
+        <p data-intro data-intro-fade class="max-w-measure text-lg md:text-xl text-ink-muted leading-relaxed md:leading-relaxed">
+            Hi, I'm Julian, a data platform engineer with a passion for all
+            things data. Originally from Berlin, I'm now based in Munich, where
+            I work as a BI engineer at a German fintech that builds financial
+            reporting for small and mid-sized businesses. What I enjoy most is
+            the whole journey data takes: from the stochastic origins of an
+            observation, through measurement and storage, transformation and
+            aggregation, to communicating what it means and the real-world
+            actions it drives. I also see data as a medium for creative
+            expression: through sound and visuals, those samples of reality can
+            carry meaning that reaches people on an emotional level. Below are a
+            few data points to get to know me. If you'd like to get in touch,
+            reach out or connect with me on LinkedIn.
+        </p>
 
         <div data-intro data-intro-fade class="mt-10">
             <a
@@ -58,7 +58,7 @@ const ui = {
 
     <!-- ── The path, newest first. #platform and #bi are what the Story
          chapters deep-link into. Everything before the two roles is
-         quieter: a neutral marker and no chips. ── -->
+         quieter: a neutral marker. ── -->
     <section id="path" class="section border-t border-line-subtle">
         <div class="page-container grid lg:grid-cols-12 gap-x-16 gap-y-10">
             <div class="lg:col-span-4">
@@ -92,13 +92,6 @@ const ui = {
                             agentically, with coding agents working on the model's
                             source files and Git behind every change.
                         </p>
-                        <ul class="chip-list mt-6" aria-hidden="true">
-                            {
-                                ui.fabricTags.map((tag) => (
-                                    <li class="chip">{tag}</li>
-                                ))
-                            }
-                        </ul>
                     </div>
                 </article>
 
@@ -120,13 +113,6 @@ const ui = {
                             M&amp;A due diligence, plus the stakeholder work of
                             agreeing what a number means before anyone builds it.
                         </p>
-                        <ul class="chip-list mt-6" aria-hidden="true">
-                            {
-                                ui.fintechTags.map((tag) => (
-                                    <li class="chip">{tag}</li>
-                                ))
-                            }
-                        </ul>
                     </div>
                 </article>
 
@@ -270,6 +256,21 @@ const ui = {
                 </li>
             </ul>
         </div>
+    </section>
+
+    <!-- ── Technologies I use. The copy keeps to the column; the tape runs
+         the full width of the page. ── -->
+    <section id="stack" class="section border-t border-line-subtle">
+        <div class="page-container">
+            <h2 data-reveal-lines class="text-h2 text-ink-strong mb-head">Technologies I use</h2>
+            <p data-reveal class="max-w-measure text-lg md:text-xl text-ink-muted leading-relaxed md:leading-relaxed">
+                I enjoy an AI-forward way of working. I combine the tools below
+                with agentic workflows, and together they act as a kind of
+                brush: a way to turn technical ideas into working systems
+                quickly, and to separate signal from noise along the way.
+            </p>
+        </div>
+        <TechTape class="mt-12 md:mt-16" />
     </section>
 
     <SecondaryCTA />

@@ -1,8 +1,9 @@
 ---
 // The moving gradient sheet (src/scripts/gradient-sheet.ts) as a backdrop.
 // Render it first inside a `relative isolate` section: that section sizes the
-// canvas and receives the pointer. The script below starts every sheet on
-// the page, so it works whatever motion script the page loads.
+// canvas and receives the pointer, and on a touch screen keeps the height it
+// loaded with (see the script). The script below starts every sheet on the
+// page, so it works whatever motion script the page loads.
 //
 //   start  moment the animation opens on, and the still frame under reduced
 //          motion; give two sheets on one page different ones
@@ -32,9 +33,31 @@ const { start, fade = false, intro = false, class: className = "-z-10" } = Astro
     import { initGradientSheet } from "../scripts/gradient-sheet";
 
     const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const sections: HTMLElement[] = [];
     document.querySelectorAll<HTMLCanvasElement>("[data-gradient-sheet]").forEach((canvas) => {
         const section = canvas.parentElement;
         const start = canvas.dataset.start ? Number(canvas.dataset.start) : undefined;
-        if (section) initGradientSheet(section, canvas, reducedMotion, start);
+        if (!section) return;
+        sections.push(section);
+        initGradientSheet(section, canvas, reducedMotion, start);
     });
+
+    // Some phone browsers resize the page as their toolbar slides away, and
+    // `100svh` follows: a sheet's section grew mid-scroll, its content
+    // re-centred and the sheet, sized to it, rescaled. On a touch screen each
+    // section keeps the screen height it loaded with; a new width (rotation)
+    // measures again.
+    if (sections.length && matchMedia("(pointer: coarse)").matches) {
+        let width = 0;
+        const hold = () => {
+            if (innerWidth === width) return;
+            width = innerWidth;
+            sections.forEach((section) => {
+                section.style.minHeight = "";
+                section.style.minHeight = getComputedStyle(section).minHeight;
+            });
+        };
+        hold();
+        addEventListener("resize", hold);
+    }
 </script>

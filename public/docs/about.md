@@ -1,8 +1,6 @@
-# Timeline
+# About
 
-Art and sound first, then economics, finance and platforms. The same thread throughout: a signal, and what it takes to turn it into a number.
-
-I'm a data platform engineer in Munich. Microsoft Fabric and Azure at work, containers and DuckDB at home, TouchDesigner after hours. I speak .
+Hi, I'm Julian, a data platform engineer with a passion for all things data. Originally from Berlin, I'm now based in Munich, where I work as a BI engineer at a German fintech that builds financial reporting for small and mid-sized businesses. What I enjoy most is the whole journey data takes: from the stochastic origins of an observation, through measurement and storage, transformation and aggregation, to communicating what it means and the real-world actions it drives. I also see data as a medium for creative expression: through sound and visuals, those samples of reality can carry meaning that reaches people on an emotional level. Below are a few data points to get to know me. If you'd like to get in touch, reach out or connect with me on LinkedIn.
 
 LinkedIn
 
@@ -47,6 +45,10 @@ I grew up in Berlin and went to the Kurt-Schwitters-Oberschule, where my focus w
 - **Craft in the details.** Correct isn't enough. Naming, layout, load times and edge cases decide whether people come back.
 
 - **Impact you can see.** A dashboard nobody opens is a failed project, however elegant the model.
+
+## Technologies I use
+
+I enjoy an AI-forward way of working. I combine the tools below with agentic workflows, and together they act as a kind of brush: a way to turn technical ideas into working systems quickly, and to separate signal from noise along the way.
 
 ## Questions? I reply fast.
 

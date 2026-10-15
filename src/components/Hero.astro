@@ -21,7 +21,7 @@ const outcomes = [
     ["an", "audit"],
     ["an", "answer"],
 ];
-const accent = "text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-glow";
+const accent = "cycle-word text-transparent bg-clip-text bg-gradient-to-r from-info to-info-glow";
 ---
 
 <section
@@ -57,8 +57,8 @@ const accent = "text-transparent bg-clip-text bg-gradient-to-r from-primary to-p
                 data-intro
                 class="text-display text-ink-strong mb-6 md:mb-8"
             >
-                I build the systems between a measurement and <span data-cycle class="cycle"><span data-cycle-item>a <span class={accent}>decision</span>.</span>{outcomes.map(([article, word]) => (
-                    <span data-cycle-item aria-hidden="true">{article} <span class={accent}>{word}</span>.</span>
+                I build the systems between a measurement and <span data-cycle class="cycle"><span data-cycle-item>a <span class={accent}>decision.</span></span>{outcomes.map(([article, word]) => (
+                    <span data-cycle-item aria-hidden="true">{article} <span class={accent}>{word}.</span></span>
                 ))}</span>
             </h1>
 
@@ -67,8 +67,8 @@ const accent = "text-transparent bg-clip-text bg-gradient-to-r from-primary to-p
                 data-intro
                 class="text-lead text-ink drop-shadow-md mb-8 md:mb-10 max-w-measure"
             >
-                Data platform engineer in Munich. Microsoft Fabric at work,
-                containers and DuckDB at home, TouchDesigner after hours.
+                Data platform engineer in Munich. Specialized in scalable
+                <span class="whitespace-nowrap">BI Solutions.</span>
             </p>
 
             <div data-hero-fade data-intro class="flex pointer-events-auto">
@@ -106,5 +106,14 @@ const accent = "text-transparent bg-clip-text bg-gradient-to-r from-primary to-p
     }
     .cycle > * + * {
         visibility: hidden;
+    }
+    /* The gradient is clipped to the word's box, and the display step's
+       negative tracking pulls that box in past the last glyph's ink, which
+       shaved its edge. The padding gives the ink room; the margin hands the
+       width back so the slot does not grow. The period sits inside the word
+       and takes the gradient with it. */
+    .cycle-word {
+        padding-inline-end: 0.08em;
+        margin-inline-end: -0.08em;
     }
 </style>

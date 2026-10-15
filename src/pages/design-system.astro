@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ScrollCue from "../components/ScrollCue.astro";
+import TechTape from "../components/TechTape.astro";
 import { color, alpha, viz, gradientSheet, type, space, layout, radius, motion, button } from "../styles/tokens.mjs";
 
 // The design system's catalogue: every token and component, rendered with
@@ -37,7 +38,8 @@ const colorGroups = [
             { name: "primary", cls: "bg-primary", value: color.primary.DEFAULT },
             { name: "primary-strong", cls: "bg-primary-strong", value: color.primary.strong },
             { name: "primary-glow", cls: "bg-primary-glow", value: color.primary.glow },
-            { name: "info", cls: "bg-info", value: color.info },
+            { name: "info", cls: "bg-info", value: color.info.DEFAULT },
+            { name: "info-glow", cls: "bg-info-glow", value: color.info.glow },
             { name: "warn", cls: "bg-warn", value: color.warn },
         ],
     },
@@ -82,6 +84,7 @@ const motionRows = [
     { name: "duration-base", value: motion.duration.base, use: "Cards, chips, icon tiles (the default)" },
     { name: "duration-slow", value: motion.duration.slow, use: "Image fades, disclosure" },
     { name: "duration-enter / exit", value: `${motion.duration.enter} / ${motion.duration.exit}`, use: "Overlays: the mobile menu arrives slower than it leaves" },
+    { name: "duration-tape", value: motion.duration.tape, use: "One lap of the technology tape (TechTape)" },
     { name: "ease-out", value: motion.ease.out, use: "Every transition and arrival (the default)" },
     { name: "ease-in", value: motion.ease.in, use: "Departures" },
     { name: "ease-in-out", value: motion.ease.inOut, use: "Loops: scroll cue, disclosure" },
@@ -404,6 +407,18 @@ const vizItems = Object.entries(viz);
                         scrolls; the hero positions its own.
                     </p>
                 </div>
+            </div>
+
+            <div class="card mt-grid px-0 overflow-hidden">
+                <p class="eyebrow mb-6 px-card">Technology tape</p>
+                <TechTape />
+                <p class="mt-6 px-card text-sm text-ink-muted">
+                    <code class="font-mono text-ink">TechTape.astro</code>, the tools on
+                    <code class="font-mono text-ink">/about</code>: one-colour marks from
+                    <code class="font-mono text-ink">src/data/tech-stack.ts</code> drawn in the ink, looping on
+                    <code class="font-mono text-ink">--dur-tape</code>. Hover pauses it; reduced motion stops it and
+                    wraps it into a still list.
+                </p>
             </div>
 
             <h3 class="text-h3 text-ink-strong mt-16 mb-6">Surfaces</h3>

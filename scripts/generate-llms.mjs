@@ -43,10 +43,10 @@ const PAGE_META = {
         group: 'en',
         desc: 'The narrative spine of the site: seven chapters from signal through belief, measurement, structure, inference and the number, then back out as expansion.',
     },
-    timeline: {
-        title: 'Timeline',
+    about: {
+        title: 'About',
         group: 'en',
-        desc: 'CV as a timeline, newest first: the multi-tenant Microsoft Fabric product role, data products in fintech, graduate studies in quantitative economics, insurance and real estate, the business administration degree and its forecasting thesis, audio engineering, the Abitur in Moscow and school in Berlin.',
+        desc: 'Who Julian is, then the CV as a timeline, newest first: the multi-tenant Microsoft Fabric product role, data products in fintech, graduate studies in quantitative economics, insurance and real estate, the business administration degree and its forecasting thesis, audio engineering, the Abitur in Moscow and school in Berlin.',
     },
     services: {
         title: 'Services & Pricing',
@@ -98,7 +98,7 @@ const PAGE_ORDER = [
     'index',
     'story',
     'projects',
-    'timeline',
+    'about',
     'services',
     'page-engine',
     'hub',
