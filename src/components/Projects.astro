@@ -5,6 +5,16 @@ import ProjectCard from "./ProjectCard.astro";
 // one, the repository otherwise.
 const projects = [
     {
+        title: "FX Macro Data Platform",
+        category: "Point-in-Time Data Platform",
+        description:
+            "A platform for macro and FX time series that keeps every vintage, so each number traces back to what was knowable when it was published.",
+        image: "/assets/fx_macro_platform.webp",
+        links: [
+            { kind: "github", href: "https://github.com/julianhilgemann/fx_macro_platform", label: "GitHub" },
+        ],
+    },
+    {
         title: "Vantage Alpin: Analytics Engineering",
         category: "Production Data Stack",
         description:
@@ -58,16 +68,20 @@ const projects = [
         ],
     },
 ] as const;
+
+// Featured cards lead the list and span the grid, image beside the text.
+const FEATURED = 2;
 ---
 
 <!-- The card list only; the Projects page supplies the heading. The first
-     card spans both columns, so five cards fill the grid evenly. Cards rise
-     one by one as they scroll in ([data-reveal-batch], src/scripts/motion.ts). -->
+     two cards are featured and span both columns, so six cards fill the grid
+     evenly. Cards rise one by one as they scroll in ([data-reveal-batch],
+     src/scripts/motion.ts). -->
 <ul data-reveal-batch class="grid sm:grid-cols-2 gap-grid">
     {
         projects.map((project, i) => (
-            <li class:list={[i === 0 && "sm:col-span-2"]}>
-                <ProjectCard {...project} links={[...project.links]} featured={i === 0} />
+            <li class:list={[i < FEATURED && "sm:col-span-2"]}>
+                <ProjectCard {...project} links={[...project.links]} featured={i < FEATURED} />
             </li>
         ))
     }
