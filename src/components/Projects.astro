@@ -26,6 +26,16 @@ const projects = [
         ],
     },
     {
+        title: "Datapipe: Audio-reactive Shorts",
+        category: "Audio-reactive Video",
+        description:
+            "One command turns a song into a finished YouTube Short: the music is measured frame by frame, and the measurements drive a neon tunnel rendered headless in Blender.",
+        image: "/assets/datapipe.webp",
+        links: [
+            { kind: "github", href: "https://github.com/julianhilgemann/audiovisual-animations", label: "GitHub" },
+        ],
+    },
+    {
         title: "End-to-End SaaS Operating System",
         category: "Stochastic Financial Twin",
         description:
@@ -70,12 +80,12 @@ const projects = [
 ] as const;
 
 // Featured cards lead the list and span the grid, image beside the text.
-const FEATURED = 2;
+const FEATURED = 3;
 ---
 
 <!-- The card list only; the Projects page supplies the heading. The first
-     two cards are featured and span both columns, so six cards fill the grid
-     evenly. Cards rise one by one as they scroll in ([data-reveal-batch],
+     three cards are featured and span both columns, so seven cards fill the
+     grid evenly. Cards rise one by one as they scroll in ([data-reveal-batch],
      src/scripts/motion.ts). -->
 <ul data-reveal-batch class="grid sm:grid-cols-2 gap-grid">
     {
