@@ -14,9 +14,8 @@
 // Each tile is tagged with the Story chapter it belongs to, which is what
 // keeps the homepage and the narrative pointing at each other, and drawn in
 // that chapter's accent: blue for the system chapters, orange for the
-// expressive end. The tiles only
-// link out to work that exists — there is no TouchDesigner or audio piece on
-// the site yet, so the expressive end is represented by the shader work.
+// expressive end. The tiles only link out to work that exists; the expressive
+// end is Datapipe, where a song's measurements drive the picture.
 const chain = {
     markers: [
         { num: "01", name: "Foundation" },
@@ -31,7 +30,7 @@ const tiles = [
         chapter: "Structure",
         tone: "info",
         note: "Macro time series kept by vintage, so every number can be traced back to what was knowable when it was published.",
-        image: "/assets/agentic_hla.webp",
+        image: "/assets/fx_macro_platform.webp",
         href: "https://github.com/julianhilgemann/fx_macro_platform",
         external: true,
     },
@@ -54,12 +53,12 @@ const tiles = [
         external: true,
     },
     {
-        title: "ShaderGradient Playground",
+        title: "Datapipe: Audio-reactive Shorts",
         chapter: "Expansion",
         tone: "primary",
-        note: "Numbers driving colour and motion on the GPU. The same loop as the dashboards, run backwards.",
-        image: "/assets/shadergradient.webp",
-        href: "https://julianhilgemann.github.io/shader_gradient_app/",
+        note: "A song measured frame by frame, then opened back up into light and motion. The same loop as the dashboards, run backwards.",
+        image: "/assets/datapipe.webp",
+        href: "https://github.com/julianhilgemann/audiovisual-animations",
         external: true,
     },
 ];
