@@ -95,7 +95,7 @@ const isActive = (href: string) => {
     </div>
 
     <!-- Mobile menu: opened and closed by toggling [data-open] on the header;
-         the choreography is in the <style> block below. -->
+         the choreography is in design-system/components.css. -->
     <div id="mobile-menu" class="mobile-menu md:hidden">
         <div class="mobile-panel" id="mobile-menu-inner">
             <nav aria-label="Main" class="flex flex-col w-full py-6 px-4 gap-6 max-w-sm mx-auto">
@@ -134,7 +134,7 @@ const isActive = (href: string) => {
 
 <script>
     // Open and close by toggling [data-open] on the header; the choreography
-    // (panel, links, icon, scrim) is CSS, in the <style> block below.
+    // (panel, links, icon, scrim) is CSS, in design-system/components.css.
     const setupMobileMenu = () => {
         const header = document.getElementById("site-header");
         const toggle = document.getElementById("mobile-menu-toggle");
@@ -185,148 +185,3 @@ const isActive = (href: string) => {
     // Run on astro page swap
     document.addEventListener("astro:page-load", setupMobileMenu);
 </script>
-
-<style>
-    /* ── Mobile menu ──
-       A blind that unrolls from under the nav bar. clip-path reveals the
-       panel top-down, so its text is never squashed (a scaleY transition
-       did that) and the panel is opaque throughout, so the page never shows
-       through the links. Arrivals are slower than departures: on open the
-       panel unrolls and the links follow one by one; on close the links
-       leave first, together, then the panel rolls back up. `visibility`
-       flips only once the close has finished, which also takes the links out
-       of the tab order while the menu is shut. Timings are the
-       enter / exit motion tokens. */
-    .mobile-menu {
-        position: fixed;
-        inset: 4.5rem 0 0 0;
-        z-index: 40;
-        padding: 1rem;
-        pointer-events: none;
-    }
-
-    /* The page recedes behind the panel; tapping it closes the menu. */
-    .mobile-menu::before {
-        content: "";
-        position: absolute;
-        inset: -4.5rem 0 0 0;
-        background: var(--scrim);
-        opacity: 0;
-        transition: opacity var(--dur-exit) var(--ease-in) 60ms;
-    }
-
-    .mobile-panel {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        overflow-y: auto;
-        border: 1px solid var(--line);
-        border-radius: var(--radius-panel);
-        background-color: rgb(var(--color-surface));
-        clip-path: inset(0 0 100% 0 round var(--radius-panel));
-        visibility: hidden;
-        transition:
-            clip-path var(--dur-exit) var(--ease-in) 60ms,
-            visibility 0s linear calc(var(--dur-exit) + 60ms);
-    }
-
-    .mobile-item {
-        opacity: 0;
-        translate: 0 -0.5rem;
-        transition:
-            opacity var(--dur-fast) var(--ease-in),
-            translate var(--dur-fast) var(--ease-in),
-            color var(--dur-fast) var(--ease-out);
-    }
-
-    [data-open] .mobile-menu {
-        pointer-events: auto;
-    }
-
-    [data-open] .mobile-menu::before {
-        opacity: 1;
-        transition: opacity var(--dur-enter) var(--ease-out);
-    }
-
-    [data-open] .mobile-panel {
-        clip-path: inset(0 0 0 0 round var(--radius-panel));
-        visibility: visible;
-        transition:
-            clip-path var(--dur-enter) var(--ease-out),
-            visibility 0s;
-    }
-
-    [data-open] .mobile-item {
-        --delay: calc(80ms + var(--i, 0) * 30ms);
-        opacity: 1;
-        translate: 0 0;
-        transition:
-            opacity var(--dur-enter) var(--ease-out) var(--delay),
-            translate var(--dur-enter) var(--ease-out) var(--delay),
-            color var(--dur-fast) var(--ease-out);
-    }
-
-    /* ── Toggle icon ──
-       Two beats each way. Opening: the three lines meet in the middle, then
-       turn into a cross. Closing: the cross straightens, then the lines
-       spread back out. */
-    .nav-icon {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 18px;
-        height: 14px;
-        color: rgb(var(--color-ink-strong));
-        transition: color var(--dur-base) var(--ease-out);
-    }
-
-    .nav-line {
-        display: block;
-        width: 100%;
-        height: 2px;
-        border-radius: 9999px;
-        background-color: currentColor;
-        transition:
-            rotate var(--dur-fast) var(--ease-in-out),
-            translate var(--dur-fast) var(--ease-in-out) var(--dur-fast),
-            opacity 0s linear var(--dur-fast);
-    }
-
-    [data-open] .nav-icon {
-        color: rgb(var(--color-primary));
-    }
-
-    [data-open] .nav-line {
-        transition:
-            translate var(--dur-fast) var(--ease-in-out),
-            rotate var(--dur-fast) var(--ease-in-out) var(--dur-fast),
-            opacity 0s linear var(--dur-fast);
-    }
-
-    [data-open] .nav-line-1 {
-        translate: 0 6px;
-        rotate: 45deg;
-    }
-
-    [data-open] .nav-line-2 {
-        opacity: 0;
-    }
-
-    [data-open] .nav-line-3 {
-        translate: 0 -6px;
-        rotate: -45deg;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .mobile-menu::before,
-        .mobile-panel,
-        .mobile-item,
-        .nav-icon,
-        .nav-line {
-            transition: none !important;
-        }
-    }
-</style>

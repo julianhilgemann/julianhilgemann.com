@@ -505,9 +505,6 @@ Deutsch
 
 Julian Hilgemann
 
-// Open and close by toggling [data-open] on the header; the choreography
-// (panel, links, icon, scrim) is CSS, in the
-
 ---
 
 ## de/ContactModal
