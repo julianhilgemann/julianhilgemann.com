@@ -1,16 +1,17 @@
 ---
 const year = new Date().getFullYear();
 
-// Hyperadapted lives on its own domain, which holds a placeholder for now
-// (src/pages/story.astro holds the same constant and label).
-const HYPERADAPTED = "https://www.hyperadapted.com";
+// Hyperadapted, the expressive half, lives on its own domain
+// (src/pages/story.astro links there too, with its own placement tag).
+const HYPERADAPTED =
+    "https://hyperadapted.com/?utm_source=julianhilgemann&utm_medium=referral&utm_campaign=julianhilgemann-site&utm_content=footer";
 ---
 
 <footer
     class="page-container py-12 mt-20 border-t border-line-subtle"
 >
-    <!-- Row 0: the cross-site link. Once Hyperadapted is live this becomes
-         the pair's mutual link, each site naming the other as its missing half. -->
+    <!-- Row 0: the cross-site link, the pair's mutual one: hyperadapted.com's
+         footer names this site as its other half, and this one names it. -->
     <p class="text-center text-sm text-ink-muted mb-10">
         <a
             href={HYPERADAPTED}
@@ -19,7 +20,7 @@ const HYPERADAPTED = "https://www.hyperadapted.com";
             class="arrow-link group"
         >
             <span class="text-ink-strong group-hover:text-primary transition-colors"
-                >Coming Soon: Hyperadapted</span
+                >The other half: Hyperadapted</span
             >
             <span class="arrow" aria-hidden="true">→</span>
         </a>
