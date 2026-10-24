@@ -5,11 +5,12 @@ import StoryField from "../components/StoryField.astro";
 import NumberAnatomy from "../components/NumberAnatomy.astro";
 import ScrollCue from "../components/ScrollCue.astro";
 
-// Hyperadapted lives on its own domain, which holds a placeholder for now —
-// hence the "Coming Soon" label on every link that points at it. The footer
-// keeps the same constant.
-const HYPERADAPTED = "https://www.hyperadapted.com";
-const HYPERADAPTED_LABEL = "Coming Soon: Hyperadapted";
+// Hyperadapted, the expressive half, lives on its own domain; chapters 1 and
+// 2 point there. The utm parameters let its analytics tell the visits from
+// here apart. The footer links there too, with its own placement tag.
+const HYPERADAPTED =
+    "https://hyperadapted.com/?utm_source=julianhilgemann&utm_medium=referral&utm_campaign=julianhilgemann-site&utm_content=story";
+const HYPERADAPTED_LABEL = "The other half: Hyperadapted";
 
 // Figure labels, chapter numbers and tags only restate the prose beside them,
 // so they travel as expressions: the llms generator flattens literal markup
