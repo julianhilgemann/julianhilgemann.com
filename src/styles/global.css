@@ -3,12 +3,14 @@
    The design system lives in three places:
      tokens.mjs      every value (colour, type, space, shape, motion); the
                      Tailwind config writes them to :root as custom properties
-     components.css  the shared building blocks: buttons, cards, labels, links
+     components.css  the shared building blocks: buttons, cards, labels, links,
+                     the nav's mobile menu; also from the design-system
+                     submodule (design-system/components.css)
      this file       base styles and the site's signature effects
 
    Vite inlines these imports before Tailwind runs, so the `@layer` blocks
    inside them land in the right layer. Imports must stay first. */
-@import "./components.css";
+@import "../../design-system/components.css";
 @import "./klaro.css";
 
 @tailwind base;
