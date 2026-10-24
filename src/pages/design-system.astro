@@ -6,7 +6,8 @@ import { color, alpha, viz, gradientSheet, type, space, layout, radius, motion, 
 
 // The design system's catalogue: every token and component, rendered with
 // the same classes the site uses, so this page is also the check that they
-// still agree. Values print straight from src/styles/tokens.mjs.
+// still agree. Values print straight from src/styles/tokens.mjs, which is
+// the light theme of the design-system submodule.
 //
 // Not linked from the site, kept out of search (noindex) and out of the
 // generated llms docs (SKIP_PAGES in scripts/generate-llms.mjs).
@@ -14,7 +15,7 @@ import { color, alpha, viz, gradientSheet, type, space, layout, radius, motion, 
 const colorGroups = [
     {
         title: "Surfaces",
-        note: "Deepest to highest. Glass is the background at 70% with a blur.",
+        note: "The page, then the opaque layers above it. Glass is the background at 70% with a blur.",
         items: [
             { name: "background", cls: "bg-background", value: color.background },
             { name: "surface", cls: "bg-surface", value: color.surface },
@@ -109,14 +110,16 @@ const vizItems = Object.entries(viz);
             <h1 class="text-h1 text-ink-strong mb-8">Design system</h1>
             <p class="text-lead text-ink max-w-measure">
                 Every value on the site starts in one file,
-                <code class="font-mono text-primary">src/styles/tokens.mjs</code>.
-                Tailwind turns it into CSS variables and utilities, the component
-                layer builds on those, and the figures read the same values.
+                <code class="font-mono text-primary">design-system/tokens.mjs</code>,
+                shared with hyperadapted.com: this site reads its light theme,
+                Hyperadapted its dark one. Tailwind turns it into CSS variables
+                and utilities, the component layer builds on those, and the
+                figures read the same values.
             </p>
             <ol class="mt-10 grid gap-grid md:grid-cols-3 text-sm">
                 <li class="card">
                     <p class="eyebrow mb-3"><span class="eyebrow-num">01</span><span class="eyebrow-rule"></span>Tokens</p>
-                    <p class="text-ink-muted"><code class="font-mono text-ink">tokens.mjs</code>: colour, type, space, shape, motion. Change a value, rebuild, done.</p>
+                    <p class="text-ink-muted"><code class="font-mono text-ink">tokens.mjs</code>: colour in a light and a dark theme, then type, space, shape, motion. Change a value, rebuild, done.</p>
                 </li>
                 <li class="card">
                     <p class="eyebrow mb-3"><span class="eyebrow-num">02</span><span class="eyebrow-rule"></span>Utilities</p>

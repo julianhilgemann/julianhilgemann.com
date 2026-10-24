@@ -20,6 +20,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # The design tokens come from the design-system submodule.
+          submodules: true
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
