@@ -9,7 +9,9 @@
  * and the perspective stretch them. The technique behind the gradient on
  * theartmarket.artbasel.com, in plain WebGL so the homepage carries no 3D
  * library, and with one change for a dark palette: light colours add their
- * light rather than cover, so blue and orange never mix to mud.
+ * light rather than cover, so blue and orange never mix to mud. On a light
+ * palette (this site's, since the light theme) every colour covers, as in the
+ * original: screening pale colours onto a pale ground would bleach them out.
  *
  * The pointer turns the sheet a little toward itself. The loop only runs while
  * its section is on screen and the tab is visible; with reduced motion it paints
@@ -121,6 +123,8 @@ void main() {
     vec3 pos = vec3((a_uv - 0.5) * u_size, fold * 0.3 + tilt + incline + offset);
 
     v_color = u_color[0];
+    // Screening (below) only lights up a dark ground; on a light one it is off.
+    float darkGround = 1.0 - step(0.5, dot(u_color[0], vec3(0.2126, 0.7152, 0.0722)));
     for (int i = 1; i < 5; i++) {
         float f = float(i);
         float n = snoise(vec3(
@@ -132,7 +136,7 @@ void main() {
         // to it (screen), so where blue and orange cross they catch a sheen
         // instead of mixing to mud, as complementary colours do.
         vec3 c = u_color[i];
-        float light = smoothstep(0.08, 0.12, dot(c, vec3(0.2126, 0.7152, 0.0722)));
+        float light = smoothstep(0.08, 0.12, dot(c, vec3(0.2126, 0.7152, 0.0722))) * darkGround;
         c = mix(c, 1.0 - (1.0 - v_color) * (1.0 - c), light);
         v_color = mix(v_color, c, smoothstep(0.1, 0.6 + f * 0.07, n));
     }

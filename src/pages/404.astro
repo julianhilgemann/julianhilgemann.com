@@ -17,13 +17,15 @@ import Layout from "../layouts/Layout.astro";
                 </div>
             </div>
 
-            <!-- Massive 404: Scaled to fit viewport width OR height -->
+            <!-- Massive 404: Scaled to fit viewport width OR height. A faint
+                 backdrop in the ink and accent colours; on the light page an
+                 overlay blend washed it out entirely. -->
             <h1
-                class="font-bold tracking-tight leading-none select-none mix-blend-overlay opacity-80"
+                class="font-bold tracking-tight leading-none select-none text-contrast/[0.08]"
                 style="font-size: min(30vw, 40vh);"
             >
                 4<span
-                    class="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-glow"
+                    class="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-primary/20 to-primary-glow/20"
                     >0</span
                 >4
             </h1>
