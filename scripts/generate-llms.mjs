@@ -14,8 +14,9 @@ const DOCS_DIR = path.join(PUBLIC_DIR, 'docs');
 const PRESERVE_IN_DOCS = new Set(['llmcntxt.md']);
 
 // design-system is the token and component catalogue: noindex, and nothing
-// in it is about the site's subject.
-const SKIP_PAGES = new Set(['404', 'design-system']);
+// in it is about the site's subject. story only forwards to hyperadapted.com,
+// where the Story has lived since 2026-10-25.
+const SKIP_PAGES = new Set(['404', 'design-system', 'story']);
 
 const PRICING_CONFIG = path.join(SRC_DIR, 'data', 'pricing-config.json');
 // Pages whose real content lives in data rather than markup.
@@ -37,11 +38,6 @@ const PAGE_META = {
         title: 'Projects',
         group: 'en',
         desc: 'Open-source data projects: analytics engineering, forecasting, data visualisation and creative coding, each with concept and architecture.',
-    },
-    story: {
-        title: 'Story',
-        group: 'en',
-        desc: 'The narrative spine of the site: seven chapters from signal through belief, measurement, structure, inference and the number, then back out as expansion.',
     },
     about: {
         title: 'About',
@@ -96,7 +92,6 @@ const GROUP_HEADINGS = [
 // top-down hits the substantive pages before the legal boilerplate.
 const PAGE_ORDER = [
     'index',
-    'story',
     'projects',
     'about',
     'services',

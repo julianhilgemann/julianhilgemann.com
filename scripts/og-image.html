@@ -4,7 +4,8 @@
   English by default; open with #de for the German version (only the figure's
   labels differ).
 
-  The figure mirrors src/components/NumberAnatomy.astro in its exploded state,
+  The figure mirrors NumberAnatomy.astro in its exploded state (Story chapter
+  6, in hyperadapted.com's src/components/ since the Story moved there),
   with the layers pulled closer so the stack fits the frame. It sits centred so
   apps that crop previews to a square still show it whole. The backdrop is a
   still, dimmed take on the hero network (src/scripts/hero-network.ts).
@@ -98,7 +99,7 @@ const lang = location.hash === "#de" ? "de" : "en";
 const t = COPY[lang];
 document.documentElement.lang = lang;
 
-// ── Figure: same geometry as NumberAnatomy.astro, layers 80 apart (86 there).
+// ── Figure: same geometry as hyperadapted.com's NumberAnatomy.astro, layers 80 apart (86 there).
 const ISO = "matrix(0.866 0.5 -0.866 0.5 140 0)";
 const OFFSETS = [0, 80, 160, 240];
 const codeRows = [
