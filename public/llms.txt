@@ -5,7 +5,6 @@
 
 ## Core Pages (English)
 - [Home](/docs/index.md): Landing page: positioning statement and the current project, the FX Macro Data Platform, with its architecture.
-- [Story](/docs/story.md): The narrative spine of the site: seven chapters from signal through belief, measurement, structure, inference and the number, then back out as expansion.
 - [Projects](/docs/projects.md): Open-source data projects: analytics engineering, forecasting, data visualisation and creative coding, each with concept and architecture.
 - [About](/docs/about.md): Who Julian is, then the CV as a timeline, newest first: the multi-tenant Microsoft Fabric product role, data products in fintech, graduate studies in quantitative economics, insurance and real estate, the business administration degree and its forecasting thesis, audio engineering, the Abitur in Moscow and school in Berlin.
 - [Services & Pricing](/docs/services.md): Service packages, deliverables, engineering and design standards, and the interactive pricing calculator.

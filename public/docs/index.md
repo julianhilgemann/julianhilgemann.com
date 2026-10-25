@@ -24,7 +24,7 @@ Macro data gets revised. A GDP print or an inflation reading is published, then 
 
 Every stage runs in its own Docker container
 
-[View on GitHub](https://github.com/julianhilgemann/fx_macro_platform) [Why structure is the product](/story#structure)
+[View on GitHub](https://github.com/julianhilgemann/fx_macro_platform) [Why structure is the product](https://hyperadapted.com/story/?utm_source=julianhilgemann&utm_medium=referral&utm_campaign=julianhilgemann-site&utm_content=now-building#structure)
 
 ## What I do
 
@@ -32,11 +32,11 @@ One chain, three stages. A measurement has to land somewhere, be modelled into s
 
 - **Platforms** Microsoft Fabric, run like a product. A multi-tenant setup where every customer gets their own Dev, Test and Prod on shared capacity. Changes go through source files, Git and DevOps, so an environment can be rebuilt rather than remembered. [How that runs today](/about#platform)
 
-- **Data Warehousing** Modelled once, so it can be reused. Warehouses and lakehouses with real models: a named grain, declared relationships, and lineage you can walk from a dashboard figure back to its row. On Fabric today, on Postgres and dbt before that. [The case for structure](/story#structure)
+- **Data Warehousing** Modelled once, so it can be reused. Warehouses and lakehouses with real models: a named grain, declared relationships, and lineage you can walk from a dashboard figure back to its row. On Fabric today, on Postgres and dbt before that. [The case for structure](https://hyperadapted.com/story/?utm_source=julianhilgemann&utm_medium=referral&utm_campaign=julianhilgemann-site&utm_content=what-i-do#structure)
 
 - **Business Intelligence** The number people actually act on. Dashboards, forecasts and scenario planning, over a metric layer that holds still. A number is only worth acting on if you can say what it leaves out, so the definitions and the uncertainty travel with it. [Data products in fintech](/about#bi)
 
-And then the same chain backwards — a number opened back up into colour, motion and sound. [That is the other half of the work.](/story#expansion)
+And then the same chain backwards — a number opened back up into colour, motion and sound. [That is the other half of the work.](https://hyperadapted.com/story/?utm_source=julianhilgemann&utm_medium=referral&utm_campaign=julianhilgemann-site&utm_content=what-i-do#expansion)
 
 ## Selected work
 
