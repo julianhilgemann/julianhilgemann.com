@@ -1,6 +1,6 @@
-# I build the systems between a measurement and a decision.
+# Where systems turn data into decisions.
 
-Data platform engineer in Munich. Specialized in scalable BI Solutions.
+Specialized in scalable BI Solutions.
 
 Projects
 
