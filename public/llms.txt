@@ -1,10 +1,10 @@
 # Julian Hilgemann — Data Platform Engineer
 
 > Portfolio and technical documentation for Julian Hilgemann, a data platform engineer building the systems between a measurement and a decision: Microsoft Fabric and Azure platforms, models and warehouses, forecasting, and the expressive work that runs the same pipeline backwards. English only; the German pages that remain are the legal ones.
-> Updated: Oct 2026
+> Updated: Nov 2026
 
 ## Core Pages (English)
-- [Home](/docs/index.md): Landing page: positioning statement and the current project, the FX Macro Data Platform, with its architecture.
+- [Home](/docs/index.md): Landing page: positioning statement and the current project, Liquiplan, a deposit ladder planner that runs in the browser, with a figure of the ladder at work.
 - [Projects](/docs/projects.md): Open-source data projects: analytics engineering, forecasting, data visualisation and creative coding, each with concept and architecture.
 - [About](/docs/about.md): Who Julian is, then the CV as a timeline, newest first: the multi-tenant Microsoft Fabric product role, data products in fintech, graduate studies in quantitative economics, insurance and real estate, the business administration degree and its forecasting thesis, audio engineering, the Abitur in Moscow and school in Berlin.
 - [Services & Pricing](/docs/services.md): Service packages, deliverables, engineering and design standards, and the interactive pricing calculator.

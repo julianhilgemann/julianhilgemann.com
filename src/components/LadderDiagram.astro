@@ -1,0 +1,549 @@
+---
+// The current project's figure: a deposit ladder at work. Six fixed-term
+// deposits as bars over 32 months, and under them the account they were paid
+// from: it drains a little every month, and each deposit comes back just as
+// it runs low. The last month the plan covers carries a flag.
+//
+// The numbers are a real plan, not a sketch: Liquiplan's example G with at
+// most six new deposits, as the live app (version 1.5) solved it on
+// 2026-11-25 and its simulator verified it. `balance` is the month-end
+// liquidity (current account plus overnight money) from January 2027, the
+// month after the old deposits were repaid; `ladder` holds the six
+// placements, with `start` and `due` as positions in that list. To redraw
+// the figure from another plan, replace those two constants: every
+// coordinate, label and step of the animation follows from them.
+//
+// Two layouts of the same drawing: wide (lg+, titles in a gutter on the left)
+// and narrow (phones and iPad portrait, titles above each band, shorter
+// labels). The markup is the static end state, with every bar filled and the
+// whole curve drawn: what reduced-motion and no-JS visitors see.
+// src/scripts/ladder-diagram.ts builds it in on scroll and then plays the
+// plan through, month by month.
+//
+// All words arrive through props so the llms generator (which flattens
+// literal markup) never picks them up; the section's prose carries the
+// meaning. Numbers are formatted here.
+interface Props {
+    deposits: { title: string; sub: string[] };
+    liquidity: { title: string; sub: string[] };
+    /** Label of the flag on the last covered month, e.g. "Secured until". */
+    horizon: string;
+    /** Label of the zone after it. */
+    shortfall: string;
+    /** The word for a deposit's term, long (wide layout) and short (narrow). */
+    units: { long: string; short: string };
+    ariaLabel: string;
+}
+
+const { deposits, liquidity, horizon, shortfall, units, ariaLabel } = Astro.props;
+
+// ── the plan ──────────────────────────────────────────────────────────────
+const FIRST_YEAR = 2027; // `balance` starts in January
+const balance = [
+    17914, 16655, 15393, 3931, 2641, 1348, 14189, 6525, 5241, 3954, 2664, 1371, 4115, 2780, 1442, 5397, 4064, 2728,
+    1390, 6694, 5364, 4032, 2696, 1357, 4208, 2826, 1441, 5561, 4183, 2801, 1416, 28,
+];
+// Latest maturity first, so every bar's end drops to the curve past bars
+// that have already ended: no line crosses a bar.
+const ladder = [
+    { start: 3, due: 27, term: 24, rate: 4.0, amount: 5100, payout: 5508 },
+    { start: 0, due: 24, term: 24, rate: 3.75, amount: 3900, payout: 4193 },
+    { start: 7, due: 19, term: 12, rate: 3.85, amount: 6400, payout: 6646 },
+    { start: 3, due: 15, term: 12, rate: 3.85, amount: 5100, payout: 5296 },
+    { start: 0, due: 12, term: 12, rate: 3.6, amount: 3900, payout: 4040 },
+    { start: 0, due: 6, term: 6, rate: 3.43, amount: 13900, payout: 14138 },
+];
+const SCALE_MAX = 18000; // top of the liquidity band
+const GRID = 10000; // the one labelled gridline
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const monthLabels = balance.map((_, p) => `${MONTHS[p % 12]} ${FIRST_YEAR + Math.floor(p / 12)}`);
+const last = balance.length - 1;
+const eur = (n: number) => `€${n.toLocaleString("en-GB")}`;
+const years = balance.map((_, p) => p).filter((p) => p % 12 === 0);
+
+// ── geometry ──────────────────────────────────────────────────────────────
+interface Layout {
+    id: "wide" | "narrow";
+    w: number;
+    h: number;
+    class: string;
+    x0: number; // x of the first month
+    mw: number; // width of a month
+    rows: { y: number; pitch: number; h: number };
+    band: { top: number; base: number };
+    axisY: number; // baseline of the year labels
+    pill: { w: number; h: number; cy: number };
+    right: number; // right edge of the zone after the last month
+    flagTop: number;
+    titles: { deposits: { x: number; y: number }; liquidity: { x: number; y: number }; step: number };
+}
+
+const layouts: Layout[] = [
+    {
+        id: "wide",
+        w: 1050,
+        h: 392,
+        class: "hidden lg:block w-full h-auto",
+        x0: 150,
+        mw: 25,
+        rows: { y: 20, pitch: 30, h: 22 },
+        band: { top: 222, base: 352 },
+        axisY: 377,
+        pill: { w: 78, h: 22, cy: 372 },
+        right: 1046,
+        flagTop: 14,
+        titles: { deposits: { x: 24, y: 35 }, liquidity: { x: 24, y: 237 }, step: 18 },
+    },
+    {
+        id: "narrow",
+        w: 360,
+        h: 496,
+        // Sized by height as well as width below lg: the figure has to share a
+        // phone screen with nothing else, but must not outgrow it.
+        class: "lg:hidden block mx-auto w-full max-w-[440px] h-auto max-h-[64svh]",
+        x0: 16,
+        mw: 10,
+        rows: { y: 58, pitch: 36, h: 26 },
+        band: { top: 312, base: 452 },
+        axisY: 479,
+        pill: { w: 76, h: 24, cy: 474 },
+        right: 352,
+        flagTop: 52,
+        titles: { deposits: { x: 16, y: 20 }, liquidity: { x: 16, y: 296 }, step: 0 },
+    },
+];
+
+const round = (n: number) => Math.round(n * 10) / 10;
+
+function geometry(L: Layout) {
+    const x = (p: number) => L.x0 + p * L.mw;
+    const y = (v: number) => round(L.band.base - (v / SCALE_MAX) * (L.band.base - L.band.top));
+    const bars = ladder.map((d, i) => {
+        const top = L.rows.y + i * L.rows.pitch;
+        const wide = L.id === "wide";
+        // The six-month bar is too short on a phone for more than its term.
+        const showRate = wide || d.term >= 12;
+        return {
+            ...d,
+            i,
+            x: x(d.start),
+            w: x(d.due) - x(d.start),
+            top,
+            cy: top + L.rows.h / 2,
+            bottom: top + L.rows.h,
+            peak: y(balance[d.due]),
+            term: `${d.term} ${wide ? units.long : units.short}`,
+            rateLabel: showRate ? `· ${d.rate.toFixed(2)}%` : "",
+            amountLabel: wide ? eur(d.amount) : "",
+        };
+    });
+    // The curve: one point per month end, and where a deposit comes back, two
+    // on the same x: the balance before the payout and after it. The third
+    // value names the bar whose payout the segment ending there draws.
+    const pts: [number, number, number][] = [];
+    balance.forEach((v, p) => {
+        const bar = bars.find((b) => b.due === p);
+        if (bar) pts.push([x(p), y(v - bar.payout), -1]);
+        pts.push([x(p), y(v), bar ? bar.i : -1]);
+    });
+    const line = "M" + pts.map(([px, py]) => `${px},${py}`).join("L");
+    const area = `${line}L${x(last)},${L.band.base}L${x(0)},${L.band.base}Z`;
+    const plan = JSON.stringify({
+        x0: L.x0,
+        mw: L.mw,
+        months: monthLabels,
+        pts,
+        bars: bars.map((b) => ({ x: b.x, w: b.w, cy: b.cy, bottom: b.bottom, start: b.start })),
+        pill: [L.pill.w / 2 + 2, L.w - L.pill.w / 2 - 2],
+    });
+    return { x, y, bars, line, area, plan, flagX: x(last), gridY: y(GRID) };
+}
+
+const PACKETS = 6;
+---
+
+<figure data-ladder role="img" aria-label={ariaLabel} class="ladder">
+    {
+        layouts.map((L) => {
+            const g = geometry(L);
+            const wide = L.id === "wide";
+            return (
+                <svg data-layout={L.id} data-plan={g.plan} viewBox={`0 0 ${L.w} ${L.h}`} class={L.class} aria-hidden="true">
+                    <defs>
+                        <pattern id={`lad-hatch-${L.id}`} width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                            <line x1="0" y1="0" x2="0" y2="7" class="lad-hatch" />
+                        </pattern>
+                        {/* What the marker has passed; the script moves its right edge. */}
+                        <clipPath id={`lad-clip-${L.id}`}>
+                            <rect data-liq-clip x={L.x0} y={L.band.top - 6} width={g.flagX - L.x0} height={L.band.base - L.band.top + 6} />
+                        </clipPath>
+                    </defs>
+
+                    {/* Titles: a gutter on the left when wide, a line above each band when narrow */}
+                    <g data-titles>
+                        <text x={L.titles.deposits.x} y={L.titles.deposits.y} class={`lad-title lad-title-${L.id}`}>
+                            {deposits.title.toUpperCase()}
+                            {wide ? (
+                                deposits.sub.map((line, n) => (
+                                    <tspan x={L.titles.deposits.x} dy={n === 0 ? 20 : L.titles.step} class="lad-sub">
+                                        {line}
+                                    </tspan>
+                                ))
+                            ) : (
+                                <tspan dx="8" class="lad-sub">
+                                    {deposits.sub.join(" ")}
+                                </tspan>
+                            )}
+                        </text>
+                        <text x={L.titles.liquidity.x} y={L.titles.liquidity.y} class={`lad-title lad-title-${L.id}`}>
+                            {liquidity.title.toUpperCase()}
+                            {wide ? (
+                                liquidity.sub.map((line, n) => (
+                                    <tspan x={L.titles.liquidity.x} dy={n === 0 ? 20 : L.titles.step} class="lad-sub">
+                                        {line}
+                                    </tspan>
+                                ))
+                            ) : (
+                                <tspan dx="8" class="lad-sub">
+                                    {liquidity.sub.join(" ")}
+                                </tspan>
+                            )}
+                        </text>
+                    </g>
+
+                    {/* The months after the last covered one */}
+                    <g data-zone>
+                        <rect
+                            x={g.flagX}
+                            y={L.band.top}
+                            width={L.right - g.flagX}
+                            height={L.band.base - L.band.top}
+                            fill={`url(#lad-hatch-${L.id})`}
+                        />
+                        {wide ? (
+                            <text x={(g.flagX + L.right) / 2} y={L.band.top + 20} text-anchor="middle" class="lad-zone-label">
+                                {shortfall}
+                            </text>
+                        ) : (
+                            <text
+                                transform={`translate(${(g.flagX + L.right) / 2 + 4.5} ${(L.band.top + L.band.base) / 2}) rotate(-90)`}
+                                text-anchor="middle"
+                                class="lad-zone-label"
+                            >
+                                {shortfall}
+                            </text>
+                        )}
+                    </g>
+
+                    {/* Time axis: a tick per month, a year at each January */}
+                    <g data-axis>
+                        <line x1={L.x0} y1={g.gridY} x2={g.flagX} y2={g.gridY} class="lad-grid" />
+                        <text x={g.flagX - 7} y={g.gridY - 6} text-anchor="end" class={`lad-scale lad-scale-${L.id}`}>
+                            {`€${GRID / 1000}k`}
+                        </text>
+                        <line x1={L.x0} y1={L.band.base} x2={L.right} y2={L.band.base} class="lad-axis" />
+                        {balance.map((_, p) => (
+                            <line
+                                x1={g.x(p)}
+                                y1={L.band.base}
+                                x2={g.x(p)}
+                                y2={L.band.base + (p % 12 === 0 ? 8 : 4)}
+                                class={p % 12 === 0 ? "lad-tick lad-tick-year" : "lad-tick"}
+                            />
+                        ))}
+                        {years.map((p) => (
+                            <text x={g.x(p) + 5} y={L.axisY} class={`lad-year lad-year-${L.id}`}>
+                                {FIRST_YEAR + p / 12}
+                            </text>
+                        ))}
+                    </g>
+
+                    {/* From each bar's end down to the balance it lifts */}
+                    {g.bars.map((b) => (
+                        <line data-tie x1={b.x + b.w} y1={b.bottom} x2={b.x + b.w} y2={b.peak} class="lad-tie" />
+                    ))}
+
+                    {/* Liquidity: the whole plan faintly, and over it the part already lived */}
+                    <path data-liq-base d={g.line} class="lad-liq-base" />
+                    <g data-elapsed>
+                        <path d={g.area} clip-path={`url(#lad-clip-${L.id})`} class="lad-liq-area" />
+                        <path data-liq-line d={g.line} class="lad-liq-line" />
+                    </g>
+
+                    {/* The deposits */}
+                    {g.bars.map((b) => (
+                        <g data-bar>
+                            <rect data-bar-track x={b.x} y={b.top} width={b.w} height={L.rows.h} rx="6" class="lad-track" />
+                            <rect data-bar-fill x={b.x} y={b.top} width={b.w} height={L.rows.h} rx="6" class="lad-fill" />
+                            <text x={b.x + (wide ? 10 : 9)} y={b.cy + (wide ? 4.5 : 5)} class={`lad-label lad-label-${L.id}`}>
+                                {b.term}
+                                {b.rateLabel && (
+                                    <tspan dx="5" class="lad-rate">
+                                        {b.rateLabel}
+                                    </tspan>
+                                )}
+                            </text>
+                            {b.amountLabel && (
+                                <text x={b.x + b.w + 10} y={b.cy + 4} class="lad-amount">
+                                    {b.amountLabel}
+                                </text>
+                            )}
+                        </g>
+                    ))}
+
+                    {/* The last month the plan covers */}
+                    <g data-flag>
+                        <line data-flag-line x1={g.flagX} y1={L.flagTop} x2={g.flagX} y2={L.band.base} class="lad-flag-line" />
+                        <circle cx={g.flagX} cy={L.flagTop} r="3.5" class="lad-flag-node" />
+                        {wide ? (
+                            <text x={g.flagX + 12} y={L.flagTop + 14} class="lad-flag-lead lad-flag-lead-wide">
+                                {horizon.toUpperCase()}
+                                <tspan x={g.flagX + 12} dy="21" class="lad-flag-month lad-flag-month-wide">
+                                    {monthLabels[last]}
+                                </tspan>
+                            </text>
+                        ) : (
+                            <text x={L.right} y={L.flagTop - 8} text-anchor="end" class="lad-flag-lead lad-flag-lead-narrow">
+                                {horizon.toUpperCase()}
+                                <tspan dx="7" class="lad-flag-month lad-flag-month-narrow">
+                                    {monthLabels[last]}
+                                </tspan>
+                            </text>
+                        )}
+                        <circle data-flag-ring cx={g.flagX} cy={L.band.base} r="5" class="lad-ring" />
+                    </g>
+
+                    {/* The marker that travels through the months, parked until the script starts it */}
+                    <g data-playhead class="lad-live">
+                        <line x1="0" y1={L.rows.y - 6} x2="0" y2={L.band.base + 8} class="lad-playhead" />
+                        <g data-pill>
+                            <rect
+                                x={-L.pill.w / 2}
+                                y={L.pill.cy - L.pill.h / 2}
+                                width={L.pill.w}
+                                height={L.pill.h}
+                                rx={L.pill.h / 2}
+                                class="lad-pill"
+                            />
+                            <text data-pill-text x="0" y={L.pill.cy + 4} text-anchor="middle" class={`lad-pill-text lad-pill-text-${L.id}`}>
+                                {monthLabels[0]}
+                            </text>
+                        </g>
+                    </g>
+                    <circle data-ring r="5" class="lad-ring" />
+                    <g data-dot class="lad-live">
+                        <circle data-dot-glow r="9" class="lad-dot-glow" />
+                        <circle r="4.5" class="lad-dot-core" />
+                    </g>
+
+                    {/* Money on the move: into a deposit, and back out of it */}
+                    {Array.from({ length: PACKETS }, () => (
+                        <g data-packet class="lad-live">
+                            <circle r="8" class="lad-packet-glow" />
+                            <circle r="3.5" class="lad-packet-core" />
+                        </g>
+                    ))}
+                </svg>
+            );
+        })
+    }
+</figure>
+
+<style>
+    .ladder svg {
+        overflow: visible;
+    }
+
+    .lad-title {
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        fill: rgb(var(--color-ink));
+    }
+    .lad-title-wide {
+        font-size: 12px;
+    }
+    .lad-title-narrow {
+        font-size: 12.5px;
+    }
+    .lad-sub {
+        font-weight: 400;
+        letter-spacing: 0;
+        fill: rgb(var(--color-ink-muted));
+    }
+    .lad-title-wide .lad-sub {
+        font-size: 13px;
+    }
+    .lad-title-narrow .lad-sub {
+        font-size: 13px;
+    }
+
+    .lad-hatch {
+        stroke: rgb(var(--color-contrast) / 0.1);
+        stroke-width: 1.5;
+    }
+    .lad-zone-label {
+        font-size: 11.5px;
+        fill: rgb(var(--color-ink-faint));
+    }
+
+    .lad-axis {
+        stroke: rgb(var(--color-contrast) / 0.28);
+        stroke-width: 1;
+    }
+    .lad-grid {
+        stroke: rgb(var(--color-contrast) / 0.1);
+        stroke-width: 1;
+        stroke-dasharray: 2 4;
+    }
+    .lad-tick {
+        stroke: rgb(var(--color-contrast) / 0.2);
+        stroke-width: 1;
+    }
+    .lad-tick-year {
+        stroke: rgb(var(--color-contrast) / 0.45);
+    }
+    .lad-year,
+    .lad-scale {
+        fill: rgb(var(--color-ink-faint));
+        font-variant-numeric: tabular-nums;
+    }
+    .lad-year-wide,
+    .lad-scale-wide {
+        font-size: 12px;
+    }
+    .lad-year-narrow,
+    .lad-scale-narrow {
+        font-size: 12.5px;
+    }
+
+    .lad-tie {
+        stroke: rgb(var(--color-info) / 0.32);
+        stroke-width: 1;
+        stroke-dasharray: 3 4;
+    }
+
+    .lad-liq-base {
+        fill: none;
+        stroke: rgb(var(--color-contrast) / 0.2);
+        stroke-width: 1.5;
+        stroke-linejoin: round;
+    }
+    .lad-liq-area {
+        fill: rgb(var(--color-contrast) / 0.05);
+    }
+    .lad-liq-line {
+        fill: none;
+        stroke: rgb(var(--color-contrast) / 0.8);
+        stroke-width: 2;
+        stroke-linejoin: round;
+    }
+
+    .lad-track {
+        fill: rgb(var(--color-surface) / 0.72);
+        stroke: rgb(var(--color-contrast) / 0.16);
+        stroke-width: 1;
+    }
+    .lad-fill {
+        fill: rgb(var(--color-info) / 0.15);
+        stroke: rgb(var(--color-info) / 0.6);
+        stroke-width: 1.2;
+    }
+    .lad-label {
+        font-weight: 600;
+        fill: rgb(var(--color-ink));
+        font-variant-numeric: tabular-nums;
+    }
+    .lad-label-wide {
+        font-size: 13px;
+    }
+    .lad-label-narrow {
+        font-size: 13.5px;
+    }
+    .lad-rate {
+        font-weight: 400;
+        fill: rgb(var(--color-ink-muted));
+    }
+    .lad-amount {
+        font-family: var(--font-mono);
+        font-size: 11.5px;
+        fill: rgb(var(--color-ink-muted));
+    }
+
+    .lad-flag-line {
+        stroke: rgb(var(--color-primary));
+        stroke-width: 1.5;
+    }
+    .lad-flag-node {
+        fill: rgb(var(--color-primary));
+    }
+    .lad-flag-lead {
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        fill: rgb(var(--color-ink-muted));
+    }
+    .lad-flag-lead-wide {
+        font-size: 10.5px;
+    }
+    .lad-flag-lead-narrow {
+        font-size: 11px;
+    }
+    .lad-flag-month {
+        font-weight: 700;
+        letter-spacing: 0;
+        fill: rgb(var(--color-primary));
+    }
+    .lad-flag-month-wide {
+        font-size: 17px;
+    }
+    .lad-flag-month-narrow {
+        font-size: 14.5px;
+    }
+
+    /* Everything that only exists while the plan plays. */
+    .lad-live {
+        opacity: 0;
+    }
+    .lad-playhead {
+        stroke: rgb(var(--color-contrast) / 0.32);
+        stroke-width: 1;
+    }
+    .lad-pill {
+        fill: rgb(var(--color-surface));
+        stroke: rgb(var(--color-contrast) / 0.22);
+        stroke-width: 1;
+    }
+    .lad-pill-text {
+        font-weight: 600;
+        fill: rgb(var(--color-ink));
+        font-variant-numeric: tabular-nums;
+    }
+    .lad-pill-text-wide {
+        font-size: 11.5px;
+    }
+    .lad-pill-text-narrow {
+        font-size: 12.5px;
+    }
+    .lad-dot-glow {
+        fill: rgb(var(--color-primary));
+        opacity: 0.25;
+    }
+    .lad-dot-core {
+        fill: rgb(var(--color-primary));
+        stroke: rgb(var(--color-surface));
+        stroke-width: 1.5;
+    }
+    .lad-ring {
+        fill: none;
+        stroke: rgb(var(--color-primary));
+        stroke-width: 1.5;
+        opacity: 0;
+    }
+    .lad-packet-glow {
+        fill: rgb(var(--color-primary));
+        opacity: 0.25;
+    }
+    .lad-packet-core {
+        fill: rgb(var(--color-primary));
+    }
+</style>
