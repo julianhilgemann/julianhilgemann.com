@@ -10,25 +10,25 @@ Projects
 
 #### Now building
 
-In active development
+Live in the browser
 
-##### FX Macro Data Platform
+##### Liquiplan
 
-A data platform for macroeconomic and FX time series, built so that every number can be traced back to what was knowable at the moment it was published.
+A planner for fixed-term deposits that answers one question: how long will the money last, and which deposits, bought when, make it last longest?
 
-Macro data gets revised. A GDP print or an inflation reading is published, then corrected — sometimes more than once, sometimes quietly. Keep only the latest value and you lose the version that mattered for a backtest, a research note or an audit. So the platform keeps every vintage: provider responses are stored untouched, and the warehouse records both the period a value describes and the day it became known.
+Money that has to cover a monthly need is caught between two mistakes. Left in an overnight account it earns little; locked into fixed terms it may not be back when the month's withdrawal is due. A deposit ladder staggers the maturities so that each deposit returns just before its money is needed. Liquiplan computes that ladder from the balances, the monthly need and the offers at hand, and it takes its goals strictly in order: first the last month that can still be covered, then the wealth left at that month. Interest never costs a month.
 
-- Raw data is immutable
+- The horizon first, interest second
 
-- Every revision becomes a new vintage
+- An independent simulator checks every plan
 
-- The warehouse rebuilds from raw
+- One HTML file, and the numbers stay in the browser
 
-- Failures are loud, never silent
+- Every decision can be replayed step by step
 
-Every stage runs in its own Docker container
+Drawn from the app's own example: six deposits at illustrative rates. A model calculation, not financial advice.
 
-[View on GitHub](https://github.com/julianhilgemann/fx_macro_platform) [Why structure is the product](https://hyperadapted.com/story/?utm_source=julianhilgemann&utm_medium=referral&utm_campaign=julianhilgemann-site&utm_content=now-building#structure)
+[Open the app](https://julianhilgemann.github.io/liquiplan-app/) [Source and method on GitHub](https://github.com/julianhilgemann/liquiplan-app)
 
 #### What I do
 

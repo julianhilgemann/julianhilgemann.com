@@ -5,6 +5,17 @@ import ProjectCard from "./ProjectCard.astro";
 // one, the repository otherwise.
 const projects = [
     {
+        title: "Liquiplan: Deposit Ladder Planner",
+        category: "Optimisation in the Browser",
+        description:
+            "A single-file web app that plans a ladder of fixed-term deposits: it finds the last month the money can cover, then the placements that reach it, and re-computes every plan in an independent simulator.",
+        image: "/assets/liquiplan.webp",
+        links: [
+            { kind: "live", href: "https://julianhilgemann.github.io/liquiplan-app/", label: "Live app" },
+            { kind: "github", href: "https://github.com/julianhilgemann/liquiplan-app", label: "GitHub" },
+        ],
+    },
+    {
         title: "FX Macro Data Platform",
         category: "Point-in-Time Data Platform",
         description:
@@ -80,11 +91,11 @@ const projects = [
 ] as const;
 
 // Featured cards lead the list and span the grid, image beside the text.
-const FEATURED = 3;
+const FEATURED = 4;
 ---
 
 <!-- The card list only; the Projects page supplies the heading. The first
-     three cards are featured and span both columns, so seven cards fill the
+     four cards are featured and span both columns, so eight cards fill the
      grid evenly. Cards rise one by one as they scroll in ([data-reveal-batch],
      src/scripts/motion.ts). -->
 <ul data-reveal-batch class="grid sm:grid-cols-2 gap-grid">

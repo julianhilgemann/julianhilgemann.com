@@ -32,7 +32,7 @@ const PAGE_META = {
     index: {
         title: 'Home',
         group: 'en',
-        desc: 'Landing page: positioning statement and the current project, the FX Macro Data Platform, with its architecture.',
+        desc: 'Landing page: positioning statement and the current project, Liquiplan, a deposit ladder planner that runs in the browser, with a figure of the ladder at work.',
     },
     projects: {
         title: 'Projects',

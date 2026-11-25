@@ -1,18 +1,16 @@
 ---
-import PipelineDiagram from "./PipelineDiagram.astro";
+import LadderDiagram from "./LadderDiagram.astro";
 
-// Diagram labels restate the prose, so they stay out of
+// The figure's words restate the prose, so they stay out of
 // literal markup (the llms generator would repeat them in the page docs).
 const diagram = {
-    stages: [
-        { title: "Sources", lines: ["Central bank &", "statistics APIs"] },
-        { title: "Raw landing", lines: ["Every response kept,", "never overwritten"] },
-        { title: "Transform", lines: ["Modelled in a", "time-aware warehouse"] },
-        { title: "Insight", lines: ["Dashboards, research", "and a read-only API"] },
-    ],
-    orchestration: { title: "Orchestration", sub: "scheduled, observable runs" },
+    deposits: { title: "Deposits", sub: ["placed by", "the optimiser"] },
+    liquidity: { title: "Liquidity", sub: ["account balance,", "month by month"] },
+    horizon: "Secured until",
+    shortfall: "shortfall",
+    units: { long: "months", short: "mo" },
     ariaLabel:
-        "Architecture: public central-bank and statistics APIs feed an immutable raw store; transformations model the data in a time-aware warehouse; dashboards, research and a read-only API sit on top. An orchestrator schedules the pipeline, and every stage runs in its own container.",
+        "A deposit ladder at work: six fixed-term deposits of 6, 12 and 24 months as bars over 32 months, from January 2027 to August 2029. Below them the account balance falls a little every month and jumps each time a deposit is repaid, just as it nears zero. A flag marks August 2029 as the last month the plan covers.",
 };
 ---
 
@@ -24,75 +22,79 @@ const diagram = {
             <div data-reveal class="lg:col-span-5">
                 <p class="badge mb-5">
                     <span class="badge-dot motion-safe:animate-pulse" aria-hidden="true"></span>
-                    In active development
+                    Live in the browser
                 </p>
-                <h3 class="text-3xl md:text-4xl font-bold tracking-tight text-ink-strong leading-tight">FX Macro Data Platform</h3>
+                <h3 class="text-3xl md:text-4xl font-bold tracking-tight text-ink-strong leading-tight">Liquiplan</h3>
                 <p class="mt-5 text-lg md:text-xl text-ink leading-relaxed">
-                    A data platform for macroeconomic and FX time series, built so
-                    that every number can be traced back to what was knowable at
-                    the moment it was published.
+                    A planner for fixed-term deposits that answers one question:
+                    how long will the money last, and which deposits, bought
+                    when, make it last longest?
                 </p>
             </div>
 
             <div data-reveal class="lg:col-span-7">
                 <p class="text-lg text-ink-muted leading-relaxed">
-                    Macro data gets revised. A GDP print or an inflation reading is
-                    published, then corrected — sometimes more than once, sometimes
-                    quietly. Keep only the latest value and you lose the version
-                    that mattered for a backtest, a research note or an audit. So
-                    the platform keeps every vintage: provider responses are stored
-                    untouched, and the warehouse records both the period a value
-                    describes and the day it became known.
+                    Money that has to cover a monthly need is caught between two
+                    mistakes. Left in an overnight account it earns little; locked
+                    into fixed terms it may not be back when the month's
+                    withdrawal is due. A deposit ladder staggers the maturities so
+                    that each deposit returns just before its money is needed.
+                    Liquiplan computes that ladder from the balances, the monthly
+                    need and the offers at hand, and it takes its goals strictly
+                    in order: first the last month that can still be covered,
+                    then the wealth left at that month. Interest never costs a
+                    month.
                 </p>
                 <ul class="mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-3 text-sm md:text-base text-ink">
                     <li class="flex items-start gap-3">
                         <svg class="shrink-0 mt-0.5 text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
-                        Raw data is immutable
+                        The horizon first, interest second
                     </li>
                     <li class="flex items-start gap-3">
                         <svg class="shrink-0 mt-0.5 text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
-                        Every revision becomes a new vintage
+                        An independent simulator checks every plan
                     </li>
                     <li class="flex items-start gap-3">
                         <svg class="shrink-0 mt-0.5 text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
-                        The warehouse rebuilds from raw
+                        One HTML file, and the numbers stay in the browser
                     </li>
                     <li class="flex items-start gap-3">
                         <svg class="shrink-0 mt-0.5 text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
-                        Failures are loud, never silent
+                        Every decision can be replayed step by step
                     </li>
                 </ul>
             </div>
         </div>
 
-        <!-- Architecture, system shape rather than tech: wide on desktop, tall on phones -->
+        <!-- The ladder at work, drawn from a plan the app computed: wide on desktop, compact on phones -->
         <div data-reveal class="mt-12 md:mt-16 -mx-4 sm:mx-0 panel px-3 py-6 sm:p-8 md:p-10">
-            <PipelineDiagram {...diagram} />
-            <p class="mt-6 md:mt-8 flex items-center justify-center gap-2 text-xs md:text-sm text-ink-muted text-center">
-                <svg class="shrink-0 text-info" width="18" height="12" viewBox="0 0 18 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="0.6" y="0.6" width="16.8" height="10.8" rx="2"></rect><path d="M4.5 3v6M9 3v6M13.5 3v6"></path></svg>
-                Every stage runs in its own Docker container
+            <LadderDiagram {...diagram} />
+            <p class="mt-6 md:mt-8 text-xs md:text-sm text-ink-muted text-center text-balance">
+                <svg class="inline-block align-[-1px] mr-1.5 text-info" width="18" height="12" viewBox="0 0 18 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true"><path d="M0.6 2.2h7M4.2 6h8M8.4 9.8h9"></path></svg>
+                Drawn from the app's own example: six deposits at illustrative
+                rates. A model calculation, not financial advice.
             </p>
         </div>
 
         <!-- A <p>, not a div: the llms generator keeps link targets only inside
-             paragraphs and list items, and the repo URL should reach the docs. -->
+             paragraphs and list items, and both URLs should reach the docs. -->
         <p class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
             <a
-                href="https://github.com/julianhilgemann/fx_macro_platform"
+                href="https://julianhilgemann.github.io/liquiplan-app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn btn-primary"
             >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58l-.01-2.04c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.67 1.65.25 2.87.12 3.17.78.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22l-.01 3.29c0 .32.22.69.82.57A12 12 0 0 0 12 .297z"></path></svg>
-                View on GitHub
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                Open the app
             </a>
             <a
-                href="https://hyperadapted.com/story/?utm_source=julianhilgemann&utm_medium=referral&utm_campaign=julianhilgemann-site&utm_content=now-building#structure"
+                href="https://github.com/julianhilgemann/liquiplan-app"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="arrow-link justify-center"
             >
-                Why structure is the product
+                Source and method on GitHub
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
             </a>
         </p>

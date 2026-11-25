@@ -10,7 +10,7 @@
  *   [data-hero-fade]       fades up after the headline
  *   [data-hero-content]    drifts out as the hero scrolls away
  *   [data-scroll-cue]      appears last
- *   [data-pipeline]        current-project architecture diagram (pipeline-diagram.ts)
+ *   [data-ladder]          current-project figure, a deposit ladder at work (ladder-diagram.ts)
  */
 import {
     gsap,
@@ -22,7 +22,7 @@ import {
     releaseIntro,
     initPageMotion,
 } from "./motion";
-import { initPipelineDiagram } from "./pipeline-diagram";
+import { initLadderDiagram } from "./ladder-diagram";
 
 /** How long each of the headline's last words holds before the next. */
 const CYCLE_HOLD = 2.4;
@@ -33,7 +33,7 @@ const gradient = hero?.querySelector<HTMLCanvasElement>("[data-gradient-sheet]")
 if (initPageMotion()) {
     heroIntro();
     heroExit();
-    initPipelineDiagram();
+    initLadderDiagram();
 }
 
 function heroIntro() {
